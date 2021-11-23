@@ -8,8 +8,6 @@ namespace NASB_Moveset_Editor
     [CustomNodeEditor(typeof(SAActiveActionNode))]
     public class SAActiveActionNodeEditor : NodeEditor
     {
-
-        bool initialized = false;
         public override void OnBodyGUI()
         {
             serializedObject.Update();

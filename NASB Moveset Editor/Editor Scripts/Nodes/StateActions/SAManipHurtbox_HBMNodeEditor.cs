@@ -8,8 +8,6 @@ namespace NASB_Moveset_Editor
     [CustomNodeEditor(typeof(SAManipHurtbox_HBMNode))]
     public class SAManipHurtbox_HBMNodeEditor : NodeEditor
     {
-
-        bool initialized = false;
         public override void OnBodyGUI()
         {
             serializedObject.Update();
@@ -24,7 +22,6 @@ namespace NASB_Moveset_Editor
 
                 if (iterator.type.Equals("Enum"))
                 {
-                    EditorGUILayout.LabelField(iterator.displayName);
                     iterator.intValue = EditorGUILayout.Popup(iterator.intValue, iterator.enumDisplayNames);
                 }
                 else
