@@ -17,16 +17,10 @@ namespace NASB_Moveset_Editor
         }
     }
 
-    // Empty class for blank outputs
-    [Serializable]
-    public class Empty { }
-
     public static class Consts
     {
         public static float NodeXOffset = 250f;
-        // public static float NodeYOffset = 20f;
-        // public static float NodeHeight = 60f;
-        public static float NodeYOffset = 120f;
+        public static float NodeYOffset = 130f;
         public static float NodeVarHeight = 20f;
     }
 }
