@@ -6,6 +6,7 @@
 # Unity
 Scenes/
 NASB Moveset Editor/Graphs/
+Testing/
 *.meta
 
 # User-specific files
