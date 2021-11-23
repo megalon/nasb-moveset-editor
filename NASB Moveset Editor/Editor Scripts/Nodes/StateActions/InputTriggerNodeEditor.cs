@@ -35,11 +35,9 @@ namespace NASB_Moveset_Editor
                         giev_BlockedByEvent = (GIEV)iterator.intValue;
                         initialized = true;
                     }
-                    else
-                    {
-                        giev_BlockedByEvent = (GIEV)EditorGUILayout.EnumFlagsField(iterator.displayName, giev_BlockedByEvent);
-                        iterator.intValue = (int)giev_BlockedByEvent;
-                    }
+                    EditorGUILayout.LabelField(iterator.displayName);
+                    giev_BlockedByEvent = (GIEV)EditorGUILayout.EnumFlagsField(giev_BlockedByEvent);
+                    iterator.intValue = (int)giev_BlockedByEvent;
                 }
                 else if (iterator.type.Equals("Enum") && iterator.name.Equals("AddEventOnTrigger"))
                 {
@@ -49,11 +47,9 @@ namespace NASB_Moveset_Editor
                         giev_AddEventOnTrigger = (GIEV)iterator.intValue;
                         initialized = true;
                     }
-                    else
-                    {
-                        giev_AddEventOnTrigger = (GIEV)EditorGUILayout.EnumFlagsField(iterator.displayName, giev_AddEventOnTrigger);
-                        iterator.intValue = (int)giev_AddEventOnTrigger;
-                    }
+                    EditorGUILayout.LabelField(iterator.displayName);
+                    giev_AddEventOnTrigger = (GIEV)EditorGUILayout.EnumFlagsField(giev_AddEventOnTrigger);
+                    iterator.intValue = (int)giev_AddEventOnTrigger;
                 }
                 else
                 {
