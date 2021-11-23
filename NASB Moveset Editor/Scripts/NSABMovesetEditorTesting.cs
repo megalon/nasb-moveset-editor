@@ -112,6 +112,9 @@ namespace NASB_Moveset_Editor
                 node.name = filename;
             }
 
+            // Trim off "Node" at the end
+            node.name = node.name.Substring(0, node.name.Length - 4);
+
             ++fileCount;
         }
 
