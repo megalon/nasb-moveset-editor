@@ -27,6 +27,8 @@ namespace NASB_Moveset_Editor
                 if (iterator.type.Equals("string")) {
                     EditorGUILayout.LabelField(iterator.name);
                     iterator.stringValue = EditorGUILayout.TextField(iterator.stringValue);
+                } else if (iterator.type.Equals("bool")) {
+                    iterator.boolValue = EditorGUILayout.ToggleLeft(iterator.name, iterator.boolValue);
                 }
                 else
                 {
