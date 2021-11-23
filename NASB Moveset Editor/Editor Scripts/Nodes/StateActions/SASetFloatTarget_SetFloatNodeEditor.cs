@@ -10,7 +10,7 @@ namespace NASB_Moveset_Editor
     [CustomNodeEditor(typeof(SASetFloatTarget_SetFloatNode))]
     public class SASetFloatTarget_SetFloatNodeEditor : NodeEditor
     {
-        string[] options = { "[=]   SET", "[+]   ADD", "[*]   MULTIPLY"};
+        string[] options = { "[=]   Set", "[+]   Add", "[*]   Multiply"};
         public override void OnBodyGUI()
         {
             serializedObject.Update();
