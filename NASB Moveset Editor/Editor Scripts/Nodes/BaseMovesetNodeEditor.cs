@@ -25,10 +25,24 @@ namespace NASB_Moveset_Editor
                 if (excludes.Contains(iterator.name)) continue;
 
                 if (iterator.type.Equals("string")) {
-                    EditorGUILayout.LabelField(iterator.name);
+                    EditorGUILayout.LabelField(iterator.displayName);
                     iterator.stringValue = EditorGUILayout.TextField(iterator.stringValue);
                 } else if (iterator.type.Equals("bool")) {
                     iterator.boolValue = EditorGUILayout.ToggleLeft(iterator.name, iterator.boolValue);
+                } else if (iterator.type.Equals("Enum") && iterator.displayName.Length > Consts.MaxDisplayNameLength)
+                {
+                    EditorGUILayout.LabelField(iterator.displayName);
+                    iterator.intValue = EditorGUILayout.Popup(iterator.intValue, iterator.enumDisplayNames);
+                }
+                else if (iterator.type.Equals("float") && iterator.displayName.Length > Consts.MaxDisplayNameLength)
+                {
+                    EditorGUILayout.LabelField(iterator.displayName);
+                    iterator.floatValue = EditorGUILayout.FloatField(iterator.floatValue);
+                }
+                else if (iterator.type.Equals("int") && iterator.displayName.Length > Consts.MaxDisplayNameLength)
+                {
+                    EditorGUILayout.LabelField(iterator.displayName);
+                    iterator.intValue = EditorGUILayout.IntField(iterator.intValue);
                 }
                 else
                 {

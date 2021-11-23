@@ -42,5 +42,6 @@ namespace NASB_Moveset_Editor
         public static float NodeXOffset = 250f;
         public static float NodeYOffset = 130f;
         public static float NodeVarHeight = 20f;
+        public static int MaxDisplayNameLength = 12;
     }
 }
