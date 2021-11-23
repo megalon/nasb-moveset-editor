@@ -26,7 +26,7 @@ namespace NASB_Moveset_Editor
 
                 if (iterator.type.Equals("string"))
                 {
-                    EditorGUILayout.LabelField(iterator.name);
+                    EditorGUILayout.LabelField(iterator.displayName);
                     iterator.stringValue = EditorGUILayout.TextField(iterator.stringValue);
                 }
                 else

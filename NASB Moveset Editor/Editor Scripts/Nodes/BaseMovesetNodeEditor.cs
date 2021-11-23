@@ -16,8 +16,6 @@ namespace NASB_Moveset_Editor
 
             SerializedProperty iterator = serializedObject.GetIterator();
 
-            var nameof = GUI.GetNameOfFocusedControl();
-
             bool enterChildren = true;
             while (iterator.NextVisible(enterChildren))
             {
@@ -28,7 +26,7 @@ namespace NASB_Moveset_Editor
                     EditorGUILayout.LabelField(iterator.displayName);
                     iterator.stringValue = EditorGUILayout.TextField(iterator.stringValue);
                 } else if (iterator.type.Equals("bool")) {
-                    iterator.boolValue = EditorGUILayout.ToggleLeft(iterator.name, iterator.boolValue);
+                    iterator.boolValue = EditorGUILayout.ToggleLeft(iterator.displayName, iterator.boolValue);
                 } else if (iterator.type.Equals("Enum") && iterator.displayName.Length > Consts.MaxDisplayNameLength)
                 {
                     EditorGUILayout.LabelField(iterator.displayName);
