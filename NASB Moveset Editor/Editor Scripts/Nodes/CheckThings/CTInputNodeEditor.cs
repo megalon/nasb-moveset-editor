@@ -1,9 +1,7 @@
 using NASB_Moveset_Editor.CheckThings;
-using NASB_Moveset_Editor.StateActions;
 using NASB_Parser.StateActions;
 using System.Linq;
 using UnityEditor;
-using UnityEngine;
 using XNodeEditor;
 
 namespace NASB_Moveset_Editor
