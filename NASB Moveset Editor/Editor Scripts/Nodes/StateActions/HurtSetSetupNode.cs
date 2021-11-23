@@ -61,7 +61,7 @@ namespace NASB_Moveset_Editor.StateActions
 			return variableCount;
 		}
 		
-		public new HurtSetSetup GetData()
+		public HurtSetSetup GetData()
 		{
 			HurtSetSetup objToReturn = new HurtSetSetup();
 			foreach(NodePort port in GetPort("HurtBones").GetConnections())

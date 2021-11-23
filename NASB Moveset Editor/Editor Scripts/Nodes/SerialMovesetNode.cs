@@ -60,7 +60,7 @@ namespace NASB_Moveset_Editor
 			return variableCount;
 		}
 		
-		public new SerialMoveset GetData()
+		public SerialMoveset GetData()
 		{
 			SerialMoveset objToReturn = new SerialMoveset();
 			foreach(NodePort port in GetPort("States").GetConnections())

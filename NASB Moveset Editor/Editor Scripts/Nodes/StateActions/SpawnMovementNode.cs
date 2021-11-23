@@ -63,7 +63,7 @@ namespace NASB_Moveset_Editor.StateActions
 			return variableCount;
 		}
 		
-		public new SpawnMovement GetData()
+		public SpawnMovement GetData()
 		{
 			SpawnMovement objToReturn = new SpawnMovement();
 			objToReturn.ToBone = ToBone;

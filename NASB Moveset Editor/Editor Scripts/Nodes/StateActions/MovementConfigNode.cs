@@ -75,7 +75,7 @@ namespace NASB_Moveset_Editor.StateActions
 			return variableCount;
 		}
 		
-		public new MovementConfig GetData()
+		public MovementConfig GetData()
 		{
 			MovementConfig objToReturn = new MovementConfig();
 			objToReturn.GetParented = GetParented;

@@ -53,7 +53,7 @@ namespace NASB_Moveset_Editor.FloatSources
 			return variableCount;
 		}
 		
-		public new FloatSource GetData()
+		public FloatSource GetData()
 		{
 			FloatSource objToReturn = new FloatSource();
 			objToReturn.TID = TID;

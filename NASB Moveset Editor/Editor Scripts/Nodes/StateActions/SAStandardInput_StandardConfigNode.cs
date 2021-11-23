@@ -53,7 +53,7 @@ namespace NASB_Moveset_Editor.StateActions
 			return variableCount;
 		}
 		
-		public new SAStandardInput.StandardConfig GetData()
+		public SAStandardInput.StandardConfig GetData()
 		{
 			SAStandardInput.StandardConfig objToReturn = new SAStandardInput.StandardConfig();
 			objToReturn.DontCheck0 = DontCheck0;

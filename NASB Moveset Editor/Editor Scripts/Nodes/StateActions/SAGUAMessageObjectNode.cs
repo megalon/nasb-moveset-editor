@@ -62,7 +62,7 @@ namespace NASB_Moveset_Editor.StateActions
 			return variableCount;
 		}
 		
-		public new SAGUAMessageObject GetData()
+		public SAGUAMessageObject GetData()
 		{
 			SAGUAMessageObject objToReturn = new SAGUAMessageObject();
 			objToReturn.PlainMessage = PlainMessage;

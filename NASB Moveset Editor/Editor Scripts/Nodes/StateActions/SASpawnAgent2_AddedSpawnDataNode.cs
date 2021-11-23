@@ -234,7 +234,7 @@ namespace NASB_Moveset_Editor.StateActions
 			return variableCount;
 		}
 		
-		public new SASpawnAgent2.AddedSpawnData GetData()
+		public SASpawnAgent2.AddedSpawnData GetData()
 		{
 			SASpawnAgent2.AddedSpawnData objToReturn = new SASpawnAgent2.AddedSpawnData();
 			objToReturn.SpawnedAgentDataId = SpawnedAgentDataId;

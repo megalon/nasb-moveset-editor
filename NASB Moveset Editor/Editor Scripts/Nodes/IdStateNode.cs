@@ -60,7 +60,7 @@ namespace NASB_Moveset_Editor
 			return variableCount;
 		}
 		
-		public new IdState GetData()
+		public IdState GetData()
 		{
 			IdState objToReturn = new IdState();
 			objToReturn.Id = Id;

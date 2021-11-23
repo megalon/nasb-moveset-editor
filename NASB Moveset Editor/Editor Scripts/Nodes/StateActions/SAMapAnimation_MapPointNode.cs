@@ -800,7 +800,7 @@ namespace NASB_Moveset_Editor.StateActions
 			return variableCount;
 		}
 		
-		public new SAMapAnimation.MapPoint GetData()
+		public SAMapAnimation.MapPoint GetData()
 		{
 			SAMapAnimation.MapPoint objToReturn = new SAMapAnimation.MapPoint();
 			objToReturn.RootAnim = RootAnim;

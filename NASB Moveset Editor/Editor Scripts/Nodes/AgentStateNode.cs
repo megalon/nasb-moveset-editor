@@ -62,7 +62,7 @@ namespace NASB_Moveset_Editor
 			return variableCount;
 		}
 		
-		public new AgentState GetData()
+		public AgentState GetData()
 		{
 			AgentState objToReturn = new AgentState();
 			objToReturn.CustomCall = CustomCall;

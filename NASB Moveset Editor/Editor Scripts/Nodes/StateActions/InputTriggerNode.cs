@@ -521,7 +521,7 @@ namespace NASB_Moveset_Editor.StateActions
 			return variableCount;
 		}
 		
-		public new InputTrigger GetData()
+		public InputTrigger GetData()
 		{
 			InputTrigger objToReturn = new InputTrigger();
 			objToReturn.SniffFrames = SniffFrames;

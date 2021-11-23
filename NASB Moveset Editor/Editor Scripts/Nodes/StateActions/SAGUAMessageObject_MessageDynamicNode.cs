@@ -72,7 +72,7 @@ namespace NASB_Moveset_Editor.StateActions
 			return variableCount;
 		}
 		
-		public new SAGUAMessageObject.MessageDynamic GetData()
+		public SAGUAMessageObject.MessageDynamic GetData()
 		{
 			SAGUAMessageObject.MessageDynamic objToReturn = new SAGUAMessageObject.MessageDynamic();
 			objToReturn.Id = Id;

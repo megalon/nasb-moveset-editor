@@ -507,7 +507,7 @@ namespace NASB_Moveset_Editor
 			return variableCount;
 		}
 		
-		public new TimedAction GetData()
+		public TimedAction GetData()
 		{
 			TimedAction objToReturn = new TimedAction();
 			objToReturn.AtFrame = AtFrame;

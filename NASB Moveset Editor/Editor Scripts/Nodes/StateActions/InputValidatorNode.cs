@@ -263,7 +263,7 @@ namespace NASB_Moveset_Editor.StateActions
 			return variableCount;
 		}
 		
-		public new InputValidator GetData()
+		public InputValidator GetData()
 		{
 			InputValidator objToReturn = new InputValidator();
 			objToReturn.InputType = InputType;

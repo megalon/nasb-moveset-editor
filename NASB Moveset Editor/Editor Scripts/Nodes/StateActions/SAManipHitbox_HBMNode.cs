@@ -236,7 +236,7 @@ namespace NASB_Moveset_Editor.StateActions
 			return variableCount;
 		}
 		
-		public new SAManipHitbox.HBM GetData()
+		public SAManipHitbox.HBM GetData()
 		{
 			SAManipHitbox.HBM objToReturn = new SAManipHitbox.HBM();
 			objToReturn.Manip = Manip;

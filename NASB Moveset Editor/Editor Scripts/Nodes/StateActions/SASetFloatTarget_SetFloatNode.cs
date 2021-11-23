@@ -423,7 +423,7 @@ namespace NASB_Moveset_Editor.StateActions
 			return variableCount;
 		}
 		
-		public new SASetFloatTarget.SetFloat GetData()
+		public SASetFloatTarget.SetFloat GetData()
 		{
 			SASetFloatTarget.SetFloat objToReturn = new SASetFloatTarget.SetFloat();
 			if (GetPort("Target").ConnectionCount > 0)

@@ -71,7 +71,7 @@ namespace NASB_Moveset_Editor.StateActions
 			return variableCount;
 		}
 		
-		public new HurtBone GetData()
+		public HurtBone GetData()
 		{
 			HurtBone objToReturn = new HurtBone();
 			objToReturn.Type = Type;

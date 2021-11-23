@@ -59,7 +59,7 @@ namespace NASB_Moveset_Editor.CheckThings
 			return variableCount;
 		}
 		
-		public new LookForInput GetData()
+		public LookForInput GetData()
 		{
 			LookForInput objToReturn = new LookForInput();
 			objToReturn.MatchMinFrames = MatchMinFrames;
