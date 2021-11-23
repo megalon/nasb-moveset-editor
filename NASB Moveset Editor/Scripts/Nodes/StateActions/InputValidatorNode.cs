@@ -41,6 +41,8 @@ namespace NASB_Moveset_Editor.StateActions
 		protected override void Init()
 		{
 			base.Init();
+			// InputValidator should default to Inside, since zero is unused
+			SegCompare = CtrlSegCompare.Inside;
 		}
 		
 		public override object GetValue(NodePort port)
