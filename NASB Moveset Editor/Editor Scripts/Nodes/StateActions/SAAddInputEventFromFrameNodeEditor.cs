@@ -34,11 +34,8 @@ namespace NASB_Moveset_Editor
                         giev = (GIEV)iterator.intValue;
                         initialized = true;
                     }
-                    else
-                    {
-                        giev = (GIEV)EditorGUILayout.EnumFlagsField(iterator.displayName, giev);
-                        iterator.intValue = (int)giev;
-                    }
+                    giev = (GIEV)EditorGUILayout.EnumFlagsField(giev);
+                    iterator.intValue = (int)giev;
                 }
                 else
                 {
