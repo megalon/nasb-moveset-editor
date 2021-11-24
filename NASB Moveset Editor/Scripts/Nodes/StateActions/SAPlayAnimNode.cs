@@ -30,7 +30,7 @@ namespace NASB_Moveset_Editor.StateActions
 	{
 		public bool FromStart;
 		public string Anim;
-		public AnimConfig Cfg;
+		[Output] public AnimConfig Cfg;
 		
 		protected override void Init()
 		{
@@ -53,6 +53,12 @@ namespace NASB_Moveset_Editor.StateActions
 			FromStart = data.FromStart;
 			Anim = data.Anim;
 			Cfg = data.Cfg;
+			
+			AnimConfigNode node_Cfg = graph.AddNode<AnimConfigNode>();
+			GetPort("Cfg").Connect(node_Cfg.GetPort("NodeInput"));
+			AssetDatabase.AddObjectToAsset(node_Cfg, assetPath);
+			variableCount += node_Cfg.SetData(Cfg, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+			
 			return variableCount;
 		}
 		
@@ -63,7 +69,11 @@ namespace NASB_Moveset_Editor.StateActions
 			objToReturn.Version = Version;
 			objToReturn.FromStart = FromStart;
 			objToReturn.Anim = Anim;
-			objToReturn.Cfg = Cfg;
+			if (GetPort("Cfg").ConnectionCount > 0)
+			{
+				AnimConfigNode AnimConfig_Node = (AnimConfigNode)GetPort("Cfg").GetConnection(0).node;
+				objToReturn.Cfg = AnimConfig_Node.GetData();
+			}
 			return objToReturn;
 		}
 	}

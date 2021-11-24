@@ -30,7 +30,7 @@ namespace NASB_Moveset_Editor.StateActions
 	{
 		public string AnimId;
 		public string RootAnimId;
-		public AnimConfig AnimCfg;
+		[Output] public AnimConfig AnimCfg;
 		[Output] public FloatSource AnimFrames;
 		[Output] public FloatSource StateFrames;
 		[Output] public FloatSource FramesToA;
@@ -60,6 +60,13 @@ namespace NASB_Moveset_Editor.StateActions
 			AnimId = data.AnimId;
 			RootAnimId = data.RootAnimId;
 			AnimCfg = data.AnimCfg;
+			
+			AnimConfigNode node_AnimCfg = graph.AddNode<AnimConfigNode>();
+			GetPort("AnimCfg").Connect(node_AnimCfg.GetPort("NodeInput"));
+			AssetDatabase.AddObjectToAsset(node_AnimCfg, assetPath);
+			variableCount += node_AnimCfg.SetData(AnimCfg, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+			++variableCount;
+			
 			AnimFrames = data.AnimFrames;
 			
 			switch (AnimFrames.TID)
@@ -2188,7 +2195,11 @@ namespace NASB_Moveset_Editor.StateActions
 			objToReturn.Version = Version;
 			objToReturn.AnimId = AnimId;
 			objToReturn.RootAnimId = RootAnimId;
-			objToReturn.AnimCfg = AnimCfg;
+			if (GetPort("AnimCfg").ConnectionCount > 0)
+			{
+				AnimConfigNode AnimConfig_Node = (AnimConfigNode)GetPort("AnimCfg").GetConnection(0).node;
+				objToReturn.AnimCfg = AnimConfig_Node.GetData();
+			}
 			if (GetPort("AnimFrames").ConnectionCount > 0)
 			{
 				FloatSourceNode FloatSource_Node = (FloatSourceNode)GetPort("AnimFrames").GetConnection(0).node;
