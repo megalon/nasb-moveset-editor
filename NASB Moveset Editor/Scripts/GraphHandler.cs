@@ -107,9 +107,21 @@ public class GraphHandler
         if (!Directory.Exists(graphsFolderPath))
             Directory.CreateDirectory(graphsFolderPath);
 
-        AssetDatabase.CreateFolder(graphsFolderPath, itemName);
+        string updatedItemName = itemName;
+        string folderPath = Path.Combine(graphsFolderPath, itemName);
 
-        string assetFolderPath = Path.Combine(graphsFolderPath, itemName);
+        int duplicateIndex = 0;
+
+        while (Directory.Exists(folderPath))
+        {
+            ++duplicateIndex;
+            updatedItemName = itemName + "_" + duplicateIndex;
+            folderPath = Path.Combine(graphsFolderPath, updatedItemName);
+        }
+
+        AssetDatabase.CreateFolder(graphsFolderPath, updatedItemName);
+
+        string assetFolderPath = folderPath;
 
         // Split the moveset apart by state
         int normalizedCount = data.States.Count;
@@ -117,7 +129,7 @@ public class GraphHandler
         foreach (IdState state in data.States)
         {
             ++i;
-            EditorUtility.DisplayProgressBar($"Importing {itemName}...", $"Loading {state.Id}", i / data.States.Count);
+            EditorUtility.DisplayProgressBar($"Importing {updatedItemName}...", $"Loading {state.Id}", i / data.States.Count);
             ScriptableObject graph = ScriptableObject.CreateInstance("MovesetGraph");
             AssetDatabase.CreateAsset(graph, $"{assetFolderPath}/{state.Id}.asset");
 
