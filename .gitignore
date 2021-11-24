@@ -4,12 +4,10 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # Unity
-Scenes/
 NASB Moveset Editor/Graphs/
 Testing/
 *.meta
-SDK/
-Prefabs/
+exports/
 
 # User-specific files
 *.rsuser
