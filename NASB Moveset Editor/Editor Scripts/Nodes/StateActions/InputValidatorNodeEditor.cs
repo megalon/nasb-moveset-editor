@@ -2,7 +2,6 @@ using NASB_Moveset_Editor.StateActions;
 using NASB_Parser.StateActions;
 using System.Linq;
 using UnityEditor;
-using UnityEngine;
 using XNodeEditor;
 
 namespace NASB_Moveset_Editor
@@ -31,23 +30,36 @@ namespace NASB_Moveset_Editor
             // Iterate through serialized properties and draw them like the Inspector (But with ports)
             SerializedProperty iterator = serializedObject.GetIterator();
             bool enterChildren = true;
+
             while (iterator.NextVisible(enterChildren))
             {
                 enterChildren = false;
                 if (excludes.Contains(iterator.name)) continue;
 
-                if (iterator.type.Equals("Enum") && iterator.name.Equals("Segment"))
-                {
-                    // Initialize the item on first load
-                    if (!initialized)
+                if (iterator.type.Equals("Enum")) {
+                    if (iterator.name.Equals("Segment"))
                     {
-                        ctrlSeg = (InputValidator.CtrlSeg)iterator.intValue;
-                        initialized = true;
+                        // Initialize the item on first load
+                        if (!initialized)
+                        {
+                            ctrlSeg = (InputValidator.CtrlSeg)iterator.intValue;
+                            initialized = true;
+                        }
+                        EditorGUILayout.LabelField(iterator.displayName);
+                        ctrlSeg = (InputValidator.CtrlSeg)EditorGUILayout.EnumFlagsField(ctrlSeg);
+                        iterator.intValue = (int)ctrlSeg;
+                    } else if (iterator.name.Equals("SegCompare") || iterator.name.Equals("MultiCompare"))
+                    {
+                        NodeEditorGUILayout.PropertyField(iterator, true);
                     } else
                     {
-                        ctrlSeg = (InputValidator.CtrlSeg)EditorGUILayout.EnumFlagsField(iterator.displayName, ctrlSeg);
-                        iterator.intValue = (int)ctrlSeg;
+                        EditorGUILayout.LabelField(iterator.displayName);
+                        iterator.intValue = EditorGUILayout.Popup(iterator.intValue, iterator.enumDisplayNames);
                     }
+                }
+                else if (iterator.type.Equals("bool"))
+                {
+                    iterator.boolValue = EditorGUILayout.ToggleLeft(iterator.displayName, iterator.boolValue);
                 }
                 else
                 {
