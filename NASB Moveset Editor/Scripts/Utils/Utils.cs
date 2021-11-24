@@ -39,9 +39,12 @@ namespace NASB_Moveset_Editor
 
     public static class Consts
     {
-        public static float NodeXOffset = 250f;
-        public static float NodeYOffset = 130f;
-        public static float NodeVarHeight = 20f;
-        public static int MaxDisplayNameLength = 12;
+        public const float NodeXOffset = 250f;
+        public const float NodeYOffset = 130f;
+        public const float NodeVarHeight = 20f;
+        public const int MaxDisplayNameLength = 12;
+
+        public const string KEY_NAMESPACE = "NASB_MOVESET_EDITOR__";
+        public const string KEY_SELECTED_ASSET_NAME = KEY_NAMESPACE + "SELECTED_ASSET_NAME";
     }
 }

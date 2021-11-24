@@ -13,12 +13,9 @@ public class GraphHandlerWindow : EditorWindow
 {
     public string[] graphDirectories = { "None" };
     public string[] graphNames = { "None" };
-    public int selection = 0;
-
-    public void Awake()
-    {
-        SetupGraphNames();
-    }
+    private int previousSelectionIndex = 0;
+    public int selectionIndex = 0;
+    public string selectedAssetName;
 
     public void OnProjectChange()
     {
@@ -30,6 +27,24 @@ public class GraphHandlerWindow : EditorWindow
     {
         GraphHandlerWindow window = GetWindow<GraphHandlerWindow>();
         window.titleContent = new GUIContent("NASB Moveset Editor v0.1");
+    }
+
+    private void OnEnable()
+    {
+        SetupGraphNames();
+        selectedAssetName = EditorPrefs.GetString(Consts.KEY_SELECTED_ASSET_NAME, "");
+
+        if (!selectedAssetName.Equals(string.Empty))
+        {
+            for (int i=0; i < graphNames.Length; ++i)
+            {
+                if (graphNames[i].Equals(selectedAssetName)) selectionIndex = i;
+            }
+        }
+        else
+        {
+            Debug.Log($"{Consts.KEY_SELECTED_ASSET_NAME} was empty! Selecting first item in list.");
+        }
     }
 
     private void OnGUI()
@@ -46,13 +61,22 @@ public class GraphHandlerWindow : EditorWindow
                 EditorGUILayout.Space(10);
                 if (graphDirectories.Length > 0)
                 {
-                    selection = EditorGUILayout.Popup("Asset to export", selection, graphNames);
+                    previousSelectionIndex = selectionIndex;
+                    selectionIndex = EditorGUILayout.Popup("Asset to export", selectionIndex, graphNames);
+                    if (selectionIndex != previousSelectionIndex)
+                    {
+                        // Selection changed, update prefs
+                        if (graphNames.Length > selectionIndex)
+                            EditorPrefs.SetString(Consts.KEY_SELECTED_ASSET_NAME, graphNames[selectionIndex]);
+                    }
+
                     EditorGUILayout.Space();
-                    if (GUILayout.Button("Export TextAsset", GUILayout.MinHeight(50))) GraphHandler.SaveTextAsset(graphDirectories[selection], graphNames[selection]);
+                    if (GUILayout.Button("Export TextAsset", GUILayout.MinHeight(50))) GraphHandler.SaveTextAsset(graphDirectories[selectionIndex], graphNames[selectionIndex]);
                     EditorGUILayout.Space(10);
                 }
                 EditorGUILayout.LabelField("Created by @megalon2d!");
                 EditorGUILayout.LabelField("NASB_Parser library originally created by sc2ad!");
+                EditorGUILayout.LabelField("xNode created by Siccity!");
             }
             EditorGUILayout.EndVertical();
             GUILayout.FlexibleSpace();
