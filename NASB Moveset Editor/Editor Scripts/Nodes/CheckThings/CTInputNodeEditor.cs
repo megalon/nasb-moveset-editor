@@ -10,8 +10,8 @@ namespace NASB_Moveset_Editor
     public class CTInputNodeEditor : NodeEditor
     {
         GIEV giev;
-
         bool initialized = false;
+
         public override void OnBodyGUI()
         {
             serializedObject.Update();
@@ -32,11 +32,10 @@ namespace NASB_Moveset_Editor
                         giev = (GIEV)iterator.intValue;
                         initialized = true;
                     }
-                    else
-                    {
-                        giev = (GIEV)EditorGUILayout.EnumFlagsField(iterator.displayName, giev);
-                        iterator.intValue = (int)giev;
-                    }
+
+                    EditorGUILayout.LabelField(iterator.displayName);
+                    giev = (GIEV)EditorGUILayout.EnumFlagsField( giev);
+                    iterator.intValue = (int)giev;
                 }
                 else
                 {
