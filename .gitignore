@@ -8,6 +8,8 @@ Scenes/
 NASB Moveset Editor/Graphs/
 Testing/
 *.meta
+SDK/
+Prefabs/
 
 # User-specific files
 *.rsuser
