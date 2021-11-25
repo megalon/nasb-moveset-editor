@@ -9,7 +9,8 @@ namespace NASB_Moveset_Editor
 	[CustomNodeGraphEditor(typeof(MovesetGraph))]
 	public class MovesetGraphEditor : NodeGraphEditor
 	{
-		private string graphName;
+		private string graphParentName;
+		private string graphSubName;
 		private GUIStyle titleStyle;
 		private Rect titleRect;
 		private int windowPadding = 20;
@@ -43,26 +44,46 @@ namespace NASB_Moveset_Editor
         public override void OnCreate()
         {
             base.OnCreate();
+			window.titleContent = new GUIContent(Consts.PROJECT_NAME);
 
 			titleStyle = new GUIStyle();
 			titleStyle.fontSize = 25;
 			titleStyle.normal.textColor = new Color32(128, 128, 128, 255);
-
-			string graphPath = AssetDatabase.GetAssetPath(base.serializedObject.targetObject);
-			graphPath = graphPath.Substring(graphPath.IndexOf("NASB Moveset Editor/Graphs/") + "NASB Moveset Editor/Graphs/".Length);
-			graphName = graphPath.Substring(0, graphPath.Length - ".asset".Length).Replace("/", " - ");
-			window.titleContent = new GUIContent(Consts.PROJECT_NAME);
 		}
 
-        public override void OnGUI()
+        public override void OnOpen()
+        {
+            base.OnOpen();
+
+			SetupInsetGraphName();
+		}
+
+		public override void OnWindowFocus()
+		{
+			base.OnWindowFocus();
+
+			SetupInsetGraphName();
+		}
+
+		public override void OnGUI()
         {
             base.OnGUI();
 
 			titleRect = new Rect(windowPadding, windowPadding, window.position.width - windowPadding, window.position.height - windowPadding);
 
 			GUILayout.BeginArea(titleRect);
-            EditorGUILayout.LabelField(graphName, titleStyle);
+			EditorGUILayout.LabelField(graphParentName, titleStyle);
+			EditorGUILayout.Space(windowPadding * 0.66f);
+			EditorGUILayout.LabelField(graphSubName, titleStyle);
 			GUILayout.EndArea();
         }
+
+		private void SetupInsetGraphName()
+        {
+			string graphPath = AssetDatabase.GetAssetPath(base.serializedObject.targetObject);
+			graphPath = graphPath.Substring(graphPath.IndexOf("NASB Moveset Editor/Graphs/") + "NASB Moveset Editor/Graphs/".Length);
+			graphParentName = graphPath.Substring(0, graphPath.IndexOf("/"));
+			graphSubName = graphPath.Substring(graphParentName.Length + 1, graphPath.IndexOf(".asset") - graphParentName.Length - 1);
+		}
     }
 }
