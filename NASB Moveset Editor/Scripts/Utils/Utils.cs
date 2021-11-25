@@ -44,6 +44,9 @@ namespace NASB_Moveset_Editor
         public const float NodeVarHeight = 20f;
         public const int MaxDisplayNameLength = 12;
 
+        public const string VERSION = "0.1.1";
+        public const string PROJECT_NAME = "NASB Moveset Editor";
+
         public const string KEY_NAMESPACE = "NASB_MOVESET_EDITOR__";
         public const string KEY_SELECTED_ASSET_NAME = KEY_NAMESPACE + "SELECTED_ASSET_NAME";
     }
