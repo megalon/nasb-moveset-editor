@@ -22,7 +22,7 @@ public class GraphHandlerWindow : EditorWindow
         SetupGraphNames();
     }
 
-    [MenuItem("Window/NASB Moveset Editor")]
+    [MenuItem("NASB/NASB Moveset Editor", priority = 4)]
     private static void OpenWindow()
     {
         GraphHandlerWindow window = GetWindow<GraphHandlerWindow>();

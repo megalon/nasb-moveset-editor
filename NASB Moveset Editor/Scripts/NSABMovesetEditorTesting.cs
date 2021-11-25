@@ -13,7 +13,7 @@ namespace NASB_Moveset_Editor
         private static int numPerRow = 6;
         private static int fileCount = 0;
 
-        [MenuItem("Window/NASB Moveset Editor Testing")]
+        [MenuItem("NASB/NASB Moveset Editor Tests", priority = 4)]
         private static void OpenWindow()
         {
             NSABMovesetEditorTesting window = GetWindow<NSABMovesetEditorTesting>();
