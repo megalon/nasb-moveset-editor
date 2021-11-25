@@ -26,7 +26,7 @@ public class GraphHandlerWindow : EditorWindow
     private static void OpenWindow()
     {
         GraphHandlerWindow window = GetWindow<GraphHandlerWindow>();
-        window.titleContent = new GUIContent("NASB Moveset Editor v0.1");
+        window.titleContent = new GUIContent(Consts.PROJECT_NAME + " " + Consts.VERSION);
     }
 
     private void OnEnable()
