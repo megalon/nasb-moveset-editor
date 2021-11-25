@@ -49,6 +49,8 @@ namespace NASB_Moveset_Editor
 			titleStyle = new GUIStyle();
 			titleStyle.fontSize = 25;
 			titleStyle.normal.textColor = new Color32(128, 128, 128, 255);
+
+			titleRect = new Rect(windowPadding, windowPadding, window.position.width - windowPadding, window.position.height - windowPadding);
 		}
 
         public override void OnOpen()
@@ -68,8 +70,6 @@ namespace NASB_Moveset_Editor
 		public override void OnGUI()
         {
             base.OnGUI();
-
-			titleRect = new Rect(windowPadding, windowPadding, window.position.width - windowPadding, window.position.height - windowPadding);
 
 			GUILayout.BeginArea(titleRect);
 			EditorGUILayout.LabelField(graphParentName, titleStyle);
