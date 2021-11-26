@@ -11,8 +11,8 @@ namespace NASB_Moveset_Editor
     {
         public static string GetGraphsDirPath()
         {
-            var mainDir = Path.GetDirectoryName(Path.GetDirectoryName(GetAssetPathFromDB("GraphHandler")));
-            return Path.Combine(mainDir, "Graphs");
+            // var mainDir = Path.GetDirectoryName(Path.GetDirectoryName(GetAssetPathFromDB("GraphHandler")));
+            return Path.Combine("Assets", "Editor", Consts.GRAPH_FOLDER_NAME);
         }
 
         public static string GetNodesDirPath()
@@ -46,6 +46,7 @@ namespace NASB_Moveset_Editor
 
         public const string VERSION = "0.1.1";
         public const string PROJECT_NAME = "NASB Moveset Editor";
+        public const string GRAPH_FOLDER_NAME = "Moveset Graphs";
 
         public const string KEY_NAMESPACE = "NASB_MOVESET_EDITOR__";
         public const string KEY_SELECTED_ASSET_NAME = KEY_NAMESPACE + "SELECTED_ASSET_NAME";
