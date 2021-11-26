@@ -87,7 +87,7 @@ namespace NASB_Moveset_Editor
 				graphPath = graphPath.Substring(graphPath.IndexOf("NASB Moveset Editor/Graphs/") + "NASB Moveset Editor/Graphs/".Length);
 				graphPath = graphPath.Substring(0, graphPath.Length - ".asset".Length);
 				graphParentName = graphPath.Substring(0, graphPath.IndexOf("/"));
-				graphSubName = graphPath.Substring(graphParentName.Length + 1, graphPath.IndexOf(".asset") - graphParentName.Length - 1);
+				graphSubName = graphPath.Substring(graphParentName.Length + 1);
 			} catch
             {
 				graphParentName = graphPath;
