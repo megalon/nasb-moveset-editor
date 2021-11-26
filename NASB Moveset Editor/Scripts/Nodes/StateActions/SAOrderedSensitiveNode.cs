@@ -54,7 +54,7 @@ namespace NASB_Moveset_Editor.StateActions
 			foreach (StateAction Actions_item in data.Actions)
 			{
 				// Create dynamic ports based on number of actions
-				string portName = "" + DynamicPorts.Count();
+				string portName = "" + (DynamicPorts.Count() + 1);
 				AddDynamicOutput(typeof(StateAction), ConnectionType.Override, TypeConstraint.None, portName);
 				
 				switch (Actions_item.TID)
