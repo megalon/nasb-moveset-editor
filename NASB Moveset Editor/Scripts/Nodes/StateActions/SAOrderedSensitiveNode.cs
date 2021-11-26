@@ -29,7 +29,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAOrderedSensitiveNode : StateActionNode
 	{
-		public int listSize = 0;
+		[Range(2, 50)] public int listSize = 0;
 		
 		protected override void Init()
 		{
