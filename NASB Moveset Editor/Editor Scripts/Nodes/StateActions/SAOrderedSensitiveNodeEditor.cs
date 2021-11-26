@@ -37,17 +37,9 @@ namespace NASB_Moveset_Editor {
                 NodeEditorGUILayout.PropertyField(iterator, true);
             }
 
-            if (!initialized)
-            {
-                initialized = true;
-                numOutputs = target.Outputs.Count();
-            }
-
-            numOutputs = EditorGUILayout.IntField("Outputs", numOutputs);
-
             if (GUILayout.Button("Update"))
             {
-                UpdateNumberOfOutputs(target, numOutputs);
+                UpdateNumberOfOutputs(target, serializedObject.FindProperty("listSize").intValue);
             }
 
             // Iterate through dynamic ports and draw them in the order in which they are serialized

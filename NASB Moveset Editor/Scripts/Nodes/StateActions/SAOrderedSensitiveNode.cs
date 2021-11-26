@@ -29,6 +29,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAOrderedSensitiveNode : StateActionNode
 	{
+		public int listSize = 0;
 		
 		protected override void Init()
 		{
@@ -48,11 +49,12 @@ namespace NASB_Moveset_Editor.StateActions
 			position.y = nodeDepthXY.y * Consts.NodeYOffset;
 			int variableCount = 0;
 			
+			listSize = data.Actions.Count;
 			
 			foreach (StateAction Actions_item in data.Actions)
 			{
 				// Create dynamic ports based on number of actions
-				string portName = "" + (DynamicPorts.Count() + 1);
+				string portName = "" + DynamicPorts.Count();
 				AddDynamicOutput(typeof(StateAction), ConnectionType.Override, TypeConstraint.None, portName);
 				
 				switch (Actions_item.TID)
