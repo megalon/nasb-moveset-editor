@@ -54,7 +54,7 @@ namespace NASB_Moveset_Editor.CheckThings
 			return variableCount;
 		}
 		
-		public new CheckThing GetData()
+		public CheckThing GetData()
 		{
 			CheckThing objToReturn = new CheckThing();
 			objToReturn.TID = TypeId.BaseIdentifier;

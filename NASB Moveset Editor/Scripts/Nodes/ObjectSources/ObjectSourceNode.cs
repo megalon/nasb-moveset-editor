@@ -54,7 +54,7 @@ namespace NASB_Moveset_Editor.ObjectSources
 			return variableCount;
 		}
 		
-		public new ObjectSource GetData()
+		public ObjectSource GetData()
 		{
 			ObjectSource objToReturn = new ObjectSource();
 			objToReturn.TID = TypeId.BaseIdentifier;

@@ -54,7 +54,7 @@ namespace NASB_Moveset_Editor.Jumps
 			return variableCount;
 		}
 		
-		public new Jump GetData()
+		public Jump GetData()
 		{
 			Jump objToReturn = new Jump();
 			objToReturn.TID = TypeId.BaseIdentifier;

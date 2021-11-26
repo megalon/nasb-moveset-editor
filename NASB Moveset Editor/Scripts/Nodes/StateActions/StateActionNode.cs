@@ -54,7 +54,7 @@ namespace NASB_Moveset_Editor.StateActions
 			return variableCount;
 		}
 		
-		public new StateAction GetData()
+		public StateAction GetData()
 		{
 			StateAction objToReturn = new StateAction();
 			objToReturn.TID = TypeId.BaseIdentifier;
