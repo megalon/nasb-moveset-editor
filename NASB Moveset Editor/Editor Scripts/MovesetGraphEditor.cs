@@ -81,9 +81,17 @@ namespace NASB_Moveset_Editor
 		private void SetupInsetGraphName()
         {
 			string graphPath = AssetDatabase.GetAssetPath(base.serializedObject.targetObject);
-			graphPath = graphPath.Substring(graphPath.IndexOf("NASB Moveset Editor/Graphs/") + "NASB Moveset Editor/Graphs/".Length);
-			graphParentName = graphPath.Substring(0, graphPath.IndexOf("/"));
-			graphSubName = graphPath.Substring(graphParentName.Length + 1, graphPath.IndexOf(".asset") - graphParentName.Length - 1);
+
+			try
+            {
+				graphPath = graphPath.Substring(graphPath.IndexOf("NASB Moveset Editor/Graphs/") + "NASB Moveset Editor/Graphs/".Length);
+				graphPath = graphPath.Substring(0, graphPath.Length - ".asset".Length);
+				graphParentName = graphPath.Substring(0, graphPath.IndexOf("/"));
+				graphSubName = graphPath.Substring(graphParentName.Length + 1, graphPath.IndexOf(".asset") - graphParentName.Length - 1);
+			} catch
+            {
+				graphParentName = graphPath;
+			}
 		}
     }
 }
