@@ -50,7 +50,7 @@ namespace NASB_Moveset_Editor
 			CustomCall = data.CustomCall;
 			Timeline = data.Timeline;
 			
-			foreach (TimedAction Timeline_item in Timeline)
+			foreach (TimedAction Timeline_item in data.Timeline)
 			{
 				TimedActionNode node_Timeline = graph.AddNode<TimedActionNode>();
 				GetPort("Timeline").Connect(node_Timeline.GetPort("NodeInput"));

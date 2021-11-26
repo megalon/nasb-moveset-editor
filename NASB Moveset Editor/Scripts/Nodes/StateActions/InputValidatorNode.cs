@@ -253,7 +253,7 @@ namespace NASB_Moveset_Editor.StateActions
 			
 			Validators = data.Validators;
 			
-			foreach (InputValidator Validators_item in Validators)
+			foreach (InputValidator Validators_item in data.Validators)
 			{
 				InputValidatorNode node_Validators = graph.AddNode<InputValidatorNode>();
 				GetPort("Validators").Connect(node_Validators.GetPort("NodeInput"));

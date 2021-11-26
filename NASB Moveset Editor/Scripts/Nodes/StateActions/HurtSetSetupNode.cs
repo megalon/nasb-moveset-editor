@@ -49,7 +49,7 @@ namespace NASB_Moveset_Editor.StateActions
 			
 			HurtBones = data.HurtBones;
 			
-			foreach (HurtBone HurtBones_item in HurtBones)
+			foreach (HurtBone HurtBones_item in data.HurtBones)
 			{
 				HurtBoneNode node_HurtBones = graph.AddNode<HurtBoneNode>();
 				GetPort("HurtBones").Connect(node_HurtBones.GetPort("NodeInput"));

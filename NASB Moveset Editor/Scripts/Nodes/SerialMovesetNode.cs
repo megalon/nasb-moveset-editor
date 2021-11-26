@@ -48,7 +48,7 @@ namespace NASB_Moveset_Editor
 			
 			States = data.States;
 			
-			foreach (IdState States_item in States)
+			foreach (IdState States_item in data.States)
 			{
 				IdStateNode node_States = graph.AddNode<IdStateNode>();
 				GetPort("States").Connect(node_States.GetPort("NodeInput"));

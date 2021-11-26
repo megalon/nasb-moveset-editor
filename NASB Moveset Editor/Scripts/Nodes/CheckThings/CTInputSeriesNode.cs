@@ -53,7 +53,7 @@ namespace NASB_Moveset_Editor.CheckThings
 			CheckFrames = data.CheckFrames;
 			InputSeries = data.InputSeries;
 			
-			foreach (LookForInput InputSeries_item in InputSeries)
+			foreach (LookForInput InputSeries_item in data.InputSeries)
 			{
 				LookForInputNode node_InputSeries = graph.AddNode<LookForInputNode>();
 				GetPort("InputSeries").Connect(node_InputSeries.GetPort("NodeInput"));
@@ -64,7 +64,7 @@ namespace NASB_Moveset_Editor.CheckThings
 			
 			StopLooking = data.StopLooking;
 			
-			foreach (LookForInput StopLooking_item in StopLooking)
+			foreach (LookForInput StopLooking_item in data.StopLooking)
 			{
 				LookForInputNode node_StopLooking = graph.AddNode<LookForInputNode>();
 				GetPort("StopLooking").Connect(node_StopLooking.GetPort("NodeInput"));

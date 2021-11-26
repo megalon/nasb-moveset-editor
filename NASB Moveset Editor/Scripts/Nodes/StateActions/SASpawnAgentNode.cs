@@ -72,7 +72,7 @@ namespace NASB_Moveset_Editor.StateActions
 			CustomSpawnMovement = data.CustomSpawnMovement;
 			Movements = data.Movements;
 			
-			foreach (SpawnMovement Movements_item in Movements)
+			foreach (SpawnMovement Movements_item in data.Movements)
 			{
 				SpawnMovementNode node_Movements = graph.AddNode<SpawnMovementNode>();
 				GetPort("Movements").Connect(node_Movements.GetPort("NodeInput"));

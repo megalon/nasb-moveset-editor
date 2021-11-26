@@ -52,7 +52,7 @@ namespace NASB_Moveset_Editor.CheckThings
 			Match = data.Match;
 			Checklist = data.Checklist;
 			
-			foreach (CheckThing Checklist_item in Checklist)
+			foreach (CheckThing Checklist_item in data.Checklist)
 			{
 				switch (Checklist_item.TID)
 				{
