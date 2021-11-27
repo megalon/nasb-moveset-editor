@@ -97,7 +97,7 @@ namespace NASB_Moveset_Editor
             EditorUtility.DisplayDialog("NASB Moveset Editor", $"Export complete!\n\nSaved to \"{outputFilePath}\"", "OK");
         }
 
-        private static void GenerateGraphs(SerialMoveset data, string itemName)
+        public static void GenerateGraphs(SerialMoveset data, string itemName)
         {
             string graphsFolderPath = Utils.GetGraphsDirPath();
             if (!Directory.Exists(graphsFolderPath))
@@ -117,10 +117,12 @@ namespace NASB_Moveset_Editor
 
             AssetDatabase.CreateFolder(graphsFolderPath, updatedItemName);
 
-            string assetFolderPath = folderPath;
+            AddGraphToExistingFolder(data, updatedItemName, folderPath);
+        }
 
+        public static void AddGraphToExistingFolder(SerialMoveset data, string updatedItemName, string assetFolderPath)
+        {
             // Split the moveset apart by state
-            int normalizedCount = data.States.Count;
             int i = 0;
             foreach (IdState state in data.States)
             {
