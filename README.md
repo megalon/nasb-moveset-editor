@@ -18,8 +18,6 @@ Once created, copy and paste the line below into the your `manifest.json` in `Pa
 
 `"com.github.siccity.xnode": "https://github.com/siccity/xNode.git"`
 
-It should prompt you to import xNode. Make sure everything is checked, and import it.
-
 ## Step 3 Import the NASB Moveset Editor
 Create a folder named `Editor` inside your Assets folder
 
@@ -36,7 +34,7 @@ Nickelodeon All-Star Brawl stores moveset data in text files using a custom form
 
 The NASB Moveset Editor can read these BulkSerialized files, and split them apart so that each `IdState` gets it's own Moveset Graph.
 
-In general, each Moveset Graph is it's own "move" in the moveset!
+**In general, each Moveset Graph is it's own "move" in the moveset!**
 
 ## Import TextAsset
 
@@ -44,20 +42,29 @@ First you need a `BulkSerialized` text file.
 
 You can extract these files from within the game using a tool like [Asset Studio](https://github.com/Perfare/AssetStudio)
 
-You can tell if you have a correct file if you open it in a text editor, and it starts with `BulkSerialize` followed by a bunch of numbers on each line.
-
-The movesets for characters are typically named by their ID. For example, `char_rival.txt` for Helga.
+The movesets for characters are typically named by their ID. For example, `char_rival.txt` for Helga. You can tell if you have a correct file if you open it in a text editor, and it starts with `BulkSerialize` followed by a bunch of numbers on each line.
 
 **Once you have a BulkSerialized file**
 
 Click the `Import TextAsset` button to import the BulkSerialized text file.
 
-This will create a folder at the path `Assets/Editor/Moveset Graphs/{filename}`
-
-Here you can find the Moveset Graphs for this moveset.
+This will create a folder at the path `Assets/Editor/Moveset Graphs/{filename}` Here you can find the Moveset Graphs for this moveset.
 
 Double click on one of these files in the Unity Inspector to open it in the NASB Moveset Editor!
 
+# Controls
+
+| Keybind | Action |
+|----|----|
+| Left Click | Select nodes. Click on a "port" and drag it to another port to connect two nodes. Right click while dragging to create a re-route point. |
+| Right Click | Context Menu. Right click in empty space within the editor to add a new node from the drop-down menu. |
+| Middle Click | Move the viewport in the editor window. |
+| Right Click + Drag | Alternative to Middle Click. Move the viewport in the editor window. |
+| Scroll Wheel | Zoom. You can define the min / max zoom level in the Preferences. |  
+| F | Focus selected. If no node is selected, it returns the viewport to (0, 0) |
+| A | Select all |
+| CTRL + Z | Undo (This uses Unity's undo system) |
+| CTRL + Y | Redo (This uses Unity's undo system) |
 
 ## Credits
 
