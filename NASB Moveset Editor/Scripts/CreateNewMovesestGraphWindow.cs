@@ -34,7 +34,9 @@ namespace NASB_Moveset_Editor
                 EditorGUILayout.BeginVertical(GUILayout.MaxWidth(400));
                 {
                     EditorGUILayout.Space(10);
-                    movesetType = (MovesetType)EditorGUILayout.EnumPopup("Moveset Type", movesetType);
+                    EditorGUILayout.HelpBox("Import the \"characterBase\" TextAsset from NASB to view all the built-in IdStates that characters can override!", MessageType.Info);
+                    // EditorGUILayout.Space(10);
+                    // movesetType = (MovesetType)EditorGUILayout.EnumPopup("Moveset Type", movesetType);
                     EditorGUILayout.Space(10);
                     textAssetName = EditorGUILayout.TextField("TextAsset Name", textAssetName);
                     EditorGUILayout.Space(10);

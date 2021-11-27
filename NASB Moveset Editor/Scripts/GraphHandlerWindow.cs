@@ -60,7 +60,7 @@ namespace NASB_Moveset_Editor
                     EditorGUILayout.Space(10);
                     if (GUILayout.Button("Import TextAsset", GUILayout.MinHeight(35))) GraphHandler.LoadTextAsset();
                     EditorGUILayout.Space(10);
-                    if (GUILayout.Button("New Moveset Graph", GUILayout.MinHeight(35)))
+                    if (GUILayout.Button("Create New Moveset Graph", GUILayout.MinHeight(35)))
                     {
                         CreateNewMovesestGraphWindow window = GetWindow<CreateNewMovesestGraphWindow>();
                         window.titleContent = new GUIContent("New Moveset Graph");
@@ -69,7 +69,7 @@ namespace NASB_Moveset_Editor
                     if (graphDirectories.Length > 0)
                     {
                         previousSelectionIndex = selectionIndex;
-                        selectionIndex = EditorGUILayout.Popup("TextAsset to export", selectionIndex, graphNames);
+                        selectionIndex = EditorGUILayout.Popup("Moveset to export", selectionIndex, graphNames);
                         if (selectionIndex != previousSelectionIndex)
                         {
                             // Selection changed, update prefs
