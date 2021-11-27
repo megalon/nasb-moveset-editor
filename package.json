@@ -1,0 +1,17 @@
+{
+  "name": "com.github.megalon.nasb-moveset-editor",
+  "version": "0.1.4",
+  "description": "A node based moveset editor for Nickelodeon All-Star Brawl!",
+  "displayName": "NASB Moveset Editor",
+  "unity": "2020.3",
+  "unityRelease": "15f2",
+  "documentationUrl": "https://github.com/megalon/nasb-moveset-editor#readme",
+  "license": "MIT",
+  "author": {
+    "name": "megalon",
+    "url": "https://www.github.com/megalon"
+  },
+  "dependencies": {
+    "com.github.siccity.xnode": "https://github.com/siccity/xNode.git"
+  }
+}
