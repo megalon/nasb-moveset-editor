@@ -8,8 +8,6 @@ namespace NASB_Moveset_Editor
     [CustomNodeEditor(typeof(SAFindLastHorizontalInputNode))]
     public class SAFindLastHorizontalInputNodeEditor : NodeEditor
     {
-
-        bool initialized = false;
         public override void OnBodyGUI()
         {
             serializedObject.Update();

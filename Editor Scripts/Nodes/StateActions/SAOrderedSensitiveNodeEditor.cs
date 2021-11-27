@@ -12,14 +12,11 @@ namespace NASB_Moveset_Editor {
     [CustomNodeEditor(typeof(SAOrderedSensitiveNode))]
     public class SAOrderedSensitiveNodeEditor : NodeEditor
     {
-        private int numOutputs;
-        private bool initialized = false;
         private const int maxOutputs = 50;
 
         public override void OnCreate()
         {
             base.OnCreate();
-            numOutputs = 0;
         }
 
         public override void OnBodyGUI()

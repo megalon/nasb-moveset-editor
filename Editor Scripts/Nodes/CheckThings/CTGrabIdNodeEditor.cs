@@ -9,8 +9,6 @@ namespace NASB_Moveset_Editor
     [CustomNodeEditor(typeof(CTGrabIdNode))]
     public class CTGrabIdNodeEditor : NodeEditor
     {
-
-        bool initialized = false;
         public override void OnBodyGUI()
         {
             serializedObject.Update();
