@@ -13,12 +13,13 @@ namespace NASB_Moveset_Editor
     {
         public Dictionary<string, GUIContent> ContainerContents;
 
-        public FSFuncText(string AText, string BText, string CText)
+        public FSFuncText(string AText, string BText, string CText, string Formula)
         {
             ContainerContents = new Dictionary<string, GUIContent>();
             ContainerContents.Add("ContainerA", new GUIContent(AText));
             ContainerContents.Add("ContainerB", new GUIContent(BText));
             ContainerContents.Add("ContainerC", new GUIContent(CText));
+            ContainerContents.Add("Formula", new GUIContent("Formula (Hover to view)", Formula));
         }
     }
 
@@ -31,35 +32,35 @@ namespace NASB_Moveset_Editor
         public override void OnCreate()
         {
             base.OnCreate();
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Abs, new FSFuncText("Input", "", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Add, new FSFuncText("A", "B", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Sub, new FSFuncText("A", "B", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Div, new FSFuncText("A", "B", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Mult, new FSFuncText("A", "B", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Sin, new FSFuncText("Input Deg", "", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Cos, new FSFuncText("Input Deg", "", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Mod, new FSFuncText("A", "B", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Clamp, new FSFuncText("Input", "Min", "Max"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Floor, new FSFuncText("Input", "", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Ceil, new FSFuncText("Input", "", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.MoveTo, new FSFuncText("Current", "Target", "Max Delta"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.MoveToAng, new FSFuncText("Current", "Target", "Max Delta"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.MoveToF, new FSFuncText("Current", "Target", "Max Delta"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.MoveToAngF, new FSFuncText("Current", "Target", "Max Delta"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Sign, new FSFuncText("Input", "", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Lerp, new FSFuncText("A", "B", "T"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.InvLerp, new FSFuncText("A", "B", "T"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Repeat, new FSFuncText("Input", "Length", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Pow, new FSFuncText("Input", "Power", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Sqrt, new FSFuncText("Input", "", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Log, new FSFuncText("Input", "", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Log10, new FSFuncText("Input", "", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Atan, new FSFuncText("Input", "", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Atan2, new FSFuncText("Y", "X", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.RoundToInt, new FSFuncText("Input", "", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Max, new FSFuncText("A", "B", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Min, new FSFuncText("A", "B", ""));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Pi, new FSFuncText("", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Abs, new FSFuncText("Input", "", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Add, new FSFuncText("A", "B", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Sub, new FSFuncText("A", "B", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Div, new FSFuncText("A", "B", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Mult, new FSFuncText("A", "B", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Sin, new FSFuncText("Input Deg", "", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Cos, new FSFuncText("Input Deg", "", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Mod, new FSFuncText("A", "B", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Clamp, new FSFuncText("Input", "Min", "Max", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Floor, new FSFuncText("Input", "", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Ceil, new FSFuncText("Input", "", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.MoveTo, new FSFuncText("Current", "Target", "Max Delta", "Mathf.MoveTowards(Current, Target, Max_Delta * Frames)"));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.MoveToAng, new FSFuncText("Current", "Target", "Max Delta", "Mathf.MoveTowardsAngle(Current, Target, Max_Delta * Frames)"));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.MoveToF, new FSFuncText("Current", "Target", "Max Delta", "Mathf.MoveTowards(Current, Target, Max_Delta * (Frames * Time_Per_Frame))"));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.MoveToAngF, new FSFuncText("Current", "Target", "Max Delta", "Mathf.MoveTowardsAngle(Current, Target, Max_Delta * (Frames * Time_Per_Frame))"));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Sign, new FSFuncText("Input", "", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Lerp, new FSFuncText("A", "B", "T", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.InvLerp, new FSFuncText("A", "B", "T", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Repeat, new FSFuncText("Input", "Length", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Pow, new FSFuncText("Input", "Power", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Sqrt, new FSFuncText("Input", "", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Log, new FSFuncText("Input", "", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Log10, new FSFuncText("Input", "", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Atan, new FSFuncText("Input", "", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Atan2, new FSFuncText("Y", "X", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.RoundToInt, new FSFuncText("Input", "", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Max, new FSFuncText("A", "B", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Min, new FSFuncText("A", "B", "", ""));
+            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Pi, new FSFuncText("", "", "", ""));
         }
 
         public override void OnBodyGUI()
@@ -78,9 +79,14 @@ namespace NASB_Moveset_Editor
                 {
                     iterator.intValue = EditorGUILayout.Popup(iterator.intValue, iterator.enumDisplayNames);
                     currentFunc = (NASB_Parser.FloatSources.FSFunc.FuncWay)iterator.intValue;
+
+                    if (!funcTextDict[currentFunc].ContainerContents["Formula"].tooltip.Equals(string.Empty))
+                    {
+                        EditorGUILayout.HelpBox(funcTextDict[currentFunc].ContainerContents["Formula"]);
+                    }
                 } else if (iterator.type.Equals("FloatSource") && funcTextDict.ContainsKey(currentFunc))
                 {
-                        NodeEditorGUILayout.PropertyField(iterator, funcTextDict[currentFunc].ContainerContents[iterator.name], true);
+                    NodeEditorGUILayout.PropertyField(iterator, funcTextDict[currentFunc].ContainerContents[iterator.name], true);
                 }
                 else
                 {
