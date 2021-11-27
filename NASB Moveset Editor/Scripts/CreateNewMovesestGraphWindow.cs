@@ -22,8 +22,8 @@ namespace NASB_Moveset_Editor
 
         private void OnEnable()
         {
-            textAssetName = "char_example";
-            stateId = "idle";
+            textAssetName = EditorPrefs.GetString(Consts.KEY_NEW_GRAPH_TEXTASSET_NAME, "char_example");
+            stateId = EditorPrefs.GetString(Consts.KEY_NEW_GRAPH_STATE, "idle");
         }
 
         private void OnGUI()
@@ -34,13 +34,28 @@ namespace NASB_Moveset_Editor
                 EditorGUILayout.BeginVertical(GUILayout.MaxWidth(400));
                 {
                     EditorGUILayout.Space(10);
-                    EditorGUILayout.HelpBox("Import the \"characterBase\" TextAsset from NASB to view all the built-in IdStates that characters can override!", MessageType.Info);
+                    EditorGUILayout.HelpBox("Import the \"characterBase\" TextAsset from NASB to view all the built-in states that characters can override!", MessageType.Info);
                     // EditorGUILayout.Space(10);
                     // movesetType = (MovesetType)EditorGUILayout.EnumPopup("Moveset Type", movesetType);
                     EditorGUILayout.Space(10);
-                    textAssetName = EditorGUILayout.TextField("TextAsset Name", textAssetName);
+
+                    // I think this is the wrong way of going about this, but it works
+                    string newTextAssetName = EditorGUILayout.TextField("TextAsset Name", textAssetName).Trim();
+                    if (!textAssetName.Equals(newTextAssetName))
+                    {
+                        EditorPrefs.SetString(Consts.KEY_NEW_GRAPH_TEXTASSET_NAME, newTextAssetName);
+                    }
+                    textAssetName = newTextAssetName;
+
                     EditorGUILayout.Space(10);
-                    stateId = EditorGUILayout.TextField("State ID", stateId);
+
+                    string newStateId = EditorGUILayout.TextField("State ID", stateId).Trim();
+                    if (!stateId.Equals(newStateId))
+                    {
+                        EditorPrefs.SetString(Consts.KEY_NEW_GRAPH_STATE, newStateId);
+                    }
+                    stateId = newStateId;
+                    
                     EditorGUILayout.Space(10);
                     if (GUILayout.Button("Create Moveset Graph", GUILayout.MinHeight(35))) CreateGraph();
                     EditorGUILayout.Space(10);

@@ -50,5 +50,7 @@ namespace NASB_Moveset_Editor
 
         public const string KEY_NAMESPACE = "NASB_MOVESET_EDITOR__";
         public const string KEY_SELECTED_ASSET_NAME = KEY_NAMESPACE + "SELECTED_ASSET_NAME";
+        public const string KEY_NEW_GRAPH_TEXTASSET_NAME = KEY_NAMESPACE + "NEW_GRAPH_TEXTASSET_NAME";
+        public const string KEY_NEW_GRAPH_STATE = KEY_NAMESPACE + "NEW_GRAPH_STATE";
     }
 }
