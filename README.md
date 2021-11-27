@@ -16,8 +16,11 @@ Create a new 3D Unity project using `Unity 2020.3.15f2`
 
 Once created, open the file `Packages/manifest.json` in a text editor, and add the two lines below at the top of the dependencies list
 
-`"com.github.siccity.xnode": "https://github.com/siccity/xNode.git",`
-`"com.github.megalon.nasb-moveset-editor": "https://github.com/megalon/nasb-moveset-editor",`
+```
+"com.github.siccity.xnode": "https://github.com/siccity/xNode.git",
+"com.github.megalon.nasb-moveset-editor": "https://github.com/megalon/nasb-moveset-editor",
+```
+Save the file, then when go back to the Unity window. It should start downloading the packages.
 
 ## Step 3 Open the editor panel
 In Unity, open the NASB Moveset Editor control panel from the top menu bar `NASB -> NASB Moveset Editor`.
