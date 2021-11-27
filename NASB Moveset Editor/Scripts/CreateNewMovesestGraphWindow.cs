@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using System.IO;
 using System.Linq;
+using XNodeEditor;
 
 namespace NASB_Moveset_Editor
 {
@@ -57,14 +58,22 @@ namespace NASB_Moveset_Editor
 
             data.States.Add(idState);
 
+            List<MovesetGraph> graphs = new List<MovesetGraph>();
+
             if (GraphHandlerWindow.graphNames.Contains(textAssetName))
             {
-                GraphHandler.AddGraphToExistingFolder(data, textAssetName, Path.Combine(Utils.GetGraphsDirPath(), textAssetName));
+                // If other graphs already exist for this TextAsset, add the graph there
+                graphs = GraphHandler.CreateGraphsForAllStates(data, textAssetName, Path.Combine(Utils.GetGraphsDirPath(), textAssetName));
             }
             else
             {
-                GraphHandler.GenerateGraphs(data, textAssetName);
+                // If this is the only graph for this TextAsset
+                graphs = GraphHandler.GenerateGraphs(data, textAssetName);
             }
+
+            NodeEditorWindow.Open(graphs[0]);
+            NodeEditorWindow.current.SelectNode(graphs[0].nodes[0], false);
+            NodeEditorWindow.current.panOffset = new Vector2(-100, -100);
 
             this.Close();
         }
