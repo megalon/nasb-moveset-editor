@@ -44,7 +44,7 @@ namespace NASB_Moveset_Editor
         public const float NodeVarHeight = 20f;
         public const int MaxDisplayNameLength = 12;
 
-        public const string VERSION = "0.1.1";
+        public const string VERSION = "0.1.3";
         public const string PROJECT_NAME = "NASB Moveset Editor";
         public const string GRAPH_FOLDER_NAME = "Moveset Graphs";
 
