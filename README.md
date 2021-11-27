@@ -11,20 +11,16 @@ Download and install `Unity 2020.3.15f2`
 
 The simplest way to do this is through [Unity Hub.](https://unity3d.com/get-unity/download)
 
-## Step 2 Import xNode
+## Step 2 Import Packages
 Create a new 3D Unity project using `Unity 2020.3.15f2`
 
-Once created, copy and paste the line below into the your `manifest.json` in `Packages/manifest.json` to add xNode to the list of dependencies.
+Once created, open the file `Packages/manifest.json` in a text editor, and add the two lines below at the top of the dependencies list
 
-`"com.github.siccity.xnode": "https://github.com/siccity/xNode.git"`
+`"com.github.siccity.xnode": "https://github.com/siccity/xNode.git",`
+`"com.github.megalon.nasb-moveset-editor": "https://github.com/megalon/nasb-moveset-editor",`
 
-## Step 3 Import the NASB Moveset Editor
-Create a folder named `Editor` inside your Assets folder
-
-Import the files from this github repo into this `Editor` folder.
-
-## Step 4 Open the editor panel
-Open the NASB Moveset Editor control panel from the menu bar `NASB -> NASB Moveset Editor`.
+## Step 3 Open the editor panel
+In Unity, open the NASB Moveset Editor control panel from the top menu bar `NASB -> NASB Moveset Editor`.
 
 You can dock this window inside unity by dragging the tab.
 
