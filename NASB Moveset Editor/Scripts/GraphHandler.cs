@@ -3,6 +3,7 @@ using UnityEditor;
 using NASB_Parser;
 using System.IO;
 using System;
+using System.Collections.Generic;
 
 namespace NASB_Moveset_Editor
 {
@@ -97,7 +98,7 @@ namespace NASB_Moveset_Editor
             EditorUtility.DisplayDialog("NASB Moveset Editor", $"Export complete!\n\nSaved to \"{outputFilePath}\"", "OK");
         }
 
-        private static void GenerateGraphs(SerialMoveset data, string itemName)
+        public static List<MovesetGraph> GenerateGraphs(SerialMoveset data, string itemName)
         {
             string graphsFolderPath = Utils.GetGraphsDirPath();
             if (!Directory.Exists(graphsFolderPath))
@@ -117,25 +118,49 @@ namespace NASB_Moveset_Editor
 
             AssetDatabase.CreateFolder(graphsFolderPath, updatedItemName);
 
-            string assetFolderPath = folderPath;
+            return CreateGraphsForAllStates(data, updatedItemName, folderPath);
+        }
 
+        public static List<MovesetGraph> CreateGraphsForAllStates(SerialMoveset data, string updatedItemName, string assetFolderPath)
+        {
+            List<MovesetGraph> movesetGraphs = new List<MovesetGraph>();
             // Split the moveset apart by state
-            int normalizedCount = data.States.Count;
             int i = 0;
             foreach (IdState state in data.States)
             {
                 ++i;
-                EditorUtility.DisplayProgressBar($"Importing {updatedItemName}...", $"Loading {state.Id}", i / data.States.Count);
-                ScriptableObject graph = ScriptableObject.CreateInstance("MovesetGraph");
-                AssetDatabase.CreateAsset(graph, $"{assetFolderPath}/{state.Id}.asset");
-
-                LoadMovesetIntoGraph(state, (MovesetGraph)graph, $"{assetFolderPath}/{state.Id}.asset");
+                movesetGraphs.Add(CreateOneStateGraph(state, updatedItemName, assetFolderPath, data, i));
             }
 
             EditorUtility.ClearProgressBar();
-
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+            return movesetGraphs;
+        }
+
+        private static MovesetGraph CreateOneStateGraph(IdState state, string textassetName, string assetFolderPath, SerialMoveset data, int i)
+        {
+            // Check if graph already exists
+            string filePath = Path.Combine(Utils.GetGraphsDirPath(), textassetName, $"{state.Id}.asset");
+            if (File.Exists(filePath))
+            {
+                string logMessage = $"The graph \"{state.Id}\" already exists for \"{textassetName}\"!";
+                EditorUtility.DisplayDialog("NASB Moveset Editor", logMessage, "OK");
+                Debug.LogWarning(logMessage);
+                return null;
+            }
+
+            if (data != null)
+                EditorUtility.DisplayProgressBar($"Importing {textassetName}...", $"Loading {state.Id}", i / data.States.Count);
+            else
+                EditorUtility.DisplayProgressBar($"Importing {textassetName}...", $"Loading {state.Id}", 0);
+
+            ScriptableObject graph = ScriptableObject.CreateInstance("MovesetGraph");
+            AssetDatabase.CreateAsset(graph, $"{assetFolderPath}/{state.Id}.asset");
+
+            LoadMovesetIntoGraph(state, (MovesetGraph)graph, $"{assetFolderPath}/{state.Id}.asset");
+
+            return (MovesetGraph)graph;
         }
 
         private static void LoadMovesetIntoGraph(IdState data, MovesetGraph graph, string assetPath)

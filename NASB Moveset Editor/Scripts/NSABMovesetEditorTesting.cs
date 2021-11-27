@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using XNodeEditor;
 using XNode;
+using System;
 
 namespace NASB_Moveset_Editor
 {
@@ -33,6 +34,25 @@ namespace NASB_Moveset_Editor
                     if (GUILayout.Button("Generate AllNodes Graph", GUILayout.MinHeight(35)))
                     {
                         GenerateAllNodes();
+                    }
+                    EditorGUILayout.Space(10);
+                    if (GUILayout.Button("Print All States From characterBase", GUILayout.MinHeight(35)))
+                    {
+                        try
+                        {
+                            string[] stateGraphPaths = Directory.GetFiles(Path.Combine(Utils.GetGraphsDirPath(), "characterBase"));
+                            string longstring = "";
+                            foreach (string path in stateGraphPaths)
+                            {
+                                if (path.Contains(".meta")) continue;
+                                longstring += Path.GetFileNameWithoutExtension(path) + ",";
+                            }
+                            Debug.Log(longstring);
+                        } catch (Exception e)
+                        {
+                            Debug.LogError("Could not find characterBase. Have you imported the characterBase asset?");
+                            Debug.LogError(e.Message);
+                        }
                     }
                     EditorGUILayout.Space(10);
                 }
