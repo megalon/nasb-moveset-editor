@@ -127,6 +127,17 @@ namespace NASB_Moveset_Editor
             foreach (IdState state in data.States)
             {
                 ++i;
+
+                // Check if graph already exists
+                string filePath = Path.Combine(Utils.GetGraphsDirPath(), updatedItemName, $"{state.Id}.asset");
+                if (File.Exists(filePath))
+                {
+                    string logMessage = $"The graph \"{state.Id}\" already exists for \"{updatedItemName}\"!";
+                    EditorUtility.DisplayDialog("NASB Moveset Editor", logMessage, "OK");
+                    Debug.LogWarning(logMessage);
+                    continue;
+                }
+
                 EditorUtility.DisplayProgressBar($"Importing {updatedItemName}...", $"Loading {state.Id}", i / data.States.Count);
                 ScriptableObject graph = ScriptableObject.CreateInstance("MovesetGraph");
                 AssetDatabase.CreateAsset(graph, $"{assetFolderPath}/{state.Id}.asset");
