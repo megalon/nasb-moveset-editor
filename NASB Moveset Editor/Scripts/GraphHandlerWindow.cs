@@ -18,6 +18,8 @@ namespace NASB_Moveset_Editor
         public int selectionIndex = 0;
         public string selectedAssetName;
 
+        private Color controlColor;
+
         public void OnProjectChange()
         {
             SetupGraphNames();
@@ -46,6 +48,8 @@ namespace NASB_Moveset_Editor
             {
                 Debug.Log($"{Consts.KEY_SELECTED_ASSET_NAME} was empty! Selecting first item in list.");
             }
+
+            controlColor = new Color(0.3f, 0.3f, 0.3f);
         }
 
         private void OnGUI()
@@ -59,13 +63,13 @@ namespace NASB_Moveset_Editor
                     EditorGUILayout.HelpBox("This is in Alpha! Things may break! You may lose all of your work!", MessageType.Warning);
                     EditorGUILayout.Space(10);
                     if (GUILayout.Button("Import TextAsset", GUILayout.MinHeight(35))) GraphHandler.LoadTextAsset();
-                    EditorGUILayout.Space(10);
+                    EditorGUILayout.Space(5);
                     if (GUILayout.Button("Create New Moveset Graph", GUILayout.MinHeight(35)))
                     {
                         CreateNewMovesestGraphWindow window = GetWindow<CreateNewMovesestGraphWindow>();
                         window.titleContent = new GUIContent("New Moveset Graph");
                     }
-                    EditorGUILayout.Space(10);
+                    EditorGUILayout.Space(25);
                     if (graphDirectories.Length > 0)
                     {
                         previousSelectionIndex = selectionIndex;
@@ -79,9 +83,14 @@ namespace NASB_Moveset_Editor
 
                         EditorGUILayout.Space();
                         if (GUILayout.Button("Export TextAsset", GUILayout.MinHeight(50))) GraphHandler.SaveTextAsset(graphDirectories[selectionIndex], graphNames[selectionIndex]);
-                        EditorGUILayout.Space(10);
                     }
-                    EditorGUILayout.LabelField("Created by @megalon2d!");
+                    EditorGUILayout.Space(10);
+                    EditorGUI.DrawRect(EditorGUILayout.GetControlRect(false, 2), controlColor);
+                    EditorGUILayout.Space(4);
+                    if (GUILayout.Button("View project on GitHub!")) Application.OpenURL("https://github.com/megalon/nasb-moveset-editor");
+                    if (GUILayout.Button("Report issues!")) Application.OpenURL("https://github.com/megalon/nasb-moveset-editor/issues");
+                    EditorGUILayout.Space(4);
+                    EditorGUILayout.LabelField("Created by megalon2d!");
                     EditorGUILayout.LabelField("NASB_Parser library originally created by sc2ad!");
                     EditorGUILayout.LabelField("xNode created by Siccity!");
                 }
