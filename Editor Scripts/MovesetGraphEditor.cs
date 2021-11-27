@@ -6,7 +6,7 @@ using XNodeEditor;
 
 namespace NASB_Moveset_Editor
 {
-	[CustomNodeGraphEditor(typeof(MovesetGraph))]
+	[CustomNodeGraphEditor(typeof(MovesetGraph), Consts.KEY_NAMESPACE + "MOVESET_GRAPH_SETTINGS")]
 	public class MovesetGraphEditor : NodeGraphEditor
 	{
 		private string graphParentName;
@@ -77,6 +77,17 @@ namespace NASB_Moveset_Editor
 			EditorGUILayout.LabelField(graphSubName, titleStyle);
 			GUILayout.EndArea();
         }
+
+		public override NodeEditorPreferences.Settings GetDefaultPreferences()
+		{
+			return new NodeEditorPreferences.Settings()
+			{
+				noodlePath = NoodlePath.Angled,
+				noodleThickness = 5,
+				portTooltips = true,
+				tintColor = new Color32(85, 85, 85, 255)
+			};
+		}
 
 		private void SetupInsetGraphName()
         {
