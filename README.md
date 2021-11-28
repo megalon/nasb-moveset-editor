@@ -1,37 +1,44 @@
 # NASB Moveset Editor
 
-This is a custom moveset editor for Nickelodeon All-Star Brawl's BulkSerialized file format.
+![image](https://user-images.githubusercontent.com/27714637/143726563-3632a7b1-657a-4b45-9083-72d235d5ab7e.png)
+
+This is a custom moveset editor for Nickelodeon All-Star Brawl's BulkSerialized file format!
 
 It runs in the Unity Editor using [xNode](https://github.com/Siccity/xNode) and a fork of [NASB_Parser](https://github.com/sc2ad/NASB_Parser).
 
 # Installation
 
-## Step 1 Setup Unity 2020.3.15f2
+## Step 1 - Setup Unity 2020.3.15f2
 Download and install `Unity 2020.3.15f2`
 
 The simplest way to do this is through [Unity Hub.](https://unity3d.com/get-unity/download)
 
 Once installed, create a new 3D Unity project using `Unity 2020.3.15f2`
 
-## Step 2 Import xNode
+## Step 2 - Import xNode
 
 Open the file `Packages/manifest.json` in a text editor, and add the line below at the top of the dependencies list
 
 ```
 "com.github.siccity.xnode": "https://github.com/siccity/xNode.git",
 ```
-Save the file, then when go back to the Unity window. It should start downloading xNode.
+Save the file, then go back to the Unity window. It should start downloading xNode.
 
-## Step 3 Import NASB Moveset Editor
+## Step 3 - Import NASB Moveset Editor
 
 Download the file `NASB_Moveset_Editor_{VERSION}.unitypackage` from the [releases page here.](https://github.com/megalon/nasb-moveset-editor/releases/latest) 
 
 Simply drag this file into your Unity project to import the package.
 
-## Step 4 Open the editor panel
+It will ask you what you want to import. Make sure to import everything!
+
+## Step 4 - Open the editor panel
 In Unity, open the NASB Moveset Editor control panel from the top menu bar `NASB -> NASB Moveset Editor`.
 
 You can dock this window inside unity by dragging the tab.
+
+![image](https://user-images.githubusercontent.com/27714637/143726704-450045f1-cf46-42e4-a186-32a714c7d89e.png)
+
 
 # Usage
 
@@ -51,13 +58,23 @@ You can extract these files from within the game using a tool like [Asset Studio
 
 The movesets for characters are typically named by their ID. For example, `char_rival.txt` for Helga. You can tell if you have a correct file if you open it in a text editor, and it starts with `BulkSerialize` followed by a bunch of numbers on each line.
 
+![Example BulkSerialized file](https://user-images.githubusercontent.com/27714637/143726738-68d888c8-3fc7-4d78-b1df-c389549f3cef.png)
+
 **Once you have a BulkSerialized file**
 
-Click the `Import TextAsset` button to import the BulkSerialized text file.
+Click the `Import TextAsset` button in the NASB Moveset Editor window to import the BulkSerialized text file.
 
-This will create a folder at the path `Assets/Editor/Moveset Graphs/{filename}` Here you can find the Moveset Graphs for this moveset.
+This will create a folder at the path `Assets/Editor/Moveset Graphs/{filename}`. Here you can find the Moveset Graphs for this moveset.
 
 Double click on one of these files in the Unity Inspector to open it in the NASB Moveset Editor!
+
+![Example folder structure in Unity Editor](https://user-images.githubusercontent.com/27714637/143726775-bb8d0924-0219-4f91-8192-359565123d36.png)
+
+Notice how some things seem to be missing. What about idle? Falling? EdgeGrab?
+
+These are contained within the `characterBase.txt` BulkSerialized file. Each character overrides these moves, but only if they need to.
+
+Import that file if you want to see all of the base moves that each character can overwrite. There's over 200!
 
 # Controls
 
@@ -72,6 +89,26 @@ Double click on one of these files in the Unity Inspector to open it in the NASB
 | A | Select all |
 | CTRL + Z | Undo (This uses Unity's undo system) |
 | CTRL + Y | Redo (This uses Unity's undo system) |
+
+# Create New Moveset Graph
+
+You can create a nearly blank moveset graph by clicking the "Create New Moveset Graph" button.
+
+This will open a new window requesting some basic information about the graph!
+
+![image](https://user-images.githubusercontent.com/27714637/143726851-c9759969-e54c-4a43-a1f9-c1e0bef72e9e.png)
+
+Click "Create Moveset Graph" and it will open the graph in the editor.
+
+You probably want to copy and paste from an existing move in a different moveset to get started.
+
+# Export TextAsset
+
+Select the moveset you want to export from the dropdown, then click on the Export TextAsset button.
+
+![image](https://user-images.githubusercontent.com/27714637/143726984-7260cf87-b51e-4fe4-9d7a-3744353e7836.png)
+
+This will convert the collection of graphs in the selected folder back into a BulkSerialized text file for you to use in the game.
 
 ## Credits
 
