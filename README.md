@@ -6,16 +6,16 @@ This is a custom moveset editor for Nickelodeon All-Star Brawl's BulkSerialized 
 
 It runs in the Unity Editor using [xNode](https://github.com/Siccity/xNode) and a fork of [NASB_Parser](https://github.com/sc2ad/NASB_Parser).
 
-# Installation
+# 🚀 Installation
 
-## Step 1 - Setup Unity 2020.3.15f2
+## 1. Setup Unity 2020.3.15f2
 Download and install `Unity 2020.3.15f2`
 
 The simplest way to do this is through [Unity Hub.](https://unity3d.com/get-unity/download)
 
 Once installed, create a new 3D Unity project using `Unity 2020.3.15f2`
 
-## Step 2 - Import xNode
+## 2. Import xNode
 
 Open the file `Packages/manifest.json` in a text editor, and add the line below at the top of the dependencies list
 
@@ -24,7 +24,7 @@ Open the file `Packages/manifest.json` in a text editor, and add the line below 
 ```
 Save the file, then go back to the Unity window. It should start downloading xNode.
 
-## Step 3 - Import NASB Moveset Editor
+## 3. Import NASB Moveset Editor
 
 Download the file `NASB_Moveset_Editor_{VERSION}.unitypackage` from the [releases page here.](https://github.com/megalon/nasb-moveset-editor/releases/latest) 
 
@@ -32,15 +32,12 @@ Simply drag this file into your Unity project to import the package.
 
 It will ask you what you want to import. Make sure to import everything!
 
-## Step 4 - Open the editor panel
+## 4. Open the editor panel
 In Unity, open the NASB Moveset Editor control panel from the top menu bar `NASB -> NASB Moveset Editor`.
 
 You can dock this window inside unity by dragging the tab.
 
-![image](https://user-images.githubusercontent.com/27714637/143726704-450045f1-cf46-42e4-a186-32a714c7d89e.png)
-
-
-# Usage
+# ℹ Usage
 
 Nickelodeon All-Star Brawl stores moveset data in text files using a custom format, known as **BulkSerialized**.
 
@@ -76,6 +73,26 @@ These are contained within the `characterBase.txt` BulkSerialized file. Each cha
 
 Import that file if you want to see all of the base moves that each character can overwrite. There's over 200!
 
+## Create New Moveset Graph
+
+You can create a nearly blank moveset graph by clicking the "Create New Moveset Graph" button.
+
+This will open a new window requesting some basic information about the graph!
+
+![image](https://user-images.githubusercontent.com/27714637/143726851-c9759969-e54c-4a43-a1f9-c1e0bef72e9e.png)
+
+Click "Create Moveset Graph" and it will open the graph in the editor.
+
+You probably want to copy and paste from an existing move in a different moveset to get started.
+
+## Export TextAsset
+
+Select the moveset you want to export from the dropdown, then click on the Export TextAsset button.
+
+![image](https://user-images.githubusercontent.com/27714637/143726984-7260cf87-b51e-4fe4-9d7a-3744353e7836.png)
+
+This will convert the collection of graphs in the selected folder back into a BulkSerialized text file for you to use in the game.
+
 # Controls
 
 | Keybind | Action |
@@ -90,27 +107,7 @@ Import that file if you want to see all of the base moves that each character ca
 | CTRL + Z | Undo (This uses Unity's undo system) |
 | CTRL + Y | Redo (This uses Unity's undo system) |
 
-# Create New Moveset Graph
-
-You can create a nearly blank moveset graph by clicking the "Create New Moveset Graph" button.
-
-This will open a new window requesting some basic information about the graph!
-
-![image](https://user-images.githubusercontent.com/27714637/143726851-c9759969-e54c-4a43-a1f9-c1e0bef72e9e.png)
-
-Click "Create Moveset Graph" and it will open the graph in the editor.
-
-You probably want to copy and paste from an existing move in a different moveset to get started.
-
-# Export TextAsset
-
-Select the moveset you want to export from the dropdown, then click on the Export TextAsset button.
-
-![image](https://user-images.githubusercontent.com/27714637/143726984-7260cf87-b51e-4fe4-9d7a-3744353e7836.png)
-
-This will convert the collection of graphs in the selected folder back into a BulkSerialized text file for you to use in the game.
-
-## Credits
+# Credits
 
 [NASB_Parser by sc2ad](https://github.com/sc2ad/NASB_Parser)
 
