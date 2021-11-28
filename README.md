@@ -11,18 +11,24 @@ Download and install `Unity 2020.3.15f2`
 
 The simplest way to do this is through [Unity Hub.](https://unity3d.com/get-unity/download)
 
-## Step 2 Import Packages
-Create a new 3D Unity project using `Unity 2020.3.15f2`
+Once installed, create a new 3D Unity project using `Unity 2020.3.15f2`
 
-Once created, open the file `Packages/manifest.json` in a text editor, and add the two lines below at the top of the dependencies list
+## Step 2 Import xNode
+
+Open the file `Packages/manifest.json` in a text editor, and add the line below at the top of the dependencies list
 
 ```
 "com.github.siccity.xnode": "https://github.com/siccity/xNode.git",
-"com.github.megalon.nasb-moveset-editor": "https://github.com/megalon/nasb-moveset-editor",
 ```
-Save the file, then when go back to the Unity window. It should start downloading the packages.
+Save the file, then when go back to the Unity window. It should start downloading xNode.
 
-## Step 3 Open the editor panel
+## Step 3 Import NASB Moveset Editor
+
+Download the file `NASB_Moveset_Editor_{VERSION}.unitypackage` from the [releases page here.](https://github.com/megalon/nasb-moveset-editor/releases/latest) 
+
+Simply drag this file into your Unity project to import the package.
+
+## Step 4 Open the editor panel
 In Unity, open the NASB Moveset Editor control panel from the top menu bar `NASB -> NASB Moveset Editor`.
 
 You can dock this window inside unity by dragging the tab.
@@ -39,7 +45,9 @@ The NASB Moveset Editor can read these BulkSerialized files, and split them apar
 
 First you need a `BulkSerialized` text file.
 
-You can extract these files from within the game using a tool like [Asset Studio](https://github.com/Perfare/AssetStudio)
+You can extract these files from within the game using a tool like [Asset Studio.](https://github.com/Perfare/AssetStudio)
+
+*These may change with each update, so make sure you have the latest files!*
 
 The movesets for characters are typically named by their ID. For example, `char_rival.txt` for Helga. You can tell if you have a correct file if you open it in a text editor, and it starts with `BulkSerialize` followed by a bunch of numbers on each line.
 
