@@ -61,6 +61,8 @@ The movesets for characters are typically named by their ID. For example, `char_
 
 Click the `Import TextAsset` button in the NASB Moveset Editor window to import the BulkSerialized text file.
 
+![image](https://user-images.githubusercontent.com/27714637/143727397-3a0f87ad-92b7-4b44-8046-526d06a132d6.png)
+
 This will create a folder at the path `Assets/Editor/Moveset Graphs/{filename}`. Here you can find the Moveset Graphs for this moveset.
 
 Double click on one of these files in the Unity Inspector to open it in the NASB Moveset Editor!
