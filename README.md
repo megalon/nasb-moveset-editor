@@ -73,6 +73,14 @@ These are contained within the `characterBase.txt` BulkSerialized file. Each cha
 
 Import that file if you want to see all of the base moves that each character can overwrite. There's over 200!
 
+characterBase isn't the only file that characters inherit moveset information from. Here is the full heiarchy.
+```
+blastzoneKOBase
+grabbableBase
+launchableBase
+characterBase
+char_x
+```
 ## Create New Moveset Graph
 
 You can create a nearly blank moveset graph by clicking the "Create New Moveset Graph" button.
