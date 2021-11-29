@@ -88,7 +88,7 @@ namespace NASB_Moveset_Editor
         public static void LogError(string message) => Log(message, LogLevel.Error);
         private static void Log(string message, LogLevel logLevel)
         {
-            message = $"[{Consts.PROJECT_NAME}]" + message;
+            message = $"[{Consts.PROJECT_NAME}] " + message;
             switch (logLevel)
             {
                 case LogLevel.Warning:

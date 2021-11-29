@@ -54,7 +54,7 @@ namespace NASB_Moveset_Editor
                     // Skip anything that isn't an asset file
                     if (!graphPath.EndsWith(".asset")) continue;
 
-                    Debug.Log($"Reading graph...\n{graphPath}");
+                    Logger.LogInfo($"Reading graph...\n{graphPath}");
 
                     MovesetGraph graph = (MovesetGraph)AssetDatabase.LoadMainAssetAtPath(graphPath);
                     IdStateNode idStateNode = (IdStateNode)graph.nodes.Find(x => x.GetType() == typeof(IdStateNode));
@@ -65,15 +65,15 @@ namespace NASB_Moveset_Editor
                 {
                     var idStateName = Path.GetFileNameWithoutExtension(graphPath);
 
-                    Debug.LogError($"Error reading graph: {idStateName}\n{graphPath}");
-                    Debug.LogError(e.Message);
+                    Logger.LogError($"Error reading graph: {idStateName}\n{graphPath}");
+                    Logger.LogError(e.Message);
 
                     EditorUtility.DisplayDialog("NASB Moveset Editor", $"Export failed!\n\nError with IdState: {idStateName}\n\nSee error message in console window for more info.", "Close");
                     return;
                 }
             }
 
-            Debug.Log($"Built SerialMoveset for {graphName}!");
+            Logger.LogInfo($"Built SerialMoveset for {graphName}!");
 
             try
             {
@@ -82,14 +82,14 @@ namespace NASB_Moveset_Editor
                 using var fs = File.OpenWrite(outputFilePath);
                 using var sr = new StreamWriter(fs);
 
-                Debug.Log($"Writing file...\n{outputFilePath}!");
+                Logger.LogInfo($"Writing file...\n{outputFilePath}!");
                 writer.Serialize(sr);
-                Debug.Log($"Finished writing file!\n{outputFilePath}!");
+                Logger.LogInfo($"Finished writing file!\n{outputFilePath}!");
             }
             catch (Exception e)
             {
-                Debug.LogError($"Error writing file!\n{outputFilePath}");
-                Debug.LogError(e.Message);
+                Logger.LogError($"Error writing file!\n{outputFilePath}");
+                Logger.LogError(e.Message);
 
                 EditorUtility.DisplayDialog("NASB Moveset Editor", "Failed to write file!\n\nSee error message in console window for more info.", "Close");
                 return;
@@ -149,7 +149,7 @@ namespace NASB_Moveset_Editor
             {
                 string logMessage = $"The graph \"{state.Id}\" already exists for \"{textassetName}\"!";
                 EditorUtility.DisplayDialog("NASB Moveset Editor", logMessage, "OK");
-                Debug.LogWarning(logMessage);
+                Logger.LogWarning(logMessage);
                 return null;
             }
 

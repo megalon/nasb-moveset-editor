@@ -46,7 +46,7 @@ namespace NASB_Moveset_Editor
             }
             else
             {
-                Debug.Log($"{Consts.KEY_SELECTED_ASSET_NAME} was empty! Selecting first item in list.");
+                Logger.LogInfo($"{Consts.KEY_SELECTED_ASSET_NAME} was empty! Selecting first item in list.");
             }
 
             controlColor = new Color(0.3f, 0.3f, 0.3f);
