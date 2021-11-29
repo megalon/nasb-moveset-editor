@@ -17,6 +17,7 @@ namespace NASB_Moveset_Editor
         private int previousSelectionIndex = 0;
         public int selectionIndex = 0;
         public string selectedAssetName;
+        private Vector2 scrollPosition = Vector2.zero;
 
         private Color controlColor;
 
@@ -54,6 +55,7 @@ namespace NASB_Moveset_Editor
 
         private void OnGUI()
         {
+            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
             EditorGUILayout.BeginHorizontal();
             {
                 GUILayout.FlexibleSpace();
@@ -98,6 +100,7 @@ namespace NASB_Moveset_Editor
                 GUILayout.FlexibleSpace();
             }
             EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndScrollView();
         }
 
         private void SetupGraphNames()
