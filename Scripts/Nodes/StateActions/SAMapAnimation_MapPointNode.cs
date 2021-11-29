@@ -22,7 +22,7 @@ using NASB_Moveset_Editor.ObjectSources;
 
 namespace NASB_Moveset_Editor.StateActions
 {
-	public class SAMapAnimation_MapPointNode : BaseMovesetNode
+	public class SAMapAnimation_MapPointNode : StateActionNode
 	{
 		public bool RootAnim;
 		public string AnimId;

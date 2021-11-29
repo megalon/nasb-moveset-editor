@@ -22,7 +22,7 @@ using NASB_Moveset_Editor.ObjectSources;
 
 namespace NASB_Moveset_Editor.StateActions
 {
-	public class SAGUAMessageObject_MessageDynamicNode : BaseMovesetNode
+	public class SAGUAMessageObject_MessageDynamicNode : StateActionNode
 	{
 		public string Id;
 		[Output] public ObjectSource ObjectSource;

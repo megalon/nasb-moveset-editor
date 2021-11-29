@@ -22,7 +22,7 @@ using NASB_Moveset_Editor.ObjectSources;
 
 namespace NASB_Moveset_Editor.StateActions
 {
-	public class SAStandardInput_StandardConfigNode : BaseMovesetNode
+	public class SAStandardInput_StandardConfigNode : StateActionNode
 	{
 		public byte DontCheck0;
 		public byte DontCheck1;
