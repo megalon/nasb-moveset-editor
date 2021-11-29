@@ -17,12 +17,20 @@ Once installed, create a new 3D Unity project using `Unity 2020.3.15f2`
 
 ## 2. Import xNode
 
-Open the file `Packages/manifest.json` in a text editor, and add the line below at the top of the dependencies list
+You have two options to install xNode. Using Unity's Package Manager, or manual install.
+
+**Option 1: Package Manager**
+
+Open the file `Packages/manifest.json` in a text editor, and add the following line at the top of the dependencies list
 
 ```
-"com.github.siccity.xnode": "https://github.com/siccity/xNode.git",
+"com.github.megalon.xnode": "https://github.com/megalon/xNode.git",
 ```
 Save the file, then go back to the Unity window. It should start downloading xNode.
+
+**Option 2: Manual install**
+
+Download [this zip file of my xNode git repo](https://github.com/megalon/xNode/archive/refs/heads/master.zip) and extract the zip into the Assets folder of your Unity project.
 
 ## 3. Import NASB Moveset Editor
 
