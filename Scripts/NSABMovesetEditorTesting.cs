@@ -47,11 +47,11 @@ namespace NASB_Moveset_Editor
                                 if (path.Contains(".meta")) continue;
                                 longstring += Path.GetFileNameWithoutExtension(path) + ",";
                             }
-                            Debug.Log(longstring);
+                            Logger.LogInfo(longstring);
                         } catch (Exception e)
                         {
-                            Debug.LogError("Could not find characterBase. Have you imported the characterBase asset?");
-                            Debug.LogError(e.Message);
+                            Logger.LogError("Could not find characterBase. Have you imported the characterBase asset?");
+                            Logger.LogError(e.Message);
                         }
                     }
                     EditorGUILayout.Space(10);
@@ -83,7 +83,7 @@ namespace NASB_Moveset_Editor
                 AssetDatabase.CreateAsset(graph, $"{graphsFolderPath}/AllNodes.asset");
             } else
             {
-                Debug.Log("Clearing graph...");
+                Logger.LogInfo("Clearing graph...");
                 ((MovesetGraph)graph).Clear();
             }
 
