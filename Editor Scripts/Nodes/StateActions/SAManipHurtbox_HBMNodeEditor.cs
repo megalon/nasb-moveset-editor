@@ -6,7 +6,7 @@ using XNodeEditor;
 namespace NASB_Moveset_Editor
 {
     [CustomNodeEditor(typeof(SAManipHurtbox_HBMNode))]
-    public class SAManipHurtbox_HBMNodeEditor : NodeEditor
+    public class SAManipHurtbox_HBMNodeEditor : StateActionNodeEditor
     {
         public override void OnBodyGUI()
         {

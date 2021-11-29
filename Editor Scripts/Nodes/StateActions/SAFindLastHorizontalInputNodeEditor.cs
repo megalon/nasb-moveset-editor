@@ -6,7 +6,7 @@ using XNodeEditor;
 namespace NASB_Moveset_Editor
 {
     [CustomNodeEditor(typeof(SAFindLastHorizontalInputNode))]
-    public class SAFindLastHorizontalInputNodeEditor : NodeEditor
+    public class SAFindLastHorizontalInputNodeEditor : StateActionNodeEditor
     {
         public override void OnBodyGUI()
         {

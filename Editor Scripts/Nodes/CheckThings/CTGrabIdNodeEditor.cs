@@ -7,7 +7,7 @@ using XNodeEditor;
 namespace NASB_Moveset_Editor
 {
     [CustomNodeEditor(typeof(CTGrabIdNode))]
-    public class CTGrabIdNodeEditor : NodeEditor
+    public class CTGrabIdNodeEditor : CheckThingNodeEditor
     {
         public override void OnBodyGUI()
         {

@@ -7,7 +7,7 @@ using NASB_Moveset_Editor.FloatSources;
 namespace NASB_Moveset_Editor
 {
     [CustomNodeEditor(typeof(FloatSourceNode))]
-    public class FloatSourceNodeEditor : NodeEditor
+    public class FloatSourceNodeEditor : BaseMovesetNodeEditor
     {
         public override void OnBodyGUI()
         {

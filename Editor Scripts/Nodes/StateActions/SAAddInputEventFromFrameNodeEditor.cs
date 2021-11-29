@@ -9,7 +9,7 @@ using XNodeEditor;
 namespace NASB_Moveset_Editor
 {
     [CustomNodeEditor(typeof(SAAddInputEventFromFrameNode))]
-    public class SAAddInputEventFromFrameNodeEditor : NodeEditor
+    public class SAAddInputEventFromFrameNodeEditor : StateActionNodeEditor
     {
         GIEV giev;
 

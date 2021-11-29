@@ -11,7 +11,7 @@ namespace NASB_Moveset_Editor
 {
 
     [CustomNodeEditor(typeof(FSFuncNode))]
-    public class FSFuncNodeEditor : NodeEditor
+    public class FSFuncNodeEditor : FloatSourceNodeEditor
     {
         private NASB_Parser.FloatSources.FSFunc.FuncWay currentFunc;
 

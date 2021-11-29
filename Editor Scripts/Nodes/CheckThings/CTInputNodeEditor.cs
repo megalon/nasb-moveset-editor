@@ -7,7 +7,7 @@ using XNodeEditor;
 namespace NASB_Moveset_Editor
 {
     [CustomNodeEditor(typeof(CTInputNode))]
-    public class CTInputNodeEditor : NodeEditor
+    public class CTInputNodeEditor : CheckThingNodeEditor
     {
         GIEV giev;
         bool initialized = false;

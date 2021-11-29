@@ -12,10 +12,9 @@ namespace NASB_Moveset_Editor
     /// Custom node editors should have the CustomNodeEditor attribute that defines which node type it is an editor for.
     /// </summary>
     [CustomNodeEditor(typeof(InputValidatorNode))]
-    public class InputValidatorNodeEditor : NodeEditor
+    public class InputValidatorNodeEditor : StateActionNodeEditor
     {
         InputValidator.CtrlSeg ctrlSeg;
-
 
         bool initialized = false;
         /// <summary> Called whenever the xNode editor window is updated </summary>
