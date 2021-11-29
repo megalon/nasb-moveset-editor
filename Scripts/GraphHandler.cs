@@ -104,6 +104,9 @@ namespace NASB_Moveset_Editor
             if (!Directory.Exists(graphsFolderPath))
                 Directory.CreateDirectory(graphsFolderPath);
 
+            // Refresh to make sure we see the graphs folder on first load
+            AssetDatabase.Refresh();
+
             string updatedItemName = itemName;
             string folderPath = Path.Combine(graphsFolderPath, itemName);
 
