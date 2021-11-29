@@ -74,6 +74,36 @@ namespace NASB_Moveset_Editor
         }
     }
 
+    public static class Logger
+    {
+        private enum LogLevel
+        {
+            Info,
+            Warning,
+            Error
+        }
+
+        public static void LogInfo(string message) => Log(message, LogLevel.Info);
+        public static void LogWarning(string message) => Log(message, LogLevel.Warning);
+        public static void LogError(string message) => Log(message, LogLevel.Error);
+        private static void Log(string message, LogLevel logLevel)
+        {
+            message = $"[{Consts.PROJECT_NAME}]" + message;
+            switch (logLevel)
+            {
+                case LogLevel.Warning:
+                    Debug.LogWarning(message);
+                    break;
+                case LogLevel.Error:
+                    Debug.LogError(message);
+                    break;
+                default:
+                    Debug.Log(message);
+                    break;
+            }
+        }
+    }
+
     public static class Consts
     {
         public const float NodeXOffset = 250f;
