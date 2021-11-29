@@ -21,6 +21,8 @@ You have two options to install xNode. Using Unity's Package Manager, or manual 
 
 **Option 1: Package Manager**
 
+You need to [install git](https://git-scm.com/downloads) and have it on your PATH for this to work.
+
 Open the file `Packages/manifest.json` in a text editor, and add the following line at the top of the dependencies list
 
 ```
