@@ -5,6 +5,7 @@ using System.IO;
 using System;
 using System.Collections.Generic;
 using XNode;
+using XNodeEditor;
 
 namespace NASB_Moveset_Editor
 {
@@ -206,26 +207,28 @@ namespace NASB_Moveset_Editor
             Undo.RecordObjects(nodes.ToArray(), "Organize Graph");
 
             // Travel through outputs and position nodes
-            TraverseThroughOutputs(idStateNode, Vector2.zero);
+            TraverseThroughOutputsHeight(idStateNode, Vector2.zero);
             Logger.LogInfo($"Organized graph!");
         }
 
-        private static int TraverseThroughOutputs(Node node, Vector2 nodeDepthXY)
+        private static float TraverseThroughOutputsHeight(Node node, Vector2 nodePos)
         {
-            // Move this node
-            node.position.x = nodeDepthXY.x * Consts.NodeXOffset;
-            node.position.y = nodeDepthXY.y * Consts.NodeYOffset;
-            int outputPortCount = 0;
+            node.position.x = nodePos.x;
+            node.position.y = nodePos.y;
+
+            Vector2 nodeSize = NodeEditorWindow.current.nodeSizes[node];
+
+            float heightOffset = 0;
             foreach (NodePort port in node.Outputs)
             {
                 foreach (NodePort connectedPort in port.GetConnections())
                 {
-                    outputPortCount += TraverseThroughOutputs(connectedPort.node, nodeDepthXY + new Vector2(1, outputPortCount));
+                    float tempHeight = TraverseThroughOutputsHeight(connectedPort.node, nodePos + new Vector2(Consts.NodeXOffset, heightOffset));
+                    heightOffset += tempHeight;
                 }
-                ++outputPortCount;
             }
 
-            return outputPortCount > 0 ? outputPortCount - 1 : outputPortCount;
+            return heightOffset > nodeSize.y ? heightOffset : nodeSize.y;
         }
     }
 }
