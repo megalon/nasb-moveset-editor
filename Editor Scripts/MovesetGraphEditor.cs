@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using XNode;
 using XNodeEditor;
 
 namespace NASB_Moveset_Editor
@@ -104,5 +106,12 @@ namespace NASB_Moveset_Editor
 				graphParentName = graphPath;
 			}
 		}
+
+        public override void AddContextMenuItems(GenericMenu menu, Type compatibleType = null, NodePort.IO direction = NodePort.IO.Input)
+        {
+            base.AddContextMenuItems(menu, compatibleType, direction);
+			menu.AddSeparator("");
+			menu.AddItem(new GUIContent("Organize Graph"), false, () => Utils.CheckOrganizeGraph());
+        }
     }
 }

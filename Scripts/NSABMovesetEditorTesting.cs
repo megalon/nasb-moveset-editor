@@ -59,7 +59,7 @@ namespace NASB_Moveset_Editor
                     EditorGUILayout.Space(10);
                     if (GUILayout.Button("Organize Graph", GUILayout.MinHeight(35)))
                     {
-                        Utils.OrganizeGraph();
+                        Utils.CheckOrganizeGraph();
                     }
                     EditorGUILayout.Space(10);
                 }

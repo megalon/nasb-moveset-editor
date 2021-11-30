@@ -74,7 +74,15 @@ namespace NASB_Moveset_Editor
             return scriptPath;
         }
 
-        public static void OrganizeGraph()
+        public static void CheckOrganizeGraph()
+        {
+            if (EditorUtility.DisplayDialog("Organize Graph", "Are you sure you want to organize the entire graph?", "Yes", "No"))
+            {
+                OrganizeGraph();
+            }
+        }
+
+        private static void OrganizeGraph()
         {
             // Get all the nodes from the current graph
             List<Node> nodes = XNodeEditor.NodeEditorWindow.current.graph.nodes;
@@ -95,8 +103,11 @@ namespace NASB_Moveset_Editor
                 return;
             }
 
+            Undo.RecordObjects(nodes.ToArray(), "Organize Graph");
+
             // Travel through outputs and position nodes
             TraverseThroughOutputs(idStateNode, Vector2.zero);
+            Logger.LogInfo($"Organized graph!");
         }
 
         private static int TraverseThroughOutputs(Node node, Vector2 nodeDepthXY)
