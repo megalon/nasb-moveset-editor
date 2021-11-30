@@ -111,7 +111,7 @@ namespace NASB_Moveset_Editor
         {
             base.AddContextMenuItems(menu, compatibleType, direction);
 			menu.AddSeparator("");
-			menu.AddItem(new GUIContent("Organize Graph"), false, () => Utils.CheckOrganizeGraph());
+			menu.AddItem(new GUIContent("Organize Graph"), false, () => GraphHandler.CheckOrganizeGraph());
         }
     }
 }
