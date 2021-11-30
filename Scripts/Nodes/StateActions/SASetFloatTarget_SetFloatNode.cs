@@ -22,7 +22,7 @@ using NASB_Moveset_Editor.ObjectSources;
 
 namespace NASB_Moveset_Editor.StateActions
 {
-	public class SASetFloatTarget_SetFloatNode : BaseMovesetNode
+	public class SASetFloatTarget_SetFloatNode : StateActionNode
 	{
 		[Output] public FloatSource Target;
 		[Output] public FloatSource Source;

@@ -6,7 +6,7 @@ using XNodeEditor;
 namespace NASB_Moveset_Editor
 {
     [CustomNodeEditor(typeof(SAActiveActionNode))]
-    public class SAActiveActionNodeEditor : NodeEditor
+    public class SAActiveActionNodeEditor : StateActionNodeEditor
     {
         public override void OnBodyGUI()
         {

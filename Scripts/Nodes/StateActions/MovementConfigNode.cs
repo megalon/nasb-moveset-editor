@@ -26,7 +26,7 @@ using static NASB_Parser.StateActions.MovementConfig;
 
 namespace NASB_Moveset_Editor.StateActions
 {
-	public class MovementConfigNode : BaseMovesetNode
+	public class MovementConfigNode : StateActionNode
 	{
 		public bool GetParented;
 		public bool LeaveEdges;

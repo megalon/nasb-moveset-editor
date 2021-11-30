@@ -7,7 +7,7 @@ using XNodeEditor;
 namespace NASB_Moveset_Editor
 {
     [CustomNodeEditor(typeof(IdStateNode))]
-    public class IdStateNodeEditor : NodeEditor
+    public class IdStateNodeEditor : BaseMovesetNodeEditor
     {
         public override void OnBodyGUI()
         {

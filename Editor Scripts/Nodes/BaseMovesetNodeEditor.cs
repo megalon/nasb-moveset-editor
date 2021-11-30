@@ -9,6 +9,18 @@ namespace NASB_Moveset_Editor
     [CustomNodeEditor(typeof(BaseMovesetNode))]
     public class BaseMovesetNodeEditor : NodeEditor
     {
+        public override void OnHeaderGUI()
+        {
+            if (target.name.Contains("_"))
+            {
+                string updatedName = target.name.Substring(target.name.IndexOf("_") + 1);
+                GUILayout.Label(updatedName, NodeEditorResources.styles.nodeHeader, GUILayout.Height(30));
+            } else
+            {
+                base.OnHeaderGUI();
+            }
+        }
+
         public override void OnBodyGUI()
         {
             serializedObject.Update();

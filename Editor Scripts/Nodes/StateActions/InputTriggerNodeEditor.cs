@@ -9,7 +9,7 @@ using XNodeEditor;
 namespace NASB_Moveset_Editor
 {
     [CustomNodeEditor(typeof(InputTriggerNode))]
-    public class InputTriggerNodeEditor : NodeEditor
+    public class InputTriggerNodeEditor : StateActionNodeEditor
     {
         GIEV giev_BlockedByEvent;
         GIEV giev_AddEventOnTrigger;

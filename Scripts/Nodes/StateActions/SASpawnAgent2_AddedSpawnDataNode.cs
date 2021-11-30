@@ -22,7 +22,7 @@ using NASB_Moveset_Editor.ObjectSources;
 
 namespace NASB_Moveset_Editor.StateActions
 {
-	public class SASpawnAgent2_AddedSpawnDataNode : BaseMovesetNode
+	public class SASpawnAgent2_AddedSpawnDataNode : StateActionNode
 	{
 		public string SpawnedAgentDataId;
 		[Output] public FloatSource SpawnedAgentDataSetValue;

@@ -6,7 +6,7 @@ using XNodeEditor;
 namespace NASB_Moveset_Editor
 {
     [CustomNodeEditor(typeof(AirDashJumpNode))]
-    public class AirDashJumpNodeEditor : NodeEditor
+    public class AirDashJumpNodeEditor : JumpNodeEditor
     {
         public override void OnBodyGUI()
         {

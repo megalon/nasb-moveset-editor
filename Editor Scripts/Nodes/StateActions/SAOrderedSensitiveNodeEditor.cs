@@ -10,7 +10,7 @@ using static XNode.Node;
 namespace NASB_Moveset_Editor {
 
     [CustomNodeEditor(typeof(SAOrderedSensitiveNode))]
-    public class SAOrderedSensitiveNodeEditor : NodeEditor
+    public class SAOrderedSensitiveNodeEditor : StateActionNodeEditor
     {
         private const int maxOutputs = 50;
 

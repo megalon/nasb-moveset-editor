@@ -7,7 +7,7 @@ using XNodeEditor;
 namespace NASB_Moveset_Editor
 {
     [CustomNodeEditor(typeof(CTCompareFloatNode))]
-    public class CTCompareFloatNodeEditor : NodeEditor
+    public class CTCompareFloatNodeEditor : CheckThingNodeEditor
     {
         string[] options = { "[==]   Equals", "[!=]   Not equals", "[<]   Less than", "[>]   Greater than", "[<=]   Less than or equal", "[>=]   Greater than or equal" };
         public override void OnBodyGUI()

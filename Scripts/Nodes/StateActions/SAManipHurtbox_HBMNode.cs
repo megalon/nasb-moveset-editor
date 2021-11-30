@@ -22,7 +22,7 @@ using NASB_Moveset_Editor.ObjectSources;
 
 namespace NASB_Moveset_Editor.StateActions
 {
-	public class SAManipHurtbox_HBMNode : BaseMovesetNode
+	public class SAManipHurtbox_HBMNode : StateActionNode
 	{
 		public SAManipHurtbox.Manip Manip;
 		public int Hurtbox;

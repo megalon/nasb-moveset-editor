@@ -26,7 +26,7 @@ using static NASB_Parser.StateActions.HurtSetSetup;
 
 namespace NASB_Moveset_Editor.StateActions
 {
-	public class HurtSetSetupNode : BaseMovesetNode
+	public class HurtSetSetupNode : StateActionNode
 	{
 		[Output] public List<HurtBone> HurtBones;
 		

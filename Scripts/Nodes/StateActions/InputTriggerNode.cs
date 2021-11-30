@@ -26,7 +26,7 @@ using static NASB_Parser.StateActions.InputTrigger;
 
 namespace NASB_Moveset_Editor.StateActions
 {
-	public class InputTriggerNode : BaseMovesetNode
+	public class InputTriggerNode : StateActionNode
 	{
 		public int SniffFrames;
 		public GIEV BlockedByEvent;

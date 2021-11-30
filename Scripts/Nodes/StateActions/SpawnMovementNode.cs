@@ -26,7 +26,7 @@ using static NASB_Parser.StateActions.SpawnMovement;
 
 namespace NASB_Moveset_Editor.StateActions
 {
-	public class SpawnMovementNode : BaseMovesetNode
+	public class SpawnMovementNode : StateActionNode
 	{
 		public string ToBone;
 		public NASB_Parser.Vector3 LocalOffset;

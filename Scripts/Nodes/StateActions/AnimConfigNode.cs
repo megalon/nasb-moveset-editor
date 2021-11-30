@@ -26,7 +26,7 @@ using static NASB_Parser.StateActions.AnimConfig;
 
 namespace NASB_Moveset_Editor.StateActions
 {
-	public class AnimConfigNode : BaseMovesetNode
+	public class AnimConfigNode : StateActionNode
 	{
 		public float Rate;
 		public float Weight;

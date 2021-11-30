@@ -6,7 +6,7 @@ using XNodeEditor;
 namespace NASB_Moveset_Editor
 {
     [CustomNodeEditor(typeof(SAManageAirJumpNode))]
-    public class SAManageAirJumpNodeEditor : NodeEditor
+    public class SAManageAirJumpNodeEditor : StateActionNodeEditor
     {
         public override void OnBodyGUI()
         {

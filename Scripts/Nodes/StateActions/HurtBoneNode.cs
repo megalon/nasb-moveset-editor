@@ -26,7 +26,7 @@ using static NASB_Parser.StateActions.HurtBone;
 
 namespace NASB_Moveset_Editor.StateActions
 {
-	public class HurtBoneNode : BaseMovesetNode
+	public class HurtBoneNode : StateActionNode
 	{
 		public HurtType Type;
 		public int Armor;
