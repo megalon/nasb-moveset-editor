@@ -225,7 +225,7 @@ namespace NASB_Moveset_Editor
                 ++outputPortCount;
             }
 
-            return outputPortCount;
+            return outputPortCount > 0 ? outputPortCount - 1 : outputPortCount;
         }
     }
 }
