@@ -26,7 +26,7 @@ using static NASB_Parser.StateActions.SAGUAMessageObject;
 
 namespace NASB_Moveset_Editor.StateActions
 {
-	public class SAGUAMessageObjectNode : BaseMovesetNode
+	public class SAGUAMessageObjectNode : StateActionNode
 	{
 		public string PlainMessage;
 		[Output] public List<SAGUAMessageObject.MessageDynamic> Dynamics;

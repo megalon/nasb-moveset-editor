@@ -26,7 +26,7 @@ using static NASB_Parser.StateActions.InputValidator;
 
 namespace NASB_Moveset_Editor.StateActions
 {
-	public class InputValidatorNode : BaseMovesetNode
+	public class InputValidatorNode : StateActionNode
 	{
 		public NASB_Parser.StateActions.InputValidator.ValidatorInputType InputType;
 		public bool RawX;

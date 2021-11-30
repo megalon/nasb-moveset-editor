@@ -26,7 +26,7 @@ using static NASB_Parser.CheckThings.LookForInput;
 
 namespace NASB_Moveset_Editor.CheckThings
 {
-	public class LookForInputNode : BaseMovesetNode
+	public class LookForInputNode : CheckThingNode
 	{
 		public int MatchMinFrames;
 		[Output] public InputValidator InputValidator;
