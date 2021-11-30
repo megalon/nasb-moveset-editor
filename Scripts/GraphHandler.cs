@@ -11,12 +11,11 @@ namespace NASB_Moveset_Editor
     {
         public static void LoadTextAsset()
         {
-            string filePath = EditorUtility.OpenFilePanel("Select Text Asset", "", "txt");
+            string filePath = EditorUtility.OpenFilePanel("Select Text Asset", EditorPrefs.GetString(Consts.KEY_IMPORT_PATH, ""), "txt");
 
-            if (filePath == null || filePath.Equals(string.Empty))
-            {
-                return;
-            }
+            if (filePath == null || filePath.Equals(string.Empty)) return;
+
+            EditorPrefs.SetString(Consts.KEY_IMPORT_PATH, Path.GetDirectoryName(filePath));
 
             BulkSerializeReader ser;
             using (var fsread = File.OpenRead(filePath))
@@ -36,12 +35,11 @@ namespace NASB_Moveset_Editor
         {
             if (graphDir == null || graphDir.Equals(string.Empty)) return;
 
-            string outputFilePath = EditorUtility.SaveFilePanel("Select Save Location", "", $"{graphName}_new", "txt");
+            string outputFilePath = EditorUtility.SaveFilePanel("Select Save Location", EditorPrefs.GetString(Consts.KEY_EXPORT_PATH, ""), $"{graphName}_new", "txt");
 
-            if (outputFilePath == null || outputFilePath.Equals(string.Empty))
-            {
-                return;
-            }
+            if (outputFilePath == null || outputFilePath.Equals(string.Empty)) return;
+
+            EditorPrefs.SetString(Consts.KEY_EXPORT_PATH, Path.GetDirectoryName(outputFilePath));
 
             SerialMoveset serialMoveset = new SerialMoveset();
 
