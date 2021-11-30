@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using XNode;
 
 namespace NASB_Moveset_Editor
 {
@@ -71,6 +72,49 @@ namespace NASB_Moveset_Editor
                 }
             }
             return scriptPath;
+        }
+
+        public static void OrganizeGraph()
+        {
+            // Get all the nodes from the current graph
+            List<Node> nodes = XNodeEditor.NodeEditorWindow.current.graph.nodes;
+
+            // Find idstate node
+            IdStateNode idStateNode = null;
+            foreach (Node node in nodes)
+            {
+                if (node.GetType().Equals(typeof(IdStateNode)))
+                {
+                    idStateNode = (IdStateNode)node;
+                }
+            }
+
+            if (idStateNode == null)
+            {
+                Logger.LogError("Could not find IdStateNode in graph!");
+                return;
+            }
+
+            // Travel through outputs and position nodes
+            TraverseThroughOutputs(idStateNode, Vector2.zero);
+        }
+
+        private static int TraverseThroughOutputs(Node node, Vector2 nodeDepthXY)
+        {
+            // Move this node
+            node.position.x = nodeDepthXY.x * Consts.NodeXOffset;
+            node.position.y = nodeDepthXY.y * Consts.NodeYOffset;
+            int outputPortCount = 0;
+            foreach (NodePort port in node.Outputs)
+            {
+                foreach (NodePort connectedPort in port.GetConnections())
+                {
+                    outputPortCount += TraverseThroughOutputs(connectedPort.node, nodeDepthXY + new Vector2(1, outputPortCount));
+                }
+                ++outputPortCount;
+            }
+
+            return outputPortCount;
         }
     }
 
