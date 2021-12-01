@@ -4,6 +4,9 @@ using NASB_Parser;
 using System.IO;
 using System;
 using System.Collections.Generic;
+using XNode;
+using XNodeEditor;
+using NASB_Moveset_Editor.StateActions;
 
 namespace NASB_Moveset_Editor
 {
@@ -169,6 +172,92 @@ namespace NASB_Moveset_Editor
             IdStateNode idStateNode = graph.AddNode<IdStateNode>();
             AssetDatabase.AddObjectToAsset(idStateNode, assetPath);
             idStateNode.SetData(data, graph, assetPath, Vector2.zero);
+        }
+
+        public static void CheckOrganizeGraph()
+        {
+            if (EditorUtility.DisplayDialog("Organize Graph", "Are you sure you want to organize the entire graph?", "Yes", "No"))
+            {
+                OrganizeGraph();
+                XNodeEditor.NodeEditorWindow.DrawAllNodesOnce();
+            }
+        }
+
+        private static void OrganizeGraph()
+        {
+            // Get all the nodes from the current graph
+            List<Node> nodes = XNodeEditor.NodeEditorWindow.current.graph.nodes;
+
+            // Find idstate node
+            IdStateNode idStateNode = null;
+            foreach (Node node in nodes)
+            {
+                if (node.GetType().Equals(typeof(IdStateNode)))
+                {
+                    idStateNode = (IdStateNode)node;
+                }
+            }
+
+            if (idStateNode == null)
+            {
+                Logger.LogError("Could not find IdStateNode in graph!");
+                return;
+            }
+
+            Undo.RecordObjects(nodes.ToArray(), "Organize Graph");
+
+            // Travel through outputs and position nodes
+            TraverseThroughOutputsHeight(idStateNode, Vector2.zero);
+            Logger.LogInfo($"Organized graph!");
+        }
+
+        private static Vector2 TraverseThroughOutputsHeight(Node node, Vector2 nodePos)
+        {
+            node.position.x = nodePos.x;
+            node.position.y = nodePos.y;
+
+            Vector2 nodeSize = NodeEditorWindow.current.nodeSizes[node];
+
+            // Special variables used for SAConfigHitboxNode
+            Node previousConnectedNode = null;
+            float savedYPos = 0;
+
+            float heightOffset = 0;
+            float widthOffset = 0;
+            int portCount = 0;
+            foreach (NodePort port in node.Outputs)
+            {
+                foreach (NodePort connectedPort in port.GetConnections())
+                {
+                    Vector2 branchDepth = Vector2.zero;
+
+                    if(connectedPort.node.GetType().Equals(typeof(SAConfigHitboxNode)) && previousConnectedNode != null)
+                    {
+                        if (previousConnectedNode.GetType().Equals(typeof(SAConfigHitboxNode)))
+                        {
+                            Vector2 offset = nodePos + new Vector2(Consts.NodeXOffset * portCount, savedYPos);
+                            TraverseThroughOutputsHeight(connectedPort.node, offset);
+                        } else
+                        {
+                            savedYPos = heightOffset;
+                            Vector2 offset = nodePos + new Vector2(Consts.NodeXOffset * portCount, heightOffset);
+                            branchDepth = TraverseThroughOutputsHeight(connectedPort.node, offset);
+                        }
+                    } else
+                    {
+                        branchDepth = TraverseThroughOutputsHeight(connectedPort.node, nodePos + new Vector2(Consts.NodeXOffset, heightOffset));
+                    }
+
+                    previousConnectedNode = connectedPort.node;
+                    heightOffset += branchDepth.y;
+                    widthOffset = branchDepth.x;
+                    if (widthOffset > nodePos.x + Consts.NodeXOffset) 
+                        heightOffset += Consts.NodeClusterYSpacing;
+                }
+                ++portCount;
+            }
+
+            return new Vector2 (widthOffset + nodePos.x, heightOffset > nodeSize.y ? heightOffset : nodeSize.y);
         }
     }
 }

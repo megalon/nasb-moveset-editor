@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using XNode;
 
 namespace NASB_Moveset_Editor
 {
@@ -108,6 +109,7 @@ namespace NASB_Moveset_Editor
     {
         public const float NodeXOffset = 250f;
         public const float NodeYOffset = 130f;
+        public const float NodeClusterYSpacing = 50f;
         public const float NodeVarHeight = 20f;
         public const int MaxDisplayNameLength = 12;
 

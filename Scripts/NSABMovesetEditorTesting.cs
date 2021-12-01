@@ -4,6 +4,8 @@ using UnityEngine;
 using XNodeEditor;
 using XNode;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace NASB_Moveset_Editor
 {
@@ -53,6 +55,11 @@ namespace NASB_Moveset_Editor
                             Logger.LogError("Could not find characterBase. Have you imported the characterBase asset?");
                             Logger.LogError(e.Message);
                         }
+                    }
+                    EditorGUILayout.Space(10);
+                    if (GUILayout.Button("Organize Graph", GUILayout.MinHeight(35)))
+                    {
+                        GraphHandler.CheckOrganizeGraph();
                     }
                     EditorGUILayout.Space(10);
                 }
