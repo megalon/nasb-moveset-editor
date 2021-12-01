@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using XNode;
 using XNodeEditor;
+using NASB_Moveset_Editor.StateActions;
 
 namespace NASB_Moveset_Editor
 {
@@ -219,13 +220,37 @@ namespace NASB_Moveset_Editor
             Vector2 nodeSize = NodeEditorWindow.current.nodeSizes[node];
 
             float heightOffset = 0;
+            Node previousConnectedNode = null;
+            float savedY = 0;
+            int portCount = 0;
             foreach (NodePort port in node.Outputs)
             {
                 foreach (NodePort connectedPort in port.GetConnections())
                 {
-                    float tempHeight = TraverseThroughOutputsHeight(connectedPort.node, nodePos + new Vector2(Consts.NodeXOffset, heightOffset));
+                    float tempHeight = 0;
+                    if (previousConnectedNode != null
+                        && connectedPort.node.GetType().Equals(typeof(SAConfigHitboxNode))
+                        && !previousConnectedNode.GetType().Equals(typeof(SAConfigHitboxNode)))
+                    {
+                        savedY = heightOffset;
+                        Vector2 offset = nodePos + new Vector2(Consts.NodeXOffset * portCount, heightOffset);
+                        heightOffset = TraverseThroughOutputsHeight(connectedPort.node, offset);
+                    }
+                    else if (previousConnectedNode != null
+                        && connectedPort.node.GetType().Equals(typeof(SAConfigHitboxNode))
+                        && previousConnectedNode.GetType().Equals(typeof(SAConfigHitboxNode)))
+                    {
+                        Vector2 offset = nodePos + new Vector2(Consts.NodeXOffset * portCount, savedY);
+                        TraverseThroughOutputsHeight(connectedPort.node, offset);
+                    }
+                    else
+                    {
+                        tempHeight = TraverseThroughOutputsHeight(connectedPort.node, nodePos + new Vector2(Consts.NodeXOffset, heightOffset));
+                    }
+                    previousConnectedNode = connectedPort.node;
                     heightOffset += tempHeight;
                 }
+                ++portCount;
             }
 
             return heightOffset > nodeSize.y ? heightOffset : nodeSize.y;
