@@ -28,7 +28,7 @@ namespace NASB_Moveset_Editor
 
             string assetFolderPath = Path.Combine(Utils.GetGraphsDirPath(), textAssetName);
 
-            EditorUtility.DisplayDialog("NASB Moveset Editor", $"Imported {textAssetName}!\n\nYou can find the moveset state graphs in\n\"{assetFolderPath}\"", "OK");
+            EditorUtility.DisplayDialog(Consts.PROJECT_NAME, $"Imported {textAssetName}!\n\nYou can find the moveset state graphs in\n\"{assetFolderPath}\"", "OK");
         }
 
         public static void SaveTextAsset(string graphDir, string graphName)
@@ -66,7 +66,7 @@ namespace NASB_Moveset_Editor
                     Logger.LogError($"Error reading graph: {idStateName}\n{graphPath}");
                     Logger.LogError(e.Message);
 
-                    EditorUtility.DisplayDialog("NASB Moveset Editor", $"Export failed!\n\nError with IdState: {idStateName}\n\nSee error message in console window for more info.", "Close");
+                    EditorUtility.DisplayDialog(Consts.PROJECT_NAME, $"Export failed!\n\nError with IdState: {idStateName}\n\nSee error message in console window for more info.", "Close");
                     return;
                 }
             }
@@ -89,11 +89,11 @@ namespace NASB_Moveset_Editor
                 Logger.LogError($"Error writing file!\n{outputFilePath}");
                 Logger.LogError(e.Message);
 
-                EditorUtility.DisplayDialog("NASB Moveset Editor", "Failed to write file!\n\nSee error message in console window for more info.", "Close");
+                EditorUtility.DisplayDialog(Consts.PROJECT_NAME, "Failed to write file!\n\nSee error message in console window for more info.", "Close");
                 return;
             }
 
-            EditorUtility.DisplayDialog("NASB Moveset Editor", $"Export complete!\n\nSaved to \"{outputFilePath}\"", "OK");
+            EditorUtility.DisplayDialog(Consts.PROJECT_NAME, $"Export complete!\n\nSaved to \"{outputFilePath}\"", "OK");
         }
 
         public static List<MovesetGraph> GenerateGraphs(SerialMoveset data, string itemName)
@@ -146,7 +146,7 @@ namespace NASB_Moveset_Editor
             if (File.Exists(filePath))
             {
                 string logMessage = $"The graph \"{state.Id}\" already exists for \"{textassetName}\"!";
-                EditorUtility.DisplayDialog("NASB Moveset Editor", logMessage, "OK");
+                EditorUtility.DisplayDialog(Consts.PROJECT_NAME, logMessage, "OK");
                 Logger.LogWarning(logMessage);
                 return null;
             }
