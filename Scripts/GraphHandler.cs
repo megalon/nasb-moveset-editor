@@ -219,34 +219,35 @@ namespace NASB_Moveset_Editor
 
             Vector2 nodeSize = NodeEditorWindow.current.nodeSizes[node];
 
-            float heightOffset = 0;
+            // Special variables used for SAConfigHitboxNode
             Node previousConnectedNode = null;
             float savedY = 0;
+
+            float heightOffset = 0;
             int portCount = 0;
             foreach (NodePort port in node.Outputs)
             {
                 foreach (NodePort connectedPort in port.GetConnections())
                 {
                     float tempHeight = 0;
-                    if (previousConnectedNode != null
-                        && connectedPort.node.GetType().Equals(typeof(SAConfigHitboxNode))
-                        && !previousConnectedNode.GetType().Equals(typeof(SAConfigHitboxNode)))
+
+                    if(connectedPort.node.GetType().Equals(typeof(SAConfigHitboxNode)) && previousConnectedNode != null)
                     {
-                        savedY = heightOffset;
-                        Vector2 offset = nodePos + new Vector2(Consts.NodeXOffset * portCount, heightOffset);
-                        heightOffset = TraverseThroughOutputsHeight(connectedPort.node, offset);
-                    }
-                    else if (previousConnectedNode != null
-                        && connectedPort.node.GetType().Equals(typeof(SAConfigHitboxNode))
-                        && previousConnectedNode.GetType().Equals(typeof(SAConfigHitboxNode)))
-                    {
-                        Vector2 offset = nodePos + new Vector2(Consts.NodeXOffset * portCount, savedY);
-                        TraverseThroughOutputsHeight(connectedPort.node, offset);
-                    }
-                    else
+                        if (previousConnectedNode.GetType().Equals(typeof(SAConfigHitboxNode)))
+                        {
+                            Vector2 offset = nodePos + new Vector2(Consts.NodeXOffset * portCount, savedY);
+                            TraverseThroughOutputsHeight(connectedPort.node, offset);
+                        } else
+                        {
+                            savedY = heightOffset;
+                            Vector2 offset = nodePos + new Vector2(Consts.NodeXOffset * portCount, heightOffset);
+                            tempHeight = TraverseThroughOutputsHeight(connectedPort.node, offset);
+                        }
+                    } else
                     {
                         tempHeight = TraverseThroughOutputsHeight(connectedPort.node, nodePos + new Vector2(Consts.NodeXOffset, heightOffset));
                     }
+
                     previousConnectedNode = connectedPort.node;
                     heightOffset += tempHeight;
                 }
