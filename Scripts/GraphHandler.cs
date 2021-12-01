@@ -11,12 +11,11 @@ namespace NASB_Moveset_Editor
     {
         public static void LoadTextAsset()
         {
-            string filePath = EditorUtility.OpenFilePanel("Select Text Asset", "", "txt");
+            string filePath = EditorUtility.OpenFilePanel("Select Text Asset", EditorPrefs.GetString(Consts.KEY_IMPORT_PATH, ""), "txt");
 
-            if (filePath == null || filePath.Equals(string.Empty))
-            {
-                return;
-            }
+            if (filePath == null || filePath.Equals(string.Empty)) return;
+
+            EditorPrefs.SetString(Consts.KEY_IMPORT_PATH, Path.GetDirectoryName(filePath));
 
             BulkSerializeReader ser;
             using (var fsread = File.OpenRead(filePath))
@@ -29,19 +28,18 @@ namespace NASB_Moveset_Editor
 
             string assetFolderPath = Path.Combine(Utils.GetGraphsDirPath(), textAssetName);
 
-            EditorUtility.DisplayDialog("NASB Moveset Editor", $"Imported {textAssetName}!\n\nYou can find the moveset state graphs in\n\"{assetFolderPath}\"", "OK");
+            EditorUtility.DisplayDialog(Consts.PROJECT_NAME, $"Imported {textAssetName}!\n\nYou can find the moveset state graphs in\n\"{assetFolderPath}\"", "OK");
         }
 
         public static void SaveTextAsset(string graphDir, string graphName)
         {
             if (graphDir == null || graphDir.Equals(string.Empty)) return;
 
-            string outputFilePath = EditorUtility.SaveFilePanel("Select Save Location", "", $"{graphName}_new", "txt");
+            string outputFilePath = EditorUtility.SaveFilePanel("Select Save Location", EditorPrefs.GetString(Consts.KEY_EXPORT_PATH, ""), $"{graphName}_new", "txt");
 
-            if (outputFilePath == null || outputFilePath.Equals(string.Empty))
-            {
-                return;
-            }
+            if (outputFilePath == null || outputFilePath.Equals(string.Empty)) return;
+
+            EditorPrefs.SetString(Consts.KEY_EXPORT_PATH, Path.GetDirectoryName(outputFilePath));
 
             SerialMoveset serialMoveset = new SerialMoveset();
 
@@ -68,7 +66,7 @@ namespace NASB_Moveset_Editor
                     Logger.LogError($"Error reading graph: {idStateName}\n{graphPath}");
                     Logger.LogError(e.Message);
 
-                    EditorUtility.DisplayDialog("NASB Moveset Editor", $"Export failed!\n\nError with IdState: {idStateName}\n\nSee error message in console window for more info.", "Close");
+                    EditorUtility.DisplayDialog(Consts.PROJECT_NAME, $"Export failed!\n\nError with IdState: {idStateName}\n\nSee error message in console window for more info.", "Close");
                     return;
                 }
             }
@@ -91,11 +89,11 @@ namespace NASB_Moveset_Editor
                 Logger.LogError($"Error writing file!\n{outputFilePath}");
                 Logger.LogError(e.Message);
 
-                EditorUtility.DisplayDialog("NASB Moveset Editor", "Failed to write file!\n\nSee error message in console window for more info.", "Close");
+                EditorUtility.DisplayDialog(Consts.PROJECT_NAME, "Failed to write file!\n\nSee error message in console window for more info.", "Close");
                 return;
             }
 
-            EditorUtility.DisplayDialog("NASB Moveset Editor", $"Export complete!\n\nSaved to \"{outputFilePath}\"", "OK");
+            EditorUtility.DisplayDialog(Consts.PROJECT_NAME, $"Export complete!\n\nSaved to \"{outputFilePath}\"", "OK");
         }
 
         public static List<MovesetGraph> GenerateGraphs(SerialMoveset data, string itemName)
@@ -148,7 +146,7 @@ namespace NASB_Moveset_Editor
             if (File.Exists(filePath))
             {
                 string logMessage = $"The graph \"{state.Id}\" already exists for \"{textassetName}\"!";
-                EditorUtility.DisplayDialog("NASB Moveset Editor", logMessage, "OK");
+                EditorUtility.DisplayDialog(Consts.PROJECT_NAME, logMessage, "OK");
                 Logger.LogWarning(logMessage);
                 return null;
             }

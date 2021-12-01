@@ -26,7 +26,7 @@ namespace NASB_Moveset_Editor
             SetupGraphNames();
         }
 
-        [MenuItem("NASB/NASB Moveset Editor", priority = 4)]
+        [MenuItem("NASB/Moveset Editor", priority = 4)]
         private static void OpenWindow()
         {
             GraphHandlerWindow window = GetWindow<GraphHandlerWindow>();

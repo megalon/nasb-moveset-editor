@@ -119,6 +119,8 @@ namespace NASB_Moveset_Editor
         public const string KEY_SELECTED_ASSET_NAME = KEY_NAMESPACE + "SELECTED_ASSET_NAME";
         public const string KEY_NEW_GRAPH_TEXTASSET_NAME = KEY_NAMESPACE + "NEW_GRAPH_TEXTASSET_NAME";
         public const string KEY_NEW_GRAPH_STATE = KEY_NAMESPACE + "NEW_GRAPH_STATE";
+        public const string KEY_IMPORT_PATH = KEY_NAMESPACE + "IMPORT_PATH";
+        public const string KEY_EXPORT_PATH = KEY_NAMESPACE + "EXPORT_PATH";
     }
 
     public class FSFuncText
