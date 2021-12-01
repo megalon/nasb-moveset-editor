@@ -212,7 +212,7 @@ namespace NASB_Moveset_Editor
             Logger.LogInfo($"Organized graph!");
         }
 
-        private static float TraverseThroughOutputsHeight(Node node, Vector2 nodePos)
+        private static Vector2 TraverseThroughOutputsHeight(Node node, Vector2 nodePos)
         {
             node.position.x = nodePos.x;
             node.position.y = nodePos.y;
@@ -229,7 +229,7 @@ namespace NASB_Moveset_Editor
             {
                 foreach (NodePort connectedPort in port.GetConnections())
                 {
-                    float tempHeight = 0;
+                    Vector2 temp = Vector2.zero;
 
                     if(connectedPort.node.GetType().Equals(typeof(SAConfigHitboxNode)) && previousConnectedNode != null)
                     {
@@ -241,20 +241,20 @@ namespace NASB_Moveset_Editor
                         {
                             savedY = heightOffset;
                             Vector2 offset = nodePos + new Vector2(Consts.NodeXOffset * portCount, heightOffset);
-                            tempHeight = TraverseThroughOutputsHeight(connectedPort.node, offset);
+                            temp = TraverseThroughOutputsHeight(connectedPort.node, offset);
                         }
                     } else
                     {
-                        tempHeight = TraverseThroughOutputsHeight(connectedPort.node, nodePos + new Vector2(Consts.NodeXOffset, heightOffset));
+                        temp = TraverseThroughOutputsHeight(connectedPort.node, nodePos + new Vector2(Consts.NodeXOffset, heightOffset));
                     }
 
                     previousConnectedNode = connectedPort.node;
-                    heightOffset += tempHeight;
+                    heightOffset += temp.y;
                 }
                 ++portCount;
             }
 
-            return heightOffset > nodeSize.y ? heightOffset : nodeSize.y;
+            return new Vector2 (nodePos.x, heightOffset > nodeSize.y ? heightOffset : nodeSize.y);
         }
     }
 }
