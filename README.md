@@ -43,7 +43,7 @@ Simply drag this file into your Unity project to import the package.
 It will ask you what you want to import. Make sure to import everything!
 
 ## 4. Open the editor panel
-In Unity, open the NASB Moveset Editor control panel from the top menu bar `NASB -> NASB Moveset Editor`.
+In Unity, open the NASB Moveset Editor control panel from the top menu bar `NASB -> Moveset Editor`.
 
 You can dock this window inside unity by dragging the tab.
 
