@@ -181,6 +181,7 @@ namespace NASB_Moveset_Editor
             if (EditorUtility.DisplayDialog("Organize Graph", "Are you sure you want to organize the entire graph?", "Yes", "No"))
             {
                 OrganizeGraph();
+                XNodeEditor.NodeEditorWindow.DrawAllNodesOnce();
             }
         }
 
