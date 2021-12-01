@@ -221,40 +221,44 @@ namespace NASB_Moveset_Editor
 
             // Special variables used for SAConfigHitboxNode
             Node previousConnectedNode = null;
-            float savedY = 0;
+            float savedYPos = 0;
 
             float heightOffset = 0;
+            float widthOffset = 0;
             int portCount = 0;
             foreach (NodePort port in node.Outputs)
             {
                 foreach (NodePort connectedPort in port.GetConnections())
                 {
-                    Vector2 temp = Vector2.zero;
+                    Vector2 branchDepth = Vector2.zero;
 
                     if(connectedPort.node.GetType().Equals(typeof(SAConfigHitboxNode)) && previousConnectedNode != null)
                     {
                         if (previousConnectedNode.GetType().Equals(typeof(SAConfigHitboxNode)))
                         {
-                            Vector2 offset = nodePos + new Vector2(Consts.NodeXOffset * portCount, savedY);
+                            Vector2 offset = nodePos + new Vector2(Consts.NodeXOffset * portCount, savedYPos);
                             TraverseThroughOutputsHeight(connectedPort.node, offset);
                         } else
                         {
-                            savedY = heightOffset;
+                            savedYPos = heightOffset;
                             Vector2 offset = nodePos + new Vector2(Consts.NodeXOffset * portCount, heightOffset);
-                            temp = TraverseThroughOutputsHeight(connectedPort.node, offset);
+                            branchDepth = TraverseThroughOutputsHeight(connectedPort.node, offset);
                         }
                     } else
                     {
-                        temp = TraverseThroughOutputsHeight(connectedPort.node, nodePos + new Vector2(Consts.NodeXOffset, heightOffset));
+                        branchDepth = TraverseThroughOutputsHeight(connectedPort.node, nodePos + new Vector2(Consts.NodeXOffset, heightOffset));
                     }
 
                     previousConnectedNode = connectedPort.node;
-                    heightOffset += temp.y;
+                    heightOffset += branchDepth.y;
+                    widthOffset = branchDepth.x;
+                    if (widthOffset > nodePos.x + Consts.NodeXOffset) 
+                        heightOffset += Consts.NodeClusterYSpacing;
                 }
                 ++portCount;
             }
 
-            return new Vector2 (nodePos.x, heightOffset > nodeSize.y ? heightOffset : nodeSize.y);
+            return new Vector2 (widthOffset + nodePos.x, heightOffset > nodeSize.y ? heightOffset : nodeSize.y);
         }
     }
 }
