@@ -117,9 +117,9 @@ This will convert the collection of graphs in the selected folder back into a Bu
 
 Bobbie has made a [moveset swapper mod](https://discord.com/channels/842098987875434541/894748073471930388/899027100395257936) in the [NASB Discord.](https://discord.com/invite/nasb)
 
-It looks for a moveset file in `BepInEx/Movesets` that matches the character ID.
+It looks for a moveset file in `BepInEx/Movesets` that matches the name of the text asset in the game.
 
-For example, Spongebob's would be `char_apple.txt`. You can also use `char_apple_new.txt`
+For example, Spongebob's moveset would be `char_apple.txt`. You can also use `char_apple_new.txt`
 
 # Controls
 
