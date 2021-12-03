@@ -113,6 +113,14 @@ Select the moveset you want to export from the dropdown, then click on the Expor
 
 This will convert the collection of graphs in the selected folder back into a BulkSerialized text file for you to use in the game.
 
+## Using the moveset in game
+
+Bobbie has made a [moveset swapper mod](https://discord.com/channels/842098987875434541/894748073471930388/899027100395257936) in the [NASB Discord.](https://discord.com/invite/nasb)
+
+It looks for a moveset file in `BepInEx/Movesets` that matches the character ID.
+
+For example, Spongebob's would be `char_apple.txt`. You can also use `char_apple_new.txt`
+
 # Controls
 
 | Keybind | Action |
