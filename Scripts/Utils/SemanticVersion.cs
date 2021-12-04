@@ -102,6 +102,23 @@ namespace NASB_Moveset_Editor
 		}
 
 		/// <summary>
+		/// Basic constructor for simple version strings used by the moveset editor
+		/// </summary>
+		/// <param name="versionString"></param>
+		public SemanticVersion(string versionString)
+        {
+			if (versionString == null || versionString.Equals(string.Empty)) return;
+
+			string majorStr = versionString.Substring(0, versionString.IndexOf('.'));
+			string minorStr = versionString.Substring(versionString.IndexOf('.') + 1);
+			minorStr = minorStr.Substring(0, minorStr.IndexOf('.'));
+			string patchStr = versionString.Substring(versionString.LastIndexOf('.') + 1);
+			this.Major = int.Parse(majorStr);
+			this.Minor = int.Parse(minorStr);
+			this.Patch = int.Parse(patchStr);
+		}
+
+		/// <summary>
 		/// Implements the operator ==.
 		/// </summary>
 		/// <param name="a">The first operand.</param>

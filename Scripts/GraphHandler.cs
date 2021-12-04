@@ -169,8 +169,6 @@ namespace NASB_Moveset_Editor
 
             LoadMovesetIntoGraph(state, (MovesetGraph)graph, $"{assetFolderPath}/{state.Id}.asset");
 
-            ((MovesetGraph)graph).version = Consts.VERSION;
-
             return (MovesetGraph)graph;
         }
 
