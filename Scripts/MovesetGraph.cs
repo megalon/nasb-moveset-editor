@@ -36,9 +36,9 @@ namespace NASB_Moveset_Editor
                     //
                 } else
                 {
+                    // This is a new graph, so set the version
                     version = Consts.VERSION;
                 }
-
             } else
             {
                 if (graphVersion < editorVersion)
@@ -49,7 +49,7 @@ namespace NASB_Moveset_Editor
                     Logger.LogError($"Graph {name} was built on a NEWER editor version {graphVersion.ToString()}! Please upgrade your editor!\n{assetPath}");
                 } else
                 {
-                    Logger.LogInfo($"Graph was made with current version of editor.\n{assetPath}");
+                    // Graph was made with current version of editor
                 }
             }
         }
