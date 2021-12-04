@@ -2,39 +2,56 @@
 using UnityEngine;
 using XNode;
 using System.Collections.Generic;
+using UnityEditor;
 
 namespace NASB_Moveset_Editor
 {
     [Serializable]
     public class MovesetGraph : NodeGraph {
         public string version;
-        private SemanticVersion graphVersion;
 
         private void OnEnable()
         {
             Utils.SetupUtils();
 
-            var editorVersion = StringToVersion(Consts.VERSION);
+            SemanticVersion editorVersion = new SemanticVersion(Consts.VERSION);
+            SemanticVersion graphVersion = null;
 
-            if (graphVersion != null)
+            string assetPath = AssetDatabase.GetAssetPath(this);
+
+            if (version != null && !version.Equals(string.Empty))
+            {
+                graphVersion = new SemanticVersion(version);
+            }
+
+            if (graphVersion == null)
+            {
+                // If this is an existing graph with no version number
+                if (nodes.Count > 0)
+                {
+                    Logger.LogWarning($"Graph {name} has no version!\n{assetPath}");
+                    // Deal with graphs with no version here
+                    //
+                    //
+                    //
+                } else
+                {
+                    version = Consts.VERSION;
+                }
+
+            } else
             {
                 if (graphVersion < editorVersion)
                 {
-                    Logger.LogWarning($"Graph {name} was built on older editor version {graphVersion.ToString()}!");
+                    Logger.LogWarning($"Graph was built on older editor version {graphVersion.ToString()}!\n{assetPath}");
+                } else if (graphVersion > editorVersion)
+                {
+                    Logger.LogError($"Graph {name} was built on a NEWER editor version {graphVersion.ToString()}! Please upgrade your editor!\n{assetPath}");
+                } else
+                {
+                    Logger.LogInfo($"Graph was made with current version of editor.\n{assetPath}");
                 }
-            } else
-            {
-                Logger.LogWarning($"Graph {name} has no version!");
             }
-        }
-
-        private SemanticVersion StringToVersion(string input)
-        {
-            string major = input.Substring(0, input.IndexOf('.'));
-            string minor = input.Substring(input.IndexOf('.') + 1);
-            minor = minor.Substring(0, minor.IndexOf('.'));
-            string patch = input.Substring(input.LastIndexOf('.') + 1);
-            return new SemanticVersion(int.Parse(major), int.Parse(minor), int.Parse(patch));
         }
     }
 }
