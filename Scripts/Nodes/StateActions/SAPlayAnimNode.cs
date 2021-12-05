@@ -30,7 +30,7 @@ namespace NASB_Moveset_Editor.StateActions
 	{
 		public bool FromStart;
 		public string Anim;
-		[Output] public AnimConfig Cfg;
+		[Output(connectionType = ConnectionType.Override)] public AnimConfig Cfg;
 		
 		protected override void Init()
 		{

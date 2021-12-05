@@ -28,13 +28,13 @@ namespace NASB_Moveset_Editor.Jumps
 {
 	public class KnockbackJumpNode : JumpNode
 	{
-		[Output] public FloatSource XDir;
-		[Output] public FloatSource YDir;
-		[Output] public FloatSource LaunchDist;
-		[Output] public FloatSource Frames;
-		[Output] public FloatSource DiType;
-		[Output] public FloatSource DiAngleIn;
-		[Output] public FloatSource DiAngleOut;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource XDir;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource YDir;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource LaunchDist;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource Frames;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource DiType;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource DiAngleIn;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource DiAngleOut;
 		
 		protected override void Init()
 		{

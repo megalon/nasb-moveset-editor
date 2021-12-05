@@ -28,7 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAFastForwardStateNode : StateActionNode
 	{
-		[Output] public FloatSource Frames;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource Frames;
 		
 		protected override void Init()
 		{

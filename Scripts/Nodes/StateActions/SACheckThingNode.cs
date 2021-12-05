@@ -28,10 +28,10 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SACheckThingNode : StateActionNode
 	{
-		[Output] public CheckThing CheckThing;
-		[Output] public StateAction Action;
+		[Output(connectionType = ConnectionType.Override)] public CheckThing CheckThing;
+		[Output(connectionType = ConnectionType.Override)] public StateAction Action;
 		public bool Else;
-		[Output] public StateAction ElseAction;
+		[Output(connectionType = ConnectionType.Override)] public StateAction ElseAction;
 		
 		protected override void Init()
 		{

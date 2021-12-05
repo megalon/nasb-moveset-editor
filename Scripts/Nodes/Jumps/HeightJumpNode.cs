@@ -28,7 +28,7 @@ namespace NASB_Moveset_Editor.Jumps
 {
 	public class HeightJumpNode : JumpNode
 	{
-		[Output] public FloatSource Height;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource Height;
 		
 		protected override void Init()
 		{

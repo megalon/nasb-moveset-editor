@@ -29,7 +29,7 @@ namespace NASB_Moveset_Editor.StateActions
 	public class SAJumpNode : StateActionNode
 	{
 		public string JumpId;
-		[Output] public Jump Jump;
+		[Output(connectionType = ConnectionType.Override)] public Jump Jump;
 		
 		protected override void Init()
 		{

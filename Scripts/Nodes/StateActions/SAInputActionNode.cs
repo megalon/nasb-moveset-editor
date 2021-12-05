@@ -30,7 +30,7 @@ namespace NASB_Moveset_Editor.StateActions
 	{
 		public float Frames;
 		public string Id;
-		[Output] public InputTrigger Trigger;
+		[Output(connectionType = ConnectionType.Override)] public InputTrigger Trigger;
 		
 		protected override void Init()
 		{

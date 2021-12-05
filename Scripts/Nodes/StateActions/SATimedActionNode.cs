@@ -28,9 +28,9 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SATimedActionNode : StateActionNode
 	{
-		[Output] public FloatSource Source;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource Source;
 		public bool Repeat;
-		[Output] public StateAction Action;
+		[Output(connectionType = ConnectionType.Override)] public StateAction Action;
 		
 		protected override void Init()
 		{

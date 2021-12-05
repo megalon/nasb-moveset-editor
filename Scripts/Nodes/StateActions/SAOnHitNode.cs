@@ -30,7 +30,7 @@ namespace NASB_Moveset_Editor.StateActions
 	{
 		public bool Hitbox;
 		public int Box;
-		[Output] public StateAction Action;
+		[Output(connectionType = ConnectionType.Override)] public StateAction Action;
 		
 		protected override void Init()
 		{

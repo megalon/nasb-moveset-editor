@@ -28,8 +28,8 @@ namespace NASB_Moveset_Editor.ObjectSources
 {
 	public class OSVector2Node : ObjectSourceNode
 	{
-		[Output] public FloatSource X;
-		[Output] public FloatSource Y;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource X;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource Y;
 		
 		protected override void Init()
 		{

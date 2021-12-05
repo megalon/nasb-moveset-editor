@@ -29,7 +29,7 @@ namespace NASB_Moveset_Editor
 	{
 		public string Id;
 		public List<string> Tags;
-		[Output] public AgentState State;
+		[Output(connectionType = ConnectionType.Override)] public AgentState State;
 		
 		protected override void Init()
 		{

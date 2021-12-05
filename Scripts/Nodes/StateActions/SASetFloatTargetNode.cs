@@ -28,7 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SASetFloatTargetNode : StateActionNode
 	{
-		[Output] public List<SASetFloatTarget.SetFloat> Sets;
+		[Output(connectionType = ConnectionType.Multiple)] public List<SASetFloatTarget.SetFloat> Sets;
 		
 		protected override void Init()
 		{

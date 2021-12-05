@@ -29,7 +29,7 @@ namespace NASB_Moveset_Editor.CheckThings
 	public class LookForInputNode : CheckThingNode
 	{
 		public int MatchMinFrames;
-		[Output] public InputValidator InputValidator;
+		[Output(connectionType = ConnectionType.Override)] public InputValidator InputValidator;
 		
 		protected override void Init()
 		{

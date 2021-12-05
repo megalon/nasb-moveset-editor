@@ -29,7 +29,7 @@ namespace NASB_Moveset_Editor.StateActions
 	public class SAOnCancelNode : StateActionNode
 	{
 		public string Id;
-		[Output] public StateAction Action;
+		[Output(connectionType = ConnectionType.Override)] public StateAction Action;
 		
 		protected override void Init()
 		{

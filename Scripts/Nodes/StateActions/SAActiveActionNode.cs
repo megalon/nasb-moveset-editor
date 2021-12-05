@@ -28,8 +28,8 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAActiveActionNode : StateActionNode
 	{
-		[Output] public StateAction Action;
-		[Output] public FloatSource FloatSource;
+		[Output(connectionType = ConnectionType.Override)] public StateAction Action;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource FloatSource;
 		public string Id;
 		public NASB_Parser.StateActions.SAActiveAction.Phases Phase;
 		

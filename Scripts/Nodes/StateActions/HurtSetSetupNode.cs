@@ -28,7 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class HurtSetSetupNode : StateActionNode
 	{
-		[Output] public List<HurtBone> HurtBones;
+		[Output(connectionType = ConnectionType.Multiple)] public List<HurtBone> HurtBones;
 		
 		protected override void Init()
 		{

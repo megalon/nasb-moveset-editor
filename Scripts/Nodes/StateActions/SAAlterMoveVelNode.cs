@@ -29,10 +29,10 @@ namespace NASB_Moveset_Editor.StateActions
 	public class SAAlterMoveVelNode : StateActionNode
 	{
 		public bool ClearAMV;
-		[Output] public FloatSource AlterX;
-		[Output] public FloatSource AlterY;
-		[Output] public FloatSource FalloffX;
-		[Output] public FloatSource FalloffY;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource AlterX;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource AlterY;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource FalloffX;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource FalloffY;
 		
 		protected override void Init()
 		{

@@ -35,13 +35,13 @@ namespace NASB_Moveset_Editor.StateActions
 		public string Bone;
 		public NASB_Parser.Vector3 LocalOffset;
 		public NASB_Parser.Vector3 GlobalOffset;
-		[Output] public FloatSource DirX;
-		[Output] public FloatSource DirY;
-		[Output] public FloatSource DirZ;
-		[Output] public FloatSource DynamicX;
-		[Output] public FloatSource DynamicY;
-		[Output] public FloatSource DynamicZ;
-		[Output] public FloatSource Scale;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource DirX;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource DirY;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource DirZ;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource DynamicX;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource DynamicY;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource DynamicZ;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource Scale;
 		
 		protected override void Init()
 		{

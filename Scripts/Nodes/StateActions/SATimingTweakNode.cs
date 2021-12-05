@@ -30,14 +30,14 @@ namespace NASB_Moveset_Editor.StateActions
 	{
 		public string AnimId;
 		public string RootAnimId;
-		[Output] public AnimConfig AnimCfg;
-		[Output] public FloatSource AnimFrames;
-		[Output] public FloatSource StateFrames;
-		[Output] public FloatSource FramesToA;
-		[Output] public FloatSource FramesToB;
-		[Output] public StateAction ActionA;
-		[Output] public StateAction ActionB;
-		[Output] public StateAction ActionEnd;
+		[Output(connectionType = ConnectionType.Override)] public AnimConfig AnimCfg;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource AnimFrames;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource StateFrames;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource FramesToA;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource FramesToB;
+		[Output(connectionType = ConnectionType.Override)] public StateAction ActionA;
+		[Output(connectionType = ConnectionType.Override)] public StateAction ActionB;
+		[Output(connectionType = ConnectionType.Override)] public StateAction ActionEnd;
 		
 		protected override void Init()
 		{

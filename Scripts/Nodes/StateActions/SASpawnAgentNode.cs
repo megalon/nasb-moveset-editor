@@ -33,10 +33,10 @@ namespace NASB_Moveset_Editor.StateActions
 		public string Bone;
 		public NASB_Parser.Vector3 LocalOffset;
 		public NASB_Parser.Vector3 WorldOffset;
-		[Output] public SAGUAMessageObject MessageObject;
+		[Output(connectionType = ConnectionType.Override)] public SAGUAMessageObject MessageObject;
 		public bool CustomSpawnMovement;
-		[Output] public List<SpawnMovement> Movements;
-		[Output] public FloatSource ResultOrderAdded;
+		[Output(connectionType = ConnectionType.Multiple)] public List<SpawnMovement> Movements;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource ResultOrderAdded;
 		
 		protected override void Init()
 		{

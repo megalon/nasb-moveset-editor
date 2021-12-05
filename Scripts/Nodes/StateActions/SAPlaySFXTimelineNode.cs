@@ -30,7 +30,7 @@ namespace NASB_Moveset_Editor.StateActions
 	{
 		public NASB_Parser.StateActions.SAPlaySFXTimeline.ManipType Manip;
 		public bool Loop;
-		[Output] public FloatSource Source;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource Source;
 		public string Timeline;
 		
 		protected override void Init()

@@ -29,7 +29,7 @@ namespace NASB_Moveset_Editor.CheckThings
 	public class CTMultipleNode : CheckThingNode
 	{
 		public NASB_Parser.CheckThings.CTMultiple.CheckMatch Match;
-		[Output] public List<CheckThing> Checklist;
+		[Output(connectionType = ConnectionType.Multiple)] public List<CheckThing> Checklist;
 		
 		protected override void Init()
 		{

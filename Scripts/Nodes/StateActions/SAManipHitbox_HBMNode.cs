@@ -26,7 +26,7 @@ namespace NASB_Moveset_Editor.StateActions
 	{
 		public SAManipHitbox.Manip Manip;
 		public int Hitbox;
-		[Output] public FloatSource Source;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource Source;
 		
 		protected override void Init()
 		{

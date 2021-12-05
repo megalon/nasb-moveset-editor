@@ -27,7 +27,7 @@ namespace NASB_Moveset_Editor.StateActions
 		public SAManipHurtbox.Manip Manip;
 		public int Hurtbox;
 		public HurtType Type;
-		[Output] public FloatSource Source;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource Source;
 		
 		protected override void Init()
 		{

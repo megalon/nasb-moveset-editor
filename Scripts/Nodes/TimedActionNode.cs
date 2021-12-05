@@ -28,7 +28,7 @@ namespace NASB_Moveset_Editor
 	public class TimedActionNode : BaseMovesetNode
 	{
 		public float AtFrame;
-		[Output] public StateAction Action;
+		[Output(connectionType = ConnectionType.Override)] public StateAction Action;
 		
 		protected override void Init()
 		{

@@ -31,7 +31,7 @@ namespace NASB_Moveset_Editor.StateActions
 		public string Id;
 		public bool Activate;
 		public bool Permanent;
-		[Output] public FloatSource RunForTime;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource RunForTime;
 		
 		protected override void Init()
 		{

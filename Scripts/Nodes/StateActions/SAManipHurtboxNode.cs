@@ -29,7 +29,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAManipHurtboxNode : StateActionNode
 	{
-		[Output] public List<SAManipHurtbox.HBM> Manips;
+		[Output(connectionType = ConnectionType.Multiple)] public List<SAManipHurtbox.HBM> Manips;
 		
 		protected override void Init()
 		{

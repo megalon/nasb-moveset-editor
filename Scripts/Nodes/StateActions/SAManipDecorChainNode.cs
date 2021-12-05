@@ -30,7 +30,7 @@ namespace NASB_Moveset_Editor.StateActions
 	{
 		public int ManipIndex;
 		public NASB_Parser.StateActions.SAManipDecorChain.ManipType Manip;
-		[Output] public FloatSource Source;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource Source;
 		
 		protected override void Init()
 		{

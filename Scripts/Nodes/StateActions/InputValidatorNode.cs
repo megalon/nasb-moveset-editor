@@ -35,8 +35,8 @@ namespace NASB_Moveset_Editor.StateActions
 		public NASB_Parser.StateActions.InputValidator.ValidatorButtonCompare ButtonCompare;
 		public NASB_Parser.StateActions.InputValidator.CtrlSegCompare SegCompare;
 		public NASB_Parser.StateActions.InputValidator.ValidatorMultiCompare MultiCompare;
-		[Output] public FloatSource FloatContainer;
-		[Output] public List<InputValidator> Validators;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource FloatContainer;
+		[Output(connectionType = ConnectionType.Multiple)] public List<InputValidator> Validators;
 		
 		protected override void Init()
 		{

@@ -30,7 +30,7 @@ namespace NASB_Moveset_Editor.StateActions
 	{
 		public float Frames;
 		public bool ForceCheck;
-		[Output] public SAStandardInput.StandardConfig Config;
+		[Output(connectionType = ConnectionType.Override)] public SAStandardInput.StandardConfig Config;
 		
 		protected override void Init()
 		{

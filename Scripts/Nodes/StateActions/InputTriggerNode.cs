@@ -31,8 +31,8 @@ namespace NASB_Moveset_Editor.StateActions
 		public int SniffFrames;
 		public GIEV BlockedByEvent;
 		public GIEV AddEventOnTrigger;
-		[Output] public StateAction Action;
-		[Output] public InputValidator Validator;
+		[Output(connectionType = ConnectionType.Override)] public StateAction Action;
+		[Output(connectionType = ConnectionType.Override)] public InputValidator Validator;
 		
 		protected override void Init()
 		{
