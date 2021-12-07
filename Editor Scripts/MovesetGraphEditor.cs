@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using XNode;
@@ -111,7 +112,52 @@ namespace NASB_Moveset_Editor
 
         public override void AddContextMenuItems(GenericMenu menu, Type compatibleType = null, NodePort.IO direction = NodePort.IO.Input)
         {
-            base.AddContextMenuItems(menu, compatibleType, direction);
+			Vector2 pos = NodeEditorWindow.current.WindowToGridPosition(Event.current.mousePosition);
+
+			if (compatibleType != null)
+			{
+				Type[] nodeTypes;
+
+				// If this is a list, get the type of the item in the list, then find nodes that have inputs for that type
+				if (typeof(IEnumerable).IsAssignableFrom(compatibleType) && compatibleType != typeof(string))
+                {
+					Type subType = Type.GetType(compatibleType.GenericTypeArguments[0].AssemblyQualifiedName);
+					nodeTypes = NodeEditorUtilities.GetCompatibleNodesTypes(NodeEditorReflection.nodeTypes, subType, direction).OrderBy(GetNodeMenuOrder).ToArray();
+				} else if (NodeEditorPreferences.GetSettings().createFilter)
+				{
+					nodeTypes = NodeEditorUtilities.GetCompatibleNodesTypes(NodeEditorReflection.nodeTypes, compatibleType, direction).OrderBy(GetNodeMenuOrder).ToArray();
+				}
+				else
+				{
+					nodeTypes = NodeEditorReflection.nodeTypes.OrderBy(GetNodeMenuOrder).ToArray();
+				}
+
+				for (int i = 0; i < nodeTypes.Length; i++)
+				{
+					Type type = nodeTypes[i];
+
+					//Get node context menu path
+					string path = GetNodeMenuName(type);
+					if (string.IsNullOrEmpty(path)) continue;
+
+					// Check if user is allowed to add more of given node type
+					XNode.Node.DisallowMultipleNodesAttribute disallowAttrib;
+					bool disallowed = false;
+					if (NodeEditorUtilities.GetAttrib(type, out disallowAttrib))
+					{
+						int typeCount = target.nodes.Count(x => x.GetType() == type);
+						if (typeCount >= disallowAttrib.max) disallowed = true;
+					}
+
+					// Add node entry to context menu
+					if (disallowed) menu.AddItem(new GUIContent(path), false, null);
+					else menu.AddItem(new GUIContent(path), false, () => {
+						XNode.Node node = CreateNode(type, pos);
+						NodeEditorWindow.current.AutoConnect(node);
+					});
+				}
+			}
+			base.AddContextMenuItems(menu, compatibleType, direction);
 			menu.AddSeparator("");
 			menu.AddItem(new GUIContent("Organize Graph"), false, () => GraphHandler.CheckOrganizeGraph());
         }
