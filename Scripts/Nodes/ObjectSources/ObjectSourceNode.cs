@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.ObjectSources
 {
 	public class ObjectSourceNode : BaseMovesetNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public ObjectSource NodeInput;
 		[HideInInspector] public NASB_Parser.ObjectSources.ObjectSource.TypeId TID;
 		[HideInInspector] public int Version;
 		

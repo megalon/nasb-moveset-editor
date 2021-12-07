@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.CheckThings
 {
 	public class CheckThingNode : BaseMovesetNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public CheckThing NodeInput;
 		[HideInInspector] public NASB_Parser.CheckThings.CheckThing.TypeId TID;
 		[HideInInspector] public int Version;
 		

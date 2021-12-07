@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class StateActionNode : BaseMovesetNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		[HideInInspector] public NASB_Parser.StateActions.StateAction.TypeId TID;
 		[HideInInspector] public int Version;
 		

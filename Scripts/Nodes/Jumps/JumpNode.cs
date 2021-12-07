@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.Jumps
 {
 	public class JumpNode : BaseMovesetNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public Jump NodeInput;
 		[HideInInspector] public NASB_Parser.Jumps.Jump.TypeId TID;
 		[HideInInspector] public int Version;
 		
