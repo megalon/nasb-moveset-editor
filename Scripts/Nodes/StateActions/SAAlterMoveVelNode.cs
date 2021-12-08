@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAAlterMoveVelNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public bool ClearAMV;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource AlterX;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource AlterY;

@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.Jumps
 {
 	public class KnockbackJumpNode : JumpNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public Jump NodeInput;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource XDir;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource YDir;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource LaunchDist;

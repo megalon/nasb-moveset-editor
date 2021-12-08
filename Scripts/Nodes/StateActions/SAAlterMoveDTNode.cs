@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAAlterMoveDTNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public bool ClearAMDT;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource After;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource Falloff;

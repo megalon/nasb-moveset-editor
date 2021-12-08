@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.CheckThings
 {
 	public class CTGrabIdNode : CheckThingNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public CheckThing NodeInput;
 		public NASB_Parser.CheckThings.CTGrabId.CheckTypes CheckType;
 		
 		protected override void Init()

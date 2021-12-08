@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSValueNode : FloatSourceNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		public float Value;
 		
 		protected override void Init()

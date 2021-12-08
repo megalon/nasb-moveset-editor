@@ -24,6 +24,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAStandardInput_StandardConfigNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public SAStandardInput.StandardConfig NodeInput;
 		public byte DontCheck0;
 		public byte DontCheck1;
 		public byte DontCheck2;

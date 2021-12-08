@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SASpawnFXNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public bool Dynamic;
 		public bool Track;
 		public bool BoneDir;

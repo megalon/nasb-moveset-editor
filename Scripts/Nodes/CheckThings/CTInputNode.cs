@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.CheckThings
 {
 	public class CTInputNode : CheckThingNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public CheckThing NodeInput;
 		[Output(connectionType = ConnectionType.Override)] public InputValidator InputValidator;
 		public int Frames;
 		public GIEV BlockedBy;

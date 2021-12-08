@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.CheckThings
 {
 	public class CTDoubleTapIdNode : CheckThingNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public CheckThing NodeInput;
 		public NASB_Parser.CheckThings.CTDoubleTapId.SimpleControlDir TapDir;
 		public int Window;
 		

@@ -28,10 +28,10 @@ namespace NASB_Moveset_Editor
 
 				// Organize State Action nodes
 				if (nodeMenuName.Contains("State Actions/"))
-                {
+				{
 					string nodeName = nodeMenuName.Substring("State Actions/".Length);
 					if (nodeName.StartsWith("SA"))
-                    {
+					{
 						string nameWithoutSA = nodeName.Substring("SA".Length).Trim();
 						int alphaComp = string.Compare(nameWithoutSA, "N");
 						if (alphaComp < 1)
@@ -46,9 +46,9 @@ namespace NASB_Moveset_Editor
 			else return null;
 		}
 
-        public override void OnCreate()
-        {
-            base.OnCreate();
+		public override void OnCreate()
+		{
+			base.OnCreate();
 			window.titleContent = new GUIContent(Consts.PROJECT_NAME);
 
 			titleStyle = new GUIStyle();
@@ -58,9 +58,9 @@ namespace NASB_Moveset_Editor
 			titleRect = new Rect(windowPadding, windowPadding, window.position.width - windowPadding, window.position.height - windowPadding);
 		}
 
-        public override void OnOpen()
-        {
-            base.OnOpen();
+		public override void OnOpen()
+		{
+			base.OnOpen();
 
 			SetupInsetGraphName();
 		}
@@ -73,15 +73,15 @@ namespace NASB_Moveset_Editor
 		}
 
 		public override void OnGUI()
-        {
-            base.OnGUI();
+		{
+			base.OnGUI();
 
 			GUILayout.BeginArea(titleRect);
 			EditorGUILayout.LabelField(graphParentName, titleStyle);
 			EditorGUILayout.Space(windowPadding * 0.66f);
 			EditorGUILayout.LabelField(graphSubName, titleStyle);
 			GUILayout.EndArea();
-        }
+		}
 
 		public override NodeEditorPreferences.Settings GetDefaultPreferences()
 		{
@@ -95,17 +95,17 @@ namespace NASB_Moveset_Editor
 		}
 
 		private void SetupInsetGraphName()
-        {
+		{
 			string graphPath = AssetDatabase.GetAssetPath(base.serializedObject.targetObject);
 
 			try
-            {
+			{
 				graphPath = graphPath.Substring(graphPath.IndexOf($"{Consts.GRAPH_FOLDER_NAME}") + Consts.GRAPH_FOLDER_NAME.Length + 1);
 				graphPath = graphPath.Substring(0, graphPath.Length - ".asset".Length);
 				graphParentName = graphPath.Substring(0, graphPath.IndexOf("/"));
 				graphSubName = graphPath.Substring(graphParentName.Length + 1);
 			} catch
-            {
+			{
 				graphParentName = graphPath;
 			}
 		}
@@ -120,10 +120,11 @@ namespace NASB_Moveset_Editor
 
 				// If this is a list, get the type of the item in the list, then find nodes that have inputs for that type
 				if (typeof(IEnumerable).IsAssignableFrom(compatibleType) && compatibleType != typeof(string))
-                {
+				{
 					Type subType = Type.GetType(compatibleType.GenericTypeArguments[0].AssemblyQualifiedName);
 					nodeTypes = NodeEditorUtilities.GetCompatibleNodesTypes(NodeEditorReflection.nodeTypes, subType, direction).OrderBy(GetNodeMenuOrder).ToArray();
-				} else if (NodeEditorPreferences.GetSettings().createFilter)
+				}
+				else if (NodeEditorPreferences.GetSettings().createFilter)
 				{
 					nodeTypes = NodeEditorUtilities.GetCompatibleNodesTypes(NodeEditorReflection.nodeTypes, compatibleType, direction).OrderBy(GetNodeMenuOrder).ToArray();
 				}

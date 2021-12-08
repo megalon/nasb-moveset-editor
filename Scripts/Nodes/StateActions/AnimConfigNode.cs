@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class AnimConfigNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public AnimConfig NodeInput;
 		public float Rate;
 		public float Weight;
 		public NASB_Parser.StateActions.AnimConfig.WrapMode Wrap;

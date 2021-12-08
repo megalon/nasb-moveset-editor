@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSFuncNode : FloatSourceNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		public NASB_Parser.FloatSources.FSFunc.FuncWay Way;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource ContainerA;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource ContainerB;

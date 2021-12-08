@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSCombatNode : FloatSourceNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		public NASB_Parser.FloatSources.FSCombat.Attributes Attribute;
 		
 		protected override void Init()

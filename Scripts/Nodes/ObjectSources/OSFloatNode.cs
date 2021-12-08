@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.ObjectSources
 {
 	public class OSFloatNode : ObjectSourceNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public ObjectSource NodeInput;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource Source;
 		
 		protected override void Init()

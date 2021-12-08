@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAManageAirJumpNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public NASB_Parser.StateActions.SAManageAirJump.ManageType Manage;
 		
 		protected override void Init()

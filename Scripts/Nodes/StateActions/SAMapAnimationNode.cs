@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAMapAnimationNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		[Output(connectionType = ConnectionType.Multiple)] public List<SAMapAnimation.MapPoint> Map;
 		
 		protected override void Init()

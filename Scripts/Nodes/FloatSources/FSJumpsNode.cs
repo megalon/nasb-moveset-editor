@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSJumpsNode : FloatSourceNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		public NASB_Parser.FloatSources.FSJumps.Attributes Attribute;
 		
 		protected override void Init()

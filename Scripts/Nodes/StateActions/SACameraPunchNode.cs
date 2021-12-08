@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SACameraPunchNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource X;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource Y;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource Z;

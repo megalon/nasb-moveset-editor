@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAInputActionNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public float Frames;
 		public string Id;
 		[Output(connectionType = ConnectionType.Override)] public InputTrigger Trigger;

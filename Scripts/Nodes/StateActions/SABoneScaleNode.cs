@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SABoneScaleNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public string Bone;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource Source;
 		

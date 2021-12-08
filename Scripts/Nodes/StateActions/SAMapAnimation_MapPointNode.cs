@@ -24,6 +24,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAMapAnimation_MapPointNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public SAMapAnimation.MapPoint NodeInput;
 		public bool RootAnim;
 		public string AnimId;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource AtFrames;

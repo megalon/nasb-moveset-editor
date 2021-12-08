@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAOnHitNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public bool Hitbox;
 		public int Box;
 		[Output(connectionType = ConnectionType.Override)] public StateAction Action;

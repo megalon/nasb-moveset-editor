@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAActiveActionNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		[Output(connectionType = ConnectionType.Override)] public StateAction Action;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource FloatSource;
 		public string Id;

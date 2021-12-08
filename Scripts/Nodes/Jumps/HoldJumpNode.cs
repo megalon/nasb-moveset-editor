@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.Jumps
 {
 	public class HoldJumpNode : JumpNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public Jump NodeInput;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource Height;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource AutoHoldFrames;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource YVelMaxOnRelease;

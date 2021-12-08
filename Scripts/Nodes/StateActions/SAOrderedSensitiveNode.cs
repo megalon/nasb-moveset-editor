@@ -29,6 +29,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAOrderedSensitiveNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		[Range(2, 50)] public int listSize = 0;
 		
 		protected override void Init()

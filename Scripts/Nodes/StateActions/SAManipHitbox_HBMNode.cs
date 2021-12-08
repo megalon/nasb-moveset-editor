@@ -24,6 +24,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAManipHitbox_HBMNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public SAManipHitbox.HBM NodeInput;
 		public SAManipHitbox.Manip Manip;
 		public int Hitbox;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource Source;

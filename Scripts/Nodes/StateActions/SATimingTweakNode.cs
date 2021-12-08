@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SATimingTweakNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public string AnimId;
 		public string RootAnimId;
 		[Output(connectionType = ConnectionType.Override)] public AnimConfig AnimCfg;

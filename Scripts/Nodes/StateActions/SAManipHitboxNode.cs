@@ -29,6 +29,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAManipHitboxNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		[Output(connectionType = ConnectionType.Multiple)] public List<SAManipHitbox.HBM> Manips;
 		
 		protected override void Init()

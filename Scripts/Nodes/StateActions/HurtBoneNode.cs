@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class HurtBoneNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public HurtBone NodeInput;
 		public HurtType Type;
 		public int Armor;
 		public int KnockbackArmor;

@@ -24,6 +24,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAGUAMessageObject_MessageDynamicNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public SAGUAMessageObject.MessageDynamic NodeInput;
 		public string Id;
 		[Output(connectionType = ConnectionType.Override)] public ObjectSource ObjectSource;
 		

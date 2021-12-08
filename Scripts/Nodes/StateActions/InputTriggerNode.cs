@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class InputTriggerNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public InputTrigger NodeInput;
 		public int SniffFrames;
 		public GIEV BlockedByEvent;
 		public GIEV AddEventOnTrigger;

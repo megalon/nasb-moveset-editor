@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.Jumps
 {
 	public class AirDashJumpNode : JumpNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public Jump NodeInput;
 		public Ease EaseSpeed;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource XDir;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource YDir;

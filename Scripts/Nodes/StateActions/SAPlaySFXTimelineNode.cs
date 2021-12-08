@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAPlaySFXTimelineNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public NASB_Parser.StateActions.SAPlaySFXTimeline.ManipType Manip;
 		public bool Loop;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource Source;

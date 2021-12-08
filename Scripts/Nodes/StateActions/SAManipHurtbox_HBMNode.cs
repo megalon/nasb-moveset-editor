@@ -24,6 +24,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAManipHurtbox_HBMNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public SAManipHurtbox.HBM NodeInput;
 		public SAManipHurtbox.Manip Manip;
 		public int Hurtbox;
 		public HurtType Type;
