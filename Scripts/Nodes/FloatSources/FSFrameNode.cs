@@ -48,6 +48,8 @@ namespace NASB_Moveset_Editor.FloatSources
 			position.y = nodeDepthXY.y * Consts.NodeYOffset;
 			int variableCount = 0;
 			
+			Value = data.Value;
+			
 			return variableCount;
 		}
 		
@@ -56,6 +58,7 @@ namespace NASB_Moveset_Editor.FloatSources
 			FSFrame objToReturn = new FSFrame();
 			objToReturn.TID = TypeId.FrameId;
 			objToReturn.Version = Version;
+			objToReturn.Value = Value;
 			return objToReturn;
 		}
 	}
