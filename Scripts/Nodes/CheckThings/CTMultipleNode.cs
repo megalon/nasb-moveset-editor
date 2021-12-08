@@ -116,12 +116,6 @@ namespace NASB_Moveset_Editor.CheckThings
 						AssetDatabase.AddObjectToAsset(MoveId_node_Checklist, assetPath);
 						variableCount += MoveId_node_Checklist.SetData((CTMove)Checklist_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 					break;
-					case CheckThing.TypeId.BaseIdentifier:
-						CheckThingNode BaseIdentifier_node_Checklist = graph.AddNode<CheckThingNode>();
-						GetPort("Checklist").Connect(BaseIdentifier_node_Checklist.GetPort("NodeInput"));
-						AssetDatabase.AddObjectToAsset(BaseIdentifier_node_Checklist, assetPath);
-						variableCount += BaseIdentifier_node_Checklist.SetData((CheckThing)Checklist_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-					break;
 				}
 				++variableCount;
 			}

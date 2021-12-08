@@ -78,12 +78,6 @@ namespace NASB_Moveset_Editor.StateActions
 					AssetDatabase.AddObjectToAsset(KnockbackId_node_Jump, assetPath);
 					variableCount += KnockbackId_node_Jump.SetData((KnockbackJump)Jump, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
-				case Jump.TypeId.BaseIdentifier:
-					JumpNode BaseIdentifier_node_Jump = graph.AddNode<JumpNode>();
-					GetPort("Jump").Connect(BaseIdentifier_node_Jump.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(BaseIdentifier_node_Jump, assetPath);
-					variableCount += BaseIdentifier_node_Jump.SetData((Jump)Jump, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
 			}
 			
 			return variableCount;

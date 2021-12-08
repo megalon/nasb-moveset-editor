@@ -61,12 +61,6 @@ namespace NASB_Moveset_Editor.StateActions
 					AssetDatabase.AddObjectToAsset(Vector2Id_node_ObjectSource, assetPath);
 					variableCount += Vector2Id_node_ObjectSource.SetData((OSVector2)ObjectSource, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
-				case ObjectSource.TypeId.BaseIdentifier:
-					ObjectSourceNode BaseIdentifier_node_ObjectSource = graph.AddNode<ObjectSourceNode>();
-					GetPort("ObjectSource").Connect(BaseIdentifier_node_ObjectSource.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(BaseIdentifier_node_ObjectSource, assetPath);
-					variableCount += BaseIdentifier_node_ObjectSource.SetData((ObjectSource)ObjectSource, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
 			}
 			
 			return variableCount;

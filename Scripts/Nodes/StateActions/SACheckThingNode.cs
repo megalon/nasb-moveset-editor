@@ -115,12 +115,6 @@ namespace NASB_Moveset_Editor.StateActions
 					AssetDatabase.AddObjectToAsset(MoveId_node_CheckThing, assetPath);
 					variableCount += MoveId_node_CheckThing.SetData((CTMove)CheckThing, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
-				case CheckThing.TypeId.BaseIdentifier:
-					CheckThingNode BaseIdentifier_node_CheckThing = graph.AddNode<CheckThingNode>();
-					GetPort("CheckThing").Connect(BaseIdentifier_node_CheckThing.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(BaseIdentifier_node_CheckThing, assetPath);
-					variableCount += BaseIdentifier_node_CheckThing.SetData((CheckThing)CheckThing, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
 			}
 			++variableCount;
 			
@@ -571,12 +565,6 @@ namespace NASB_Moveset_Editor.StateActions
 					GetPort("Action").Connect(LaunchGrabbedCustomId_node_Action.GetPort("NodeInput"));
 					AssetDatabase.AddObjectToAsset(LaunchGrabbedCustomId_node_Action, assetPath);
 					variableCount += LaunchGrabbedCustomId_node_Action.SetData((SALaunchGrabbedCustom)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.BaseIdentifier:
-					StateActionNode BaseIdentifier_node_Action = graph.AddNode<StateActionNode>();
-					GetPort("Action").Connect(BaseIdentifier_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(BaseIdentifier_node_Action, assetPath);
-					variableCount += BaseIdentifier_node_Action.SetData((StateAction)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 			}
 			++variableCount;
@@ -1029,12 +1017,6 @@ namespace NASB_Moveset_Editor.StateActions
 					GetPort("ElseAction").Connect(LaunchGrabbedCustomId_node_ElseAction.GetPort("NodeInput"));
 					AssetDatabase.AddObjectToAsset(LaunchGrabbedCustomId_node_ElseAction, assetPath);
 					variableCount += LaunchGrabbedCustomId_node_ElseAction.SetData((SALaunchGrabbedCustom)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.BaseIdentifier:
-					StateActionNode BaseIdentifier_node_ElseAction = graph.AddNode<StateActionNode>();
-					GetPort("ElseAction").Connect(BaseIdentifier_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(BaseIdentifier_node_ElseAction, assetPath);
-					variableCount += BaseIdentifier_node_ElseAction.SetData((StateAction)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 			}
 			

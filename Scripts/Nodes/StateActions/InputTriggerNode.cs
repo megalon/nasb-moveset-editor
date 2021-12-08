@@ -502,12 +502,6 @@ namespace NASB_Moveset_Editor.StateActions
 					AssetDatabase.AddObjectToAsset(LaunchGrabbedCustomId_node_Action, assetPath);
 					variableCount += LaunchGrabbedCustomId_node_Action.SetData((SALaunchGrabbedCustom)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
-				case StateAction.TypeId.BaseIdentifier:
-					StateActionNode BaseIdentifier_node_Action = graph.AddNode<StateActionNode>();
-					GetPort("Action").Connect(BaseIdentifier_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(BaseIdentifier_node_Action, assetPath);
-					variableCount += BaseIdentifier_node_Action.SetData((StateAction)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
 			}
 			++variableCount;
 			
