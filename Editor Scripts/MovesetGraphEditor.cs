@@ -16,11 +16,13 @@ namespace NASB_Moveset_Editor
 		private GUIStyle titleStyle;
 		private Rect titleRect;
 		private int windowPadding = 20;
-
+		
 		public override string GetNodeMenuName(System.Type type)
 		{
 			if (type.Namespace != null && type.Namespace.StartsWith("NASB_Moveset_Editor"))
 			{
+				if (Consts.NodesToIgnore.Contains(type.Name)) return null;
+
 				string nodeMenuName = base.GetNodeMenuName(type).Replace("NASB_Moveset_Editor/", "");
 
 				// Organize State Action nodes
