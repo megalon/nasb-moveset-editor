@@ -31,6 +31,7 @@ namespace NASB_Moveset_Editor
         {
             GraphHandlerWindow window = GetWindow<GraphHandlerWindow>();
             window.titleContent = new GUIContent(Consts.PROJECT_NAME);
+            window.minSize = new Vector2(280, 0);
         }
 
         private void OnEnable()
@@ -57,6 +58,17 @@ namespace NASB_Moveset_Editor
         {
             GUIStyle rightAlignedGUIStyle = new GUIStyle(GUI.skin.label);
             rightAlignedGUIStyle.alignment = TextAnchor.LowerRight;
+            EditorGUILayout.BeginHorizontal();
+            {
+                GUILayout.FlexibleSpace();
+                EditorGUILayout.BeginVertical(GUILayout.MaxWidth(400));
+                {
+                    EditorGUILayout.HelpBox("This is in Alpha! Things may break! You may lose all of your work!", MessageType.Warning);
+                }
+                EditorGUILayout.EndVertical();
+                GUILayout.FlexibleSpace();
+            }
+            EditorGUILayout.EndHorizontal();
 
             scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
             EditorGUILayout.BeginHorizontal();
@@ -64,8 +76,6 @@ namespace NASB_Moveset_Editor
                 GUILayout.FlexibleSpace();
                 EditorGUILayout.BeginVertical(GUILayout.MaxWidth(400));
                 {
-                    EditorGUILayout.Space(10);
-                    EditorGUILayout.HelpBox("This is in Alpha! Things may break! You may lose all of your work!", MessageType.Warning);
                     EditorGUILayout.Space(10);
                     if (GUILayout.Button("Import TextAsset", GUILayout.MinHeight(35))) GraphHandler.LoadTextAsset();
                     EditorGUILayout.Space(5);
@@ -75,6 +85,7 @@ namespace NASB_Moveset_Editor
                         window.titleContent = new GUIContent("New Moveset Graph");
                     }
                     EditorGUILayout.Space(25);
+
                     if (graphDirectories.Length > 0)
                     {
                         previousSelectionIndex = selectionIndex;
@@ -97,12 +108,13 @@ namespace NASB_Moveset_Editor
                     EditorGUILayout.Space(4);
                     EditorGUILayout.BeginHorizontal();
                     {
-                        EditorGUILayout.LabelField("Created by megalon2d!");
-                        EditorGUILayout.LabelField($"Version {Consts.VERSION}", rightAlignedGUIStyle);
+                        EditorGUILayout.LabelField("Created by megalon2d", GUILayout.MinWidth(0));
+                        EditorGUILayout.LabelField($"Version {Consts.VERSION}", rightAlignedGUIStyle, GUILayout.MinWidth(0));
                     }
                     EditorGUILayout.EndHorizontal();
-                    EditorGUILayout.LabelField("NASB_Parser created by sc2ad!");
-                    EditorGUILayout.LabelField("xNode created by Siccity!");
+                    EditorGUILayout.LabelField("NASB_Parser created by sc2ad");
+                    EditorGUILayout.LabelField("xNode created by Siccity");
+                    EditorGUILayout.Space(10);
                 }
                 EditorGUILayout.EndVertical();
                 GUILayout.FlexibleSpace();
