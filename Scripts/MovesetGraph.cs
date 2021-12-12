@@ -29,14 +29,10 @@ namespace NASB_Moveset_Editor
                 // If this is an existing graph with no version number
                 if (nodes.Count > 0)
                 {
-                    Logger.LogWarning($"Graph {name} has no version!\n{assetPath}");
-                    // Deal with graphs with no version here
-                    //
-                    //
-                    //
+                    Logger.LogWarning($"Graph {name} was made with an old version of the Moveset Editor. It may not export correctly!\n{assetPath}");
                 } else
                 {
-                    // This is a new graph, so set the version
+                    // Graph has no nodes, assume this is a new graph, so set the version
                     version = Consts.VERSION;
                 }
             } else
