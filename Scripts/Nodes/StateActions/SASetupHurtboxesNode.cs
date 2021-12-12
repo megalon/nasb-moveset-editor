@@ -28,7 +28,8 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SASetupHurtboxesNode : StateActionNode
 	{
-		[Output] public HurtSetSetup HurtSetSetup;
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
+		[Output(connectionType = ConnectionType.Override)] public HurtSetSetup HurtSetSetup;
 		
 		protected override void Init()
 		{

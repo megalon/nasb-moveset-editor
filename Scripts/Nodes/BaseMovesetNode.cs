@@ -7,7 +7,7 @@ namespace NASB_Moveset_Editor
 {
 	public class BaseMovesetNode : Node
 	{
-		[Input] public Node NodeInput;
+		// [Input] public Node NodeInput;
 
 		// Use this for initialization
 		protected override void Init()

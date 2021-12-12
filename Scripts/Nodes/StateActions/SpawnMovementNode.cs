@@ -28,10 +28,11 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SpawnMovementNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public SpawnMovement NodeInput;
 		public string ToBone;
 		public NASB_Parser.Vector3 LocalOffset;
 		public NASB_Parser.Vector3 WorldOffset;
-		[Output] public MovementConfig Config;
+		[Output(connectionType = ConnectionType.Override)] public MovementConfig Config;
 		
 		protected override void Init()
 		{

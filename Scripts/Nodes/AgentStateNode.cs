@@ -27,8 +27,9 @@ namespace NASB_Moveset_Editor
 {
 	public class AgentStateNode : BaseMovesetNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public AgentState NodeInput;
 		public string CustomCall;
-		[Output] public List<TimedAction> Timeline;
+		[Output(connectionType = ConnectionType.Multiple)] public List<TimedAction> Timeline;
 		
 		protected override void Init()
 		{

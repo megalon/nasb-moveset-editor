@@ -27,7 +27,8 @@ namespace NASB_Moveset_Editor
 {
 	public class SerialMovesetNode : BaseMovesetNode
 	{
-		[Output] public List<IdState> States;
+		[Input(connectionType = ConnectionType.Override)] public SerialMoveset NodeInput;
+		[Output(connectionType = ConnectionType.Multiple)] public List<IdState> States;
 		
 		protected override void Init()
 		{

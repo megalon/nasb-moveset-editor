@@ -24,8 +24,9 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SASetFloatTarget_SetFloatNode : StateActionNode
 	{
-		[Output] public FloatSource Target;
-		[Output] public FloatSource Source;
+		[Input(connectionType = ConnectionType.Override)] public SASetFloatTarget.SetFloat NodeInput;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource Target;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource Source;
 		public SASetFloatTarget.SetFloat.ManipWay Way;
 		
 		protected override void Init()

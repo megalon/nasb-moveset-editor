@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SALocalFXNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public NASB_Parser.StateActions.SALocalFX.LocalFXAction ActionType;
 		public string Id;
 		

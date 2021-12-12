@@ -60,7 +60,12 @@ namespace NASB_Moveset_Editor
                     MovesetGraph graph = (MovesetGraph)AssetDatabase.LoadMainAssetAtPath(graphPath);
                     IdStateNode idStateNode = (IdStateNode)graph.nodes.Find(x => x.GetType() == typeof(IdStateNode));
 
-                    serialMoveset.States.Add(idStateNode.GetData());
+                    IdState tempIdState = idStateNode.GetData();
+
+                    // Sort timeline by start frame
+                    tempIdState.State.Timeline.Sort((x, y) => x.AtFrame.CompareTo(y.AtFrame));
+
+                    serialMoveset.States.Add(tempIdState);
                 }
                 catch (Exception e)
                 {

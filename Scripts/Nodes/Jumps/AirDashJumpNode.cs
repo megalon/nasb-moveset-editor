@@ -28,20 +28,22 @@ namespace NASB_Moveset_Editor.Jumps
 {
 	public class AirDashJumpNode : JumpNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public Jump NodeInput;
 		public Ease EaseSpeed;
-		[Output] public FloatSource XDir;
-		[Output] public FloatSource YDir;
-		[Output] public FloatSource SpeedStart;
-		[Output] public FloatSource SpeedEnd;
-		[Output] public FloatSource SpeedUpMult;
-		[Output] public FloatSource SpeedDownMult;
-		[Output] public FloatSource Frames;
-		[Output] public FloatSource RedirectFrames;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource XDir;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource YDir;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource SpeedStart;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource SpeedEnd;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource SpeedUpMult;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource SpeedDownMult;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource Frames;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource RedirectFrames;
 		
 		protected override void Init()
 		{
 			base.Init();
 			TID = TypeId.AirdashId;
+			Version = 1;
 		}
 		
 		public override object GetValue(NodePort port)

@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSEffectsNode : FloatSourceNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		public string LocalFxId;
 		public NASB_Parser.FloatSources.FSEffects.ManipAspect Masp;
 		

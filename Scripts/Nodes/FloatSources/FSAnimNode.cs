@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSAnimNode : FloatSourceNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		public string Anim;
 		public NASB_Parser.FloatSources.FSAnim.AnimAttr Attribute;
 		

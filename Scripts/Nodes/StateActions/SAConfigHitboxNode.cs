@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAConfigHitboxNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public int Hitbox;
 		public bool ForceZ0;
 		public float Radius;
@@ -46,6 +47,7 @@ namespace NASB_Moveset_Editor.StateActions
 		{
 			base.Init();
 			TID = TypeId.ConfigHitboxId;
+			Version = 1;
 		}
 		
 		public override object GetValue(NodePort port)

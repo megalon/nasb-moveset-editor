@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SACameraShakeNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public float Shake;
 		public float Intensity;
 		
@@ -35,6 +36,7 @@ namespace NASB_Moveset_Editor.StateActions
 		{
 			base.Init();
 			TID = TypeId.CameraShakeId;
+			Version = 1;
 		}
 		
 		public override object GetValue(NodePort port)

@@ -28,9 +28,10 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SALaunchGrabbedCustomNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public string AtkProp;
-		[Output] public FloatSource X;
-		[Output] public FloatSource Y;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource X;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource Y;
 		
 		protected override void Init()
 		{

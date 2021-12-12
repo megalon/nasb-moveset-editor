@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class MovementConfigNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public MovementConfig NodeInput;
 		public bool GetParented;
 		public bool LeaveEdges;
 		public bool PassThrough;

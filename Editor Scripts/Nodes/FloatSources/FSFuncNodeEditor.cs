@@ -41,7 +41,7 @@ namespace NASB_Moveset_Editor
                     {
                         EditorGUILayout.HelpBox(Utils.funcTextDict[currentFunc].ContainerContents["Formula"]);
                     }
-                } else if (iterator.type.Equals("FloatSource") && Utils.funcTextDict.ContainsKey(currentFunc))
+                } else if (iterator.type.Equals("FloatSource") && Utils.funcTextDict.ContainsKey(currentFunc) && !iterator.name.Contains("NodeInput"))
                 {
                     NodeEditorGUILayout.PropertyField(iterator, Utils.funcTextDict[currentFunc].ContainerContents[iterator.name], true);
                 }

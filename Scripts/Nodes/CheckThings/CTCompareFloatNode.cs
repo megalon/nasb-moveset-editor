@@ -28,9 +28,10 @@ namespace NASB_Moveset_Editor.CheckThings
 {
 	public class CTCompareFloatNode : CheckThingNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public CheckThing NodeInput;
 		public CheckWay Way;
-		[Output] public FloatSource A;
-		[Output] public FloatSource B;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource A;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource B;
 		
 		protected override void Init()
 		{

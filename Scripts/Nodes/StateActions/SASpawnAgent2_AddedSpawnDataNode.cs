@@ -24,8 +24,9 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SASpawnAgent2_AddedSpawnDataNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public SASpawnAgent2.AddedSpawnData NodeInput;
 		public string SpawnedAgentDataId;
-		[Output] public FloatSource SpawnedAgentDataSetValue;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource SpawnedAgentDataSetValue;
 		
 		protected override void Init()
 		{

@@ -28,8 +28,9 @@ namespace NASB_Moveset_Editor.CheckThings
 {
 	public class CTMultipleNode : CheckThingNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public CheckThing NodeInput;
 		public NASB_Parser.CheckThings.CTMultiple.CheckMatch Match;
-		[Output] public List<CheckThing> Checklist;
+		[Output(connectionType = ConnectionType.Multiple)] public List<CheckThing> Checklist;
 		
 		protected override void Init()
 		{
@@ -115,12 +116,6 @@ namespace NASB_Moveset_Editor.CheckThings
 						GetPort("Checklist").Connect(MoveId_node_Checklist.GetPort("NodeInput"));
 						AssetDatabase.AddObjectToAsset(MoveId_node_Checklist, assetPath);
 						variableCount += MoveId_node_Checklist.SetData((CTMove)Checklist_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-					break;
-					case CheckThing.TypeId.BaseIdentifier:
-						CheckThingNode BaseIdentifier_node_Checklist = graph.AddNode<CheckThingNode>();
-						GetPort("Checklist").Connect(BaseIdentifier_node_Checklist.GetPort("NodeInput"));
-						AssetDatabase.AddObjectToAsset(BaseIdentifier_node_Checklist, assetPath);
-						variableCount += BaseIdentifier_node_Checklist.SetData((CheckThing)Checklist_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 					break;
 				}
 				++variableCount;

@@ -28,9 +28,10 @@ namespace NASB_Moveset_Editor.CheckThings
 {
 	public class CTInputSeriesNode : CheckThingNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public CheckThing NodeInput;
 		public int CheckFrames;
-		[Output] public List<LookForInput> InputSeries;
-		[Output] public List<LookForInput> StopLooking;
+		[Output(connectionType = ConnectionType.Multiple)] public List<LookForInput> InputSeries;
+		[Output(connectionType = ConnectionType.Multiple)] public List<LookForInput> StopLooking;
 		
 		protected override void Init()
 		{

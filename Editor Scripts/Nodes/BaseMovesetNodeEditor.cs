@@ -35,8 +35,7 @@ namespace NASB_Moveset_Editor
                 if (excludes.Contains(iterator.name)) continue;
 
                 if (iterator.type.Equals("string")) {
-                    EditorGUILayout.LabelField(iterator.displayName);
-                    iterator.stringValue = EditorGUILayout.TextField(iterator.stringValue);
+                    DisplayStringProp(iterator);
                 } else if (iterator.type.Equals("bool")) {
                     iterator.boolValue = EditorGUILayout.ToggleLeft(iterator.displayName, iterator.boolValue);
                 } else if (iterator.type.Equals("Enum") && iterator.displayName.Length > Consts.MaxDisplayNameLength)
@@ -68,6 +67,12 @@ namespace NASB_Moveset_Editor
             }
 
             serializedObject.ApplyModifiedProperties();
+        }
+
+        protected void DisplayStringProp(SerializedProperty property)
+        {
+            EditorGUILayout.LabelField(property.displayName);
+            property.stringValue = EditorGUILayout.TextField(property.stringValue);
         }
     }
 }

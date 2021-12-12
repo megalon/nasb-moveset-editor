@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSLagNode : FloatSourceNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		public NASB_Parser.FloatSources.FSLag.LagTypes LagType;
 		public NASB_Parser.FloatSources.FSLag.ManipLags ManipLag;
 		

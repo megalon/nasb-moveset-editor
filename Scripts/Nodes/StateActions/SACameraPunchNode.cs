@@ -28,10 +28,11 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SACameraPunchNode : StateActionNode
 	{
-		[Output] public FloatSource X;
-		[Output] public FloatSource Y;
-		[Output] public FloatSource Z;
-		[Output] public FloatSource T;
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource X;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource Y;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource Z;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource T;
 		
 		protected override void Init()
 		{

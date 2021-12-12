@@ -29,6 +29,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAEventKOGrabbedNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public KOType KO;
 		
 		protected override void Init()

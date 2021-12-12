@@ -28,36 +28,38 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SASpawnAgent2Node : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public string Bank;
 		public string Id;
 		public string Bone;
 		public NASB_Parser.Vector3 LocalOffset;
 		public NASB_Parser.Vector3 WorldOffset;
 		public bool CustomSpawnMovement;
-		[Output] public List<SpawnMovement> Movements;
+		[Output(connectionType = ConnectionType.Multiple)] public List<SpawnMovement> Movements;
 		public string SpawnedAgentDataId;
-		[Output] public FloatSource SpawnedAgentDataSetValue;
-		[Output] public FloatSource ResultOrderAdded;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource SpawnedAgentDataSetValue;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource ResultOrderAdded;
 		public bool SetPlayerIndex;
 		public bool SetAttackTeam;
 		public bool SetDefendTeam;
 		public bool SetProjectileLevel;
 		public bool SetDirection;
 		public bool SetRedirect;
-		[Output] public FloatSource PlayerIndex;
-		[Output] public FloatSource AttackTeam;
-		[Output] public FloatSource DefendTeam;
-		[Output] public FloatSource ProjectileLevel;
-		[Output] public FloatSource Direction;
-		[Output] public FloatSource RedirectX;
-		[Output] public FloatSource RedirectY;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource PlayerIndex;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource AttackTeam;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource DefendTeam;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource ProjectileLevel;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource Direction;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource RedirectX;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource RedirectY;
 		public bool ExactSpawn;
-		[Output] public List<SASpawnAgent2.AddedSpawnData> AddedSpawns;
+		[Output(connectionType = ConnectionType.Multiple)] public List<SASpawnAgent2.AddedSpawnData> AddedSpawns;
 		
 		protected override void Init()
 		{
 			base.Init();
 			TID = TypeId.SpawnAgent2Id;
+			Version = 2;
 		}
 		
 		public override object GetValue(NodePort port)

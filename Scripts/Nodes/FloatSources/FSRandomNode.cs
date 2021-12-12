@@ -28,9 +28,10 @@ namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSRandomNode : FloatSourceNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		public bool Ratio;
-		[Output] public FloatSource A;
-		[Output] public FloatSource B;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource A;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource B;
 		
 		protected override void Init()
 		{

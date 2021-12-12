@@ -28,6 +28,7 @@ namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAFindLastHorizontalInputNode : StateActionNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public NASB_Parser.StateActions.SAFindLastHorizontalInput.SearchType Search;
 		public int ResultInScratch;
 		
