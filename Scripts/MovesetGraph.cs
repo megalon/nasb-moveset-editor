@@ -7,7 +7,9 @@ using UnityEditor;
 namespace NASB_Moveset_Editor
 {
     [Serializable]
-    public class MovesetGraph : NodeGraph {
+    public class MovesetGraph : NodeGraph
+    {
+        [HideInInspector][SerializeField]
         private string editorVersion;
 
         private void OnEnable()
