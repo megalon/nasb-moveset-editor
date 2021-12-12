@@ -1,6 +1,6 @@
 {
   "name": "com.github.megalon.nasb-moveset-editor",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A node based moveset editor for Nickelodeon All-Star Brawl!",
   "displayName": "NASB Moveset Editor",
   "unity": "2020.3",
