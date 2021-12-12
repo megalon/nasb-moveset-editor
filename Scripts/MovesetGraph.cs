@@ -8,7 +8,7 @@ namespace NASB_Moveset_Editor
 {
     [Serializable]
     public class MovesetGraph : NodeGraph {
-        public string version;
+        private string editorVersion;
 
         private void OnEnable()
         {
@@ -19,9 +19,9 @@ namespace NASB_Moveset_Editor
 
             string assetPath = AssetDatabase.GetAssetPath(this);
 
-            if (version != null && !version.Equals(string.Empty))
+            if (this.editorVersion != null && !this.editorVersion.Equals(string.Empty))
             {
-                graphVersion = new SemanticVersion(version);
+                graphVersion = new SemanticVersion(this.editorVersion);
             }
 
             if (graphVersion == null)
@@ -33,7 +33,7 @@ namespace NASB_Moveset_Editor
                 } else
                 {
                     // Graph has no nodes, assume this is a new graph, so set the version
-                    version = Consts.VERSION;
+                    this.editorVersion = Consts.VERSION;
                 }
             } else
             {
