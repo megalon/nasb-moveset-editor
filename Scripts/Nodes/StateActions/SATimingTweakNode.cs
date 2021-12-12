@@ -1264,6 +1264,12 @@ namespace NASB_Moveset_Editor.StateActions
 					AssetDatabase.AddObjectToAsset(LaunchGrabbedCustomId_node_ActionA, assetPath);
 					variableCount += LaunchGrabbedCustomId_node_ActionA.SetData((SALaunchGrabbedCustom)ActionA, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
+				case StateAction.TypeId.MapAnimSimpleId:
+					SAMapAnimationSimpleNode MapAnimSimpleId_node_ActionA = graph.AddNode<SAMapAnimationSimpleNode>();
+					GetPort("ActionA").Connect(MapAnimSimpleId_node_ActionA.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(MapAnimSimpleId_node_ActionA, assetPath);
+					variableCount += MapAnimSimpleId_node_ActionA.SetData((SAMapAnimationSimple)ActionA, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				break;
 			}
 			++variableCount;
 			
@@ -1715,6 +1721,12 @@ namespace NASB_Moveset_Editor.StateActions
 					AssetDatabase.AddObjectToAsset(LaunchGrabbedCustomId_node_ActionB, assetPath);
 					variableCount += LaunchGrabbedCustomId_node_ActionB.SetData((SALaunchGrabbedCustom)ActionB, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
+				case StateAction.TypeId.MapAnimSimpleId:
+					SAMapAnimationSimpleNode MapAnimSimpleId_node_ActionB = graph.AddNode<SAMapAnimationSimpleNode>();
+					GetPort("ActionB").Connect(MapAnimSimpleId_node_ActionB.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(MapAnimSimpleId_node_ActionB, assetPath);
+					variableCount += MapAnimSimpleId_node_ActionB.SetData((SAMapAnimationSimple)ActionB, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				break;
 			}
 			++variableCount;
 			
@@ -2165,6 +2177,12 @@ namespace NASB_Moveset_Editor.StateActions
 					GetPort("ActionEnd").Connect(LaunchGrabbedCustomId_node_ActionEnd.GetPort("NodeInput"));
 					AssetDatabase.AddObjectToAsset(LaunchGrabbedCustomId_node_ActionEnd, assetPath);
 					variableCount += LaunchGrabbedCustomId_node_ActionEnd.SetData((SALaunchGrabbedCustom)ActionEnd, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.MapAnimSimpleId:
+					SAMapAnimationSimpleNode MapAnimSimpleId_node_ActionEnd = graph.AddNode<SAMapAnimationSimpleNode>();
+					GetPort("ActionEnd").Connect(MapAnimSimpleId_node_ActionEnd.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(MapAnimSimpleId_node_ActionEnd, assetPath);
+					variableCount += MapAnimSimpleId_node_ActionEnd.SetData((SAMapAnimationSimple)ActionEnd, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 			}
 			
@@ -2992,6 +3010,10 @@ namespace NASB_Moveset_Editor.StateActions
 						SALaunchGrabbedCustomNode LaunchGrabbedCustomId_StateAction_Node = (SALaunchGrabbedCustomNode)GetPort("ActionA").GetConnection(0).node;
 						objToReturn.ActionA = LaunchGrabbedCustomId_StateAction_Node.GetData();
 					break;
+					case StateAction.TypeId.MapAnimSimpleId:
+						SAMapAnimationSimpleNode MapAnimSimpleId_StateAction_Node = (SAMapAnimationSimpleNode)GetPort("ActionA").GetConnection(0).node;
+						objToReturn.ActionA = MapAnimSimpleId_StateAction_Node.GetData();
+					break;
 					case StateAction.TypeId.BaseIdentifier:
 						StateActionNode BaseIdentifier_StateAction_Node = (StateActionNode)GetPort("ActionA").GetConnection(0).node;
 						objToReturn.ActionA = BaseIdentifier_StateAction_Node.GetData();
@@ -3299,6 +3321,10 @@ namespace NASB_Moveset_Editor.StateActions
 						SALaunchGrabbedCustomNode LaunchGrabbedCustomId_StateAction_Node = (SALaunchGrabbedCustomNode)GetPort("ActionB").GetConnection(0).node;
 						objToReturn.ActionB = LaunchGrabbedCustomId_StateAction_Node.GetData();
 					break;
+					case StateAction.TypeId.MapAnimSimpleId:
+						SAMapAnimationSimpleNode MapAnimSimpleId_StateAction_Node = (SAMapAnimationSimpleNode)GetPort("ActionB").GetConnection(0).node;
+						objToReturn.ActionB = MapAnimSimpleId_StateAction_Node.GetData();
+					break;
 					case StateAction.TypeId.BaseIdentifier:
 						StateActionNode BaseIdentifier_StateAction_Node = (StateActionNode)GetPort("ActionB").GetConnection(0).node;
 						objToReturn.ActionB = BaseIdentifier_StateAction_Node.GetData();
@@ -3605,6 +3631,10 @@ namespace NASB_Moveset_Editor.StateActions
 					case StateAction.TypeId.LaunchGrabbedCustomId:
 						SALaunchGrabbedCustomNode LaunchGrabbedCustomId_StateAction_Node = (SALaunchGrabbedCustomNode)GetPort("ActionEnd").GetConnection(0).node;
 						objToReturn.ActionEnd = LaunchGrabbedCustomId_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.MapAnimSimpleId:
+						SAMapAnimationSimpleNode MapAnimSimpleId_StateAction_Node = (SAMapAnimationSimpleNode)GetPort("ActionEnd").GetConnection(0).node;
+						objToReturn.ActionEnd = MapAnimSimpleId_StateAction_Node.GetData();
 					break;
 					case StateAction.TypeId.BaseIdentifier:
 						StateActionNode BaseIdentifier_StateAction_Node = (StateActionNode)GetPort("ActionEnd").GetConnection(0).node;

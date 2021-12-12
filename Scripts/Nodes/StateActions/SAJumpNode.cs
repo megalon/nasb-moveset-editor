@@ -79,6 +79,18 @@ namespace NASB_Moveset_Editor.StateActions
 					AssetDatabase.AddObjectToAsset(KnockbackId_node_Jump, assetPath);
 					variableCount += KnockbackId_node_Jump.SetData((KnockbackJump)Jump, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
+				case Jump.TypeId.DelayedId:
+					DelayedJumpNode DelayedId_node_Jump = graph.AddNode<DelayedJumpNode>();
+					GetPort("Jump").Connect(DelayedId_node_Jump.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(DelayedId_node_Jump, assetPath);
+					variableCount += DelayedId_node_Jump.SetData((DelayedJump)Jump, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				break;
+				case Jump.TypeId.KnockbackAltId:
+					KnockbackAltJumpNode KnockbackAltId_node_Jump = graph.AddNode<KnockbackAltJumpNode>();
+					GetPort("Jump").Connect(KnockbackAltId_node_Jump.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(KnockbackAltId_node_Jump, assetPath);
+					variableCount += KnockbackAltId_node_Jump.SetData((KnockbackAltJump)Jump, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				break;
 			}
 			
 			return variableCount;
@@ -110,6 +122,14 @@ namespace NASB_Moveset_Editor.StateActions
 					case Jump.TypeId.KnockbackId:
 						KnockbackJumpNode KnockbackId_Jump_Node = (KnockbackJumpNode)GetPort("Jump").GetConnection(0).node;
 						objToReturn.Jump = KnockbackId_Jump_Node.GetData();
+					break;
+					case Jump.TypeId.DelayedId:
+						DelayedJumpNode DelayedId_Jump_Node = (DelayedJumpNode)GetPort("Jump").GetConnection(0).node;
+						objToReturn.Jump = DelayedId_Jump_Node.GetData();
+					break;
+					case Jump.TypeId.KnockbackAltId:
+						KnockbackAltJumpNode KnockbackAltId_Jump_Node = (KnockbackAltJumpNode)GetPort("Jump").GetConnection(0).node;
+						objToReturn.Jump = KnockbackAltId_Jump_Node.GetData();
 					break;
 					case Jump.TypeId.BaseIdentifier:
 						JumpNode BaseIdentifier_Jump_Node = (JumpNode)GetPort("Jump").GetConnection(0).node;
