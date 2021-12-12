@@ -6,8 +6,6 @@
 // * 
 using NASB_Parser.FloatSources;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 using UnityEditor;
 using XNode;
