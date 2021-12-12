@@ -43,6 +43,7 @@ namespace NASB_Moveset_Editor.Jumps
 		{
 			base.Init();
 			TID = TypeId.AirdashId;
+			Version = 1;
 		}
 		
 		public override object GetValue(NodePort port)

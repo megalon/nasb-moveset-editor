@@ -44,6 +44,7 @@ namespace NASB_Moveset_Editor.StateActions
 		protected override void Init()
 		{
 			base.Init();
+			Version = 1;
 		}
 		
 		public override object GetValue(NodePort port)

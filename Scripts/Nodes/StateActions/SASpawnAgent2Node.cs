@@ -59,6 +59,7 @@ namespace NASB_Moveset_Editor.StateActions
 		{
 			base.Init();
 			TID = TypeId.SpawnAgent2Id;
+			Version = 2;
 		}
 		
 		public override object GetValue(NodePort port)
