@@ -30,7 +30,7 @@ namespace NASB_Moveset_Editor
         private static void OpenWindow()
         {
             GraphHandlerWindow window = GetWindow<GraphHandlerWindow>();
-            window.titleContent = new GUIContent(Consts.PROJECT_NAME + " " + Consts.VERSION);
+            window.titleContent = new GUIContent(Consts.PROJECT_NAME);
         }
 
         private void OnEnable()
@@ -55,6 +55,9 @@ namespace NASB_Moveset_Editor
 
         private void OnGUI()
         {
+            GUIStyle rightAlignedGUIStyle = new GUIStyle(GUI.skin.label);
+            rightAlignedGUIStyle.alignment = TextAnchor.LowerRight;
+
             scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
             EditorGUILayout.BeginHorizontal();
             {
@@ -92,8 +95,13 @@ namespace NASB_Moveset_Editor
                     if (GUILayout.Button("View project on GitHub!")) Application.OpenURL("https://github.com/megalon/nasb-moveset-editor");
                     if (GUILayout.Button("Report issues!")) Application.OpenURL("https://github.com/megalon/nasb-moveset-editor/issues");
                     EditorGUILayout.Space(4);
-                    EditorGUILayout.LabelField("Created by megalon2d!");
-                    EditorGUILayout.LabelField("NASB_Parser library originally created by sc2ad!");
+                    EditorGUILayout.BeginHorizontal();
+                    {
+                        EditorGUILayout.LabelField("Created by megalon2d!");
+                        EditorGUILayout.LabelField($"Version {Consts.VERSION}", rightAlignedGUIStyle);
+                    }
+                    EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.LabelField("NASB_Parser created by sc2ad!");
                     EditorGUILayout.LabelField("xNode created by Siccity!");
                 }
                 EditorGUILayout.EndVertical();
