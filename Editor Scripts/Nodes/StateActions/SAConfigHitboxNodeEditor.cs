@@ -19,8 +19,13 @@ namespace NASB_Moveset_Editor
             // Node input
             NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("NodeInput"), true);
             NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("Hitbox"), true);
-            SerializedProperty forceZ0Bool = iterator.serializedObject.FindProperty("ForceZ0");
-            forceZ0Bool.boolValue = EditorGUILayout.ToggleLeft(forceZ0Bool.displayName, forceZ0Bool.boolValue);
+
+            //   ForceZ0 is ignored as of game update v21.5.0
+            //   and NASB Parser for Unity v1.2.0
+            // 
+            // SerializedProperty forceZ0Bool = iterator.serializedObject.FindProperty("ForceZ0");
+            // forceZ0Bool.boolValue = EditorGUILayout.ToggleLeft(forceZ0Bool.displayName, forceZ0Bool.boolValue);
+
             NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("Radius"), true);
             NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("LocalOffset"), true);
             NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("WorldOffset"), true);
