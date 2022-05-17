@@ -33,14 +33,14 @@ namespace NASB_Moveset_Editor.Jumps
 		[Output(connectionType = ConnectionType.Override)] public FloatSource YDir;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource LaunchDist;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource Frames;
-		[Output(connectionType = ConnectionType.Override)] public FloatSource DiType;
-		[Output(connectionType = ConnectionType.Override)] public FloatSource DiAngleIn;
-		[Output(connectionType = ConnectionType.Override)] public FloatSource DiAngleOut;
+		public bool DoLaunch;
+		[Output(connectionType = ConnectionType.Override)] public FloatSource BounceMinVel;
 		
 		protected override void Init()
 		{
 			base.Init();
 			TID = TypeId.KnockbackId;
+			Version = 3;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -803,563 +803,190 @@ namespace NASB_Moveset_Editor.Jumps
 			}
 			++variableCount;
 			
-			DiType = data.DiType;
+			DoLaunch = data.DoLaunch;
+			BounceMinVel = data.BounceMinVel;
 			
-			switch (DiType.TID)
+			switch (BounceMinVel.TID)
 			{
 				case FloatSource.TypeId.AgentId:
-					FSAgentNode AgentId_node_DiType = graph.AddNode<FSAgentNode>();
-					GetPort("DiType").Connect(AgentId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(AgentId_node_DiType, assetPath);
-					variableCount += AgentId_node_DiType.SetData((FSAgent)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSAgentNode AgentId_node_BounceMinVel = graph.AddNode<FSAgentNode>();
+					GetPort("BounceMinVel").Connect(AgentId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(AgentId_node_BounceMinVel, assetPath);
+					variableCount += AgentId_node_BounceMinVel.SetData((FSAgent)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.BonesId:
-					FSBonesNode BonesId_node_DiType = graph.AddNode<FSBonesNode>();
-					GetPort("DiType").Connect(BonesId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(BonesId_node_DiType, assetPath);
-					variableCount += BonesId_node_DiType.SetData((FSBones)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSBonesNode BonesId_node_BounceMinVel = graph.AddNode<FSBonesNode>();
+					GetPort("BounceMinVel").Connect(BonesId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(BonesId_node_BounceMinVel, assetPath);
+					variableCount += BonesId_node_BounceMinVel.SetData((FSBones)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.AttackId:
-					FSAttackNode AttackId_node_DiType = graph.AddNode<FSAttackNode>();
-					GetPort("DiType").Connect(AttackId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(AttackId_node_DiType, assetPath);
-					variableCount += AttackId_node_DiType.SetData((FSAttack)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSAttackNode AttackId_node_BounceMinVel = graph.AddNode<FSAttackNode>();
+					GetPort("BounceMinVel").Connect(AttackId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(AttackId_node_BounceMinVel, assetPath);
+					variableCount += AttackId_node_BounceMinVel.SetData((FSAttack)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.FrameId:
-					FSFrameNode FrameId_node_DiType = graph.AddNode<FSFrameNode>();
-					GetPort("DiType").Connect(FrameId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(FrameId_node_DiType, assetPath);
-					variableCount += FrameId_node_DiType.SetData((FSFrame)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSFrameNode FrameId_node_BounceMinVel = graph.AddNode<FSFrameNode>();
+					GetPort("BounceMinVel").Connect(FrameId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(FrameId_node_BounceMinVel, assetPath);
+					variableCount += FrameId_node_BounceMinVel.SetData((FSFrame)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.InputId:
-					FSInputNode InputId_node_DiType = graph.AddNode<FSInputNode>();
-					GetPort("DiType").Connect(InputId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(InputId_node_DiType, assetPath);
-					variableCount += InputId_node_DiType.SetData((FSInput)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSInputNode InputId_node_BounceMinVel = graph.AddNode<FSInputNode>();
+					GetPort("BounceMinVel").Connect(InputId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(InputId_node_BounceMinVel, assetPath);
+					variableCount += InputId_node_BounceMinVel.SetData((FSInput)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.FuncId:
-					FSFuncNode FuncId_node_DiType = graph.AddNode<FSFuncNode>();
-					GetPort("DiType").Connect(FuncId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(FuncId_node_DiType, assetPath);
-					variableCount += FuncId_node_DiType.SetData((FSFunc)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSFuncNode FuncId_node_BounceMinVel = graph.AddNode<FSFuncNode>();
+					GetPort("BounceMinVel").Connect(FuncId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(FuncId_node_BounceMinVel, assetPath);
+					variableCount += FuncId_node_BounceMinVel.SetData((FSFunc)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.MovementId:
-					FSMovementNode MovementId_node_DiType = graph.AddNode<FSMovementNode>();
-					GetPort("DiType").Connect(MovementId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(MovementId_node_DiType, assetPath);
-					variableCount += MovementId_node_DiType.SetData((FSMovement)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSMovementNode MovementId_node_BounceMinVel = graph.AddNode<FSMovementNode>();
+					GetPort("BounceMinVel").Connect(MovementId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(MovementId_node_BounceMinVel, assetPath);
+					variableCount += MovementId_node_BounceMinVel.SetData((FSMovement)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.CombatId:
-					FSCombatNode CombatId_node_DiType = graph.AddNode<FSCombatNode>();
-					GetPort("DiType").Connect(CombatId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CombatId_node_DiType, assetPath);
-					variableCount += CombatId_node_DiType.SetData((FSCombat)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSCombatNode CombatId_node_BounceMinVel = graph.AddNode<FSCombatNode>();
+					GetPort("BounceMinVel").Connect(CombatId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(CombatId_node_BounceMinVel, assetPath);
+					variableCount += CombatId_node_BounceMinVel.SetData((FSCombat)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.GrabsId:
-					FSGrabsNode GrabsId_node_DiType = graph.AddNode<FSGrabsNode>();
-					GetPort("DiType").Connect(GrabsId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(GrabsId_node_DiType, assetPath);
-					variableCount += GrabsId_node_DiType.SetData((FSGrabs)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSGrabsNode GrabsId_node_BounceMinVel = graph.AddNode<FSGrabsNode>();
+					GetPort("BounceMinVel").Connect(GrabsId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(GrabsId_node_BounceMinVel, assetPath);
+					variableCount += GrabsId_node_BounceMinVel.SetData((FSGrabs)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.DataId:
-					FSDataNode DataId_node_DiType = graph.AddNode<FSDataNode>();
-					GetPort("DiType").Connect(DataId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(DataId_node_DiType, assetPath);
-					variableCount += DataId_node_DiType.SetData((FSData)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSDataNode DataId_node_BounceMinVel = graph.AddNode<FSDataNode>();
+					GetPort("BounceMinVel").Connect(DataId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(DataId_node_BounceMinVel, assetPath);
+					variableCount += DataId_node_BounceMinVel.SetData((FSData)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.ScratchId:
-					FSScratchNode ScratchId_node_DiType = graph.AddNode<FSScratchNode>();
-					GetPort("DiType").Connect(ScratchId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ScratchId_node_DiType, assetPath);
-					variableCount += ScratchId_node_DiType.SetData((FSScratch)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSScratchNode ScratchId_node_BounceMinVel = graph.AddNode<FSScratchNode>();
+					GetPort("BounceMinVel").Connect(ScratchId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(ScratchId_node_BounceMinVel, assetPath);
+					variableCount += ScratchId_node_BounceMinVel.SetData((FSScratch)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.AnimId:
-					FSAnimNode AnimId_node_DiType = graph.AddNode<FSAnimNode>();
-					GetPort("DiType").Connect(AnimId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(AnimId_node_DiType, assetPath);
-					variableCount += AnimId_node_DiType.SetData((FSAnim)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSAnimNode AnimId_node_BounceMinVel = graph.AddNode<FSAnimNode>();
+					GetPort("BounceMinVel").Connect(AnimId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(AnimId_node_BounceMinVel, assetPath);
+					variableCount += AnimId_node_BounceMinVel.SetData((FSAnim)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.SpeedId:
-					FSSpeedNode SpeedId_node_DiType = graph.AddNode<FSSpeedNode>();
-					GetPort("DiType").Connect(SpeedId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SpeedId_node_DiType, assetPath);
-					variableCount += SpeedId_node_DiType.SetData((FSSpeed)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSSpeedNode SpeedId_node_BounceMinVel = graph.AddNode<FSSpeedNode>();
+					GetPort("BounceMinVel").Connect(SpeedId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SpeedId_node_BounceMinVel, assetPath);
+					variableCount += SpeedId_node_BounceMinVel.SetData((FSSpeed)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.PhysicsId:
-					FSPhysicsNode PhysicsId_node_DiType = graph.AddNode<FSPhysicsNode>();
-					GetPort("DiType").Connect(PhysicsId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(PhysicsId_node_DiType, assetPath);
-					variableCount += PhysicsId_node_DiType.SetData((FSPhysics)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSPhysicsNode PhysicsId_node_BounceMinVel = graph.AddNode<FSPhysicsNode>();
+					GetPort("BounceMinVel").Connect(PhysicsId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(PhysicsId_node_BounceMinVel, assetPath);
+					variableCount += PhysicsId_node_BounceMinVel.SetData((FSPhysics)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.CollisionId:
-					FSCollisionNode CollisionId_node_DiType = graph.AddNode<FSCollisionNode>();
-					GetPort("DiType").Connect(CollisionId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CollisionId_node_DiType, assetPath);
-					variableCount += CollisionId_node_DiType.SetData((FSCollision)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSCollisionNode CollisionId_node_BounceMinVel = graph.AddNode<FSCollisionNode>();
+					GetPort("BounceMinVel").Connect(CollisionId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(CollisionId_node_BounceMinVel, assetPath);
+					variableCount += CollisionId_node_BounceMinVel.SetData((FSCollision)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.TimerId:
-					FSTimerNode TimerId_node_DiType = graph.AddNode<FSTimerNode>();
-					GetPort("DiType").Connect(TimerId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(TimerId_node_DiType, assetPath);
-					variableCount += TimerId_node_DiType.SetData((FSTimer)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSTimerNode TimerId_node_BounceMinVel = graph.AddNode<FSTimerNode>();
+					GetPort("BounceMinVel").Connect(TimerId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(TimerId_node_BounceMinVel, assetPath);
+					variableCount += TimerId_node_BounceMinVel.SetData((FSTimer)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.LagId:
-					FSLagNode LagId_node_DiType = graph.AddNode<FSLagNode>();
-					GetPort("DiType").Connect(LagId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(LagId_node_DiType, assetPath);
-					variableCount += LagId_node_DiType.SetData((FSLag)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSLagNode LagId_node_BounceMinVel = graph.AddNode<FSLagNode>();
+					GetPort("BounceMinVel").Connect(LagId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(LagId_node_BounceMinVel, assetPath);
+					variableCount += LagId_node_BounceMinVel.SetData((FSLag)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.EffectsId:
-					FSEffectsNode EffectsId_node_DiType = graph.AddNode<FSEffectsNode>();
-					GetPort("DiType").Connect(EffectsId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(EffectsId_node_DiType, assetPath);
-					variableCount += EffectsId_node_DiType.SetData((FSEffects)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSEffectsNode EffectsId_node_BounceMinVel = graph.AddNode<FSEffectsNode>();
+					GetPort("BounceMinVel").Connect(EffectsId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(EffectsId_node_BounceMinVel, assetPath);
+					variableCount += EffectsId_node_BounceMinVel.SetData((FSEffects)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.ColorsId:
-					FSColorsNode ColorsId_node_DiType = graph.AddNode<FSColorsNode>();
-					GetPort("DiType").Connect(ColorsId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ColorsId_node_DiType, assetPath);
-					variableCount += ColorsId_node_DiType.SetData((FSColors)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSColorsNode ColorsId_node_BounceMinVel = graph.AddNode<FSColorsNode>();
+					GetPort("BounceMinVel").Connect(ColorsId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(ColorsId_node_BounceMinVel, assetPath);
+					variableCount += ColorsId_node_BounceMinVel.SetData((FSColors)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.OnHitId:
-					FSOnHitNode OnHitId_node_DiType = graph.AddNode<FSOnHitNode>();
-					GetPort("DiType").Connect(OnHitId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OnHitId_node_DiType, assetPath);
-					variableCount += OnHitId_node_DiType.SetData((FSOnHit)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSOnHitNode OnHitId_node_BounceMinVel = graph.AddNode<FSOnHitNode>();
+					GetPort("BounceMinVel").Connect(OnHitId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(OnHitId_node_BounceMinVel, assetPath);
+					variableCount += OnHitId_node_BounceMinVel.SetData((FSOnHit)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.RandomId:
-					FSRandomNode RandomId_node_DiType = graph.AddNode<FSRandomNode>();
-					GetPort("DiType").Connect(RandomId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(RandomId_node_DiType, assetPath);
-					variableCount += RandomId_node_DiType.SetData((FSRandom)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSRandomNode RandomId_node_BounceMinVel = graph.AddNode<FSRandomNode>();
+					GetPort("BounceMinVel").Connect(RandomId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(RandomId_node_BounceMinVel, assetPath);
+					variableCount += RandomId_node_BounceMinVel.SetData((FSRandom)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.CameraId:
-					FSCameraInfoNode CameraId_node_DiType = graph.AddNode<FSCameraInfoNode>();
-					GetPort("DiType").Connect(CameraId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CameraId_node_DiType, assetPath);
-					variableCount += CameraId_node_DiType.SetData((FSCameraInfo)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSCameraInfoNode CameraId_node_BounceMinVel = graph.AddNode<FSCameraInfoNode>();
+					GetPort("BounceMinVel").Connect(CameraId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(CameraId_node_BounceMinVel, assetPath);
+					variableCount += CameraId_node_BounceMinVel.SetData((FSCameraInfo)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.SportsId:
-					FSSportsNode SportsId_node_DiType = graph.AddNode<FSSportsNode>();
-					GetPort("DiType").Connect(SportsId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SportsId_node_DiType, assetPath);
-					variableCount += SportsId_node_DiType.SetData((FSSports)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSSportsNode SportsId_node_BounceMinVel = graph.AddNode<FSSportsNode>();
+					GetPort("BounceMinVel").Connect(SportsId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SportsId_node_BounceMinVel, assetPath);
+					variableCount += SportsId_node_BounceMinVel.SetData((FSSports)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.Vector2Mag:
-					FSVector2MagNode Vector2Mag_node_DiType = graph.AddNode<FSVector2MagNode>();
-					GetPort("DiType").Connect(Vector2Mag_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(Vector2Mag_node_DiType, assetPath);
-					variableCount += Vector2Mag_node_DiType.SetData((FSVector2Mag)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSVector2MagNode Vector2Mag_node_BounceMinVel = graph.AddNode<FSVector2MagNode>();
+					GetPort("BounceMinVel").Connect(Vector2Mag_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(Vector2Mag_node_BounceMinVel, assetPath);
+					variableCount += Vector2Mag_node_BounceMinVel.SetData((FSVector2Mag)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.CPUHelpId:
-					FSCpuHelpNode CPUHelpId_node_DiType = graph.AddNode<FSCpuHelpNode>();
-					GetPort("DiType").Connect(CPUHelpId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CPUHelpId_node_DiType, assetPath);
-					variableCount += CPUHelpId_node_DiType.SetData((FSCpuHelp)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSCpuHelpNode CPUHelpId_node_BounceMinVel = graph.AddNode<FSCpuHelpNode>();
+					GetPort("BounceMinVel").Connect(CPUHelpId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(CPUHelpId_node_BounceMinVel, assetPath);
+					variableCount += CPUHelpId_node_BounceMinVel.SetData((FSCpuHelp)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.ItemId:
-					FSItemNode ItemId_node_DiType = graph.AddNode<FSItemNode>();
-					GetPort("DiType").Connect(ItemId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ItemId_node_DiType, assetPath);
-					variableCount += ItemId_node_DiType.SetData((FSItem)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSItemNode ItemId_node_BounceMinVel = graph.AddNode<FSItemNode>();
+					GetPort("BounceMinVel").Connect(ItemId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(ItemId_node_BounceMinVel, assetPath);
+					variableCount += ItemId_node_BounceMinVel.SetData((FSItem)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.ModeId:
-					FSModeNode ModeId_node_DiType = graph.AddNode<FSModeNode>();
-					GetPort("DiType").Connect(ModeId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ModeId_node_DiType, assetPath);
-					variableCount += ModeId_node_DiType.SetData((FSMode)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSModeNode ModeId_node_BounceMinVel = graph.AddNode<FSModeNode>();
+					GetPort("BounceMinVel").Connect(ModeId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(ModeId_node_BounceMinVel, assetPath);
+					variableCount += ModeId_node_BounceMinVel.SetData((FSMode)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.JumpsId:
-					FSJumpsNode JumpsId_node_DiType = graph.AddNode<FSJumpsNode>();
-					GetPort("DiType").Connect(JumpsId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(JumpsId_node_DiType, assetPath);
-					variableCount += JumpsId_node_DiType.SetData((FSJumps)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSJumpsNode JumpsId_node_BounceMinVel = graph.AddNode<FSJumpsNode>();
+					GetPort("BounceMinVel").Connect(JumpsId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(JumpsId_node_BounceMinVel, assetPath);
+					variableCount += JumpsId_node_BounceMinVel.SetData((FSJumps)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.RootAnimId:
-					FSRootAnimNode RootAnimId_node_DiType = graph.AddNode<FSRootAnimNode>();
-					GetPort("DiType").Connect(RootAnimId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(RootAnimId_node_DiType, assetPath);
-					variableCount += RootAnimId_node_DiType.SetData((FSRootAnim)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSRootAnimNode RootAnimId_node_BounceMinVel = graph.AddNode<FSRootAnimNode>();
+					GetPort("BounceMinVel").Connect(RootAnimId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(RootAnimId_node_BounceMinVel, assetPath);
+					variableCount += RootAnimId_node_BounceMinVel.SetData((FSRootAnim)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 				case FloatSource.TypeId.FloatId:
-					FSValueNode FloatId_node_DiType = graph.AddNode<FSValueNode>();
-					GetPort("DiType").Connect(FloatId_node_DiType.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(FloatId_node_DiType, assetPath);
-					variableCount += FloatId_node_DiType.SetData((FSValue)DiType, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-			}
-			++variableCount;
-			
-			DiAngleIn = data.DiAngleIn;
-			
-			switch (DiAngleIn.TID)
-			{
-				case FloatSource.TypeId.AgentId:
-					FSAgentNode AgentId_node_DiAngleIn = graph.AddNode<FSAgentNode>();
-					GetPort("DiAngleIn").Connect(AgentId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(AgentId_node_DiAngleIn, assetPath);
-					variableCount += AgentId_node_DiAngleIn.SetData((FSAgent)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.BonesId:
-					FSBonesNode BonesId_node_DiAngleIn = graph.AddNode<FSBonesNode>();
-					GetPort("DiAngleIn").Connect(BonesId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(BonesId_node_DiAngleIn, assetPath);
-					variableCount += BonesId_node_DiAngleIn.SetData((FSBones)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.AttackId:
-					FSAttackNode AttackId_node_DiAngleIn = graph.AddNode<FSAttackNode>();
-					GetPort("DiAngleIn").Connect(AttackId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(AttackId_node_DiAngleIn, assetPath);
-					variableCount += AttackId_node_DiAngleIn.SetData((FSAttack)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.FrameId:
-					FSFrameNode FrameId_node_DiAngleIn = graph.AddNode<FSFrameNode>();
-					GetPort("DiAngleIn").Connect(FrameId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(FrameId_node_DiAngleIn, assetPath);
-					variableCount += FrameId_node_DiAngleIn.SetData((FSFrame)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.InputId:
-					FSInputNode InputId_node_DiAngleIn = graph.AddNode<FSInputNode>();
-					GetPort("DiAngleIn").Connect(InputId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(InputId_node_DiAngleIn, assetPath);
-					variableCount += InputId_node_DiAngleIn.SetData((FSInput)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.FuncId:
-					FSFuncNode FuncId_node_DiAngleIn = graph.AddNode<FSFuncNode>();
-					GetPort("DiAngleIn").Connect(FuncId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(FuncId_node_DiAngleIn, assetPath);
-					variableCount += FuncId_node_DiAngleIn.SetData((FSFunc)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.MovementId:
-					FSMovementNode MovementId_node_DiAngleIn = graph.AddNode<FSMovementNode>();
-					GetPort("DiAngleIn").Connect(MovementId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(MovementId_node_DiAngleIn, assetPath);
-					variableCount += MovementId_node_DiAngleIn.SetData((FSMovement)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.CombatId:
-					FSCombatNode CombatId_node_DiAngleIn = graph.AddNode<FSCombatNode>();
-					GetPort("DiAngleIn").Connect(CombatId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CombatId_node_DiAngleIn, assetPath);
-					variableCount += CombatId_node_DiAngleIn.SetData((FSCombat)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.GrabsId:
-					FSGrabsNode GrabsId_node_DiAngleIn = graph.AddNode<FSGrabsNode>();
-					GetPort("DiAngleIn").Connect(GrabsId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(GrabsId_node_DiAngleIn, assetPath);
-					variableCount += GrabsId_node_DiAngleIn.SetData((FSGrabs)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.DataId:
-					FSDataNode DataId_node_DiAngleIn = graph.AddNode<FSDataNode>();
-					GetPort("DiAngleIn").Connect(DataId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(DataId_node_DiAngleIn, assetPath);
-					variableCount += DataId_node_DiAngleIn.SetData((FSData)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.ScratchId:
-					FSScratchNode ScratchId_node_DiAngleIn = graph.AddNode<FSScratchNode>();
-					GetPort("DiAngleIn").Connect(ScratchId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ScratchId_node_DiAngleIn, assetPath);
-					variableCount += ScratchId_node_DiAngleIn.SetData((FSScratch)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.AnimId:
-					FSAnimNode AnimId_node_DiAngleIn = graph.AddNode<FSAnimNode>();
-					GetPort("DiAngleIn").Connect(AnimId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(AnimId_node_DiAngleIn, assetPath);
-					variableCount += AnimId_node_DiAngleIn.SetData((FSAnim)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.SpeedId:
-					FSSpeedNode SpeedId_node_DiAngleIn = graph.AddNode<FSSpeedNode>();
-					GetPort("DiAngleIn").Connect(SpeedId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SpeedId_node_DiAngleIn, assetPath);
-					variableCount += SpeedId_node_DiAngleIn.SetData((FSSpeed)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.PhysicsId:
-					FSPhysicsNode PhysicsId_node_DiAngleIn = graph.AddNode<FSPhysicsNode>();
-					GetPort("DiAngleIn").Connect(PhysicsId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(PhysicsId_node_DiAngleIn, assetPath);
-					variableCount += PhysicsId_node_DiAngleIn.SetData((FSPhysics)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.CollisionId:
-					FSCollisionNode CollisionId_node_DiAngleIn = graph.AddNode<FSCollisionNode>();
-					GetPort("DiAngleIn").Connect(CollisionId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CollisionId_node_DiAngleIn, assetPath);
-					variableCount += CollisionId_node_DiAngleIn.SetData((FSCollision)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.TimerId:
-					FSTimerNode TimerId_node_DiAngleIn = graph.AddNode<FSTimerNode>();
-					GetPort("DiAngleIn").Connect(TimerId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(TimerId_node_DiAngleIn, assetPath);
-					variableCount += TimerId_node_DiAngleIn.SetData((FSTimer)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.LagId:
-					FSLagNode LagId_node_DiAngleIn = graph.AddNode<FSLagNode>();
-					GetPort("DiAngleIn").Connect(LagId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(LagId_node_DiAngleIn, assetPath);
-					variableCount += LagId_node_DiAngleIn.SetData((FSLag)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.EffectsId:
-					FSEffectsNode EffectsId_node_DiAngleIn = graph.AddNode<FSEffectsNode>();
-					GetPort("DiAngleIn").Connect(EffectsId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(EffectsId_node_DiAngleIn, assetPath);
-					variableCount += EffectsId_node_DiAngleIn.SetData((FSEffects)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.ColorsId:
-					FSColorsNode ColorsId_node_DiAngleIn = graph.AddNode<FSColorsNode>();
-					GetPort("DiAngleIn").Connect(ColorsId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ColorsId_node_DiAngleIn, assetPath);
-					variableCount += ColorsId_node_DiAngleIn.SetData((FSColors)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.OnHitId:
-					FSOnHitNode OnHitId_node_DiAngleIn = graph.AddNode<FSOnHitNode>();
-					GetPort("DiAngleIn").Connect(OnHitId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OnHitId_node_DiAngleIn, assetPath);
-					variableCount += OnHitId_node_DiAngleIn.SetData((FSOnHit)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.RandomId:
-					FSRandomNode RandomId_node_DiAngleIn = graph.AddNode<FSRandomNode>();
-					GetPort("DiAngleIn").Connect(RandomId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(RandomId_node_DiAngleIn, assetPath);
-					variableCount += RandomId_node_DiAngleIn.SetData((FSRandom)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.CameraId:
-					FSCameraInfoNode CameraId_node_DiAngleIn = graph.AddNode<FSCameraInfoNode>();
-					GetPort("DiAngleIn").Connect(CameraId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CameraId_node_DiAngleIn, assetPath);
-					variableCount += CameraId_node_DiAngleIn.SetData((FSCameraInfo)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.SportsId:
-					FSSportsNode SportsId_node_DiAngleIn = graph.AddNode<FSSportsNode>();
-					GetPort("DiAngleIn").Connect(SportsId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SportsId_node_DiAngleIn, assetPath);
-					variableCount += SportsId_node_DiAngleIn.SetData((FSSports)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.Vector2Mag:
-					FSVector2MagNode Vector2Mag_node_DiAngleIn = graph.AddNode<FSVector2MagNode>();
-					GetPort("DiAngleIn").Connect(Vector2Mag_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(Vector2Mag_node_DiAngleIn, assetPath);
-					variableCount += Vector2Mag_node_DiAngleIn.SetData((FSVector2Mag)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.CPUHelpId:
-					FSCpuHelpNode CPUHelpId_node_DiAngleIn = graph.AddNode<FSCpuHelpNode>();
-					GetPort("DiAngleIn").Connect(CPUHelpId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CPUHelpId_node_DiAngleIn, assetPath);
-					variableCount += CPUHelpId_node_DiAngleIn.SetData((FSCpuHelp)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.ItemId:
-					FSItemNode ItemId_node_DiAngleIn = graph.AddNode<FSItemNode>();
-					GetPort("DiAngleIn").Connect(ItemId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ItemId_node_DiAngleIn, assetPath);
-					variableCount += ItemId_node_DiAngleIn.SetData((FSItem)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.ModeId:
-					FSModeNode ModeId_node_DiAngleIn = graph.AddNode<FSModeNode>();
-					GetPort("DiAngleIn").Connect(ModeId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ModeId_node_DiAngleIn, assetPath);
-					variableCount += ModeId_node_DiAngleIn.SetData((FSMode)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.JumpsId:
-					FSJumpsNode JumpsId_node_DiAngleIn = graph.AddNode<FSJumpsNode>();
-					GetPort("DiAngleIn").Connect(JumpsId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(JumpsId_node_DiAngleIn, assetPath);
-					variableCount += JumpsId_node_DiAngleIn.SetData((FSJumps)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.RootAnimId:
-					FSRootAnimNode RootAnimId_node_DiAngleIn = graph.AddNode<FSRootAnimNode>();
-					GetPort("DiAngleIn").Connect(RootAnimId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(RootAnimId_node_DiAngleIn, assetPath);
-					variableCount += RootAnimId_node_DiAngleIn.SetData((FSRootAnim)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.FloatId:
-					FSValueNode FloatId_node_DiAngleIn = graph.AddNode<FSValueNode>();
-					GetPort("DiAngleIn").Connect(FloatId_node_DiAngleIn.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(FloatId_node_DiAngleIn, assetPath);
-					variableCount += FloatId_node_DiAngleIn.SetData((FSValue)DiAngleIn, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-			}
-			++variableCount;
-			
-			DiAngleOut = data.DiAngleOut;
-			
-			switch (DiAngleOut.TID)
-			{
-				case FloatSource.TypeId.AgentId:
-					FSAgentNode AgentId_node_DiAngleOut = graph.AddNode<FSAgentNode>();
-					GetPort("DiAngleOut").Connect(AgentId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(AgentId_node_DiAngleOut, assetPath);
-					variableCount += AgentId_node_DiAngleOut.SetData((FSAgent)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.BonesId:
-					FSBonesNode BonesId_node_DiAngleOut = graph.AddNode<FSBonesNode>();
-					GetPort("DiAngleOut").Connect(BonesId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(BonesId_node_DiAngleOut, assetPath);
-					variableCount += BonesId_node_DiAngleOut.SetData((FSBones)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.AttackId:
-					FSAttackNode AttackId_node_DiAngleOut = graph.AddNode<FSAttackNode>();
-					GetPort("DiAngleOut").Connect(AttackId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(AttackId_node_DiAngleOut, assetPath);
-					variableCount += AttackId_node_DiAngleOut.SetData((FSAttack)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.FrameId:
-					FSFrameNode FrameId_node_DiAngleOut = graph.AddNode<FSFrameNode>();
-					GetPort("DiAngleOut").Connect(FrameId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(FrameId_node_DiAngleOut, assetPath);
-					variableCount += FrameId_node_DiAngleOut.SetData((FSFrame)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.InputId:
-					FSInputNode InputId_node_DiAngleOut = graph.AddNode<FSInputNode>();
-					GetPort("DiAngleOut").Connect(InputId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(InputId_node_DiAngleOut, assetPath);
-					variableCount += InputId_node_DiAngleOut.SetData((FSInput)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.FuncId:
-					FSFuncNode FuncId_node_DiAngleOut = graph.AddNode<FSFuncNode>();
-					GetPort("DiAngleOut").Connect(FuncId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(FuncId_node_DiAngleOut, assetPath);
-					variableCount += FuncId_node_DiAngleOut.SetData((FSFunc)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.MovementId:
-					FSMovementNode MovementId_node_DiAngleOut = graph.AddNode<FSMovementNode>();
-					GetPort("DiAngleOut").Connect(MovementId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(MovementId_node_DiAngleOut, assetPath);
-					variableCount += MovementId_node_DiAngleOut.SetData((FSMovement)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.CombatId:
-					FSCombatNode CombatId_node_DiAngleOut = graph.AddNode<FSCombatNode>();
-					GetPort("DiAngleOut").Connect(CombatId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CombatId_node_DiAngleOut, assetPath);
-					variableCount += CombatId_node_DiAngleOut.SetData((FSCombat)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.GrabsId:
-					FSGrabsNode GrabsId_node_DiAngleOut = graph.AddNode<FSGrabsNode>();
-					GetPort("DiAngleOut").Connect(GrabsId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(GrabsId_node_DiAngleOut, assetPath);
-					variableCount += GrabsId_node_DiAngleOut.SetData((FSGrabs)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.DataId:
-					FSDataNode DataId_node_DiAngleOut = graph.AddNode<FSDataNode>();
-					GetPort("DiAngleOut").Connect(DataId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(DataId_node_DiAngleOut, assetPath);
-					variableCount += DataId_node_DiAngleOut.SetData((FSData)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.ScratchId:
-					FSScratchNode ScratchId_node_DiAngleOut = graph.AddNode<FSScratchNode>();
-					GetPort("DiAngleOut").Connect(ScratchId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ScratchId_node_DiAngleOut, assetPath);
-					variableCount += ScratchId_node_DiAngleOut.SetData((FSScratch)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.AnimId:
-					FSAnimNode AnimId_node_DiAngleOut = graph.AddNode<FSAnimNode>();
-					GetPort("DiAngleOut").Connect(AnimId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(AnimId_node_DiAngleOut, assetPath);
-					variableCount += AnimId_node_DiAngleOut.SetData((FSAnim)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.SpeedId:
-					FSSpeedNode SpeedId_node_DiAngleOut = graph.AddNode<FSSpeedNode>();
-					GetPort("DiAngleOut").Connect(SpeedId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SpeedId_node_DiAngleOut, assetPath);
-					variableCount += SpeedId_node_DiAngleOut.SetData((FSSpeed)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.PhysicsId:
-					FSPhysicsNode PhysicsId_node_DiAngleOut = graph.AddNode<FSPhysicsNode>();
-					GetPort("DiAngleOut").Connect(PhysicsId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(PhysicsId_node_DiAngleOut, assetPath);
-					variableCount += PhysicsId_node_DiAngleOut.SetData((FSPhysics)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.CollisionId:
-					FSCollisionNode CollisionId_node_DiAngleOut = graph.AddNode<FSCollisionNode>();
-					GetPort("DiAngleOut").Connect(CollisionId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CollisionId_node_DiAngleOut, assetPath);
-					variableCount += CollisionId_node_DiAngleOut.SetData((FSCollision)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.TimerId:
-					FSTimerNode TimerId_node_DiAngleOut = graph.AddNode<FSTimerNode>();
-					GetPort("DiAngleOut").Connect(TimerId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(TimerId_node_DiAngleOut, assetPath);
-					variableCount += TimerId_node_DiAngleOut.SetData((FSTimer)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.LagId:
-					FSLagNode LagId_node_DiAngleOut = graph.AddNode<FSLagNode>();
-					GetPort("DiAngleOut").Connect(LagId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(LagId_node_DiAngleOut, assetPath);
-					variableCount += LagId_node_DiAngleOut.SetData((FSLag)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.EffectsId:
-					FSEffectsNode EffectsId_node_DiAngleOut = graph.AddNode<FSEffectsNode>();
-					GetPort("DiAngleOut").Connect(EffectsId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(EffectsId_node_DiAngleOut, assetPath);
-					variableCount += EffectsId_node_DiAngleOut.SetData((FSEffects)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.ColorsId:
-					FSColorsNode ColorsId_node_DiAngleOut = graph.AddNode<FSColorsNode>();
-					GetPort("DiAngleOut").Connect(ColorsId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ColorsId_node_DiAngleOut, assetPath);
-					variableCount += ColorsId_node_DiAngleOut.SetData((FSColors)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.OnHitId:
-					FSOnHitNode OnHitId_node_DiAngleOut = graph.AddNode<FSOnHitNode>();
-					GetPort("DiAngleOut").Connect(OnHitId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OnHitId_node_DiAngleOut, assetPath);
-					variableCount += OnHitId_node_DiAngleOut.SetData((FSOnHit)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.RandomId:
-					FSRandomNode RandomId_node_DiAngleOut = graph.AddNode<FSRandomNode>();
-					GetPort("DiAngleOut").Connect(RandomId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(RandomId_node_DiAngleOut, assetPath);
-					variableCount += RandomId_node_DiAngleOut.SetData((FSRandom)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.CameraId:
-					FSCameraInfoNode CameraId_node_DiAngleOut = graph.AddNode<FSCameraInfoNode>();
-					GetPort("DiAngleOut").Connect(CameraId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CameraId_node_DiAngleOut, assetPath);
-					variableCount += CameraId_node_DiAngleOut.SetData((FSCameraInfo)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.SportsId:
-					FSSportsNode SportsId_node_DiAngleOut = graph.AddNode<FSSportsNode>();
-					GetPort("DiAngleOut").Connect(SportsId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SportsId_node_DiAngleOut, assetPath);
-					variableCount += SportsId_node_DiAngleOut.SetData((FSSports)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.Vector2Mag:
-					FSVector2MagNode Vector2Mag_node_DiAngleOut = graph.AddNode<FSVector2MagNode>();
-					GetPort("DiAngleOut").Connect(Vector2Mag_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(Vector2Mag_node_DiAngleOut, assetPath);
-					variableCount += Vector2Mag_node_DiAngleOut.SetData((FSVector2Mag)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.CPUHelpId:
-					FSCpuHelpNode CPUHelpId_node_DiAngleOut = graph.AddNode<FSCpuHelpNode>();
-					GetPort("DiAngleOut").Connect(CPUHelpId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CPUHelpId_node_DiAngleOut, assetPath);
-					variableCount += CPUHelpId_node_DiAngleOut.SetData((FSCpuHelp)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.ItemId:
-					FSItemNode ItemId_node_DiAngleOut = graph.AddNode<FSItemNode>();
-					GetPort("DiAngleOut").Connect(ItemId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ItemId_node_DiAngleOut, assetPath);
-					variableCount += ItemId_node_DiAngleOut.SetData((FSItem)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.ModeId:
-					FSModeNode ModeId_node_DiAngleOut = graph.AddNode<FSModeNode>();
-					GetPort("DiAngleOut").Connect(ModeId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ModeId_node_DiAngleOut, assetPath);
-					variableCount += ModeId_node_DiAngleOut.SetData((FSMode)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.JumpsId:
-					FSJumpsNode JumpsId_node_DiAngleOut = graph.AddNode<FSJumpsNode>();
-					GetPort("DiAngleOut").Connect(JumpsId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(JumpsId_node_DiAngleOut, assetPath);
-					variableCount += JumpsId_node_DiAngleOut.SetData((FSJumps)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.RootAnimId:
-					FSRootAnimNode RootAnimId_node_DiAngleOut = graph.AddNode<FSRootAnimNode>();
-					GetPort("DiAngleOut").Connect(RootAnimId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(RootAnimId_node_DiAngleOut, assetPath);
-					variableCount += RootAnimId_node_DiAngleOut.SetData((FSRootAnim)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case FloatSource.TypeId.FloatId:
-					FSValueNode FloatId_node_DiAngleOut = graph.AddNode<FSValueNode>();
-					GetPort("DiAngleOut").Connect(FloatId_node_DiAngleOut.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(FloatId_node_DiAngleOut, assetPath);
-					variableCount += FloatId_node_DiAngleOut.SetData((FSValue)DiAngleOut, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					FSValueNode FloatId_node_BounceMinVel = graph.AddNode<FSValueNode>();
+					GetPort("BounceMinVel").Connect(FloatId_node_BounceMinVel.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(FloatId_node_BounceMinVel, assetPath);
+					variableCount += FloatId_node_BounceMinVel.SetData((FSValue)BounceMinVel, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 			}
 			
@@ -1879,384 +1506,131 @@ namespace NASB_Moveset_Editor.Jumps
 					break;
 				}
 			}
-			if (GetPort("DiType").ConnectionCount > 0)
+			objToReturn.DoLaunch = DoLaunch;
+			if (GetPort("BounceMinVel").ConnectionCount > 0)
 			{
-				FloatSourceNode FloatSource_Node = (FloatSourceNode)GetPort("DiType").GetConnection(0).node;
+				FloatSourceNode FloatSource_Node = (FloatSourceNode)GetPort("BounceMinVel").GetConnection(0).node;
 				switch (FloatSource_Node.TID)
 				{
 					case FloatSource.TypeId.AgentId:
-						FSAgentNode AgentId_FloatSource_Node = (FSAgentNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = AgentId_FloatSource_Node.GetData();
+						FSAgentNode AgentId_FloatSource_Node = (FSAgentNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = AgentId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.BonesId:
-						FSBonesNode BonesId_FloatSource_Node = (FSBonesNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = BonesId_FloatSource_Node.GetData();
+						FSBonesNode BonesId_FloatSource_Node = (FSBonesNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = BonesId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.AttackId:
-						FSAttackNode AttackId_FloatSource_Node = (FSAttackNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = AttackId_FloatSource_Node.GetData();
+						FSAttackNode AttackId_FloatSource_Node = (FSAttackNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = AttackId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.FrameId:
-						FSFrameNode FrameId_FloatSource_Node = (FSFrameNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = FrameId_FloatSource_Node.GetData();
+						FSFrameNode FrameId_FloatSource_Node = (FSFrameNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = FrameId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.InputId:
-						FSInputNode InputId_FloatSource_Node = (FSInputNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = InputId_FloatSource_Node.GetData();
+						FSInputNode InputId_FloatSource_Node = (FSInputNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = InputId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.FuncId:
-						FSFuncNode FuncId_FloatSource_Node = (FSFuncNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = FuncId_FloatSource_Node.GetData();
+						FSFuncNode FuncId_FloatSource_Node = (FSFuncNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = FuncId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.MovementId:
-						FSMovementNode MovementId_FloatSource_Node = (FSMovementNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = MovementId_FloatSource_Node.GetData();
+						FSMovementNode MovementId_FloatSource_Node = (FSMovementNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = MovementId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.CombatId:
-						FSCombatNode CombatId_FloatSource_Node = (FSCombatNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = CombatId_FloatSource_Node.GetData();
+						FSCombatNode CombatId_FloatSource_Node = (FSCombatNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = CombatId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.GrabsId:
-						FSGrabsNode GrabsId_FloatSource_Node = (FSGrabsNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = GrabsId_FloatSource_Node.GetData();
+						FSGrabsNode GrabsId_FloatSource_Node = (FSGrabsNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = GrabsId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.DataId:
-						FSDataNode DataId_FloatSource_Node = (FSDataNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = DataId_FloatSource_Node.GetData();
+						FSDataNode DataId_FloatSource_Node = (FSDataNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = DataId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.ScratchId:
-						FSScratchNode ScratchId_FloatSource_Node = (FSScratchNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = ScratchId_FloatSource_Node.GetData();
+						FSScratchNode ScratchId_FloatSource_Node = (FSScratchNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = ScratchId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.AnimId:
-						FSAnimNode AnimId_FloatSource_Node = (FSAnimNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = AnimId_FloatSource_Node.GetData();
+						FSAnimNode AnimId_FloatSource_Node = (FSAnimNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = AnimId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.SpeedId:
-						FSSpeedNode SpeedId_FloatSource_Node = (FSSpeedNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = SpeedId_FloatSource_Node.GetData();
+						FSSpeedNode SpeedId_FloatSource_Node = (FSSpeedNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = SpeedId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.PhysicsId:
-						FSPhysicsNode PhysicsId_FloatSource_Node = (FSPhysicsNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = PhysicsId_FloatSource_Node.GetData();
+						FSPhysicsNode PhysicsId_FloatSource_Node = (FSPhysicsNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = PhysicsId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.CollisionId:
-						FSCollisionNode CollisionId_FloatSource_Node = (FSCollisionNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = CollisionId_FloatSource_Node.GetData();
+						FSCollisionNode CollisionId_FloatSource_Node = (FSCollisionNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = CollisionId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.TimerId:
-						FSTimerNode TimerId_FloatSource_Node = (FSTimerNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = TimerId_FloatSource_Node.GetData();
+						FSTimerNode TimerId_FloatSource_Node = (FSTimerNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = TimerId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.LagId:
-						FSLagNode LagId_FloatSource_Node = (FSLagNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = LagId_FloatSource_Node.GetData();
+						FSLagNode LagId_FloatSource_Node = (FSLagNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = LagId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.EffectsId:
-						FSEffectsNode EffectsId_FloatSource_Node = (FSEffectsNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = EffectsId_FloatSource_Node.GetData();
+						FSEffectsNode EffectsId_FloatSource_Node = (FSEffectsNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = EffectsId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.ColorsId:
-						FSColorsNode ColorsId_FloatSource_Node = (FSColorsNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = ColorsId_FloatSource_Node.GetData();
+						FSColorsNode ColorsId_FloatSource_Node = (FSColorsNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = ColorsId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.OnHitId:
-						FSOnHitNode OnHitId_FloatSource_Node = (FSOnHitNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = OnHitId_FloatSource_Node.GetData();
+						FSOnHitNode OnHitId_FloatSource_Node = (FSOnHitNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = OnHitId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.RandomId:
-						FSRandomNode RandomId_FloatSource_Node = (FSRandomNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = RandomId_FloatSource_Node.GetData();
+						FSRandomNode RandomId_FloatSource_Node = (FSRandomNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = RandomId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.CameraId:
-						FSCameraInfoNode CameraId_FloatSource_Node = (FSCameraInfoNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = CameraId_FloatSource_Node.GetData();
+						FSCameraInfoNode CameraId_FloatSource_Node = (FSCameraInfoNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = CameraId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.SportsId:
-						FSSportsNode SportsId_FloatSource_Node = (FSSportsNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = SportsId_FloatSource_Node.GetData();
+						FSSportsNode SportsId_FloatSource_Node = (FSSportsNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = SportsId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.Vector2Mag:
-						FSVector2MagNode Vector2Mag_FloatSource_Node = (FSVector2MagNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = Vector2Mag_FloatSource_Node.GetData();
+						FSVector2MagNode Vector2Mag_FloatSource_Node = (FSVector2MagNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = Vector2Mag_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.CPUHelpId:
-						FSCpuHelpNode CPUHelpId_FloatSource_Node = (FSCpuHelpNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = CPUHelpId_FloatSource_Node.GetData();
+						FSCpuHelpNode CPUHelpId_FloatSource_Node = (FSCpuHelpNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = CPUHelpId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.ItemId:
-						FSItemNode ItemId_FloatSource_Node = (FSItemNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = ItemId_FloatSource_Node.GetData();
+						FSItemNode ItemId_FloatSource_Node = (FSItemNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = ItemId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.ModeId:
-						FSModeNode ModeId_FloatSource_Node = (FSModeNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = ModeId_FloatSource_Node.GetData();
+						FSModeNode ModeId_FloatSource_Node = (FSModeNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = ModeId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.JumpsId:
-						FSJumpsNode JumpsId_FloatSource_Node = (FSJumpsNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = JumpsId_FloatSource_Node.GetData();
+						FSJumpsNode JumpsId_FloatSource_Node = (FSJumpsNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = JumpsId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.RootAnimId:
-						FSRootAnimNode RootAnimId_FloatSource_Node = (FSRootAnimNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = RootAnimId_FloatSource_Node.GetData();
+						FSRootAnimNode RootAnimId_FloatSource_Node = (FSRootAnimNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = RootAnimId_FloatSource_Node.GetData();
 					break;
 					case FloatSource.TypeId.FloatId:
-						FSValueNode FloatId_FloatSource_Node = (FSValueNode)GetPort("DiType").GetConnection(0).node;
-						objToReturn.DiType = FloatId_FloatSource_Node.GetData();
-					break;
-				}
-			}
-			if (GetPort("DiAngleIn").ConnectionCount > 0)
-			{
-				FloatSourceNode FloatSource_Node = (FloatSourceNode)GetPort("DiAngleIn").GetConnection(0).node;
-				switch (FloatSource_Node.TID)
-				{
-					case FloatSource.TypeId.AgentId:
-						FSAgentNode AgentId_FloatSource_Node = (FSAgentNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = AgentId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.BonesId:
-						FSBonesNode BonesId_FloatSource_Node = (FSBonesNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = BonesId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.AttackId:
-						FSAttackNode AttackId_FloatSource_Node = (FSAttackNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = AttackId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.FrameId:
-						FSFrameNode FrameId_FloatSource_Node = (FSFrameNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = FrameId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.InputId:
-						FSInputNode InputId_FloatSource_Node = (FSInputNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = InputId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.FuncId:
-						FSFuncNode FuncId_FloatSource_Node = (FSFuncNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = FuncId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.MovementId:
-						FSMovementNode MovementId_FloatSource_Node = (FSMovementNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = MovementId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.CombatId:
-						FSCombatNode CombatId_FloatSource_Node = (FSCombatNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = CombatId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.GrabsId:
-						FSGrabsNode GrabsId_FloatSource_Node = (FSGrabsNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = GrabsId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.DataId:
-						FSDataNode DataId_FloatSource_Node = (FSDataNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = DataId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.ScratchId:
-						FSScratchNode ScratchId_FloatSource_Node = (FSScratchNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = ScratchId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.AnimId:
-						FSAnimNode AnimId_FloatSource_Node = (FSAnimNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = AnimId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.SpeedId:
-						FSSpeedNode SpeedId_FloatSource_Node = (FSSpeedNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = SpeedId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.PhysicsId:
-						FSPhysicsNode PhysicsId_FloatSource_Node = (FSPhysicsNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = PhysicsId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.CollisionId:
-						FSCollisionNode CollisionId_FloatSource_Node = (FSCollisionNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = CollisionId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.TimerId:
-						FSTimerNode TimerId_FloatSource_Node = (FSTimerNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = TimerId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.LagId:
-						FSLagNode LagId_FloatSource_Node = (FSLagNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = LagId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.EffectsId:
-						FSEffectsNode EffectsId_FloatSource_Node = (FSEffectsNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = EffectsId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.ColorsId:
-						FSColorsNode ColorsId_FloatSource_Node = (FSColorsNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = ColorsId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.OnHitId:
-						FSOnHitNode OnHitId_FloatSource_Node = (FSOnHitNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = OnHitId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.RandomId:
-						FSRandomNode RandomId_FloatSource_Node = (FSRandomNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = RandomId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.CameraId:
-						FSCameraInfoNode CameraId_FloatSource_Node = (FSCameraInfoNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = CameraId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.SportsId:
-						FSSportsNode SportsId_FloatSource_Node = (FSSportsNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = SportsId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.Vector2Mag:
-						FSVector2MagNode Vector2Mag_FloatSource_Node = (FSVector2MagNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = Vector2Mag_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.CPUHelpId:
-						FSCpuHelpNode CPUHelpId_FloatSource_Node = (FSCpuHelpNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = CPUHelpId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.ItemId:
-						FSItemNode ItemId_FloatSource_Node = (FSItemNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = ItemId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.ModeId:
-						FSModeNode ModeId_FloatSource_Node = (FSModeNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = ModeId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.JumpsId:
-						FSJumpsNode JumpsId_FloatSource_Node = (FSJumpsNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = JumpsId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.RootAnimId:
-						FSRootAnimNode RootAnimId_FloatSource_Node = (FSRootAnimNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = RootAnimId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.FloatId:
-						FSValueNode FloatId_FloatSource_Node = (FSValueNode)GetPort("DiAngleIn").GetConnection(0).node;
-						objToReturn.DiAngleIn = FloatId_FloatSource_Node.GetData();
-					break;
-				}
-			}
-			if (GetPort("DiAngleOut").ConnectionCount > 0)
-			{
-				FloatSourceNode FloatSource_Node = (FloatSourceNode)GetPort("DiAngleOut").GetConnection(0).node;
-				switch (FloatSource_Node.TID)
-				{
-					case FloatSource.TypeId.AgentId:
-						FSAgentNode AgentId_FloatSource_Node = (FSAgentNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = AgentId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.BonesId:
-						FSBonesNode BonesId_FloatSource_Node = (FSBonesNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = BonesId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.AttackId:
-						FSAttackNode AttackId_FloatSource_Node = (FSAttackNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = AttackId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.FrameId:
-						FSFrameNode FrameId_FloatSource_Node = (FSFrameNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = FrameId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.InputId:
-						FSInputNode InputId_FloatSource_Node = (FSInputNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = InputId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.FuncId:
-						FSFuncNode FuncId_FloatSource_Node = (FSFuncNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = FuncId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.MovementId:
-						FSMovementNode MovementId_FloatSource_Node = (FSMovementNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = MovementId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.CombatId:
-						FSCombatNode CombatId_FloatSource_Node = (FSCombatNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = CombatId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.GrabsId:
-						FSGrabsNode GrabsId_FloatSource_Node = (FSGrabsNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = GrabsId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.DataId:
-						FSDataNode DataId_FloatSource_Node = (FSDataNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = DataId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.ScratchId:
-						FSScratchNode ScratchId_FloatSource_Node = (FSScratchNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = ScratchId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.AnimId:
-						FSAnimNode AnimId_FloatSource_Node = (FSAnimNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = AnimId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.SpeedId:
-						FSSpeedNode SpeedId_FloatSource_Node = (FSSpeedNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = SpeedId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.PhysicsId:
-						FSPhysicsNode PhysicsId_FloatSource_Node = (FSPhysicsNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = PhysicsId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.CollisionId:
-						FSCollisionNode CollisionId_FloatSource_Node = (FSCollisionNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = CollisionId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.TimerId:
-						FSTimerNode TimerId_FloatSource_Node = (FSTimerNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = TimerId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.LagId:
-						FSLagNode LagId_FloatSource_Node = (FSLagNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = LagId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.EffectsId:
-						FSEffectsNode EffectsId_FloatSource_Node = (FSEffectsNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = EffectsId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.ColorsId:
-						FSColorsNode ColorsId_FloatSource_Node = (FSColorsNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = ColorsId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.OnHitId:
-						FSOnHitNode OnHitId_FloatSource_Node = (FSOnHitNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = OnHitId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.RandomId:
-						FSRandomNode RandomId_FloatSource_Node = (FSRandomNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = RandomId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.CameraId:
-						FSCameraInfoNode CameraId_FloatSource_Node = (FSCameraInfoNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = CameraId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.SportsId:
-						FSSportsNode SportsId_FloatSource_Node = (FSSportsNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = SportsId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.Vector2Mag:
-						FSVector2MagNode Vector2Mag_FloatSource_Node = (FSVector2MagNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = Vector2Mag_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.CPUHelpId:
-						FSCpuHelpNode CPUHelpId_FloatSource_Node = (FSCpuHelpNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = CPUHelpId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.ItemId:
-						FSItemNode ItemId_FloatSource_Node = (FSItemNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = ItemId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.ModeId:
-						FSModeNode ModeId_FloatSource_Node = (FSModeNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = ModeId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.JumpsId:
-						FSJumpsNode JumpsId_FloatSource_Node = (FSJumpsNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = JumpsId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.RootAnimId:
-						FSRootAnimNode RootAnimId_FloatSource_Node = (FSRootAnimNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = RootAnimId_FloatSource_Node.GetData();
-					break;
-					case FloatSource.TypeId.FloatId:
-						FSValueNode FloatId_FloatSource_Node = (FSValueNode)GetPort("DiAngleOut").GetConnection(0).node;
-						objToReturn.DiAngleOut = FloatId_FloatSource_Node.GetData();
+						FSValueNode FloatId_FloatSource_Node = (FSValueNode)GetPort("BounceMinVel").GetConnection(0).node;
+						objToReturn.BounceMinVel = FloatId_FloatSource_Node.GetData();
 					break;
 				}
 			}

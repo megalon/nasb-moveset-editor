@@ -30,11 +30,13 @@ namespace NASB_Moveset_Editor.StateActions
 	{
 		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public string ToState;
+		public bool Proxy;
 		
 		protected override void Init()
 		{
 			base.Init();
 			TID = TypeId.StateCancelGrabbedId;
+			Version = 1;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -50,6 +52,7 @@ namespace NASB_Moveset_Editor.StateActions
 			int variableCount = 0;
 			
 			ToState = data.ToState;
+			Proxy = data.Proxy;
 			return variableCount;
 		}
 		
@@ -59,6 +62,7 @@ namespace NASB_Moveset_Editor.StateActions
 			objToReturn.TID = TypeId.StateCancelGrabbedId;
 			objToReturn.Version = Version;
 			objToReturn.ToState = ToState;
+			objToReturn.Proxy = Proxy;
 			return objToReturn;
 		}
 	}

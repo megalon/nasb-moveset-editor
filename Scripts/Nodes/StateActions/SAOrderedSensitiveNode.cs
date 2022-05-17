@@ -510,6 +510,18 @@ namespace NASB_Moveset_Editor.StateActions
 						AssetDatabase.AddObjectToAsset(MapAnimSimpleId_node_Actions, assetPath);
 						variableCount += MapAnimSimpleId_node_Actions.SetData((SAMapAnimationSimple)Actions_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 					break;
+					case StateAction.TypeId.OnLeaveParentId:
+						SAOnLeaveParentNode OnLeaveParentId_node_Actions = graph.AddNode<SAOnLeaveParentNode>();
+						GetPort(portName).Connect(OnLeaveParentId_node_Actions.GetPort("NodeInput"));
+						AssetDatabase.AddObjectToAsset(OnLeaveParentId_node_Actions, assetPath);
+						variableCount += OnLeaveParentId_node_Actions.SetData((SAOnLeaveParent)Actions_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					break;
+					case StateAction.TypeId.PersistLocalFXId:
+						SAPersistLocalFXNode PersistLocalFXId_node_Actions = graph.AddNode<SAPersistLocalFXNode>();
+						GetPort(portName).Connect(PersistLocalFXId_node_Actions.GetPort("NodeInput"));
+						AssetDatabase.AddObjectToAsset(PersistLocalFXId_node_Actions, assetPath);
+						variableCount += PersistLocalFXId_node_Actions.SetData((SAPersistLocalFX)Actions_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					break;
 				}
 				++variableCount;
 			}
@@ -827,6 +839,14 @@ namespace NASB_Moveset_Editor.StateActions
 					case StateAction.TypeId.MapAnimSimpleId:
 						SAMapAnimationSimpleNode MapAnimSimpleId_StateAction_Node = (SAMapAnimationSimpleNode)port.Connection.node;
 						objToReturn.Actions.Add(MapAnimSimpleId_StateAction_Node.GetData());
+					break;
+					case StateAction.TypeId.OnLeaveParentId:
+						SAOnLeaveParentNode OnLeaveParentId_StateAction_Node = (SAOnLeaveParentNode)port.Connection.node;
+						objToReturn.Actions.Add(OnLeaveParentId_StateAction_Node.GetData());
+					break;
+					case StateAction.TypeId.PersistLocalFXId:
+						SAPersistLocalFXNode PersistLocalFXId_StateAction_Node = (SAPersistLocalFXNode)port.Connection.node;
+						objToReturn.Actions.Add(PersistLocalFXId_StateAction_Node.GetData());
 					break;
 					case StateAction.TypeId.BaseIdentifier:
 						StateActionNode BaseIdentifier_StateAction_Node = (StateActionNode)port.Connection.node;

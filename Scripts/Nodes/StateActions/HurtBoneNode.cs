@@ -32,7 +32,7 @@ namespace NASB_Moveset_Editor.StateActions
 		public HurtType Type;
 		public int Armor;
 		public int KnockbackArmor;
-		public bool ForceZ0;
+		public bool IgnoreGrab;
 		public string BoneA;
 		public string BoneB;
 		public float Radius;
@@ -62,7 +62,7 @@ namespace NASB_Moveset_Editor.StateActions
 			Type = data.Type;
 			Armor = data.Armor;
 			KnockbackArmor = data.KnockbackArmor;
-			ForceZ0 = data.ForceZ0;
+			IgnoreGrab = data.IgnoreGrab;
 			BoneA = data.BoneA;
 			BoneB = data.BoneB;
 			Radius = data.Radius;
@@ -79,7 +79,7 @@ namespace NASB_Moveset_Editor.StateActions
 			objToReturn.Type = Type;
 			objToReturn.Armor = Armor;
 			objToReturn.KnockbackArmor = KnockbackArmor;
-			objToReturn.ForceZ0 = ForceZ0;
+			objToReturn.IgnoreGrab = IgnoreGrab;
 			objToReturn.BoneA = BoneA;
 			objToReturn.BoneB = BoneB;
 			objToReturn.Radius = Radius;

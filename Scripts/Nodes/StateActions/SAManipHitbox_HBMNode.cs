@@ -28,6 +28,9 @@ namespace NASB_Moveset_Editor.StateActions
 		public SAManipHitbox.Manip Manip;
 		public int Hitbox;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource Source;
+		public string Bone;
+		public string Bone2;
+		[HideInInspector] public int Version;
 		
 		protected override void Init()
 		{
@@ -233,7 +236,11 @@ namespace NASB_Moveset_Editor.StateActions
 					variableCount += FloatId_node_Source.SetData((FSValue)Source, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 			}
+			++variableCount;
 			
+			Bone = data.Bone;
+			Bone2 = data.Bone2;
+			Version = data.Version;
 			return variableCount;
 		}
 		
@@ -369,6 +376,9 @@ namespace NASB_Moveset_Editor.StateActions
 					break;
 				}
 			}
+			objToReturn.Bone = Bone;
+			objToReturn.Bone2 = Bone2;
+			objToReturn.Version = Version;
 			return objToReturn;
 		}
 	}

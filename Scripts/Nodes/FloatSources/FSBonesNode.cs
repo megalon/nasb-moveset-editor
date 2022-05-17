@@ -30,11 +30,13 @@ namespace NASB_Moveset_Editor.FloatSources
 	{
 		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		public NASB_Parser.FloatSources.FSBones.Attributes Attribute;
+		public string Bone;
 		
 		protected override void Init()
 		{
 			base.Init();
 			TID = TypeId.BonesId;
+			Version = 1;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -50,6 +52,7 @@ namespace NASB_Moveset_Editor.FloatSources
 			int variableCount = 0;
 			
 			Attribute = data.Attribute;
+			Bone = data.Bone;
 			return variableCount;
 		}
 		
@@ -59,6 +62,7 @@ namespace NASB_Moveset_Editor.FloatSources
 			objToReturn.TID = TypeId.BonesId;
 			objToReturn.Version = Version;
 			objToReturn.Attribute = Attribute;
+			objToReturn.Bone = Bone;
 			return objToReturn;
 		}
 	}

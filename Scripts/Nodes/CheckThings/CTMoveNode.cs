@@ -31,12 +31,14 @@ namespace NASB_Moveset_Editor.CheckThings
 		[Input(connectionType = ConnectionType.Override)] public CheckThing NodeInput;
 		public string MovesetId;
 		public bool Previous;
+		public bool Not;
 		public List<string> Extras;
 		
 		protected override void Init()
 		{
 			base.Init();
 			TID = TypeId.MoveId;
+			Version = 1;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -53,6 +55,7 @@ namespace NASB_Moveset_Editor.CheckThings
 			
 			MovesetId = data.MovesetId;
 			Previous = data.Previous;
+			Not = data.Not;
 			Extras = data.Extras;
 			return variableCount;
 		}
@@ -64,6 +67,7 @@ namespace NASB_Moveset_Editor.CheckThings
 			objToReturn.Version = Version;
 			objToReturn.MovesetId = MovesetId;
 			objToReturn.Previous = Previous;
+			objToReturn.Not = Not;
 			objToReturn.Extras = Extras;
 			return objToReturn;
 		}

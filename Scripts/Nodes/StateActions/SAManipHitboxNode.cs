@@ -36,6 +36,7 @@ namespace NASB_Moveset_Editor.StateActions
 		{
 			base.Init();
 			TID = TypeId.ManipHitboxId;
+			Version = 1;
 		}
 		
 		public override object GetValue(NodePort port)

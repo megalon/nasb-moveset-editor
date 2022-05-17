@@ -22,22 +22,18 @@ using NASB_Moveset_Editor.Jumps;
 using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
-using static NASB_Parser.StateActions.StateAction;
+using static NASB_Parser.Jumps.Jump;
 
-namespace NASB_Moveset_Editor.StateActions
+namespace NASB_Moveset_Editor.Jumps
 {
-	public class SAStopJumpNode : StateActionNode
+	public class ClampMomentumJumpNode : JumpNode
 	{
-		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
-		public bool StopAll;
-		public string JumpId;
-		public List<string> JumpIds;
+		[Input(connectionType = ConnectionType.Override)] public Jump NodeInput;
 		
 		protected override void Init()
 		{
 			base.Init();
-			TID = TypeId.StopJumpId;
-			Version = 1;
+			TID = TypeId.ClampMomentumId;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -45,27 +41,21 @@ namespace NASB_Moveset_Editor.StateActions
 			return null;
 		}
 		
-		public int SetData(SAStopJump data, MovesetGraph graph, string assetPath, Vector2 nodeDepthXY)
+		public int SetData(ClampMomentumJump data, MovesetGraph graph, string assetPath, Vector2 nodeDepthXY)
 		{
-			name = NodeEditorUtilities.NodeDefaultName(typeof(SAStopJump));
+			name = NodeEditorUtilities.NodeDefaultName(typeof(ClampMomentumJump));
 			position.x = nodeDepthXY.x * Consts.NodeXOffset;
 			position.y = nodeDepthXY.y * Consts.NodeYOffset;
 			int variableCount = 0;
 			
-			StopAll = data.StopAll;
-			JumpId = data.JumpId;
-			JumpIds = data.JumpIds;
 			return variableCount;
 		}
 		
-		public new SAStopJump GetData()
+		public new ClampMomentumJump GetData()
 		{
-			SAStopJump objToReturn = new SAStopJump();
-			objToReturn.TID = TypeId.StopJumpId;
+			ClampMomentumJump objToReturn = new ClampMomentumJump();
+			objToReturn.TID = TypeId.ClampMomentumId;
 			objToReturn.Version = Version;
-			objToReturn.StopAll = StopAll;
-			objToReturn.JumpId = JumpId;
-			objToReturn.JumpIds = JumpIds;
 			return objToReturn;
 		}
 	}

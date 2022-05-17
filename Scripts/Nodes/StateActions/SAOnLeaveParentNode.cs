@@ -5,8 +5,6 @@
 // * 
 // * 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 using UnityEditor;
 using XNode;
@@ -26,16 +24,15 @@ using static NASB_Parser.StateActions.StateAction;
 
 namespace NASB_Moveset_Editor.StateActions
 {
-	public class SAOnCancelNode : StateActionNode
+	public class SAOnLeaveParentNode : StateActionNode
 	{
 		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
-		public string Id;
 		[Output(connectionType = ConnectionType.Override)] public StateAction Action;
 		
 		protected override void Init()
 		{
 			base.Init();
-			TID = TypeId.OnCancelId;
+			TID = TypeId.OnLeaveParentId;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -43,14 +40,13 @@ namespace NASB_Moveset_Editor.StateActions
 			return null;
 		}
 		
-		public int SetData(SAOnCancel data, MovesetGraph graph, string assetPath, Vector2 nodeDepthXY)
+		public int SetData(SAOnLeaveParent data, MovesetGraph graph, string assetPath, Vector2 nodeDepthXY)
 		{
-			name = NodeEditorUtilities.NodeDefaultName(typeof(SAOnCancel));
+			name = NodeEditorUtilities.NodeDefaultName(typeof(SAOnLeaveParent));
 			position.x = nodeDepthXY.x * Consts.NodeXOffset;
 			position.y = nodeDepthXY.y * Consts.NodeYOffset;
 			int variableCount = 0;
 			
-			Id = data.Id;
 			Action = data.Action;
 			
 			switch (Action.TID)
@@ -522,12 +518,11 @@ namespace NASB_Moveset_Editor.StateActions
 			return variableCount;
 		}
 		
-		public new SAOnCancel GetData()
+		public new SAOnLeaveParent GetData()
 		{
-			SAOnCancel objToReturn = new SAOnCancel();
-			objToReturn.TID = TypeId.OnCancelId;
+			SAOnLeaveParent objToReturn = new SAOnLeaveParent();
+			objToReturn.TID = TypeId.OnLeaveParentId;
 			objToReturn.Version = Version;
-			objToReturn.Id = Id;
 			if (GetPort("Action").ConnectionCount > 0)
 			{
 				StateActionNode StateAction_Node = (StateActionNode)GetPort("Action").GetConnection(0).node;

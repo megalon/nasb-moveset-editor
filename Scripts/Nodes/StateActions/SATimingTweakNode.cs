@@ -1270,6 +1270,18 @@ namespace NASB_Moveset_Editor.StateActions
 					AssetDatabase.AddObjectToAsset(MapAnimSimpleId_node_ActionA, assetPath);
 					variableCount += MapAnimSimpleId_node_ActionA.SetData((SAMapAnimationSimple)ActionA, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
+				case StateAction.TypeId.OnLeaveParentId:
+					SAOnLeaveParentNode OnLeaveParentId_node_ActionA = graph.AddNode<SAOnLeaveParentNode>();
+					GetPort("ActionA").Connect(OnLeaveParentId_node_ActionA.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(OnLeaveParentId_node_ActionA, assetPath);
+					variableCount += OnLeaveParentId_node_ActionA.SetData((SAOnLeaveParent)ActionA, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.PersistLocalFXId:
+					SAPersistLocalFXNode PersistLocalFXId_node_ActionA = graph.AddNode<SAPersistLocalFXNode>();
+					GetPort("ActionA").Connect(PersistLocalFXId_node_ActionA.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(PersistLocalFXId_node_ActionA, assetPath);
+					variableCount += PersistLocalFXId_node_ActionA.SetData((SAPersistLocalFX)ActionA, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				break;
 			}
 			++variableCount;
 			
@@ -1727,6 +1739,18 @@ namespace NASB_Moveset_Editor.StateActions
 					AssetDatabase.AddObjectToAsset(MapAnimSimpleId_node_ActionB, assetPath);
 					variableCount += MapAnimSimpleId_node_ActionB.SetData((SAMapAnimationSimple)ActionB, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
+				case StateAction.TypeId.OnLeaveParentId:
+					SAOnLeaveParentNode OnLeaveParentId_node_ActionB = graph.AddNode<SAOnLeaveParentNode>();
+					GetPort("ActionB").Connect(OnLeaveParentId_node_ActionB.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(OnLeaveParentId_node_ActionB, assetPath);
+					variableCount += OnLeaveParentId_node_ActionB.SetData((SAOnLeaveParent)ActionB, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.PersistLocalFXId:
+					SAPersistLocalFXNode PersistLocalFXId_node_ActionB = graph.AddNode<SAPersistLocalFXNode>();
+					GetPort("ActionB").Connect(PersistLocalFXId_node_ActionB.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(PersistLocalFXId_node_ActionB, assetPath);
+					variableCount += PersistLocalFXId_node_ActionB.SetData((SAPersistLocalFX)ActionB, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				break;
 			}
 			++variableCount;
 			
@@ -2183,6 +2207,18 @@ namespace NASB_Moveset_Editor.StateActions
 					GetPort("ActionEnd").Connect(MapAnimSimpleId_node_ActionEnd.GetPort("NodeInput"));
 					AssetDatabase.AddObjectToAsset(MapAnimSimpleId_node_ActionEnd, assetPath);
 					variableCount += MapAnimSimpleId_node_ActionEnd.SetData((SAMapAnimationSimple)ActionEnd, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.OnLeaveParentId:
+					SAOnLeaveParentNode OnLeaveParentId_node_ActionEnd = graph.AddNode<SAOnLeaveParentNode>();
+					GetPort("ActionEnd").Connect(OnLeaveParentId_node_ActionEnd.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(OnLeaveParentId_node_ActionEnd, assetPath);
+					variableCount += OnLeaveParentId_node_ActionEnd.SetData((SAOnLeaveParent)ActionEnd, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.PersistLocalFXId:
+					SAPersistLocalFXNode PersistLocalFXId_node_ActionEnd = graph.AddNode<SAPersistLocalFXNode>();
+					GetPort("ActionEnd").Connect(PersistLocalFXId_node_ActionEnd.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(PersistLocalFXId_node_ActionEnd, assetPath);
+					variableCount += PersistLocalFXId_node_ActionEnd.SetData((SAPersistLocalFX)ActionEnd, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
 				break;
 			}
 			
@@ -3014,6 +3050,14 @@ namespace NASB_Moveset_Editor.StateActions
 						SAMapAnimationSimpleNode MapAnimSimpleId_StateAction_Node = (SAMapAnimationSimpleNode)GetPort("ActionA").GetConnection(0).node;
 						objToReturn.ActionA = MapAnimSimpleId_StateAction_Node.GetData();
 					break;
+					case StateAction.TypeId.OnLeaveParentId:
+						SAOnLeaveParentNode OnLeaveParentId_StateAction_Node = (SAOnLeaveParentNode)GetPort("ActionA").GetConnection(0).node;
+						objToReturn.ActionA = OnLeaveParentId_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.PersistLocalFXId:
+						SAPersistLocalFXNode PersistLocalFXId_StateAction_Node = (SAPersistLocalFXNode)GetPort("ActionA").GetConnection(0).node;
+						objToReturn.ActionA = PersistLocalFXId_StateAction_Node.GetData();
+					break;
 					case StateAction.TypeId.BaseIdentifier:
 						StateActionNode BaseIdentifier_StateAction_Node = (StateActionNode)GetPort("ActionA").GetConnection(0).node;
 						objToReturn.ActionA = BaseIdentifier_StateAction_Node.GetData();
@@ -3325,6 +3369,14 @@ namespace NASB_Moveset_Editor.StateActions
 						SAMapAnimationSimpleNode MapAnimSimpleId_StateAction_Node = (SAMapAnimationSimpleNode)GetPort("ActionB").GetConnection(0).node;
 						objToReturn.ActionB = MapAnimSimpleId_StateAction_Node.GetData();
 					break;
+					case StateAction.TypeId.OnLeaveParentId:
+						SAOnLeaveParentNode OnLeaveParentId_StateAction_Node = (SAOnLeaveParentNode)GetPort("ActionB").GetConnection(0).node;
+						objToReturn.ActionB = OnLeaveParentId_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.PersistLocalFXId:
+						SAPersistLocalFXNode PersistLocalFXId_StateAction_Node = (SAPersistLocalFXNode)GetPort("ActionB").GetConnection(0).node;
+						objToReturn.ActionB = PersistLocalFXId_StateAction_Node.GetData();
+					break;
 					case StateAction.TypeId.BaseIdentifier:
 						StateActionNode BaseIdentifier_StateAction_Node = (StateActionNode)GetPort("ActionB").GetConnection(0).node;
 						objToReturn.ActionB = BaseIdentifier_StateAction_Node.GetData();
@@ -3635,6 +3687,14 @@ namespace NASB_Moveset_Editor.StateActions
 					case StateAction.TypeId.MapAnimSimpleId:
 						SAMapAnimationSimpleNode MapAnimSimpleId_StateAction_Node = (SAMapAnimationSimpleNode)GetPort("ActionEnd").GetConnection(0).node;
 						objToReturn.ActionEnd = MapAnimSimpleId_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.OnLeaveParentId:
+						SAOnLeaveParentNode OnLeaveParentId_StateAction_Node = (SAOnLeaveParentNode)GetPort("ActionEnd").GetConnection(0).node;
+						objToReturn.ActionEnd = OnLeaveParentId_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.PersistLocalFXId:
+						SAPersistLocalFXNode PersistLocalFXId_StateAction_Node = (SAPersistLocalFXNode)GetPort("ActionEnd").GetConnection(0).node;
+						objToReturn.ActionEnd = PersistLocalFXId_StateAction_Node.GetData();
 					break;
 					case StateAction.TypeId.BaseIdentifier:
 						StateActionNode BaseIdentifier_StateAction_Node = (StateActionNode)GetPort("ActionEnd").GetConnection(0).node;
