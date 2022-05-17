@@ -114,7 +114,7 @@ namespace NASB_Moveset_Editor
         public const int MaxDisplayNameLength = 12;
         public static List<string> NodesToIgnore = new List<string> { "BaseMovesetNode", "SerialMovesetNode", "CheckThingNode", "FloatSourceNode", "JumpNode", "ObjectSourceNode", "StateActionNode" };
 
-        public const string VERSION = "0.3.0";
+        public const string VERSION = "0.4.0";
         public const string PROJECT_NAME = "NASB Moveset Editor";
         public const string GRAPH_FOLDER_NAME = "Moveset Graphs";
 
