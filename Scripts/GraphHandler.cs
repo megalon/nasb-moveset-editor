@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEditor;
-using NASB_Parser;
+using MovesetParser;
 using System.IO;
 using System;
 using System.Collections.Generic;

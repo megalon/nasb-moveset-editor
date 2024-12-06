@@ -1,10 +1,10 @@
 // * 
 // * 
-// * This file was generated using NASB_Parser_to_xNode by megalon2d
-// * https://github.com/megalon/NASB_Parser_to_xNode
+// * This file was generated using MovesetParser_to_xNode by megalon2d
+// * https://github.com/megalon/MovesetParser_to_xNode
 // * 
 // * 
-using NASB_Parser.FloatSources;
+using MovesetParser.FloatSources;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,24 +12,24 @@ using UnityEngine;
 using UnityEditor;
 using XNode;
 using XNodeEditor;
-using NASB_Parser;
-using NASB_Parser.Jumps;
-using NASB_Parser.CheckThings;
-using NASB_Parser.StateActions;
-using NASB_Parser.ObjectSources;
+using MovesetParser;
+using MovesetParser.Jumps;
+using MovesetParser.CheckThings;
+using MovesetParser.StateActions;
+using MovesetParser.ObjectSources;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
 using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
-using static NASB_Parser.StateActions.StateAction;
+using static MovesetParser.StateActions.StateAction;
 
 namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAPlaySFXTimelineNode : StateActionNode
 	{
 		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
-		public NASB_Parser.StateActions.SAPlaySFXTimeline.ManipType Manip;
+		public MovesetParser.StateActions.SAPlaySFXTimeline.ManipType Manip;
 		public bool Loop;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource Source;
 		public string Timeline;

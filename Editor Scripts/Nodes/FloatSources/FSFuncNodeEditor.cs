@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NASB_Parser;
+using MovesetParser;
 using XNodeEditor;
 using NASB_Moveset_Editor.FloatSources;
 using UnityEditor;
@@ -13,7 +13,7 @@ namespace NASB_Moveset_Editor
     [CustomNodeEditor(typeof(FSFuncNode))]
     public class FSFuncNodeEditor : FloatSourceNodeEditor
     {
-        private NASB_Parser.FloatSources.FSFunc.FuncWay currentFunc;
+        private MovesetParser.FloatSources.FSFunc.FuncWay currentFunc;
 
         public override void OnCreate()
         {
@@ -35,7 +35,7 @@ namespace NASB_Moveset_Editor
                 if (iterator.type.Equals("Enum"))
                 {
                     iterator.intValue = EditorGUILayout.Popup(iterator.intValue, iterator.enumDisplayNames);
-                    currentFunc = (NASB_Parser.FloatSources.FSFunc.FuncWay)iterator.intValue;
+                    currentFunc = (MovesetParser.FloatSources.FSFunc.FuncWay)iterator.intValue;
 
                     if (!Utils.funcTextDict[currentFunc].ContainerContents["Formula"].tooltip.Equals(string.Empty))
                     {

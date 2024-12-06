@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using NASB_Parser;
+using MovesetParser;
 using System.IO;
 using System.Threading.Tasks;
 using XNode;
@@ -112,7 +112,7 @@ namespace NASB_Moveset_Editor
                         EditorGUILayout.LabelField($"Version {Consts.VERSION}", rightAlignedGUIStyle, GUILayout.MinWidth(0));
                     }
                     EditorGUILayout.EndHorizontal();
-                    EditorGUILayout.LabelField("NASB_Parser created by sc2ad");
+                    EditorGUILayout.LabelField("MovesetParser created by sc2ad");
                     EditorGUILayout.LabelField("xNode created by Siccity");
                     EditorGUILayout.Space(10);
                 }

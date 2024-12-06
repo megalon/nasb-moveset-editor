@@ -1,4 +1,4 @@
-using NASB_Parser;
+using MovesetParser;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;

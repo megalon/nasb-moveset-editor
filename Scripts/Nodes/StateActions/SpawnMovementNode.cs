@@ -1,7 +1,7 @@
 // * 
 // * 
-// * This file was generated using NASB_Parser_to_xNode by megalon2d
-// * https://github.com/megalon/NASB_Parser_to_xNode
+// * This file was generated using MovesetParser_to_xNode by megalon2d
+// * https://github.com/megalon/MovesetParser_to_xNode
 // * 
 // * 
 using System;
@@ -11,18 +11,18 @@ using UnityEngine;
 using UnityEditor;
 using XNode;
 using XNodeEditor;
-using NASB_Parser;
-using NASB_Parser.FloatSources;
-using NASB_Parser.Jumps;
-using NASB_Parser.CheckThings;
-using NASB_Parser.StateActions;
-using NASB_Parser.ObjectSources;
+using MovesetParser;
+using MovesetParser.FloatSources;
+using MovesetParser.Jumps;
+using MovesetParser.CheckThings;
+using MovesetParser.StateActions;
+using MovesetParser.ObjectSources;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
 using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
-using static NASB_Parser.StateActions.SpawnMovement;
+using static MovesetParser.StateActions.SpawnMovement;
 
 namespace NASB_Moveset_Editor.StateActions
 {
@@ -30,8 +30,8 @@ namespace NASB_Moveset_Editor.StateActions
 	{
 		[Input(connectionType = ConnectionType.Override)] public SpawnMovement NodeInput;
 		public string ToBone;
-		public NASB_Parser.Vector3 LocalOffset;
-		public NASB_Parser.Vector3 WorldOffset;
+		public MovesetParser.Vector3 LocalOffset;
+		public MovesetParser.Vector3 WorldOffset;
 		[Output(connectionType = ConnectionType.Override)] public MovementConfig Config;
 		
 		protected override void Init()

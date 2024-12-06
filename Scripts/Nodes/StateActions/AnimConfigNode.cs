@@ -1,7 +1,7 @@
 // * 
 // * 
-// * This file was generated using NASB_Parser_to_xNode by megalon2d
-// * https://github.com/megalon/NASB_Parser_to_xNode
+// * This file was generated using MovesetParser_to_xNode by megalon2d
+// * https://github.com/megalon/MovesetParser_to_xNode
 // * 
 // * 
 using System;
@@ -11,18 +11,18 @@ using UnityEngine;
 using UnityEditor;
 using XNode;
 using XNodeEditor;
-using NASB_Parser;
-using NASB_Parser.FloatSources;
-using NASB_Parser.Jumps;
-using NASB_Parser.CheckThings;
-using NASB_Parser.StateActions;
-using NASB_Parser.ObjectSources;
+using MovesetParser;
+using MovesetParser.FloatSources;
+using MovesetParser.Jumps;
+using MovesetParser.CheckThings;
+using MovesetParser.StateActions;
+using MovesetParser.ObjectSources;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
 using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
-using static NASB_Parser.StateActions.AnimConfig;
+using static MovesetParser.StateActions.AnimConfig;
 
 namespace NASB_Moveset_Editor.StateActions
 {
@@ -31,7 +31,7 @@ namespace NASB_Moveset_Editor.StateActions
 		[Input(connectionType = ConnectionType.Override)] public AnimConfig NodeInput;
 		public float Rate;
 		public float Weight;
-		public NASB_Parser.StateActions.AnimConfig.WrapMode Wrap;
+		public MovesetParser.StateActions.AnimConfig.WrapMode Wrap;
 		public bool ClingToFrames;
 		
 		protected override void Init()

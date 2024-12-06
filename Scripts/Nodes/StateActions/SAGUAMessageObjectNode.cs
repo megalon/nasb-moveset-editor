@@ -1,28 +1,28 @@
 // * 
 // * 
-// * This file was generated using NASB_Parser_to_xNode by megalon2d
-// * https://github.com/megalon/NASB_Parser_to_xNode
+// * This file was generated using MovesetParser_to_xNode by megalon2d
+// * https://github.com/megalon/MovesetParser_to_xNode
 // * 
 // * 
 using System;
 using System.Collections.Generic;
 using System.Text;
-using NASB_Parser.ObjectSources;
+using MovesetParser.ObjectSources;
 using UnityEngine;
 using UnityEditor;
 using XNode;
 using XNodeEditor;
-using NASB_Parser;
-using NASB_Parser.FloatSources;
-using NASB_Parser.Jumps;
-using NASB_Parser.CheckThings;
-using NASB_Parser.StateActions;
+using MovesetParser;
+using MovesetParser.FloatSources;
+using MovesetParser.Jumps;
+using MovesetParser.CheckThings;
+using MovesetParser.StateActions;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
 using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
-using static NASB_Parser.StateActions.SAGUAMessageObject;
+using static MovesetParser.StateActions.SAGUAMessageObject;
 
 namespace NASB_Moveset_Editor.StateActions
 {

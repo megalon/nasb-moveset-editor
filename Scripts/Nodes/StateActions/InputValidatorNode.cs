@@ -1,10 +1,10 @@
 // * 
 // * 
-// * This file was generated using NASB_Parser_to_xNode by megalon2d
-// * https://github.com/megalon/NASB_Parser_to_xNode
+// * This file was generated using MovesetParser_to_xNode by megalon2d
+// * https://github.com/megalon/MovesetParser_to_xNode
 // * 
 // * 
-using NASB_Parser.FloatSources;
+using MovesetParser.FloatSources;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,30 +12,30 @@ using UnityEngine;
 using UnityEditor;
 using XNode;
 using XNodeEditor;
-using NASB_Parser;
-using NASB_Parser.Jumps;
-using NASB_Parser.CheckThings;
-using NASB_Parser.StateActions;
-using NASB_Parser.ObjectSources;
+using MovesetParser;
+using MovesetParser.Jumps;
+using MovesetParser.CheckThings;
+using MovesetParser.StateActions;
+using MovesetParser.ObjectSources;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
 using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
-using static NASB_Parser.StateActions.InputValidator;
+using static MovesetParser.StateActions.InputValidator;
 
 namespace NASB_Moveset_Editor.StateActions
 {
 	public class InputValidatorNode : StateActionNode
 	{
 		[Input(connectionType = ConnectionType.Override)] public InputValidator NodeInput;
-		public NASB_Parser.StateActions.InputValidator.ValidatorInputType InputType;
+		public MovesetParser.StateActions.InputValidator.ValidatorInputType InputType;
 		public bool RawX;
-		public NASB_Parser.StateActions.InputValidator.CtrlSeg Segment;
-		public NASB_Parser.StateActions.InputValidator.ValidatorFloatCompare FloatCompare;
-		public NASB_Parser.StateActions.InputValidator.ValidatorButtonCompare ButtonCompare;
-		public NASB_Parser.StateActions.InputValidator.CtrlSegCompare SegCompare;
-		public NASB_Parser.StateActions.InputValidator.ValidatorMultiCompare MultiCompare;
+		public MovesetParser.StateActions.InputValidator.CtrlSeg Segment;
+		public MovesetParser.StateActions.InputValidator.ValidatorFloatCompare FloatCompare;
+		public MovesetParser.StateActions.InputValidator.ValidatorButtonCompare ButtonCompare;
+		public MovesetParser.StateActions.InputValidator.CtrlSegCompare SegCompare;
+		public MovesetParser.StateActions.InputValidator.ValidatorMultiCompare MultiCompare;
 		[Output(connectionType = ConnectionType.Override)] public FloatSource FloatContainer;
 		[Output(connectionType = ConnectionType.Multiple)] public List<InputValidator> Validators;
 		
