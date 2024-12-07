@@ -73,7 +73,7 @@ namespace NASB_Moveset_Editor
             IdState idState = new IdState();
             idState.Id = stateId;
 
-            data.States.Add(idState);
+            data.States = new IdState[] { idState };
 
             List<MovesetGraph> graphs = new List<MovesetGraph>();
 

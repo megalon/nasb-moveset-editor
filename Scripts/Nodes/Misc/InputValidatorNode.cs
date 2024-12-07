@@ -31,14 +31,16 @@ namespace NASB_Moveset_Editor.Misc
 	public class InputValidatorNode : BaseMovesetNode
 	{
 		[Input(connectionType = ConnectionType.Override)] public InputValidator NodeInput;
-		[Output(connectionType = ConnectionType.Override)] public InputType InputType;
+		public InputType InputType;
 		public bool RawX;
 		
 		protected override void Init()
 		{
 			base.Init();
+
 			// InputValidator should default to Inside, since zero is unused
-			SegCompare = CtrlSegCompare.Inside;
+			// TODO: THis is commented out for testing!
+			//SegCompare = CtrlSegCompare.Inside;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -54,13 +56,6 @@ namespace NASB_Moveset_Editor.Misc
 			int variableCount = 0;
 			
 			InputType = data.InputType;
-			
-			InputTypeNode node_InputType = graph.AddNode<InputTypeNode>();
-			GetPort("InputType").Connect(node_InputType.GetPort("NodeInput"));
-			AssetDatabase.AddObjectToAsset(node_InputType, assetPath);
-			variableCount += node_InputType.SetData(InputType, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
-			++variableCount;
-			
 			RawX = data.RawX;
 			return variableCount;
 		}
@@ -68,11 +63,7 @@ namespace NASB_Moveset_Editor.Misc
 		public InputValidator GetData()
 		{
 			InputValidator objToReturn = new InputValidator();
-			if (GetPort("InputType").ConnectionCount > 0)
-			{
-				InputTypeNode InputType_Node = (InputTypeNode)GetPort("InputType").GetConnection(0).node;
-				objToReturn.InputType = InputType_Node.GetData();
-			}
+			objToReturn.InputType = InputType;
 			objToReturn.RawX = RawX;
 			return objToReturn;
 		}

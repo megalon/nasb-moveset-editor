@@ -33,7 +33,7 @@ namespace NASB_Moveset_Editor.Misc
 		[Input(connectionType = ConnectionType.Override)] public AnimConfig NodeInput;
 		public float Rate;
 		public float Weight;
-		[Output(connectionType = ConnectionType.Override)] public WrapMode WrapMode;
+		public WrapMode WrapMode;
 		public bool ClingToFrames;
 		
 		protected override void Init()
@@ -56,13 +56,6 @@ namespace NASB_Moveset_Editor.Misc
 			Rate = data.Rate;
 			Weight = data.Weight;
 			WrapMode = data.WrapMode;
-			
-			WrapModeNode node_WrapMode = graph.AddNode<WrapModeNode>();
-			GetPort("WrapMode").Connect(node_WrapMode.GetPort("NodeInput"));
-			AssetDatabase.AddObjectToAsset(node_WrapMode, assetPath);
-			variableCount += node_WrapMode.SetData(WrapMode, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
-			++variableCount;
-			
 			ClingToFrames = data.ClingToFrames;
 			return variableCount;
 		}
@@ -72,11 +65,7 @@ namespace NASB_Moveset_Editor.Misc
 			AnimConfig objToReturn = new AnimConfig();
 			objToReturn.Rate = Rate;
 			objToReturn.Weight = Weight;
-			if (GetPort("WrapMode").ConnectionCount > 0)
-			{
-				WrapModeNode WrapMode_Node = (WrapModeNode)GetPort("WrapMode").GetConnection(0).node;
-				objToReturn.WrapMode = WrapMode_Node.GetData();
-			}
+			objToReturn.WrapMode = WrapMode;
 			objToReturn.ClingToFrames = ClingToFrames;
 			return objToReturn;
 		}

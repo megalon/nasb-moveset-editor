@@ -40,7 +40,7 @@ namespace NASB_Moveset_Editor.Misc
 		public bool Stop;
 		public bool LeaveParent;
 		public float InheritParentVelocity;
-		[Output(connectionType = ConnectionType.Override)] public StageLayer IgnoreStageLayer;
+		public StageLayer IgnoreStageLayer;
 		public float LeaveEdgeRestrict;
 		public bool SimpleFreeMovement;
 		public float SimpleRadius;
@@ -72,13 +72,6 @@ namespace NASB_Moveset_Editor.Misc
 			LeaveParent = data.LeaveParent;
 			InheritParentVelocity = data.InheritParentVelocity;
 			IgnoreStageLayer = data.IgnoreStageLayer;
-			
-			StageLayerNode node_IgnoreStageLayer = graph.AddNode<StageLayerNode>();
-			GetPort("IgnoreStageLayer").Connect(node_IgnoreStageLayer.GetPort("NodeInput"));
-			AssetDatabase.AddObjectToAsset(node_IgnoreStageLayer, assetPath);
-			variableCount += node_IgnoreStageLayer.SetData(IgnoreStageLayer, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
-			++variableCount;
-			
 			LeaveEdgeRestrict = data.LeaveEdgeRestrict;
 			SimpleFreeMovement = data.SimpleFreeMovement;
 			SimpleRadius = data.SimpleRadius;
@@ -97,11 +90,7 @@ namespace NASB_Moveset_Editor.Misc
 			objToReturn.Stop = Stop;
 			objToReturn.LeaveParent = LeaveParent;
 			objToReturn.InheritParentVelocity = InheritParentVelocity;
-			if (GetPort("IgnoreStageLayer").ConnectionCount > 0)
-			{
-				StageLayerNode StageLayer_Node = (StageLayerNode)GetPort("IgnoreStageLayer").GetConnection(0).node;
-				objToReturn.IgnoreStageLayer = StageLayer_Node.GetData();
-			}
+			objToReturn.IgnoreStageLayer = IgnoreStageLayer;
 			objToReturn.LeaveEdgeRestrict = LeaveEdgeRestrict;
 			objToReturn.SimpleFreeMovement = SimpleFreeMovement;
 			objToReturn.SimpleRadius = SimpleRadius;

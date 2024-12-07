@@ -25,7 +25,7 @@ using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
 using NASB_Moveset_Editor.Unity;
 using static MovesetParser.StateActions.StateAction;
-using static MovesetParser.StateActions.SAMapAnimation;
+using static MovesetParser.StateActions.SAMapAnimationSimple;
 
 namespace NASB_Moveset_Editor.StateActions
 {

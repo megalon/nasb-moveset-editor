@@ -30,7 +30,6 @@ namespace NASB_Moveset_Editor.Misc
 {
 	public class StandardInputTriggerConfigNode : BaseMovesetNode
 	{
-		// TODO: NOTE, this type for this may be wrong! It was "Misc" for some reason
 		[Input(connectionType = ConnectionType.Override)] public BaseMovesetNode NodeInput;
 		public byte[] DontCheckBytes;
 		

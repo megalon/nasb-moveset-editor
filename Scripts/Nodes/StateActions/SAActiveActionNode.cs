@@ -34,7 +34,7 @@ namespace NASB_Moveset_Editor.StateActions
 		[Output(connectionType = ConnectionType.Override)] public StateAction Action;
 		[Output(connectionType = ConnectionType.Override)] public FloatSourceContainer Frames;
 		public string Id;
-		[Output(connectionType = ConnectionType.Override)] public Phase Phase;
+		public Phase Phase;
 		
 		protected override void Init()
 		{
@@ -557,12 +557,6 @@ namespace NASB_Moveset_Editor.StateActions
 			
 			Id = data.Id;
 			Phase = data.Phase;
-			
-			PhaseNode node_Phase = graph.AddNode<PhaseNode>();
-			GetPort("Phase").Connect(node_Phase.GetPort("NodeInput"));
-			AssetDatabase.AddObjectToAsset(node_Phase, assetPath);
-			variableCount += node_Phase.SetData(Phase, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
-			
 			return variableCount;
 		}
 		
@@ -907,11 +901,7 @@ namespace NASB_Moveset_Editor.StateActions
 				objToReturn.Frames = FloatSourceContainer_Node.GetData();
 			}
 			objToReturn.Id = Id;
-			if (GetPort("Phase").ConnectionCount > 0)
-			{
-				PhaseNode Phase_Node = (PhaseNode)GetPort("Phase").GetConnection(0).node;
-				objToReturn.Phase = Phase_Node.GetData();
-			}
+			objToReturn.Phase = Phase;
 			return objToReturn;
 		}
 	}

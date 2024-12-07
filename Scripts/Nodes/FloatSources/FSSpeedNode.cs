@@ -31,7 +31,7 @@ namespace NASB_Moveset_Editor.FloatSources
 	public class FSSpeedNode : FloatSourceNode
 	{
 		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
-		[Output(connectionType = ConnectionType.Override)] public SpeedType SpeedType;
+		public SpeedType SpeedType;
 		
 		protected override void Init()
 		{
@@ -52,12 +52,6 @@ namespace NASB_Moveset_Editor.FloatSources
 			int variableCount = 0;
 			
 			SpeedType = data.SpeedType;
-			
-			SpeedTypeNode node_SpeedType = graph.AddNode<SpeedTypeNode>();
-			GetPort("SpeedType").Connect(node_SpeedType.GetPort("NodeInput"));
-			AssetDatabase.AddObjectToAsset(node_SpeedType, assetPath);
-			variableCount += node_SpeedType.SetData(SpeedType, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
-			
 			return variableCount;
 		}
 		
@@ -65,11 +59,7 @@ namespace NASB_Moveset_Editor.FloatSources
 		{
 			FSSpeed objToReturn = new FSSpeed();
 			objToReturn.TID = TypeId.FSSpeed;
-			if (GetPort("SpeedType").ConnectionCount > 0)
-			{
-				SpeedTypeNode SpeedType_Node = (SpeedTypeNode)GetPort("SpeedType").GetConnection(0).node;
-				objToReturn.SpeedType = SpeedType_Node.GetData();
-			}
+			objToReturn.SpeedType = SpeedType;
 			return objToReturn;
 		}
 	}

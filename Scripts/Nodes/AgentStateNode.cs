@@ -37,6 +37,7 @@ namespace NASB_Moveset_Editor
 		protected override void Init()
 		{
 			base.Init();
+			Timeline = new TimedAction[1];
 		}
 		
 		public override object GetValue(NodePort port)

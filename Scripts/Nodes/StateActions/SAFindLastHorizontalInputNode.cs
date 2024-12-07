@@ -31,8 +31,8 @@ namespace NASB_Moveset_Editor.StateActions
 	public class SAFindLastHorizontalInputNode : StateActionNode
 	{
 		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
-		[Output(connectionType = ConnectionType.Override)] public Search Search;
-		[Output(connectionType = ConnectionType.Override)] public Stick Stick;
+		public Search Search;
+		public Stick Stick;
 		public int ResultInScratch;
 		public int DurationFrames;
 		
@@ -55,21 +55,7 @@ namespace NASB_Moveset_Editor.StateActions
 			int variableCount = 0;
 			
 			Search = data.Search;
-			
-			SearchNode node_Search = graph.AddNode<SearchNode>();
-			GetPort("Search").Connect(node_Search.GetPort("NodeInput"));
-			AssetDatabase.AddObjectToAsset(node_Search, assetPath);
-			variableCount += node_Search.SetData(Search, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
-			++variableCount;
-			
 			Stick = data.Stick;
-			
-			StickNode node_Stick = graph.AddNode<StickNode>();
-			GetPort("Stick").Connect(node_Stick.GetPort("NodeInput"));
-			AssetDatabase.AddObjectToAsset(node_Stick, assetPath);
-			variableCount += node_Stick.SetData(Stick, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
-			++variableCount;
-			
 			ResultInScratch = data.ResultInScratch;
 			DurationFrames = data.DurationFrames;
 			return variableCount;
@@ -79,16 +65,8 @@ namespace NASB_Moveset_Editor.StateActions
 		{
 			SAFindLastHorizontalInput objToReturn = new SAFindLastHorizontalInput();
 			objToReturn.TID = TypeId.SAFindLastHorizontalInput;
-			if (GetPort("Search").ConnectionCount > 0)
-			{
-				SearchNode Search_Node = (SearchNode)GetPort("Search").GetConnection(0).node;
-				objToReturn.Search = Search_Node.GetData();
-			}
-			if (GetPort("Stick").ConnectionCount > 0)
-			{
-				StickNode Stick_Node = (StickNode)GetPort("Stick").GetConnection(0).node;
-				objToReturn.Stick = Stick_Node.GetData();
-			}
+			objToReturn.Search = Search;
+			objToReturn.Stick = Stick;
 			objToReturn.ResultInScratch = ResultInScratch;
 			objToReturn.DurationFrames = DurationFrames;
 			return objToReturn;

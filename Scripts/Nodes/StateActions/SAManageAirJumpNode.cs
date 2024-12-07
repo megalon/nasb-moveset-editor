@@ -31,7 +31,7 @@ namespace NASB_Moveset_Editor.StateActions
 	public class SAManageAirJumpNode : StateActionNode
 	{
 		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
-		[Output(connectionType = ConnectionType.Override)] public Manage Manage;
+		public Manage Manage;
 		
 		protected override void Init()
 		{
@@ -52,12 +52,6 @@ namespace NASB_Moveset_Editor.StateActions
 			int variableCount = 0;
 			
 			Manage = data.Manage;
-			
-			ManageNode node_Manage = graph.AddNode<ManageNode>();
-			GetPort("Manage").Connect(node_Manage.GetPort("NodeInput"));
-			AssetDatabase.AddObjectToAsset(node_Manage, assetPath);
-			variableCount += node_Manage.SetData(Manage, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
-			
 			return variableCount;
 		}
 		
@@ -65,11 +59,7 @@ namespace NASB_Moveset_Editor.StateActions
 		{
 			SAManageAirJump objToReturn = new SAManageAirJump();
 			objToReturn.TID = TypeId.SAManageAirJump;
-			if (GetPort("Manage").ConnectionCount > 0)
-			{
-				ManageNode Manage_Node = (ManageNode)GetPort("Manage").GetConnection(0).node;
-				objToReturn.Manage = Manage_Node.GetData();
-			}
+			objToReturn.Manage = Manage;
 			return objToReturn;
 		}
 	}

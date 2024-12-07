@@ -32,7 +32,7 @@ namespace NASB_Moveset_Editor.StateActions
 	{
 		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public string Id;
-		[Output(connectionType = ConnectionType.Override)] public LocalFXAction LocalFXAction;
+		public LocalFXAction LocalFXAction;
 		
 		protected override void Init()
 		{
@@ -54,12 +54,6 @@ namespace NASB_Moveset_Editor.StateActions
 			
 			Id = data.Id;
 			LocalFXAction = data.LocalFXAction;
-			
-			LocalFXActionNode node_LocalFXAction = graph.AddNode<LocalFXActionNode>();
-			GetPort("LocalFXAction").Connect(node_LocalFXAction.GetPort("NodeInput"));
-			AssetDatabase.AddObjectToAsset(node_LocalFXAction, assetPath);
-			variableCount += node_LocalFXAction.SetData(LocalFXAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
-			
 			return variableCount;
 		}
 		
@@ -68,11 +62,7 @@ namespace NASB_Moveset_Editor.StateActions
 			SALocalFX objToReturn = new SALocalFX();
 			objToReturn.TID = TypeId.SALocalFX;
 			objToReturn.Id = Id;
-			if (GetPort("LocalFXAction").ConnectionCount > 0)
-			{
-				LocalFXActionNode LocalFXAction_Node = (LocalFXActionNode)GetPort("LocalFXAction").GetConnection(0).node;
-				objToReturn.LocalFXAction = LocalFXAction_Node.GetData();
-			}
+			objToReturn.LocalFXAction = LocalFXAction;
 			return objToReturn;
 		}
 	}
