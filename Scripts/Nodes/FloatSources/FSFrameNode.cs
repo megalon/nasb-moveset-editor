@@ -1,39 +1,41 @@
 // * 
 // * 
-// * This file was generated using MovesetParser_to_xNode by megalon2d
-// * https://github.com/megalon/MovesetParser_to_xNode
+// * This file was generated using NASB_Parser_to_xNode by megalon2d
+// * https://github.com/megalon/NASB_Parser_to_xNode
 // * 
 // * 
-using System;
-using System.Collections.Generic;
-using System.Text;
+using MovesetParser.BulkSerialize;
 using UnityEngine;
 using UnityEditor;
 using XNode;
 using XNodeEditor;
 using MovesetParser;
+using MovesetParser.CheckThings;
 using MovesetParser.FloatSources;
 using MovesetParser.Jumps;
-using MovesetParser.CheckThings;
+using MovesetParser.Misc;
 using MovesetParser.StateActions;
 using MovesetParser.ObjectSources;
+using MovesetParser.Unity;
+using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
-using NASB_Moveset_Editor.CheckThings;
+using NASB_Moveset_Editor.Misc;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
-using static MovesetParser.FloatSources.FSValue;
+using NASB_Moveset_Editor.Unity;
 using static MovesetParser.FloatSources.FloatSource;
 
 namespace NASB_Moveset_Editor.FloatSources
 {
-	public class FSFrameNode : FSValueNode
+	public class FSFrameNode : FloatSourceNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		
 		protected override void Init()
 		{
 			base.Init();
-			TID = TypeId.FrameId;
+			TID = TypeId.FSFrame;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -41,7 +43,7 @@ namespace NASB_Moveset_Editor.FloatSources
 			return null;
 		}
 		
-		public int SetData(FSFrame data, MovesetGraph graph, string assetPath, Vector2 nodeDepthXY)
+		public int SetData(FSFrame data, MovesetGraph graph, string assetPath, UnityEngine.Vector2 nodeDepthXY)
 		{
 			name = NodeEditorUtilities.NodeDefaultName(typeof(FSFrame));
 			position.x = nodeDepthXY.x * Consts.NodeXOffset;
@@ -56,8 +58,7 @@ namespace NASB_Moveset_Editor.FloatSources
 		public new FSFrame GetData()
 		{
 			FSFrame objToReturn = new FSFrame();
-			objToReturn.TID = TypeId.FrameId;
-			objToReturn.Version = Version;
+			objToReturn.TID = TypeId.FSFrame;
 			objToReturn.Value = Value;
 			return objToReturn;
 		}

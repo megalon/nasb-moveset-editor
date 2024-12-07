@@ -1,27 +1,29 @@
 // * 
 // * 
-// * This file was generated using MovesetParser_to_xNode by megalon2d
-// * https://github.com/megalon/MovesetParser_to_xNode
+// * This file was generated using NASB_Parser_to_xNode by megalon2d
+// * https://github.com/megalon/NASB_Parser_to_xNode
 // * 
 // * 
-using MovesetParser.FloatSources;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using MovesetParser.BulkSerialize;
 using UnityEngine;
 using UnityEditor;
 using XNode;
 using XNodeEditor;
 using MovesetParser;
-using MovesetParser.Jumps;
 using MovesetParser.CheckThings;
+using MovesetParser.FloatSources;
+using MovesetParser.Jumps;
+using MovesetParser.Misc;
 using MovesetParser.StateActions;
 using MovesetParser.ObjectSources;
+using MovesetParser.Unity;
+using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
-using NASB_Moveset_Editor.CheckThings;
+using NASB_Moveset_Editor.Misc;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
+using NASB_Moveset_Editor.Unity;
 using static MovesetParser.FloatSources.FloatSource;
 
 namespace NASB_Moveset_Editor.FloatSources
@@ -29,13 +31,13 @@ namespace NASB_Moveset_Editor.FloatSources
 	public class FSAnimNode : FloatSourceNode
 	{
 		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
-		public string Anim;
-		public MovesetParser.FloatSources.FSAnim.AnimAttr Attribute;
+		public string Animation;
+		public MovesetParser.FloatSources.FSAnim.AnimationAttribute Attribute;
 		
 		protected override void Init()
 		{
 			base.Init();
-			TID = TypeId.AnimId;
+			TID = TypeId.FSAnim;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -43,14 +45,14 @@ namespace NASB_Moveset_Editor.FloatSources
 			return null;
 		}
 		
-		public int SetData(FSAnim data, MovesetGraph graph, string assetPath, Vector2 nodeDepthXY)
+		public int SetData(FSAnim data, MovesetGraph graph, string assetPath, UnityEngine.Vector2 nodeDepthXY)
 		{
 			name = NodeEditorUtilities.NodeDefaultName(typeof(FSAnim));
 			position.x = nodeDepthXY.x * Consts.NodeXOffset;
 			position.y = nodeDepthXY.y * Consts.NodeYOffset;
 			int variableCount = 0;
 			
-			Anim = data.Anim;
+			Animation = data.Animation;
 			Attribute = data.Attribute;
 			return variableCount;
 		}
@@ -58,9 +60,8 @@ namespace NASB_Moveset_Editor.FloatSources
 		public new FSAnim GetData()
 		{
 			FSAnim objToReturn = new FSAnim();
-			objToReturn.TID = TypeId.AnimId;
-			objToReturn.Version = Version;
-			objToReturn.Anim = Anim;
+			objToReturn.TID = TypeId.FSAnim;
+			objToReturn.Animation = Animation;
 			objToReturn.Attribute = Attribute;
 			return objToReturn;
 		}

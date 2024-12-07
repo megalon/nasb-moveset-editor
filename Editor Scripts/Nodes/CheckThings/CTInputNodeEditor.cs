@@ -3,6 +3,7 @@ using MovesetParser.StateActions;
 using System.Linq;
 using UnityEditor;
 using XNodeEditor;
+using MovesetParser.Misc;
 
 namespace NASB_Moveset_Editor
 {

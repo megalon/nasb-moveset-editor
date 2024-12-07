@@ -68,7 +68,7 @@ namespace NASB_Moveset_Editor
 
         private void CreateGraph()
         {
-            SerialMoveset data = new SerialMoveset();
+            Moveset data = new Moveset();
 
             IdState idState = new IdState();
             idState.Id = stateId;

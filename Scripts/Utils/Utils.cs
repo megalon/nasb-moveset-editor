@@ -112,7 +112,7 @@ namespace NASB_Moveset_Editor
         public const float NodeClusterYSpacing = 50f;
         public const float NodeVarHeight = 20f;
         public const int MaxDisplayNameLength = 12;
-        public static List<string> NodesToIgnore = new List<string> { "BaseMovesetNode", "SerialMovesetNode", "CheckThingNode", "FloatSourceNode", "JumpNode", "ObjectSourceNode", "StateActionNode" };
+        public static List<string> NodesToIgnore = new List<string> { "BaseMovesetNode", "MovesetNode", "CheckThingNode", "FloatSourceNode", "JumpNode", "ObjectSourceNode", "StateActionNode" };
 
         public const string VERSION = "0.4.0";
         public const string PROJECT_NAME = "NASB Moveset Editor";

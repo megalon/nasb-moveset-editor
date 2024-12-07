@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using XNodeEditor;
+using MovesetParser.Misc;
 
 namespace NASB_Moveset_Editor
 {

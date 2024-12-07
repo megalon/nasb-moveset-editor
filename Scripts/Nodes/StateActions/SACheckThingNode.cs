@@ -1,13 +1,11 @@
 // * 
 // * 
-// * This file was generated using MovesetParser_to_xNode by megalon2d
-// * https://github.com/megalon/MovesetParser_to_xNode
+// * This file was generated using NASB_Parser_to_xNode by megalon2d
+// * https://github.com/megalon/NASB_Parser_to_xNode
 // * 
 // * 
+using MovesetParser.BulkSerialize;
 using MovesetParser.CheckThings;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 using UnityEditor;
 using XNode;
@@ -15,13 +13,17 @@ using XNodeEditor;
 using MovesetParser;
 using MovesetParser.FloatSources;
 using MovesetParser.Jumps;
+using MovesetParser.Misc;
 using MovesetParser.StateActions;
 using MovesetParser.ObjectSources;
+using MovesetParser.Unity;
+using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
-using NASB_Moveset_Editor.CheckThings;
+using NASB_Moveset_Editor.Misc;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
+using NASB_Moveset_Editor.Unity;
 using static MovesetParser.StateActions.StateAction;
 
 namespace NASB_Moveset_Editor.StateActions
@@ -37,7 +39,7 @@ namespace NASB_Moveset_Editor.StateActions
 		protected override void Init()
 		{
 			base.Init();
-			TID = TypeId.CheckId;
+			TID = TypeId.SACheckThing;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -45,7 +47,7 @@ namespace NASB_Moveset_Editor.StateActions
 			return null;
 		}
 		
-		public int SetData(SACheckThing data, MovesetGraph graph, string assetPath, Vector2 nodeDepthXY)
+		public int SetData(SACheckThing data, MovesetGraph graph, string assetPath, UnityEngine.Vector2 nodeDepthXY)
 		{
 			name = NodeEditorUtilities.NodeDefaultName(typeof(SACheckThing));
 			position.x = nodeDepthXY.x * Consts.NodeXOffset;
@@ -56,65 +58,71 @@ namespace NASB_Moveset_Editor.StateActions
 			
 			switch (CheckThing.TID)
 			{
-				case CheckThing.TypeId.MultipleId:
-					CTMultipleNode MultipleId_node_CheckThing = graph.AddNode<CTMultipleNode>();
-					GetPort("CheckThing").Connect(MultipleId_node_CheckThing.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(MultipleId_node_CheckThing, assetPath);
-					variableCount += MultipleId_node_CheckThing.SetData((CTMultiple)CheckThing, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				case CheckThing.TypeId.CheckThing:
+					CheckThingNode CheckThing_node_CheckThing = graph.AddNode<CheckThingNode>();
+					GetPort("CheckThing").Connect(CheckThing_node_CheckThing.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(CheckThing_node_CheckThing, assetPath);
+					variableCount += CheckThing_node_CheckThing.SetData((CheckThing)CheckThing, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 				break;
-				case CheckThing.TypeId.CompareId:
-					CTCompareFloatNode CompareId_node_CheckThing = graph.AddNode<CTCompareFloatNode>();
-					GetPort("CheckThing").Connect(CompareId_node_CheckThing.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CompareId_node_CheckThing, assetPath);
-					variableCount += CompareId_node_CheckThing.SetData((CTCompareFloat)CheckThing, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				case CheckThing.TypeId.CTMultiple:
+					CTMultipleNode CTMultiple_node_CheckThing = graph.AddNode<CTMultipleNode>();
+					GetPort("CheckThing").Connect(CTMultiple_node_CheckThing.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(CTMultiple_node_CheckThing, assetPath);
+					variableCount += CTMultiple_node_CheckThing.SetData((CTMultiple)CheckThing, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 				break;
-				case CheckThing.TypeId.DoubleTapId:
-					CTDoubleTapIdNode DoubleTapId_node_CheckThing = graph.AddNode<CTDoubleTapIdNode>();
-					GetPort("CheckThing").Connect(DoubleTapId_node_CheckThing.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(DoubleTapId_node_CheckThing, assetPath);
-					variableCount += DoubleTapId_node_CheckThing.SetData((CTDoubleTapId)CheckThing, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				case CheckThing.TypeId.CTCompareFloat:
+					CTCompareFloatNode CTCompareFloat_node_CheckThing = graph.AddNode<CTCompareFloatNode>();
+					GetPort("CheckThing").Connect(CTCompareFloat_node_CheckThing.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(CTCompareFloat_node_CheckThing, assetPath);
+					variableCount += CTCompareFloat_node_CheckThing.SetData((CTCompareFloat)CheckThing, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 				break;
-				case CheckThing.TypeId.InputId:
-					CTInputNode InputId_node_CheckThing = graph.AddNode<CTInputNode>();
-					GetPort("CheckThing").Connect(InputId_node_CheckThing.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(InputId_node_CheckThing, assetPath);
-					variableCount += InputId_node_CheckThing.SetData((CTInput)CheckThing, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				case CheckThing.TypeId.CTDoubleTap:
+					CTDoubleTapNode CTDoubleTap_node_CheckThing = graph.AddNode<CTDoubleTapNode>();
+					GetPort("CheckThing").Connect(CTDoubleTap_node_CheckThing.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(CTDoubleTap_node_CheckThing, assetPath);
+					variableCount += CTDoubleTap_node_CheckThing.SetData((CTDoubleTap)CheckThing, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 				break;
-				case CheckThing.TypeId.InputSeriesId:
-					CTInputSeriesNode InputSeriesId_node_CheckThing = graph.AddNode<CTInputSeriesNode>();
-					GetPort("CheckThing").Connect(InputSeriesId_node_CheckThing.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(InputSeriesId_node_CheckThing, assetPath);
-					variableCount += InputSeriesId_node_CheckThing.SetData((CTInputSeries)CheckThing, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				case CheckThing.TypeId.CTInput:
+					CTInputNode CTInput_node_CheckThing = graph.AddNode<CTInputNode>();
+					GetPort("CheckThing").Connect(CTInput_node_CheckThing.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(CTInput_node_CheckThing, assetPath);
+					variableCount += CTInput_node_CheckThing.SetData((CTInput)CheckThing, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 				break;
-				case CheckThing.TypeId.TechId:
-					CTCheckTechNode TechId_node_CheckThing = graph.AddNode<CTCheckTechNode>();
-					GetPort("CheckThing").Connect(TechId_node_CheckThing.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(TechId_node_CheckThing, assetPath);
-					variableCount += TechId_node_CheckThing.SetData((CTCheckTech)CheckThing, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				case CheckThing.TypeId.CTInputSeries:
+					CTInputSeriesNode CTInputSeries_node_CheckThing = graph.AddNode<CTInputSeriesNode>();
+					GetPort("CheckThing").Connect(CTInputSeries_node_CheckThing.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(CTInputSeries_node_CheckThing, assetPath);
+					variableCount += CTInputSeries_node_CheckThing.SetData((CTInputSeries)CheckThing, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 				break;
-				case CheckThing.TypeId.GrabId:
-					CTGrabIdNode GrabId_node_CheckThing = graph.AddNode<CTGrabIdNode>();
-					GetPort("CheckThing").Connect(GrabId_node_CheckThing.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(GrabId_node_CheckThing, assetPath);
-					variableCount += GrabId_node_CheckThing.SetData((CTGrabId)CheckThing, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				case CheckThing.TypeId.CTCheckTech:
+					CTCheckTechNode CTCheckTech_node_CheckThing = graph.AddNode<CTCheckTechNode>();
+					GetPort("CheckThing").Connect(CTCheckTech_node_CheckThing.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(CTCheckTech_node_CheckThing, assetPath);
+					variableCount += CTCheckTech_node_CheckThing.SetData((CTCheckTech)CheckThing, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 				break;
-				case CheckThing.TypeId.GrabAgentId:
-					CTGrabbedAgentNode GrabAgentId_node_CheckThing = graph.AddNode<CTGrabbedAgentNode>();
-					GetPort("CheckThing").Connect(GrabAgentId_node_CheckThing.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(GrabAgentId_node_CheckThing, assetPath);
-					variableCount += GrabAgentId_node_CheckThing.SetData((CTGrabbedAgent)CheckThing, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				case CheckThing.TypeId.CTGrab:
+					CTGrabNode CTGrab_node_CheckThing = graph.AddNode<CTGrabNode>();
+					GetPort("CheckThing").Connect(CTGrab_node_CheckThing.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(CTGrab_node_CheckThing, assetPath);
+					variableCount += CTGrab_node_CheckThing.SetData((CTGrab)CheckThing, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 				break;
-				case CheckThing.TypeId.SkinId:
-					CTSkinNode SkinId_node_CheckThing = graph.AddNode<CTSkinNode>();
-					GetPort("CheckThing").Connect(SkinId_node_CheckThing.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SkinId_node_CheckThing, assetPath);
-					variableCount += SkinId_node_CheckThing.SetData((CTSkin)CheckThing, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				case CheckThing.TypeId.CTGrabbedAgent:
+					CTGrabbedAgentNode CTGrabbedAgent_node_CheckThing = graph.AddNode<CTGrabbedAgentNode>();
+					GetPort("CheckThing").Connect(CTGrabbedAgent_node_CheckThing.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(CTGrabbedAgent_node_CheckThing, assetPath);
+					variableCount += CTGrabbedAgent_node_CheckThing.SetData((CTGrabbedAgent)CheckThing, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 				break;
-				case CheckThing.TypeId.MoveId:
-					CTMoveNode MoveId_node_CheckThing = graph.AddNode<CTMoveNode>();
-					GetPort("CheckThing").Connect(MoveId_node_CheckThing.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(MoveId_node_CheckThing, assetPath);
-					variableCount += MoveId_node_CheckThing.SetData((CTMove)CheckThing, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				case CheckThing.TypeId.CTSkin:
+					CTSkinNode CTSkin_node_CheckThing = graph.AddNode<CTSkinNode>();
+					GetPort("CheckThing").Connect(CTSkin_node_CheckThing.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(CTSkin_node_CheckThing, assetPath);
+					variableCount += CTSkin_node_CheckThing.SetData((CTSkin)CheckThing, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case CheckThing.TypeId.CTMove:
+					CTMoveNode CTMove_node_CheckThing = graph.AddNode<CTMoveNode>();
+					GetPort("CheckThing").Connect(CTMove_node_CheckThing.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(CTMove_node_CheckThing, assetPath);
+					variableCount += CTMove_node_CheckThing.SetData((CTMove)CheckThing, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 				break;
 			}
 			++variableCount;
@@ -123,467 +131,491 @@ namespace NASB_Moveset_Editor.StateActions
 			
 			switch (Action.TID)
 			{
-				case StateAction.TypeId.DebugId:
-					SADebugMessageNode DebugId_node_Action = graph.AddNode<SADebugMessageNode>();
-					GetPort("Action").Connect(DebugId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(DebugId_node_Action, assetPath);
-					variableCount += DebugId_node_Action.SetData((SADebugMessage)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.PlayAnimId:
-					SAPlayAnimNode PlayAnimId_node_Action = graph.AddNode<SAPlayAnimNode>();
-					GetPort("Action").Connect(PlayAnimId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(PlayAnimId_node_Action, assetPath);
-					variableCount += PlayAnimId_node_Action.SetData((SAPlayAnim)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.RootAnimId:
-					SAPlayRootAnimNode RootAnimId_node_Action = graph.AddNode<SAPlayRootAnimNode>();
-					GetPort("Action").Connect(RootAnimId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(RootAnimId_node_Action, assetPath);
-					variableCount += RootAnimId_node_Action.SetData((SAPlayRootAnim)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SnapAnimWeightsId:
-					SASnapAnimWeightsNode SnapAnimWeightsId_node_Action = graph.AddNode<SASnapAnimWeightsNode>();
-					GetPort("Action").Connect(SnapAnimWeightsId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SnapAnimWeightsId_node_Action, assetPath);
-					variableCount += SnapAnimWeightsId_node_Action.SetData((SASnapAnimWeights)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.StandardInputId:
-					SAStandardInputNode StandardInputId_node_Action = graph.AddNode<SAStandardInputNode>();
-					GetPort("Action").Connect(StandardInputId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(StandardInputId_node_Action, assetPath);
-					variableCount += StandardInputId_node_Action.SetData((SAStandardInput)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.InputId:
-					SAInputActionNode InputId_node_Action = graph.AddNode<SAInputActionNode>();
-					GetPort("Action").Connect(InputId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(InputId_node_Action, assetPath);
-					variableCount += InputId_node_Action.SetData((SAInputAction)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.DeactInputId:
-					SADeactivateInputActionNode DeactInputId_node_Action = graph.AddNode<SADeactivateInputActionNode>();
-					GetPort("Action").Connect(DeactInputId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(DeactInputId_node_Action, assetPath);
-					variableCount += DeactInputId_node_Action.SetData((SADeactivateInputAction)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.InputEventFromFrameId:
-					SAAddInputEventFromFrameNode InputEventFromFrameId_node_Action = graph.AddNode<SAAddInputEventFromFrameNode>();
-					GetPort("Action").Connect(InputEventFromFrameId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(InputEventFromFrameId_node_Action, assetPath);
-					variableCount += InputEventFromFrameId_node_Action.SetData((SAAddInputEventFromFrame)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.CancelStateId:
-					SACancelToStateNode CancelStateId_node_Action = graph.AddNode<SACancelToStateNode>();
-					GetPort("Action").Connect(CancelStateId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CancelStateId_node_Action, assetPath);
-					variableCount += CancelStateId_node_Action.SetData((SACancelToState)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.CustomCallId:
-					SACustomCallNode CustomCallId_node_Action = graph.AddNode<SACustomCallNode>();
-					GetPort("Action").Connect(CustomCallId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CustomCallId_node_Action, assetPath);
-					variableCount += CustomCallId_node_Action.SetData((SACustomCall)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.TimerId:
-					SATimedActionNode TimerId_node_Action = graph.AddNode<SATimedActionNode>();
-					GetPort("Action").Connect(TimerId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(TimerId_node_Action, assetPath);
-					variableCount += TimerId_node_Action.SetData((SATimedAction)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.OrderId:
-					SAOrderedSensitiveNode OrderId_node_Action = graph.AddNode<SAOrderedSensitiveNode>();
-					GetPort("Action").Connect(OrderId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OrderId_node_Action, assetPath);
-					variableCount += OrderId_node_Action.SetData((SAOrderedSensitive)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ProxyId:
-					SAProxyMoveNode ProxyId_node_Action = graph.AddNode<SAProxyMoveNode>();
-					GetPort("Action").Connect(ProxyId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ProxyId_node_Action, assetPath);
-					variableCount += ProxyId_node_Action.SetData((SAProxyMove)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.CheckId:
-					SACheckThingNode CheckId_node_Action = graph.AddNode<SACheckThingNode>();
-					GetPort("Action").Connect(CheckId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CheckId_node_Action, assetPath);
-					variableCount += CheckId_node_Action.SetData((SACheckThing)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ActiveActionId:
-					SAActiveActionNode ActiveActionId_node_Action = graph.AddNode<SAActiveActionNode>();
-					GetPort("Action").Connect(ActiveActionId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ActiveActionId_node_Action, assetPath);
-					variableCount += ActiveActionId_node_Action.SetData((SAActiveAction)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.DeactivateActionId:
-					SADeactivateActionNode DeactivateActionId_node_Action = graph.AddNode<SADeactivateActionNode>();
-					GetPort("Action").Connect(DeactivateActionId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(DeactivateActionId_node_Action, assetPath);
-					variableCount += DeactivateActionId_node_Action.SetData((SADeactivateAction)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SetFloatId:
-					SASetFloatTargetNode SetFloatId_node_Action = graph.AddNode<SASetFloatTargetNode>();
-					GetPort("Action").Connect(SetFloatId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SetFloatId_node_Action, assetPath);
-					variableCount += SetFloatId_node_Action.SetData((SASetFloatTarget)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.OnBounceId:
-					SAOnBounceNode OnBounceId_node_Action = graph.AddNode<SAOnBounceNode>();
-					GetPort("Action").Connect(OnBounceId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OnBounceId_node_Action, assetPath);
-					variableCount += OnBounceId_node_Action.SetData((SAOnBounce)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.OnLeaveEdgeId:
-					SAOnLeaveEdgeNode OnLeaveEdgeId_node_Action = graph.AddNode<SAOnLeaveEdgeNode>();
-					GetPort("Action").Connect(OnLeaveEdgeId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OnLeaveEdgeId_node_Action, assetPath);
-					variableCount += OnLeaveEdgeId_node_Action.SetData((SAOnLeaveEdge)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.OnStoppedAtEdgeId:
-					SAOnStoppedAtLedgeNode OnStoppedAtEdgeId_node_Action = graph.AddNode<SAOnStoppedAtLedgeNode>();
-					GetPort("Action").Connect(OnStoppedAtEdgeId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OnStoppedAtEdgeId_node_Action, assetPath);
-					variableCount += OnStoppedAtEdgeId_node_Action.SetData((SAOnStoppedAtLedge)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.OnLandId:
-					SAOnLandNode OnLandId_node_Action = graph.AddNode<SAOnLandNode>();
-					GetPort("Action").Connect(OnLandId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OnLandId_node_Action, assetPath);
-					variableCount += OnLandId_node_Action.SetData((SAOnLand)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.OnCancelId:
-					SAOnCancelNode OnCancelId_node_Action = graph.AddNode<SAOnCancelNode>();
-					GetPort("Action").Connect(OnCancelId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OnCancelId_node_Action, assetPath);
-					variableCount += OnCancelId_node_Action.SetData((SAOnCancel)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.RefreshAtkId:
-					SARefreshAttackNode RefreshAtkId_node_Action = graph.AddNode<SARefreshAttackNode>();
-					GetPort("Action").Connect(RefreshAtkId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(RefreshAtkId_node_Action, assetPath);
-					variableCount += RefreshAtkId_node_Action.SetData((SARefreshAttack)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.EndAtkId:
-					SAEndAttackNode EndAtkId_node_Action = graph.AddNode<SAEndAttackNode>();
-					GetPort("Action").Connect(EndAtkId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(EndAtkId_node_Action, assetPath);
-					variableCount += EndAtkId_node_Action.SetData((SAEndAttack)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SetHitboxCountId:
-					SASetHitboxCountNode SetHitboxCountId_node_Action = graph.AddNode<SASetHitboxCountNode>();
-					GetPort("Action").Connect(SetHitboxCountId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SetHitboxCountId_node_Action, assetPath);
-					variableCount += SetHitboxCountId_node_Action.SetData((SASetHitboxCount)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ConfigHitboxId:
-					SAConfigHitboxNode ConfigHitboxId_node_Action = graph.AddNode<SAConfigHitboxNode>();
-					GetPort("Action").Connect(ConfigHitboxId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ConfigHitboxId_node_Action, assetPath);
-					variableCount += ConfigHitboxId_node_Action.SetData((SAConfigHitbox)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SetAtkPropId:
-					SASetAttackPropNode SetAtkPropId_node_Action = graph.AddNode<SASetAttackPropNode>();
-					GetPort("Action").Connect(SetAtkPropId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SetAtkPropId_node_Action, assetPath);
-					variableCount += SetAtkPropId_node_Action.SetData((SASetAttackProp)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ManipHitboxId:
-					SAManipHitboxNode ManipHitboxId_node_Action = graph.AddNode<SAManipHitboxNode>();
-					GetPort("Action").Connect(ManipHitboxId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ManipHitboxId_node_Action, assetPath);
-					variableCount += ManipHitboxId_node_Action.SetData((SAManipHitbox)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.UpdateHurtsetId:
-					SAUpdateHurtboxesNode UpdateHurtsetId_node_Action = graph.AddNode<SAUpdateHurtboxesNode>();
-					GetPort("Action").Connect(UpdateHurtsetId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(UpdateHurtsetId_node_Action, assetPath);
-					variableCount += UpdateHurtsetId_node_Action.SetData((SAUpdateHurtboxes)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SetupHurtsetId:
-					SASetupHurtboxesNode SetupHurtsetId_node_Action = graph.AddNode<SASetupHurtboxesNode>();
-					GetPort("Action").Connect(SetupHurtsetId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SetupHurtsetId_node_Action, assetPath);
-					variableCount += SetupHurtsetId_node_Action.SetData((SASetupHurtboxes)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ManipHurtboxId:
-					SAManipHurtboxNode ManipHurtboxId_node_Action = graph.AddNode<SAManipHurtboxNode>();
-					GetPort("Action").Connect(ManipHurtboxId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ManipHurtboxId_node_Action, assetPath);
-					variableCount += ManipHurtboxId_node_Action.SetData((SAManipHurtbox)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.BoneStateId:
-					SABoneStateNode BoneStateId_node_Action = graph.AddNode<SABoneStateNode>();
-					GetPort("Action").Connect(BoneStateId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(BoneStateId_node_Action, assetPath);
-					variableCount += BoneStateId_node_Action.SetData((SABoneState)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.BoneScaleId:
-					SABoneScaleNode BoneScaleId_node_Action = graph.AddNode<SABoneScaleNode>();
-					GetPort("Action").Connect(BoneScaleId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(BoneScaleId_node_Action, assetPath);
-					variableCount += BoneScaleId_node_Action.SetData((SABoneScale)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SpawnAgentId:
-					SASpawnAgentNode SpawnAgentId_node_Action = graph.AddNode<SASpawnAgentNode>();
-					GetPort("Action").Connect(SpawnAgentId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SpawnAgentId_node_Action, assetPath);
-					variableCount += SpawnAgentId_node_Action.SetData((SASpawnAgent)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.LocalFXId:
-					SALocalFXNode LocalFXId_node_Action = graph.AddNode<SALocalFXNode>();
-					GetPort("Action").Connect(LocalFXId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(LocalFXId_node_Action, assetPath);
-					variableCount += LocalFXId_node_Action.SetData((SALocalFX)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SpawnFXId:
-					SASpawnFXNode SpawnFXId_node_Action = graph.AddNode<SASpawnFXNode>();
-					GetPort("Action").Connect(SpawnFXId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SpawnFXId_node_Action, assetPath);
-					variableCount += SpawnFXId_node_Action.SetData((SASpawnFX)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.HitboxFXId:
-					SASetHitboxFXNode HitboxFXId_node_Action = graph.AddNode<SASetHitboxFXNode>();
-					GetPort("Action").Connect(HitboxFXId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(HitboxFXId_node_Action, assetPath);
-					variableCount += HitboxFXId_node_Action.SetData((SASetHitboxFX)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SFXId:
-					SAPlaySFXNode SFXId_node_Action = graph.AddNode<SAPlaySFXNode>();
-					GetPort("Action").Connect(SFXId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SFXId_node_Action, assetPath);
-					variableCount += SFXId_node_Action.SetData((SAPlaySFX)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.HitboxSFXId:
-					SASetHitboxSFXNode HitboxSFXId_node_Action = graph.AddNode<SASetHitboxSFXNode>();
-					GetPort("Action").Connect(HitboxSFXId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(HitboxSFXId_node_Action, assetPath);
-					variableCount += HitboxSFXId_node_Action.SetData((SASetHitboxSFX)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ColorTintId:
-					SAColorTintNode ColorTintId_node_Action = graph.AddNode<SAColorTintNode>();
-					GetPort("Action").Connect(ColorTintId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ColorTintId_node_Action, assetPath);
-					variableCount += ColorTintId_node_Action.SetData((SAColorTint)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.FindFloorId:
-					SAFindFloorNode FindFloorId_node_Action = graph.AddNode<SAFindFloorNode>();
-					GetPort("Action").Connect(FindFloorId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(FindFloorId_node_Action, assetPath);
-					variableCount += FindFloorId_node_Action.SetData((SAFindFloor)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.HurtGrabbedId:
-					SAHurtGrabbedNode HurtGrabbedId_node_Action = graph.AddNode<SAHurtGrabbedNode>();
-					GetPort("Action").Connect(HurtGrabbedId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(HurtGrabbedId_node_Action, assetPath);
-					variableCount += HurtGrabbedId_node_Action.SetData((SAHurtGrabbed)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.LaunchGrabbedId:
-					SALaunchGrabbedNode LaunchGrabbedId_node_Action = graph.AddNode<SALaunchGrabbedNode>();
-					GetPort("Action").Connect(LaunchGrabbedId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(LaunchGrabbedId_node_Action, assetPath);
-					variableCount += LaunchGrabbedId_node_Action.SetData((SALaunchGrabbed)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.StateCancelGrabbedId:
-					SAStateCancelGrabbedNode StateCancelGrabbedId_node_Action = graph.AddNode<SAStateCancelGrabbedNode>();
-					GetPort("Action").Connect(StateCancelGrabbedId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(StateCancelGrabbedId_node_Action, assetPath);
-					variableCount += StateCancelGrabbedId_node_Action.SetData((SAStateCancelGrabbed)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.EndGrabId:
-					SAEndGrabNode EndGrabId_node_Action = graph.AddNode<SAEndGrabNode>();
-					GetPort("Action").Connect(EndGrabId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(EndGrabId_node_Action, assetPath);
-					variableCount += EndGrabId_node_Action.SetData((SAEndGrab)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.GrabNotifyEscapeId:
-					SAGrabNotifyEscapeNode GrabNotifyEscapeId_node_Action = graph.AddNode<SAGrabNotifyEscapeNode>();
-					GetPort("Action").Connect(GrabNotifyEscapeId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(GrabNotifyEscapeId_node_Action, assetPath);
-					variableCount += GrabNotifyEscapeId_node_Action.SetData((SAGrabNotifyEscape)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.IgnoreGrabbedId:
-					SAIgnoreGrabbedNode IgnoreGrabbedId_node_Action = graph.AddNode<SAIgnoreGrabbedNode>();
-					GetPort("Action").Connect(IgnoreGrabbedId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(IgnoreGrabbedId_node_Action, assetPath);
-					variableCount += IgnoreGrabbedId_node_Action.SetData((SAIgnoreGrabbed)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.EventKOId:
-					SAEventKONode EventKOId_node_Action = graph.AddNode<SAEventKONode>();
-					GetPort("Action").Connect(EventKOId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(EventKOId_node_Action, assetPath);
-					variableCount += EventKOId_node_Action.SetData((SAEventKO)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.EventKOGrabbedId:
-					SAEventKOGrabbedNode EventKOGrabbedId_node_Action = graph.AddNode<SAEventKOGrabbedNode>();
-					GetPort("Action").Connect(EventKOGrabbedId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(EventKOGrabbedId_node_Action, assetPath);
-					variableCount += EventKOGrabbedId_node_Action.SetData((SAEventKOGrabbed)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.CameraShakeId:
-					SACameraShakeNode CameraShakeId_node_Action = graph.AddNode<SACameraShakeNode>();
-					GetPort("Action").Connect(CameraShakeId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CameraShakeId_node_Action, assetPath);
-					variableCount += CameraShakeId_node_Action.SetData((SACameraShake)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ResetOnHitId:
-					SAResetOnHitsNode ResetOnHitId_node_Action = graph.AddNode<SAResetOnHitsNode>();
-					GetPort("Action").Connect(ResetOnHitId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ResetOnHitId_node_Action, assetPath);
-					variableCount += ResetOnHitId_node_Action.SetData((SAResetOnHits)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.OnHitId:
-					SAOnHitNode OnHitId_node_Action = graph.AddNode<SAOnHitNode>();
-					GetPort("Action").Connect(OnHitId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OnHitId_node_Action, assetPath);
-					variableCount += OnHitId_node_Action.SetData((SAOnHit)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.FastForwardId:
-					SAFastForwardStateNode FastForwardId_node_Action = graph.AddNode<SAFastForwardStateNode>();
-					GetPort("Action").Connect(FastForwardId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(FastForwardId_node_Action, assetPath);
-					variableCount += FastForwardId_node_Action.SetData((SAFastForwardState)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.TimingTweakId:
-					SATimingTweakNode TimingTweakId_node_Action = graph.AddNode<SATimingTweakNode>();
-					GetPort("Action").Connect(TimingTweakId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(TimingTweakId_node_Action, assetPath);
-					variableCount += TimingTweakId_node_Action.SetData((SATimingTweak)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.MapAnimId:
-					SAMapAnimationNode MapAnimId_node_Action = graph.AddNode<SAMapAnimationNode>();
-					GetPort("Action").Connect(MapAnimId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(MapAnimId_node_Action, assetPath);
-					variableCount += MapAnimId_node_Action.SetData((SAMapAnimation)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.AlterMoveDtId:
-					SAAlterMoveDTNode AlterMoveDtId_node_Action = graph.AddNode<SAAlterMoveDTNode>();
-					GetPort("Action").Connect(AlterMoveDtId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(AlterMoveDtId_node_Action, assetPath);
-					variableCount += AlterMoveDtId_node_Action.SetData((SAAlterMoveDT)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.AlterMoveVelId:
-					SAAlterMoveVelNode AlterMoveVelId_node_Action = graph.AddNode<SAAlterMoveVelNode>();
-					GetPort("Action").Connect(AlterMoveVelId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(AlterMoveVelId_node_Action, assetPath);
-					variableCount += AlterMoveVelId_node_Action.SetData((SAAlterMoveVel)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SetStagePartId:
-					SASetStagePartNode SetStagePartId_node_Action = graph.AddNode<SASetStagePartNode>();
-					GetPort("Action").Connect(SetStagePartId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SetStagePartId_node_Action, assetPath);
-					variableCount += SetStagePartId_node_Action.SetData((SASetStagePart)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SetStagePartsDefaultId:
-					SASetStagePartsDefaultNode SetStagePartsDefaultId_node_Action = graph.AddNode<SASetStagePartsDefaultNode>();
-					GetPort("Action").Connect(SetStagePartsDefaultId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SetStagePartsDefaultId_node_Action, assetPath);
-					variableCount += SetStagePartsDefaultId_node_Action.SetData((SASetStagePartsDefault)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.JumpId:
-					SAJumpNode JumpId_node_Action = graph.AddNode<SAJumpNode>();
-					GetPort("Action").Connect(JumpId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(JumpId_node_Action, assetPath);
-					variableCount += JumpId_node_Action.SetData((SAJump)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.StopJumpId:
-					SAStopJumpNode StopJumpId_node_Action = graph.AddNode<SAStopJumpNode>();
-					GetPort("Action").Connect(StopJumpId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(StopJumpId_node_Action, assetPath);
-					variableCount += StopJumpId_node_Action.SetData((SAStopJump)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ManageAirJumpId:
-					SAManageAirJumpNode ManageAirJumpId_node_Action = graph.AddNode<SAManageAirJumpNode>();
-					GetPort("Action").Connect(ManageAirJumpId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ManageAirJumpId_node_Action, assetPath);
-					variableCount += ManageAirJumpId_node_Action.SetData((SAManageAirJump)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.LeaveGroundId:
-					SALeaveGroundNode LeaveGroundId_node_Action = graph.AddNode<SALeaveGroundNode>();
-					GetPort("Action").Connect(LeaveGroundId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(LeaveGroundId_node_Action, assetPath);
-					variableCount += LeaveGroundId_node_Action.SetData((SALeaveGround)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.UnhogEdgeId:
-					SAUnHogEdgeNode UnhogEdgeId_node_Action = graph.AddNode<SAUnHogEdgeNode>();
-					GetPort("Action").Connect(UnhogEdgeId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(UnhogEdgeId_node_Action, assetPath);
-					variableCount += UnhogEdgeId_node_Action.SetData((SAUnHogEdge)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SFXTimelineId:
-					SAPlaySFXTimelineNode SFXTimelineId_node_Action = graph.AddNode<SAPlaySFXTimelineNode>();
-					GetPort("Action").Connect(SFXTimelineId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SFXTimelineId_node_Action, assetPath);
-					variableCount += SFXTimelineId_node_Action.SetData((SAPlaySFXTimeline)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.FindLastHorizontalInputId:
-					SAFindLastHorizontalInputNode FindLastHorizontalInputId_node_Action = graph.AddNode<SAFindLastHorizontalInputNode>();
-					GetPort("Action").Connect(FindLastHorizontalInputId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(FindLastHorizontalInputId_node_Action, assetPath);
-					variableCount += FindLastHorizontalInputId_node_Action.SetData((SAFindLastHorizontalInput)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SetCommandGrab:
-					SASetCommandGrabNode SetCommandGrab_node_Action = graph.AddNode<SASetCommandGrabNode>();
-					GetPort("Action").Connect(SetCommandGrab_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SetCommandGrab_node_Action, assetPath);
-					variableCount += SetCommandGrab_node_Action.SetData((SASetCommandGrab)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.CameraPunchId:
-					SACameraPunchNode CameraPunchId_node_Action = graph.AddNode<SACameraPunchNode>();
-					GetPort("Action").Connect(CameraPunchId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CameraPunchId_node_Action, assetPath);
-					variableCount += CameraPunchId_node_Action.SetData((SACameraPunch)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SpawnAgent2Id:
-					SASpawnAgent2Node SpawnAgent2Id_node_Action = graph.AddNode<SASpawnAgent2Node>();
-					GetPort("Action").Connect(SpawnAgent2Id_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SpawnAgent2Id_node_Action, assetPath);
-					variableCount += SpawnAgent2Id_node_Action.SetData((SASpawnAgent2)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ManipDecorChainId:
-					SAManipDecorChainNode ManipDecorChainId_node_Action = graph.AddNode<SAManipDecorChainNode>();
-					GetPort("Action").Connect(ManipDecorChainId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ManipDecorChainId_node_Action, assetPath);
-					variableCount += ManipDecorChainId_node_Action.SetData((SAManipDecorChain)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.UpdateHitboxesId:
-					SAUpdateHitboxesNode UpdateHitboxesId_node_Action = graph.AddNode<SAUpdateHitboxesNode>();
-					GetPort("Action").Connect(UpdateHitboxesId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(UpdateHitboxesId_node_Action, assetPath);
-					variableCount += UpdateHitboxesId_node_Action.SetData((SAUpdateHitboxes)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SampleAnimId:
-					SASampleAnimNode SampleAnimId_node_Action = graph.AddNode<SASampleAnimNode>();
-					GetPort("Action").Connect(SampleAnimId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SampleAnimId_node_Action, assetPath);
-					variableCount += SampleAnimId_node_Action.SetData((SASampleAnim)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ForceExtraInputId:
-					SAForceExtraInputCheckNode ForceExtraInputId_node_Action = graph.AddNode<SAForceExtraInputCheckNode>();
-					GetPort("Action").Connect(ForceExtraInputId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ForceExtraInputId_node_Action, assetPath);
-					variableCount += ForceExtraInputId_node_Action.SetData((SAForceExtraInputCheck)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.LaunchGrabbedCustomId:
-					SALaunchGrabbedCustomNode LaunchGrabbedCustomId_node_Action = graph.AddNode<SALaunchGrabbedCustomNode>();
-					GetPort("Action").Connect(LaunchGrabbedCustomId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(LaunchGrabbedCustomId_node_Action, assetPath);
-					variableCount += LaunchGrabbedCustomId_node_Action.SetData((SALaunchGrabbedCustom)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.MapAnimSimpleId:
-					SAMapAnimationSimpleNode MapAnimSimpleId_node_Action = graph.AddNode<SAMapAnimationSimpleNode>();
-					GetPort("Action").Connect(MapAnimSimpleId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(MapAnimSimpleId_node_Action, assetPath);
-					variableCount += MapAnimSimpleId_node_Action.SetData((SAMapAnimationSimple)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.OnLeaveParentId:
-					SAOnLeaveParentNode OnLeaveParentId_node_Action = graph.AddNode<SAOnLeaveParentNode>();
-					GetPort("Action").Connect(OnLeaveParentId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OnLeaveParentId_node_Action, assetPath);
-					variableCount += OnLeaveParentId_node_Action.SetData((SAOnLeaveParent)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.PersistLocalFXId:
-					SAPersistLocalFXNode PersistLocalFXId_node_Action = graph.AddNode<SAPersistLocalFXNode>();
-					GetPort("Action").Connect(PersistLocalFXId_node_Action.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(PersistLocalFXId_node_Action, assetPath);
-					variableCount += PersistLocalFXId_node_Action.SetData((SAPersistLocalFX)Action, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				case StateAction.TypeId.StateAction:
+					StateActionNode StateAction_node_Action = graph.AddNode<StateActionNode>();
+					GetPort("Action").Connect(StateAction_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(StateAction_node_Action, assetPath);
+					variableCount += StateAction_node_Action.SetData((StateAction)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SADebugMessage:
+					SADebugMessageNode SADebugMessage_node_Action = graph.AddNode<SADebugMessageNode>();
+					GetPort("Action").Connect(SADebugMessage_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SADebugMessage_node_Action, assetPath);
+					variableCount += SADebugMessage_node_Action.SetData((SADebugMessage)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAPlayAnim:
+					SAPlayAnimNode SAPlayAnim_node_Action = graph.AddNode<SAPlayAnimNode>();
+					GetPort("Action").Connect(SAPlayAnim_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAPlayAnim_node_Action, assetPath);
+					variableCount += SAPlayAnim_node_Action.SetData((SAPlayAnim)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAPlayRootAnim:
+					SAPlayRootAnimNode SAPlayRootAnim_node_Action = graph.AddNode<SAPlayRootAnimNode>();
+					GetPort("Action").Connect(SAPlayRootAnim_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAPlayRootAnim_node_Action, assetPath);
+					variableCount += SAPlayRootAnim_node_Action.SetData((SAPlayRootAnim)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASnapAnimWeights:
+					SASnapAnimWeightsNode SASnapAnimWeights_node_Action = graph.AddNode<SASnapAnimWeightsNode>();
+					GetPort("Action").Connect(SASnapAnimWeights_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASnapAnimWeights_node_Action, assetPath);
+					variableCount += SASnapAnimWeights_node_Action.SetData((SASnapAnimWeights)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAStandardInput:
+					SAStandardInputNode SAStandardInput_node_Action = graph.AddNode<SAStandardInputNode>();
+					GetPort("Action").Connect(SAStandardInput_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAStandardInput_node_Action, assetPath);
+					variableCount += SAStandardInput_node_Action.SetData((SAStandardInput)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAInputAction:
+					SAInputActionNode SAInputAction_node_Action = graph.AddNode<SAInputActionNode>();
+					GetPort("Action").Connect(SAInputAction_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAInputAction_node_Action, assetPath);
+					variableCount += SAInputAction_node_Action.SetData((SAInputAction)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SADeactivateInputAction:
+					SADeactivateInputActionNode SADeactivateInputAction_node_Action = graph.AddNode<SADeactivateInputActionNode>();
+					GetPort("Action").Connect(SADeactivateInputAction_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SADeactivateInputAction_node_Action, assetPath);
+					variableCount += SADeactivateInputAction_node_Action.SetData((SADeactivateInputAction)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAAddInputEventFromFrame:
+					SAAddInputEventFromFrameNode SAAddInputEventFromFrame_node_Action = graph.AddNode<SAAddInputEventFromFrameNode>();
+					GetPort("Action").Connect(SAAddInputEventFromFrame_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAAddInputEventFromFrame_node_Action, assetPath);
+					variableCount += SAAddInputEventFromFrame_node_Action.SetData((SAAddInputEventFromFrame)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SACancelToState:
+					SACancelToStateNode SACancelToState_node_Action = graph.AddNode<SACancelToStateNode>();
+					GetPort("Action").Connect(SACancelToState_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SACancelToState_node_Action, assetPath);
+					variableCount += SACancelToState_node_Action.SetData((SACancelToState)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SACustomCall:
+					SACustomCallNode SACustomCall_node_Action = graph.AddNode<SACustomCallNode>();
+					GetPort("Action").Connect(SACustomCall_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SACustomCall_node_Action, assetPath);
+					variableCount += SACustomCall_node_Action.SetData((SACustomCall)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SATimedAction:
+					SATimedActionNode SATimedAction_node_Action = graph.AddNode<SATimedActionNode>();
+					GetPort("Action").Connect(SATimedAction_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SATimedAction_node_Action, assetPath);
+					variableCount += SATimedAction_node_Action.SetData((SATimedAction)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAOrderSensitive:
+					SAOrderSensitiveNode SAOrderSensitive_node_Action = graph.AddNode<SAOrderSensitiveNode>();
+					GetPort("Action").Connect(SAOrderSensitive_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAOrderSensitive_node_Action, assetPath);
+					variableCount += SAOrderSensitive_node_Action.SetData((SAOrderSensitive)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAProxyMove:
+					SAProxyMoveNode SAProxyMove_node_Action = graph.AddNode<SAProxyMoveNode>();
+					GetPort("Action").Connect(SAProxyMove_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAProxyMove_node_Action, assetPath);
+					variableCount += SAProxyMove_node_Action.SetData((SAProxyMove)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SACheckThing:
+					SACheckThingNode SACheckThing_node_Action = graph.AddNode<SACheckThingNode>();
+					GetPort("Action").Connect(SACheckThing_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SACheckThing_node_Action, assetPath);
+					variableCount += SACheckThing_node_Action.SetData((SACheckThing)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAActiveAction:
+					SAActiveActionNode SAActiveAction_node_Action = graph.AddNode<SAActiveActionNode>();
+					GetPort("Action").Connect(SAActiveAction_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAActiveAction_node_Action, assetPath);
+					variableCount += SAActiveAction_node_Action.SetData((SAActiveAction)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SADeactivateAction:
+					SADeactivateActionNode SADeactivateAction_node_Action = graph.AddNode<SADeactivateActionNode>();
+					GetPort("Action").Connect(SADeactivateAction_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SADeactivateAction_node_Action, assetPath);
+					variableCount += SADeactivateAction_node_Action.SetData((SADeactivateAction)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetFloatTarget:
+					SASetFloatTargetNode SASetFloatTarget_node_Action = graph.AddNode<SASetFloatTargetNode>();
+					GetPort("Action").Connect(SASetFloatTarget_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetFloatTarget_node_Action, assetPath);
+					variableCount += SASetFloatTarget_node_Action.SetData((SASetFloatTarget)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAOnBounce:
+					SAOnBounceNode SAOnBounce_node_Action = graph.AddNode<SAOnBounceNode>();
+					GetPort("Action").Connect(SAOnBounce_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAOnBounce_node_Action, assetPath);
+					variableCount += SAOnBounce_node_Action.SetData((SAOnBounce)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAOnLeaveEdge:
+					SAOnLeaveEdgeNode SAOnLeaveEdge_node_Action = graph.AddNode<SAOnLeaveEdgeNode>();
+					GetPort("Action").Connect(SAOnLeaveEdge_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAOnLeaveEdge_node_Action, assetPath);
+					variableCount += SAOnLeaveEdge_node_Action.SetData((SAOnLeaveEdge)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAOnStoppedAtEdge:
+					SAOnStoppedAtEdgeNode SAOnStoppedAtEdge_node_Action = graph.AddNode<SAOnStoppedAtEdgeNode>();
+					GetPort("Action").Connect(SAOnStoppedAtEdge_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAOnStoppedAtEdge_node_Action, assetPath);
+					variableCount += SAOnStoppedAtEdge_node_Action.SetData((SAOnStoppedAtEdge)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAOnLand:
+					SAOnLandNode SAOnLand_node_Action = graph.AddNode<SAOnLandNode>();
+					GetPort("Action").Connect(SAOnLand_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAOnLand_node_Action, assetPath);
+					variableCount += SAOnLand_node_Action.SetData((SAOnLand)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAOnCancel:
+					SAOnCancelNode SAOnCancel_node_Action = graph.AddNode<SAOnCancelNode>();
+					GetPort("Action").Connect(SAOnCancel_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAOnCancel_node_Action, assetPath);
+					variableCount += SAOnCancel_node_Action.SetData((SAOnCancel)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SARefreshAttack:
+					SARefreshAttackNode SARefreshAttack_node_Action = graph.AddNode<SARefreshAttackNode>();
+					GetPort("Action").Connect(SARefreshAttack_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SARefreshAttack_node_Action, assetPath);
+					variableCount += SARefreshAttack_node_Action.SetData((SARefreshAttack)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAEndAttack:
+					SAEndAttackNode SAEndAttack_node_Action = graph.AddNode<SAEndAttackNode>();
+					GetPort("Action").Connect(SAEndAttack_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAEndAttack_node_Action, assetPath);
+					variableCount += SAEndAttack_node_Action.SetData((SAEndAttack)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetHitboxCount:
+					SASetHitboxCountNode SASetHitboxCount_node_Action = graph.AddNode<SASetHitboxCountNode>();
+					GetPort("Action").Connect(SASetHitboxCount_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetHitboxCount_node_Action, assetPath);
+					variableCount += SASetHitboxCount_node_Action.SetData((SASetHitboxCount)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAConfigHitbox:
+					SAConfigHitboxNode SAConfigHitbox_node_Action = graph.AddNode<SAConfigHitboxNode>();
+					GetPort("Action").Connect(SAConfigHitbox_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAConfigHitbox_node_Action, assetPath);
+					variableCount += SAConfigHitbox_node_Action.SetData((SAConfigHitbox)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetAtkProp:
+					SASetAtkPropNode SASetAtkProp_node_Action = graph.AddNode<SASetAtkPropNode>();
+					GetPort("Action").Connect(SASetAtkProp_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetAtkProp_node_Action, assetPath);
+					variableCount += SASetAtkProp_node_Action.SetData((SASetAtkProp)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAManipHitBox:
+					SAManipHitBoxNode SAManipHitBox_node_Action = graph.AddNode<SAManipHitBoxNode>();
+					GetPort("Action").Connect(SAManipHitBox_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAManipHitBox_node_Action, assetPath);
+					variableCount += SAManipHitBox_node_Action.SetData((SAManipHitBox)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAUpdateHurtboxes:
+					SAUpdateHurtboxesNode SAUpdateHurtboxes_node_Action = graph.AddNode<SAUpdateHurtboxesNode>();
+					GetPort("Action").Connect(SAUpdateHurtboxes_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAUpdateHurtboxes_node_Action, assetPath);
+					variableCount += SAUpdateHurtboxes_node_Action.SetData((SAUpdateHurtboxes)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetupHurtboxes:
+					SASetupHurtboxesNode SASetupHurtboxes_node_Action = graph.AddNode<SASetupHurtboxesNode>();
+					GetPort("Action").Connect(SASetupHurtboxes_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetupHurtboxes_node_Action, assetPath);
+					variableCount += SASetupHurtboxes_node_Action.SetData((SASetupHurtboxes)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAManipHurtBox:
+					SAManipHurtBoxNode SAManipHurtBox_node_Action = graph.AddNode<SAManipHurtBoxNode>();
+					GetPort("Action").Connect(SAManipHurtBox_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAManipHurtBox_node_Action, assetPath);
+					variableCount += SAManipHurtBox_node_Action.SetData((SAManipHurtBox)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SABoneState:
+					SABoneStateNode SABoneState_node_Action = graph.AddNode<SABoneStateNode>();
+					GetPort("Action").Connect(SABoneState_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SABoneState_node_Action, assetPath);
+					variableCount += SABoneState_node_Action.SetData((SABoneState)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SABoneScale:
+					SABoneScaleNode SABoneScale_node_Action = graph.AddNode<SABoneScaleNode>();
+					GetPort("Action").Connect(SABoneScale_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SABoneScale_node_Action, assetPath);
+					variableCount += SABoneScale_node_Action.SetData((SABoneScale)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASpawnAgent:
+					SASpawnAgentNode SASpawnAgent_node_Action = graph.AddNode<SASpawnAgentNode>();
+					GetPort("Action").Connect(SASpawnAgent_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASpawnAgent_node_Action, assetPath);
+					variableCount += SASpawnAgent_node_Action.SetData((SASpawnAgent)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SALocalFX:
+					SALocalFXNode SALocalFX_node_Action = graph.AddNode<SALocalFXNode>();
+					GetPort("Action").Connect(SALocalFX_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SALocalFX_node_Action, assetPath);
+					variableCount += SALocalFX_node_Action.SetData((SALocalFX)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASpawnFX:
+					SASpawnFXNode SASpawnFX_node_Action = graph.AddNode<SASpawnFXNode>();
+					GetPort("Action").Connect(SASpawnFX_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASpawnFX_node_Action, assetPath);
+					variableCount += SASpawnFX_node_Action.SetData((SASpawnFX)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetHitboxFX:
+					SASetHitboxFXNode SASetHitboxFX_node_Action = graph.AddNode<SASetHitboxFXNode>();
+					GetPort("Action").Connect(SASetHitboxFX_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetHitboxFX_node_Action, assetPath);
+					variableCount += SASetHitboxFX_node_Action.SetData((SASetHitboxFX)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAPlaySFX:
+					SAPlaySFXNode SAPlaySFX_node_Action = graph.AddNode<SAPlaySFXNode>();
+					GetPort("Action").Connect(SAPlaySFX_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAPlaySFX_node_Action, assetPath);
+					variableCount += SAPlaySFX_node_Action.SetData((SAPlaySFX)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetHitboxSFX:
+					SASetHitboxSFXNode SASetHitboxSFX_node_Action = graph.AddNode<SASetHitboxSFXNode>();
+					GetPort("Action").Connect(SASetHitboxSFX_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetHitboxSFX_node_Action, assetPath);
+					variableCount += SASetHitboxSFX_node_Action.SetData((SASetHitboxSFX)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAColorTint:
+					SAColorTintNode SAColorTint_node_Action = graph.AddNode<SAColorTintNode>();
+					GetPort("Action").Connect(SAColorTint_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAColorTint_node_Action, assetPath);
+					variableCount += SAColorTint_node_Action.SetData((SAColorTint)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAFindFloor:
+					SAFindFloorNode SAFindFloor_node_Action = graph.AddNode<SAFindFloorNode>();
+					GetPort("Action").Connect(SAFindFloor_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAFindFloor_node_Action, assetPath);
+					variableCount += SAFindFloor_node_Action.SetData((SAFindFloor)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAHurtGrabbed:
+					SAHurtGrabbedNode SAHurtGrabbed_node_Action = graph.AddNode<SAHurtGrabbedNode>();
+					GetPort("Action").Connect(SAHurtGrabbed_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAHurtGrabbed_node_Action, assetPath);
+					variableCount += SAHurtGrabbed_node_Action.SetData((SAHurtGrabbed)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SALaunchGrabbed:
+					SALaunchGrabbedNode SALaunchGrabbed_node_Action = graph.AddNode<SALaunchGrabbedNode>();
+					GetPort("Action").Connect(SALaunchGrabbed_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SALaunchGrabbed_node_Action, assetPath);
+					variableCount += SALaunchGrabbed_node_Action.SetData((SALaunchGrabbed)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAStateCancelGrabbed:
+					SAStateCancelGrabbedNode SAStateCancelGrabbed_node_Action = graph.AddNode<SAStateCancelGrabbedNode>();
+					GetPort("Action").Connect(SAStateCancelGrabbed_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAStateCancelGrabbed_node_Action, assetPath);
+					variableCount += SAStateCancelGrabbed_node_Action.SetData((SAStateCancelGrabbed)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAEndGrab:
+					SAEndGrabNode SAEndGrab_node_Action = graph.AddNode<SAEndGrabNode>();
+					GetPort("Action").Connect(SAEndGrab_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAEndGrab_node_Action, assetPath);
+					variableCount += SAEndGrab_node_Action.SetData((SAEndGrab)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAGrabNotifyEscape:
+					SAGrabNotifyEscapeNode SAGrabNotifyEscape_node_Action = graph.AddNode<SAGrabNotifyEscapeNode>();
+					GetPort("Action").Connect(SAGrabNotifyEscape_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAGrabNotifyEscape_node_Action, assetPath);
+					variableCount += SAGrabNotifyEscape_node_Action.SetData((SAGrabNotifyEscape)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAIgnoreGrabbed:
+					SAIgnoreGrabbedNode SAIgnoreGrabbed_node_Action = graph.AddNode<SAIgnoreGrabbedNode>();
+					GetPort("Action").Connect(SAIgnoreGrabbed_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAIgnoreGrabbed_node_Action, assetPath);
+					variableCount += SAIgnoreGrabbed_node_Action.SetData((SAIgnoreGrabbed)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAEventKO:
+					SAEventKONode SAEventKO_node_Action = graph.AddNode<SAEventKONode>();
+					GetPort("Action").Connect(SAEventKO_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAEventKO_node_Action, assetPath);
+					variableCount += SAEventKO_node_Action.SetData((SAEventKO)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAEventKOGrabbed:
+					SAEventKOGrabbedNode SAEventKOGrabbed_node_Action = graph.AddNode<SAEventKOGrabbedNode>();
+					GetPort("Action").Connect(SAEventKOGrabbed_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAEventKOGrabbed_node_Action, assetPath);
+					variableCount += SAEventKOGrabbed_node_Action.SetData((SAEventKOGrabbed)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SACameraShake:
+					SACameraShakeNode SACameraShake_node_Action = graph.AddNode<SACameraShakeNode>();
+					GetPort("Action").Connect(SACameraShake_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SACameraShake_node_Action, assetPath);
+					variableCount += SACameraShake_node_Action.SetData((SACameraShake)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAResetOnHits:
+					SAResetOnHitsNode SAResetOnHits_node_Action = graph.AddNode<SAResetOnHitsNode>();
+					GetPort("Action").Connect(SAResetOnHits_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAResetOnHits_node_Action, assetPath);
+					variableCount += SAResetOnHits_node_Action.SetData((SAResetOnHits)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAOnHit:
+					SAOnHitNode SAOnHit_node_Action = graph.AddNode<SAOnHitNode>();
+					GetPort("Action").Connect(SAOnHit_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAOnHit_node_Action, assetPath);
+					variableCount += SAOnHit_node_Action.SetData((SAOnHit)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAFastForwardState:
+					SAFastForwardStateNode SAFastForwardState_node_Action = graph.AddNode<SAFastForwardStateNode>();
+					GetPort("Action").Connect(SAFastForwardState_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAFastForwardState_node_Action, assetPath);
+					variableCount += SAFastForwardState_node_Action.SetData((SAFastForwardState)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SATimingTweak:
+					SATimingTweakNode SATimingTweak_node_Action = graph.AddNode<SATimingTweakNode>();
+					GetPort("Action").Connect(SATimingTweak_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SATimingTweak_node_Action, assetPath);
+					variableCount += SATimingTweak_node_Action.SetData((SATimingTweak)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAMapAnimation:
+					SAMapAnimationNode SAMapAnimation_node_Action = graph.AddNode<SAMapAnimationNode>();
+					GetPort("Action").Connect(SAMapAnimation_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAMapAnimation_node_Action, assetPath);
+					variableCount += SAMapAnimation_node_Action.SetData((SAMapAnimation)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAAlterMoveDT:
+					SAAlterMoveDTNode SAAlterMoveDT_node_Action = graph.AddNode<SAAlterMoveDTNode>();
+					GetPort("Action").Connect(SAAlterMoveDT_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAAlterMoveDT_node_Action, assetPath);
+					variableCount += SAAlterMoveDT_node_Action.SetData((SAAlterMoveDT)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAAlterMoveVel:
+					SAAlterMoveVelNode SAAlterMoveVel_node_Action = graph.AddNode<SAAlterMoveVelNode>();
+					GetPort("Action").Connect(SAAlterMoveVel_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAAlterMoveVel_node_Action, assetPath);
+					variableCount += SAAlterMoveVel_node_Action.SetData((SAAlterMoveVel)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetStagePart:
+					SASetStagePartNode SASetStagePart_node_Action = graph.AddNode<SASetStagePartNode>();
+					GetPort("Action").Connect(SASetStagePart_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetStagePart_node_Action, assetPath);
+					variableCount += SASetStagePart_node_Action.SetData((SASetStagePart)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetStagePartsDefault:
+					SASetStagePartsDefaultNode SASetStagePartsDefault_node_Action = graph.AddNode<SASetStagePartsDefaultNode>();
+					GetPort("Action").Connect(SASetStagePartsDefault_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetStagePartsDefault_node_Action, assetPath);
+					variableCount += SASetStagePartsDefault_node_Action.SetData((SASetStagePartsDefault)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAJump:
+					SAJumpNode SAJump_node_Action = graph.AddNode<SAJumpNode>();
+					GetPort("Action").Connect(SAJump_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAJump_node_Action, assetPath);
+					variableCount += SAJump_node_Action.SetData((SAJump)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAStopJump:
+					SAStopJumpNode SAStopJump_node_Action = graph.AddNode<SAStopJumpNode>();
+					GetPort("Action").Connect(SAStopJump_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAStopJump_node_Action, assetPath);
+					variableCount += SAStopJump_node_Action.SetData((SAStopJump)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAManageAirJump:
+					SAManageAirJumpNode SAManageAirJump_node_Action = graph.AddNode<SAManageAirJumpNode>();
+					GetPort("Action").Connect(SAManageAirJump_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAManageAirJump_node_Action, assetPath);
+					variableCount += SAManageAirJump_node_Action.SetData((SAManageAirJump)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SALeaveGround:
+					SALeaveGroundNode SALeaveGround_node_Action = graph.AddNode<SALeaveGroundNode>();
+					GetPort("Action").Connect(SALeaveGround_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SALeaveGround_node_Action, assetPath);
+					variableCount += SALeaveGround_node_Action.SetData((SALeaveGround)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAUnHogEdge:
+					SAUnHogEdgeNode SAUnHogEdge_node_Action = graph.AddNode<SAUnHogEdgeNode>();
+					GetPort("Action").Connect(SAUnHogEdge_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAUnHogEdge_node_Action, assetPath);
+					variableCount += SAUnHogEdge_node_Action.SetData((SAUnHogEdge)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAPlaySFXTimeline:
+					SAPlaySFXTimelineNode SAPlaySFXTimeline_node_Action = graph.AddNode<SAPlaySFXTimelineNode>();
+					GetPort("Action").Connect(SAPlaySFXTimeline_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAPlaySFXTimeline_node_Action, assetPath);
+					variableCount += SAPlaySFXTimeline_node_Action.SetData((SAPlaySFXTimeline)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAFindLastHorizontalInput:
+					SAFindLastHorizontalInputNode SAFindLastHorizontalInput_node_Action = graph.AddNode<SAFindLastHorizontalInputNode>();
+					GetPort("Action").Connect(SAFindLastHorizontalInput_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAFindLastHorizontalInput_node_Action, assetPath);
+					variableCount += SAFindLastHorizontalInput_node_Action.SetData((SAFindLastHorizontalInput)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetCommandGrab:
+					SASetCommandGrabNode SASetCommandGrab_node_Action = graph.AddNode<SASetCommandGrabNode>();
+					GetPort("Action").Connect(SASetCommandGrab_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetCommandGrab_node_Action, assetPath);
+					variableCount += SASetCommandGrab_node_Action.SetData((SASetCommandGrab)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SACameraPunch:
+					SACameraPunchNode SACameraPunch_node_Action = graph.AddNode<SACameraPunchNode>();
+					GetPort("Action").Connect(SACameraPunch_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SACameraPunch_node_Action, assetPath);
+					variableCount += SACameraPunch_node_Action.SetData((SACameraPunch)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASpawnAgent2:
+					SASpawnAgent2Node SASpawnAgent2_node_Action = graph.AddNode<SASpawnAgent2Node>();
+					GetPort("Action").Connect(SASpawnAgent2_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASpawnAgent2_node_Action, assetPath);
+					variableCount += SASpawnAgent2_node_Action.SetData((SASpawnAgent2)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAManipDecorChain:
+					SAManipDecorChainNode SAManipDecorChain_node_Action = graph.AddNode<SAManipDecorChainNode>();
+					GetPort("Action").Connect(SAManipDecorChain_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAManipDecorChain_node_Action, assetPath);
+					variableCount += SAManipDecorChain_node_Action.SetData((SAManipDecorChain)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAUpdateHitboxes:
+					SAUpdateHitboxesNode SAUpdateHitboxes_node_Action = graph.AddNode<SAUpdateHitboxesNode>();
+					GetPort("Action").Connect(SAUpdateHitboxes_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAUpdateHitboxes_node_Action, assetPath);
+					variableCount += SAUpdateHitboxes_node_Action.SetData((SAUpdateHitboxes)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASampleAnim:
+					SASampleAnimNode SASampleAnim_node_Action = graph.AddNode<SASampleAnimNode>();
+					GetPort("Action").Connect(SASampleAnim_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASampleAnim_node_Action, assetPath);
+					variableCount += SASampleAnim_node_Action.SetData((SASampleAnim)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAForceExtraInputCheck:
+					SAForceExtraInputCheckNode SAForceExtraInputCheck_node_Action = graph.AddNode<SAForceExtraInputCheckNode>();
+					GetPort("Action").Connect(SAForceExtraInputCheck_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAForceExtraInputCheck_node_Action, assetPath);
+					variableCount += SAForceExtraInputCheck_node_Action.SetData((SAForceExtraInputCheck)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SALaunchGrabbedCustom:
+					SALaunchGrabbedCustomNode SALaunchGrabbedCustom_node_Action = graph.AddNode<SALaunchGrabbedCustomNode>();
+					GetPort("Action").Connect(SALaunchGrabbedCustom_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SALaunchGrabbedCustom_node_Action, assetPath);
+					variableCount += SALaunchGrabbedCustom_node_Action.SetData((SALaunchGrabbedCustom)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAMapAnimationSimple:
+					SAMapAnimationSimpleNode SAMapAnimationSimple_node_Action = graph.AddNode<SAMapAnimationSimpleNode>();
+					GetPort("Action").Connect(SAMapAnimationSimple_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAMapAnimationSimple_node_Action, assetPath);
+					variableCount += SAMapAnimationSimple_node_Action.SetData((SAMapAnimationSimple)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAPersistLocalFX:
+					SAPersistLocalFXNode SAPersistLocalFX_node_Action = graph.AddNode<SAPersistLocalFXNode>();
+					GetPort("Action").Connect(SAPersistLocalFX_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAPersistLocalFX_node_Action, assetPath);
+					variableCount += SAPersistLocalFX_node_Action.SetData((SAPersistLocalFX)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAOnLeaveParent:
+					SAOnLeaveParentNode SAOnLeaveParent_node_Action = graph.AddNode<SAOnLeaveParentNode>();
+					GetPort("Action").Connect(SAOnLeaveParent_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAOnLeaveParent_node_Action, assetPath);
+					variableCount += SAOnLeaveParent_node_Action.SetData((SAOnLeaveParent)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAPlayVoiceLine:
+					SAPlayVoiceLineNode SAPlayVoiceLine_node_Action = graph.AddNode<SAPlayVoiceLineNode>();
+					GetPort("Action").Connect(SAPlayVoiceLine_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAPlayVoiceLine_node_Action, assetPath);
+					variableCount += SAPlayVoiceLine_node_Action.SetData((SAPlayVoiceLine)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAPlayCategoryVoiceLine:
+					SAPlayCategoryVoiceLineNode SAPlayCategoryVoiceLine_node_Action = graph.AddNode<SAPlayCategoryVoiceLineNode>();
+					GetPort("Action").Connect(SAPlayCategoryVoiceLine_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAPlayCategoryVoiceLine_node_Action, assetPath);
+					variableCount += SAPlayCategoryVoiceLine_node_Action.SetData((SAPlayCategoryVoiceLine)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAStopVoiceLines:
+					SAStopVoiceLinesNode SAStopVoiceLines_node_Action = graph.AddNode<SAStopVoiceLinesNode>();
+					GetPort("Action").Connect(SAStopVoiceLines_node_Action.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAStopVoiceLines_node_Action, assetPath);
+					variableCount += SAStopVoiceLines_node_Action.SetData((SAStopVoiceLines)Action, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 				break;
 			}
 			++variableCount;
@@ -593,467 +625,491 @@ namespace NASB_Moveset_Editor.StateActions
 			
 			switch (ElseAction.TID)
 			{
-				case StateAction.TypeId.DebugId:
-					SADebugMessageNode DebugId_node_ElseAction = graph.AddNode<SADebugMessageNode>();
-					GetPort("ElseAction").Connect(DebugId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(DebugId_node_ElseAction, assetPath);
-					variableCount += DebugId_node_ElseAction.SetData((SADebugMessage)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.PlayAnimId:
-					SAPlayAnimNode PlayAnimId_node_ElseAction = graph.AddNode<SAPlayAnimNode>();
-					GetPort("ElseAction").Connect(PlayAnimId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(PlayAnimId_node_ElseAction, assetPath);
-					variableCount += PlayAnimId_node_ElseAction.SetData((SAPlayAnim)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.RootAnimId:
-					SAPlayRootAnimNode RootAnimId_node_ElseAction = graph.AddNode<SAPlayRootAnimNode>();
-					GetPort("ElseAction").Connect(RootAnimId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(RootAnimId_node_ElseAction, assetPath);
-					variableCount += RootAnimId_node_ElseAction.SetData((SAPlayRootAnim)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SnapAnimWeightsId:
-					SASnapAnimWeightsNode SnapAnimWeightsId_node_ElseAction = graph.AddNode<SASnapAnimWeightsNode>();
-					GetPort("ElseAction").Connect(SnapAnimWeightsId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SnapAnimWeightsId_node_ElseAction, assetPath);
-					variableCount += SnapAnimWeightsId_node_ElseAction.SetData((SASnapAnimWeights)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.StandardInputId:
-					SAStandardInputNode StandardInputId_node_ElseAction = graph.AddNode<SAStandardInputNode>();
-					GetPort("ElseAction").Connect(StandardInputId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(StandardInputId_node_ElseAction, assetPath);
-					variableCount += StandardInputId_node_ElseAction.SetData((SAStandardInput)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.InputId:
-					SAInputActionNode InputId_node_ElseAction = graph.AddNode<SAInputActionNode>();
-					GetPort("ElseAction").Connect(InputId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(InputId_node_ElseAction, assetPath);
-					variableCount += InputId_node_ElseAction.SetData((SAInputAction)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.DeactInputId:
-					SADeactivateInputActionNode DeactInputId_node_ElseAction = graph.AddNode<SADeactivateInputActionNode>();
-					GetPort("ElseAction").Connect(DeactInputId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(DeactInputId_node_ElseAction, assetPath);
-					variableCount += DeactInputId_node_ElseAction.SetData((SADeactivateInputAction)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.InputEventFromFrameId:
-					SAAddInputEventFromFrameNode InputEventFromFrameId_node_ElseAction = graph.AddNode<SAAddInputEventFromFrameNode>();
-					GetPort("ElseAction").Connect(InputEventFromFrameId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(InputEventFromFrameId_node_ElseAction, assetPath);
-					variableCount += InputEventFromFrameId_node_ElseAction.SetData((SAAddInputEventFromFrame)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.CancelStateId:
-					SACancelToStateNode CancelStateId_node_ElseAction = graph.AddNode<SACancelToStateNode>();
-					GetPort("ElseAction").Connect(CancelStateId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CancelStateId_node_ElseAction, assetPath);
-					variableCount += CancelStateId_node_ElseAction.SetData((SACancelToState)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.CustomCallId:
-					SACustomCallNode CustomCallId_node_ElseAction = graph.AddNode<SACustomCallNode>();
-					GetPort("ElseAction").Connect(CustomCallId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CustomCallId_node_ElseAction, assetPath);
-					variableCount += CustomCallId_node_ElseAction.SetData((SACustomCall)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.TimerId:
-					SATimedActionNode TimerId_node_ElseAction = graph.AddNode<SATimedActionNode>();
-					GetPort("ElseAction").Connect(TimerId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(TimerId_node_ElseAction, assetPath);
-					variableCount += TimerId_node_ElseAction.SetData((SATimedAction)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.OrderId:
-					SAOrderedSensitiveNode OrderId_node_ElseAction = graph.AddNode<SAOrderedSensitiveNode>();
-					GetPort("ElseAction").Connect(OrderId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OrderId_node_ElseAction, assetPath);
-					variableCount += OrderId_node_ElseAction.SetData((SAOrderedSensitive)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ProxyId:
-					SAProxyMoveNode ProxyId_node_ElseAction = graph.AddNode<SAProxyMoveNode>();
-					GetPort("ElseAction").Connect(ProxyId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ProxyId_node_ElseAction, assetPath);
-					variableCount += ProxyId_node_ElseAction.SetData((SAProxyMove)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.CheckId:
-					SACheckThingNode CheckId_node_ElseAction = graph.AddNode<SACheckThingNode>();
-					GetPort("ElseAction").Connect(CheckId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CheckId_node_ElseAction, assetPath);
-					variableCount += CheckId_node_ElseAction.SetData((SACheckThing)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ActiveActionId:
-					SAActiveActionNode ActiveActionId_node_ElseAction = graph.AddNode<SAActiveActionNode>();
-					GetPort("ElseAction").Connect(ActiveActionId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ActiveActionId_node_ElseAction, assetPath);
-					variableCount += ActiveActionId_node_ElseAction.SetData((SAActiveAction)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.DeactivateActionId:
-					SADeactivateActionNode DeactivateActionId_node_ElseAction = graph.AddNode<SADeactivateActionNode>();
-					GetPort("ElseAction").Connect(DeactivateActionId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(DeactivateActionId_node_ElseAction, assetPath);
-					variableCount += DeactivateActionId_node_ElseAction.SetData((SADeactivateAction)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SetFloatId:
-					SASetFloatTargetNode SetFloatId_node_ElseAction = graph.AddNode<SASetFloatTargetNode>();
-					GetPort("ElseAction").Connect(SetFloatId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SetFloatId_node_ElseAction, assetPath);
-					variableCount += SetFloatId_node_ElseAction.SetData((SASetFloatTarget)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.OnBounceId:
-					SAOnBounceNode OnBounceId_node_ElseAction = graph.AddNode<SAOnBounceNode>();
-					GetPort("ElseAction").Connect(OnBounceId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OnBounceId_node_ElseAction, assetPath);
-					variableCount += OnBounceId_node_ElseAction.SetData((SAOnBounce)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.OnLeaveEdgeId:
-					SAOnLeaveEdgeNode OnLeaveEdgeId_node_ElseAction = graph.AddNode<SAOnLeaveEdgeNode>();
-					GetPort("ElseAction").Connect(OnLeaveEdgeId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OnLeaveEdgeId_node_ElseAction, assetPath);
-					variableCount += OnLeaveEdgeId_node_ElseAction.SetData((SAOnLeaveEdge)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.OnStoppedAtEdgeId:
-					SAOnStoppedAtLedgeNode OnStoppedAtEdgeId_node_ElseAction = graph.AddNode<SAOnStoppedAtLedgeNode>();
-					GetPort("ElseAction").Connect(OnStoppedAtEdgeId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OnStoppedAtEdgeId_node_ElseAction, assetPath);
-					variableCount += OnStoppedAtEdgeId_node_ElseAction.SetData((SAOnStoppedAtLedge)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.OnLandId:
-					SAOnLandNode OnLandId_node_ElseAction = graph.AddNode<SAOnLandNode>();
-					GetPort("ElseAction").Connect(OnLandId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OnLandId_node_ElseAction, assetPath);
-					variableCount += OnLandId_node_ElseAction.SetData((SAOnLand)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.OnCancelId:
-					SAOnCancelNode OnCancelId_node_ElseAction = graph.AddNode<SAOnCancelNode>();
-					GetPort("ElseAction").Connect(OnCancelId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OnCancelId_node_ElseAction, assetPath);
-					variableCount += OnCancelId_node_ElseAction.SetData((SAOnCancel)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.RefreshAtkId:
-					SARefreshAttackNode RefreshAtkId_node_ElseAction = graph.AddNode<SARefreshAttackNode>();
-					GetPort("ElseAction").Connect(RefreshAtkId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(RefreshAtkId_node_ElseAction, assetPath);
-					variableCount += RefreshAtkId_node_ElseAction.SetData((SARefreshAttack)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.EndAtkId:
-					SAEndAttackNode EndAtkId_node_ElseAction = graph.AddNode<SAEndAttackNode>();
-					GetPort("ElseAction").Connect(EndAtkId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(EndAtkId_node_ElseAction, assetPath);
-					variableCount += EndAtkId_node_ElseAction.SetData((SAEndAttack)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SetHitboxCountId:
-					SASetHitboxCountNode SetHitboxCountId_node_ElseAction = graph.AddNode<SASetHitboxCountNode>();
-					GetPort("ElseAction").Connect(SetHitboxCountId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SetHitboxCountId_node_ElseAction, assetPath);
-					variableCount += SetHitboxCountId_node_ElseAction.SetData((SASetHitboxCount)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ConfigHitboxId:
-					SAConfigHitboxNode ConfigHitboxId_node_ElseAction = graph.AddNode<SAConfigHitboxNode>();
-					GetPort("ElseAction").Connect(ConfigHitboxId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ConfigHitboxId_node_ElseAction, assetPath);
-					variableCount += ConfigHitboxId_node_ElseAction.SetData((SAConfigHitbox)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SetAtkPropId:
-					SASetAttackPropNode SetAtkPropId_node_ElseAction = graph.AddNode<SASetAttackPropNode>();
-					GetPort("ElseAction").Connect(SetAtkPropId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SetAtkPropId_node_ElseAction, assetPath);
-					variableCount += SetAtkPropId_node_ElseAction.SetData((SASetAttackProp)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ManipHitboxId:
-					SAManipHitboxNode ManipHitboxId_node_ElseAction = graph.AddNode<SAManipHitboxNode>();
-					GetPort("ElseAction").Connect(ManipHitboxId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ManipHitboxId_node_ElseAction, assetPath);
-					variableCount += ManipHitboxId_node_ElseAction.SetData((SAManipHitbox)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.UpdateHurtsetId:
-					SAUpdateHurtboxesNode UpdateHurtsetId_node_ElseAction = graph.AddNode<SAUpdateHurtboxesNode>();
-					GetPort("ElseAction").Connect(UpdateHurtsetId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(UpdateHurtsetId_node_ElseAction, assetPath);
-					variableCount += UpdateHurtsetId_node_ElseAction.SetData((SAUpdateHurtboxes)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SetupHurtsetId:
-					SASetupHurtboxesNode SetupHurtsetId_node_ElseAction = graph.AddNode<SASetupHurtboxesNode>();
-					GetPort("ElseAction").Connect(SetupHurtsetId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SetupHurtsetId_node_ElseAction, assetPath);
-					variableCount += SetupHurtsetId_node_ElseAction.SetData((SASetupHurtboxes)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ManipHurtboxId:
-					SAManipHurtboxNode ManipHurtboxId_node_ElseAction = graph.AddNode<SAManipHurtboxNode>();
-					GetPort("ElseAction").Connect(ManipHurtboxId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ManipHurtboxId_node_ElseAction, assetPath);
-					variableCount += ManipHurtboxId_node_ElseAction.SetData((SAManipHurtbox)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.BoneStateId:
-					SABoneStateNode BoneStateId_node_ElseAction = graph.AddNode<SABoneStateNode>();
-					GetPort("ElseAction").Connect(BoneStateId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(BoneStateId_node_ElseAction, assetPath);
-					variableCount += BoneStateId_node_ElseAction.SetData((SABoneState)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.BoneScaleId:
-					SABoneScaleNode BoneScaleId_node_ElseAction = graph.AddNode<SABoneScaleNode>();
-					GetPort("ElseAction").Connect(BoneScaleId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(BoneScaleId_node_ElseAction, assetPath);
-					variableCount += BoneScaleId_node_ElseAction.SetData((SABoneScale)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SpawnAgentId:
-					SASpawnAgentNode SpawnAgentId_node_ElseAction = graph.AddNode<SASpawnAgentNode>();
-					GetPort("ElseAction").Connect(SpawnAgentId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SpawnAgentId_node_ElseAction, assetPath);
-					variableCount += SpawnAgentId_node_ElseAction.SetData((SASpawnAgent)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.LocalFXId:
-					SALocalFXNode LocalFXId_node_ElseAction = graph.AddNode<SALocalFXNode>();
-					GetPort("ElseAction").Connect(LocalFXId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(LocalFXId_node_ElseAction, assetPath);
-					variableCount += LocalFXId_node_ElseAction.SetData((SALocalFX)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SpawnFXId:
-					SASpawnFXNode SpawnFXId_node_ElseAction = graph.AddNode<SASpawnFXNode>();
-					GetPort("ElseAction").Connect(SpawnFXId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SpawnFXId_node_ElseAction, assetPath);
-					variableCount += SpawnFXId_node_ElseAction.SetData((SASpawnFX)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.HitboxFXId:
-					SASetHitboxFXNode HitboxFXId_node_ElseAction = graph.AddNode<SASetHitboxFXNode>();
-					GetPort("ElseAction").Connect(HitboxFXId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(HitboxFXId_node_ElseAction, assetPath);
-					variableCount += HitboxFXId_node_ElseAction.SetData((SASetHitboxFX)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SFXId:
-					SAPlaySFXNode SFXId_node_ElseAction = graph.AddNode<SAPlaySFXNode>();
-					GetPort("ElseAction").Connect(SFXId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SFXId_node_ElseAction, assetPath);
-					variableCount += SFXId_node_ElseAction.SetData((SAPlaySFX)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.HitboxSFXId:
-					SASetHitboxSFXNode HitboxSFXId_node_ElseAction = graph.AddNode<SASetHitboxSFXNode>();
-					GetPort("ElseAction").Connect(HitboxSFXId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(HitboxSFXId_node_ElseAction, assetPath);
-					variableCount += HitboxSFXId_node_ElseAction.SetData((SASetHitboxSFX)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ColorTintId:
-					SAColorTintNode ColorTintId_node_ElseAction = graph.AddNode<SAColorTintNode>();
-					GetPort("ElseAction").Connect(ColorTintId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ColorTintId_node_ElseAction, assetPath);
-					variableCount += ColorTintId_node_ElseAction.SetData((SAColorTint)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.FindFloorId:
-					SAFindFloorNode FindFloorId_node_ElseAction = graph.AddNode<SAFindFloorNode>();
-					GetPort("ElseAction").Connect(FindFloorId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(FindFloorId_node_ElseAction, assetPath);
-					variableCount += FindFloorId_node_ElseAction.SetData((SAFindFloor)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.HurtGrabbedId:
-					SAHurtGrabbedNode HurtGrabbedId_node_ElseAction = graph.AddNode<SAHurtGrabbedNode>();
-					GetPort("ElseAction").Connect(HurtGrabbedId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(HurtGrabbedId_node_ElseAction, assetPath);
-					variableCount += HurtGrabbedId_node_ElseAction.SetData((SAHurtGrabbed)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.LaunchGrabbedId:
-					SALaunchGrabbedNode LaunchGrabbedId_node_ElseAction = graph.AddNode<SALaunchGrabbedNode>();
-					GetPort("ElseAction").Connect(LaunchGrabbedId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(LaunchGrabbedId_node_ElseAction, assetPath);
-					variableCount += LaunchGrabbedId_node_ElseAction.SetData((SALaunchGrabbed)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.StateCancelGrabbedId:
-					SAStateCancelGrabbedNode StateCancelGrabbedId_node_ElseAction = graph.AddNode<SAStateCancelGrabbedNode>();
-					GetPort("ElseAction").Connect(StateCancelGrabbedId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(StateCancelGrabbedId_node_ElseAction, assetPath);
-					variableCount += StateCancelGrabbedId_node_ElseAction.SetData((SAStateCancelGrabbed)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.EndGrabId:
-					SAEndGrabNode EndGrabId_node_ElseAction = graph.AddNode<SAEndGrabNode>();
-					GetPort("ElseAction").Connect(EndGrabId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(EndGrabId_node_ElseAction, assetPath);
-					variableCount += EndGrabId_node_ElseAction.SetData((SAEndGrab)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.GrabNotifyEscapeId:
-					SAGrabNotifyEscapeNode GrabNotifyEscapeId_node_ElseAction = graph.AddNode<SAGrabNotifyEscapeNode>();
-					GetPort("ElseAction").Connect(GrabNotifyEscapeId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(GrabNotifyEscapeId_node_ElseAction, assetPath);
-					variableCount += GrabNotifyEscapeId_node_ElseAction.SetData((SAGrabNotifyEscape)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.IgnoreGrabbedId:
-					SAIgnoreGrabbedNode IgnoreGrabbedId_node_ElseAction = graph.AddNode<SAIgnoreGrabbedNode>();
-					GetPort("ElseAction").Connect(IgnoreGrabbedId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(IgnoreGrabbedId_node_ElseAction, assetPath);
-					variableCount += IgnoreGrabbedId_node_ElseAction.SetData((SAIgnoreGrabbed)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.EventKOId:
-					SAEventKONode EventKOId_node_ElseAction = graph.AddNode<SAEventKONode>();
-					GetPort("ElseAction").Connect(EventKOId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(EventKOId_node_ElseAction, assetPath);
-					variableCount += EventKOId_node_ElseAction.SetData((SAEventKO)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.EventKOGrabbedId:
-					SAEventKOGrabbedNode EventKOGrabbedId_node_ElseAction = graph.AddNode<SAEventKOGrabbedNode>();
-					GetPort("ElseAction").Connect(EventKOGrabbedId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(EventKOGrabbedId_node_ElseAction, assetPath);
-					variableCount += EventKOGrabbedId_node_ElseAction.SetData((SAEventKOGrabbed)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.CameraShakeId:
-					SACameraShakeNode CameraShakeId_node_ElseAction = graph.AddNode<SACameraShakeNode>();
-					GetPort("ElseAction").Connect(CameraShakeId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CameraShakeId_node_ElseAction, assetPath);
-					variableCount += CameraShakeId_node_ElseAction.SetData((SACameraShake)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ResetOnHitId:
-					SAResetOnHitsNode ResetOnHitId_node_ElseAction = graph.AddNode<SAResetOnHitsNode>();
-					GetPort("ElseAction").Connect(ResetOnHitId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ResetOnHitId_node_ElseAction, assetPath);
-					variableCount += ResetOnHitId_node_ElseAction.SetData((SAResetOnHits)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.OnHitId:
-					SAOnHitNode OnHitId_node_ElseAction = graph.AddNode<SAOnHitNode>();
-					GetPort("ElseAction").Connect(OnHitId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OnHitId_node_ElseAction, assetPath);
-					variableCount += OnHitId_node_ElseAction.SetData((SAOnHit)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.FastForwardId:
-					SAFastForwardStateNode FastForwardId_node_ElseAction = graph.AddNode<SAFastForwardStateNode>();
-					GetPort("ElseAction").Connect(FastForwardId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(FastForwardId_node_ElseAction, assetPath);
-					variableCount += FastForwardId_node_ElseAction.SetData((SAFastForwardState)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.TimingTweakId:
-					SATimingTweakNode TimingTweakId_node_ElseAction = graph.AddNode<SATimingTweakNode>();
-					GetPort("ElseAction").Connect(TimingTweakId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(TimingTweakId_node_ElseAction, assetPath);
-					variableCount += TimingTweakId_node_ElseAction.SetData((SATimingTweak)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.MapAnimId:
-					SAMapAnimationNode MapAnimId_node_ElseAction = graph.AddNode<SAMapAnimationNode>();
-					GetPort("ElseAction").Connect(MapAnimId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(MapAnimId_node_ElseAction, assetPath);
-					variableCount += MapAnimId_node_ElseAction.SetData((SAMapAnimation)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.AlterMoveDtId:
-					SAAlterMoveDTNode AlterMoveDtId_node_ElseAction = graph.AddNode<SAAlterMoveDTNode>();
-					GetPort("ElseAction").Connect(AlterMoveDtId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(AlterMoveDtId_node_ElseAction, assetPath);
-					variableCount += AlterMoveDtId_node_ElseAction.SetData((SAAlterMoveDT)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.AlterMoveVelId:
-					SAAlterMoveVelNode AlterMoveVelId_node_ElseAction = graph.AddNode<SAAlterMoveVelNode>();
-					GetPort("ElseAction").Connect(AlterMoveVelId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(AlterMoveVelId_node_ElseAction, assetPath);
-					variableCount += AlterMoveVelId_node_ElseAction.SetData((SAAlterMoveVel)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SetStagePartId:
-					SASetStagePartNode SetStagePartId_node_ElseAction = graph.AddNode<SASetStagePartNode>();
-					GetPort("ElseAction").Connect(SetStagePartId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SetStagePartId_node_ElseAction, assetPath);
-					variableCount += SetStagePartId_node_ElseAction.SetData((SASetStagePart)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SetStagePartsDefaultId:
-					SASetStagePartsDefaultNode SetStagePartsDefaultId_node_ElseAction = graph.AddNode<SASetStagePartsDefaultNode>();
-					GetPort("ElseAction").Connect(SetStagePartsDefaultId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SetStagePartsDefaultId_node_ElseAction, assetPath);
-					variableCount += SetStagePartsDefaultId_node_ElseAction.SetData((SASetStagePartsDefault)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.JumpId:
-					SAJumpNode JumpId_node_ElseAction = graph.AddNode<SAJumpNode>();
-					GetPort("ElseAction").Connect(JumpId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(JumpId_node_ElseAction, assetPath);
-					variableCount += JumpId_node_ElseAction.SetData((SAJump)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.StopJumpId:
-					SAStopJumpNode StopJumpId_node_ElseAction = graph.AddNode<SAStopJumpNode>();
-					GetPort("ElseAction").Connect(StopJumpId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(StopJumpId_node_ElseAction, assetPath);
-					variableCount += StopJumpId_node_ElseAction.SetData((SAStopJump)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ManageAirJumpId:
-					SAManageAirJumpNode ManageAirJumpId_node_ElseAction = graph.AddNode<SAManageAirJumpNode>();
-					GetPort("ElseAction").Connect(ManageAirJumpId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ManageAirJumpId_node_ElseAction, assetPath);
-					variableCount += ManageAirJumpId_node_ElseAction.SetData((SAManageAirJump)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.LeaveGroundId:
-					SALeaveGroundNode LeaveGroundId_node_ElseAction = graph.AddNode<SALeaveGroundNode>();
-					GetPort("ElseAction").Connect(LeaveGroundId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(LeaveGroundId_node_ElseAction, assetPath);
-					variableCount += LeaveGroundId_node_ElseAction.SetData((SALeaveGround)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.UnhogEdgeId:
-					SAUnHogEdgeNode UnhogEdgeId_node_ElseAction = graph.AddNode<SAUnHogEdgeNode>();
-					GetPort("ElseAction").Connect(UnhogEdgeId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(UnhogEdgeId_node_ElseAction, assetPath);
-					variableCount += UnhogEdgeId_node_ElseAction.SetData((SAUnHogEdge)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SFXTimelineId:
-					SAPlaySFXTimelineNode SFXTimelineId_node_ElseAction = graph.AddNode<SAPlaySFXTimelineNode>();
-					GetPort("ElseAction").Connect(SFXTimelineId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SFXTimelineId_node_ElseAction, assetPath);
-					variableCount += SFXTimelineId_node_ElseAction.SetData((SAPlaySFXTimeline)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.FindLastHorizontalInputId:
-					SAFindLastHorizontalInputNode FindLastHorizontalInputId_node_ElseAction = graph.AddNode<SAFindLastHorizontalInputNode>();
-					GetPort("ElseAction").Connect(FindLastHorizontalInputId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(FindLastHorizontalInputId_node_ElseAction, assetPath);
-					variableCount += FindLastHorizontalInputId_node_ElseAction.SetData((SAFindLastHorizontalInput)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SetCommandGrab:
-					SASetCommandGrabNode SetCommandGrab_node_ElseAction = graph.AddNode<SASetCommandGrabNode>();
-					GetPort("ElseAction").Connect(SetCommandGrab_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SetCommandGrab_node_ElseAction, assetPath);
-					variableCount += SetCommandGrab_node_ElseAction.SetData((SASetCommandGrab)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.CameraPunchId:
-					SACameraPunchNode CameraPunchId_node_ElseAction = graph.AddNode<SACameraPunchNode>();
-					GetPort("ElseAction").Connect(CameraPunchId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(CameraPunchId_node_ElseAction, assetPath);
-					variableCount += CameraPunchId_node_ElseAction.SetData((SACameraPunch)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SpawnAgent2Id:
-					SASpawnAgent2Node SpawnAgent2Id_node_ElseAction = graph.AddNode<SASpawnAgent2Node>();
-					GetPort("ElseAction").Connect(SpawnAgent2Id_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SpawnAgent2Id_node_ElseAction, assetPath);
-					variableCount += SpawnAgent2Id_node_ElseAction.SetData((SASpawnAgent2)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ManipDecorChainId:
-					SAManipDecorChainNode ManipDecorChainId_node_ElseAction = graph.AddNode<SAManipDecorChainNode>();
-					GetPort("ElseAction").Connect(ManipDecorChainId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ManipDecorChainId_node_ElseAction, assetPath);
-					variableCount += ManipDecorChainId_node_ElseAction.SetData((SAManipDecorChain)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.UpdateHitboxesId:
-					SAUpdateHitboxesNode UpdateHitboxesId_node_ElseAction = graph.AddNode<SAUpdateHitboxesNode>();
-					GetPort("ElseAction").Connect(UpdateHitboxesId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(UpdateHitboxesId_node_ElseAction, assetPath);
-					variableCount += UpdateHitboxesId_node_ElseAction.SetData((SAUpdateHitboxes)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.SampleAnimId:
-					SASampleAnimNode SampleAnimId_node_ElseAction = graph.AddNode<SASampleAnimNode>();
-					GetPort("ElseAction").Connect(SampleAnimId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(SampleAnimId_node_ElseAction, assetPath);
-					variableCount += SampleAnimId_node_ElseAction.SetData((SASampleAnim)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.ForceExtraInputId:
-					SAForceExtraInputCheckNode ForceExtraInputId_node_ElseAction = graph.AddNode<SAForceExtraInputCheckNode>();
-					GetPort("ElseAction").Connect(ForceExtraInputId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(ForceExtraInputId_node_ElseAction, assetPath);
-					variableCount += ForceExtraInputId_node_ElseAction.SetData((SAForceExtraInputCheck)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.LaunchGrabbedCustomId:
-					SALaunchGrabbedCustomNode LaunchGrabbedCustomId_node_ElseAction = graph.AddNode<SALaunchGrabbedCustomNode>();
-					GetPort("ElseAction").Connect(LaunchGrabbedCustomId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(LaunchGrabbedCustomId_node_ElseAction, assetPath);
-					variableCount += LaunchGrabbedCustomId_node_ElseAction.SetData((SALaunchGrabbedCustom)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.MapAnimSimpleId:
-					SAMapAnimationSimpleNode MapAnimSimpleId_node_ElseAction = graph.AddNode<SAMapAnimationSimpleNode>();
-					GetPort("ElseAction").Connect(MapAnimSimpleId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(MapAnimSimpleId_node_ElseAction, assetPath);
-					variableCount += MapAnimSimpleId_node_ElseAction.SetData((SAMapAnimationSimple)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.OnLeaveParentId:
-					SAOnLeaveParentNode OnLeaveParentId_node_ElseAction = graph.AddNode<SAOnLeaveParentNode>();
-					GetPort("ElseAction").Connect(OnLeaveParentId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(OnLeaveParentId_node_ElseAction, assetPath);
-					variableCount += OnLeaveParentId_node_ElseAction.SetData((SAOnLeaveParent)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
-				break;
-				case StateAction.TypeId.PersistLocalFXId:
-					SAPersistLocalFXNode PersistLocalFXId_node_ElseAction = graph.AddNode<SAPersistLocalFXNode>();
-					GetPort("ElseAction").Connect(PersistLocalFXId_node_ElseAction.GetPort("NodeInput"));
-					AssetDatabase.AddObjectToAsset(PersistLocalFXId_node_ElseAction, assetPath);
-					variableCount += PersistLocalFXId_node_ElseAction.SetData((SAPersistLocalFX)ElseAction, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				case StateAction.TypeId.StateAction:
+					StateActionNode StateAction_node_ElseAction = graph.AddNode<StateActionNode>();
+					GetPort("ElseAction").Connect(StateAction_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(StateAction_node_ElseAction, assetPath);
+					variableCount += StateAction_node_ElseAction.SetData((StateAction)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SADebugMessage:
+					SADebugMessageNode SADebugMessage_node_ElseAction = graph.AddNode<SADebugMessageNode>();
+					GetPort("ElseAction").Connect(SADebugMessage_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SADebugMessage_node_ElseAction, assetPath);
+					variableCount += SADebugMessage_node_ElseAction.SetData((SADebugMessage)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAPlayAnim:
+					SAPlayAnimNode SAPlayAnim_node_ElseAction = graph.AddNode<SAPlayAnimNode>();
+					GetPort("ElseAction").Connect(SAPlayAnim_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAPlayAnim_node_ElseAction, assetPath);
+					variableCount += SAPlayAnim_node_ElseAction.SetData((SAPlayAnim)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAPlayRootAnim:
+					SAPlayRootAnimNode SAPlayRootAnim_node_ElseAction = graph.AddNode<SAPlayRootAnimNode>();
+					GetPort("ElseAction").Connect(SAPlayRootAnim_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAPlayRootAnim_node_ElseAction, assetPath);
+					variableCount += SAPlayRootAnim_node_ElseAction.SetData((SAPlayRootAnim)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASnapAnimWeights:
+					SASnapAnimWeightsNode SASnapAnimWeights_node_ElseAction = graph.AddNode<SASnapAnimWeightsNode>();
+					GetPort("ElseAction").Connect(SASnapAnimWeights_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASnapAnimWeights_node_ElseAction, assetPath);
+					variableCount += SASnapAnimWeights_node_ElseAction.SetData((SASnapAnimWeights)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAStandardInput:
+					SAStandardInputNode SAStandardInput_node_ElseAction = graph.AddNode<SAStandardInputNode>();
+					GetPort("ElseAction").Connect(SAStandardInput_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAStandardInput_node_ElseAction, assetPath);
+					variableCount += SAStandardInput_node_ElseAction.SetData((SAStandardInput)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAInputAction:
+					SAInputActionNode SAInputAction_node_ElseAction = graph.AddNode<SAInputActionNode>();
+					GetPort("ElseAction").Connect(SAInputAction_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAInputAction_node_ElseAction, assetPath);
+					variableCount += SAInputAction_node_ElseAction.SetData((SAInputAction)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SADeactivateInputAction:
+					SADeactivateInputActionNode SADeactivateInputAction_node_ElseAction = graph.AddNode<SADeactivateInputActionNode>();
+					GetPort("ElseAction").Connect(SADeactivateInputAction_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SADeactivateInputAction_node_ElseAction, assetPath);
+					variableCount += SADeactivateInputAction_node_ElseAction.SetData((SADeactivateInputAction)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAAddInputEventFromFrame:
+					SAAddInputEventFromFrameNode SAAddInputEventFromFrame_node_ElseAction = graph.AddNode<SAAddInputEventFromFrameNode>();
+					GetPort("ElseAction").Connect(SAAddInputEventFromFrame_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAAddInputEventFromFrame_node_ElseAction, assetPath);
+					variableCount += SAAddInputEventFromFrame_node_ElseAction.SetData((SAAddInputEventFromFrame)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SACancelToState:
+					SACancelToStateNode SACancelToState_node_ElseAction = graph.AddNode<SACancelToStateNode>();
+					GetPort("ElseAction").Connect(SACancelToState_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SACancelToState_node_ElseAction, assetPath);
+					variableCount += SACancelToState_node_ElseAction.SetData((SACancelToState)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SACustomCall:
+					SACustomCallNode SACustomCall_node_ElseAction = graph.AddNode<SACustomCallNode>();
+					GetPort("ElseAction").Connect(SACustomCall_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SACustomCall_node_ElseAction, assetPath);
+					variableCount += SACustomCall_node_ElseAction.SetData((SACustomCall)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SATimedAction:
+					SATimedActionNode SATimedAction_node_ElseAction = graph.AddNode<SATimedActionNode>();
+					GetPort("ElseAction").Connect(SATimedAction_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SATimedAction_node_ElseAction, assetPath);
+					variableCount += SATimedAction_node_ElseAction.SetData((SATimedAction)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAOrderSensitive:
+					SAOrderSensitiveNode SAOrderSensitive_node_ElseAction = graph.AddNode<SAOrderSensitiveNode>();
+					GetPort("ElseAction").Connect(SAOrderSensitive_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAOrderSensitive_node_ElseAction, assetPath);
+					variableCount += SAOrderSensitive_node_ElseAction.SetData((SAOrderSensitive)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAProxyMove:
+					SAProxyMoveNode SAProxyMove_node_ElseAction = graph.AddNode<SAProxyMoveNode>();
+					GetPort("ElseAction").Connect(SAProxyMove_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAProxyMove_node_ElseAction, assetPath);
+					variableCount += SAProxyMove_node_ElseAction.SetData((SAProxyMove)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SACheckThing:
+					SACheckThingNode SACheckThing_node_ElseAction = graph.AddNode<SACheckThingNode>();
+					GetPort("ElseAction").Connect(SACheckThing_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SACheckThing_node_ElseAction, assetPath);
+					variableCount += SACheckThing_node_ElseAction.SetData((SACheckThing)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAActiveAction:
+					SAActiveActionNode SAActiveAction_node_ElseAction = graph.AddNode<SAActiveActionNode>();
+					GetPort("ElseAction").Connect(SAActiveAction_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAActiveAction_node_ElseAction, assetPath);
+					variableCount += SAActiveAction_node_ElseAction.SetData((SAActiveAction)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SADeactivateAction:
+					SADeactivateActionNode SADeactivateAction_node_ElseAction = graph.AddNode<SADeactivateActionNode>();
+					GetPort("ElseAction").Connect(SADeactivateAction_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SADeactivateAction_node_ElseAction, assetPath);
+					variableCount += SADeactivateAction_node_ElseAction.SetData((SADeactivateAction)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetFloatTarget:
+					SASetFloatTargetNode SASetFloatTarget_node_ElseAction = graph.AddNode<SASetFloatTargetNode>();
+					GetPort("ElseAction").Connect(SASetFloatTarget_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetFloatTarget_node_ElseAction, assetPath);
+					variableCount += SASetFloatTarget_node_ElseAction.SetData((SASetFloatTarget)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAOnBounce:
+					SAOnBounceNode SAOnBounce_node_ElseAction = graph.AddNode<SAOnBounceNode>();
+					GetPort("ElseAction").Connect(SAOnBounce_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAOnBounce_node_ElseAction, assetPath);
+					variableCount += SAOnBounce_node_ElseAction.SetData((SAOnBounce)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAOnLeaveEdge:
+					SAOnLeaveEdgeNode SAOnLeaveEdge_node_ElseAction = graph.AddNode<SAOnLeaveEdgeNode>();
+					GetPort("ElseAction").Connect(SAOnLeaveEdge_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAOnLeaveEdge_node_ElseAction, assetPath);
+					variableCount += SAOnLeaveEdge_node_ElseAction.SetData((SAOnLeaveEdge)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAOnStoppedAtEdge:
+					SAOnStoppedAtEdgeNode SAOnStoppedAtEdge_node_ElseAction = graph.AddNode<SAOnStoppedAtEdgeNode>();
+					GetPort("ElseAction").Connect(SAOnStoppedAtEdge_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAOnStoppedAtEdge_node_ElseAction, assetPath);
+					variableCount += SAOnStoppedAtEdge_node_ElseAction.SetData((SAOnStoppedAtEdge)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAOnLand:
+					SAOnLandNode SAOnLand_node_ElseAction = graph.AddNode<SAOnLandNode>();
+					GetPort("ElseAction").Connect(SAOnLand_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAOnLand_node_ElseAction, assetPath);
+					variableCount += SAOnLand_node_ElseAction.SetData((SAOnLand)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAOnCancel:
+					SAOnCancelNode SAOnCancel_node_ElseAction = graph.AddNode<SAOnCancelNode>();
+					GetPort("ElseAction").Connect(SAOnCancel_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAOnCancel_node_ElseAction, assetPath);
+					variableCount += SAOnCancel_node_ElseAction.SetData((SAOnCancel)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SARefreshAttack:
+					SARefreshAttackNode SARefreshAttack_node_ElseAction = graph.AddNode<SARefreshAttackNode>();
+					GetPort("ElseAction").Connect(SARefreshAttack_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SARefreshAttack_node_ElseAction, assetPath);
+					variableCount += SARefreshAttack_node_ElseAction.SetData((SARefreshAttack)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAEndAttack:
+					SAEndAttackNode SAEndAttack_node_ElseAction = graph.AddNode<SAEndAttackNode>();
+					GetPort("ElseAction").Connect(SAEndAttack_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAEndAttack_node_ElseAction, assetPath);
+					variableCount += SAEndAttack_node_ElseAction.SetData((SAEndAttack)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetHitboxCount:
+					SASetHitboxCountNode SASetHitboxCount_node_ElseAction = graph.AddNode<SASetHitboxCountNode>();
+					GetPort("ElseAction").Connect(SASetHitboxCount_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetHitboxCount_node_ElseAction, assetPath);
+					variableCount += SASetHitboxCount_node_ElseAction.SetData((SASetHitboxCount)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAConfigHitbox:
+					SAConfigHitboxNode SAConfigHitbox_node_ElseAction = graph.AddNode<SAConfigHitboxNode>();
+					GetPort("ElseAction").Connect(SAConfigHitbox_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAConfigHitbox_node_ElseAction, assetPath);
+					variableCount += SAConfigHitbox_node_ElseAction.SetData((SAConfigHitbox)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetAtkProp:
+					SASetAtkPropNode SASetAtkProp_node_ElseAction = graph.AddNode<SASetAtkPropNode>();
+					GetPort("ElseAction").Connect(SASetAtkProp_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetAtkProp_node_ElseAction, assetPath);
+					variableCount += SASetAtkProp_node_ElseAction.SetData((SASetAtkProp)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAManipHitBox:
+					SAManipHitBoxNode SAManipHitBox_node_ElseAction = graph.AddNode<SAManipHitBoxNode>();
+					GetPort("ElseAction").Connect(SAManipHitBox_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAManipHitBox_node_ElseAction, assetPath);
+					variableCount += SAManipHitBox_node_ElseAction.SetData((SAManipHitBox)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAUpdateHurtboxes:
+					SAUpdateHurtboxesNode SAUpdateHurtboxes_node_ElseAction = graph.AddNode<SAUpdateHurtboxesNode>();
+					GetPort("ElseAction").Connect(SAUpdateHurtboxes_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAUpdateHurtboxes_node_ElseAction, assetPath);
+					variableCount += SAUpdateHurtboxes_node_ElseAction.SetData((SAUpdateHurtboxes)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetupHurtboxes:
+					SASetupHurtboxesNode SASetupHurtboxes_node_ElseAction = graph.AddNode<SASetupHurtboxesNode>();
+					GetPort("ElseAction").Connect(SASetupHurtboxes_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetupHurtboxes_node_ElseAction, assetPath);
+					variableCount += SASetupHurtboxes_node_ElseAction.SetData((SASetupHurtboxes)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAManipHurtBox:
+					SAManipHurtBoxNode SAManipHurtBox_node_ElseAction = graph.AddNode<SAManipHurtBoxNode>();
+					GetPort("ElseAction").Connect(SAManipHurtBox_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAManipHurtBox_node_ElseAction, assetPath);
+					variableCount += SAManipHurtBox_node_ElseAction.SetData((SAManipHurtBox)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SABoneState:
+					SABoneStateNode SABoneState_node_ElseAction = graph.AddNode<SABoneStateNode>();
+					GetPort("ElseAction").Connect(SABoneState_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SABoneState_node_ElseAction, assetPath);
+					variableCount += SABoneState_node_ElseAction.SetData((SABoneState)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SABoneScale:
+					SABoneScaleNode SABoneScale_node_ElseAction = graph.AddNode<SABoneScaleNode>();
+					GetPort("ElseAction").Connect(SABoneScale_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SABoneScale_node_ElseAction, assetPath);
+					variableCount += SABoneScale_node_ElseAction.SetData((SABoneScale)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASpawnAgent:
+					SASpawnAgentNode SASpawnAgent_node_ElseAction = graph.AddNode<SASpawnAgentNode>();
+					GetPort("ElseAction").Connect(SASpawnAgent_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASpawnAgent_node_ElseAction, assetPath);
+					variableCount += SASpawnAgent_node_ElseAction.SetData((SASpawnAgent)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SALocalFX:
+					SALocalFXNode SALocalFX_node_ElseAction = graph.AddNode<SALocalFXNode>();
+					GetPort("ElseAction").Connect(SALocalFX_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SALocalFX_node_ElseAction, assetPath);
+					variableCount += SALocalFX_node_ElseAction.SetData((SALocalFX)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASpawnFX:
+					SASpawnFXNode SASpawnFX_node_ElseAction = graph.AddNode<SASpawnFXNode>();
+					GetPort("ElseAction").Connect(SASpawnFX_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASpawnFX_node_ElseAction, assetPath);
+					variableCount += SASpawnFX_node_ElseAction.SetData((SASpawnFX)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetHitboxFX:
+					SASetHitboxFXNode SASetHitboxFX_node_ElseAction = graph.AddNode<SASetHitboxFXNode>();
+					GetPort("ElseAction").Connect(SASetHitboxFX_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetHitboxFX_node_ElseAction, assetPath);
+					variableCount += SASetHitboxFX_node_ElseAction.SetData((SASetHitboxFX)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAPlaySFX:
+					SAPlaySFXNode SAPlaySFX_node_ElseAction = graph.AddNode<SAPlaySFXNode>();
+					GetPort("ElseAction").Connect(SAPlaySFX_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAPlaySFX_node_ElseAction, assetPath);
+					variableCount += SAPlaySFX_node_ElseAction.SetData((SAPlaySFX)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetHitboxSFX:
+					SASetHitboxSFXNode SASetHitboxSFX_node_ElseAction = graph.AddNode<SASetHitboxSFXNode>();
+					GetPort("ElseAction").Connect(SASetHitboxSFX_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetHitboxSFX_node_ElseAction, assetPath);
+					variableCount += SASetHitboxSFX_node_ElseAction.SetData((SASetHitboxSFX)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAColorTint:
+					SAColorTintNode SAColorTint_node_ElseAction = graph.AddNode<SAColorTintNode>();
+					GetPort("ElseAction").Connect(SAColorTint_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAColorTint_node_ElseAction, assetPath);
+					variableCount += SAColorTint_node_ElseAction.SetData((SAColorTint)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAFindFloor:
+					SAFindFloorNode SAFindFloor_node_ElseAction = graph.AddNode<SAFindFloorNode>();
+					GetPort("ElseAction").Connect(SAFindFloor_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAFindFloor_node_ElseAction, assetPath);
+					variableCount += SAFindFloor_node_ElseAction.SetData((SAFindFloor)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAHurtGrabbed:
+					SAHurtGrabbedNode SAHurtGrabbed_node_ElseAction = graph.AddNode<SAHurtGrabbedNode>();
+					GetPort("ElseAction").Connect(SAHurtGrabbed_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAHurtGrabbed_node_ElseAction, assetPath);
+					variableCount += SAHurtGrabbed_node_ElseAction.SetData((SAHurtGrabbed)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SALaunchGrabbed:
+					SALaunchGrabbedNode SALaunchGrabbed_node_ElseAction = graph.AddNode<SALaunchGrabbedNode>();
+					GetPort("ElseAction").Connect(SALaunchGrabbed_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SALaunchGrabbed_node_ElseAction, assetPath);
+					variableCount += SALaunchGrabbed_node_ElseAction.SetData((SALaunchGrabbed)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAStateCancelGrabbed:
+					SAStateCancelGrabbedNode SAStateCancelGrabbed_node_ElseAction = graph.AddNode<SAStateCancelGrabbedNode>();
+					GetPort("ElseAction").Connect(SAStateCancelGrabbed_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAStateCancelGrabbed_node_ElseAction, assetPath);
+					variableCount += SAStateCancelGrabbed_node_ElseAction.SetData((SAStateCancelGrabbed)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAEndGrab:
+					SAEndGrabNode SAEndGrab_node_ElseAction = graph.AddNode<SAEndGrabNode>();
+					GetPort("ElseAction").Connect(SAEndGrab_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAEndGrab_node_ElseAction, assetPath);
+					variableCount += SAEndGrab_node_ElseAction.SetData((SAEndGrab)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAGrabNotifyEscape:
+					SAGrabNotifyEscapeNode SAGrabNotifyEscape_node_ElseAction = graph.AddNode<SAGrabNotifyEscapeNode>();
+					GetPort("ElseAction").Connect(SAGrabNotifyEscape_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAGrabNotifyEscape_node_ElseAction, assetPath);
+					variableCount += SAGrabNotifyEscape_node_ElseAction.SetData((SAGrabNotifyEscape)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAIgnoreGrabbed:
+					SAIgnoreGrabbedNode SAIgnoreGrabbed_node_ElseAction = graph.AddNode<SAIgnoreGrabbedNode>();
+					GetPort("ElseAction").Connect(SAIgnoreGrabbed_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAIgnoreGrabbed_node_ElseAction, assetPath);
+					variableCount += SAIgnoreGrabbed_node_ElseAction.SetData((SAIgnoreGrabbed)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAEventKO:
+					SAEventKONode SAEventKO_node_ElseAction = graph.AddNode<SAEventKONode>();
+					GetPort("ElseAction").Connect(SAEventKO_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAEventKO_node_ElseAction, assetPath);
+					variableCount += SAEventKO_node_ElseAction.SetData((SAEventKO)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAEventKOGrabbed:
+					SAEventKOGrabbedNode SAEventKOGrabbed_node_ElseAction = graph.AddNode<SAEventKOGrabbedNode>();
+					GetPort("ElseAction").Connect(SAEventKOGrabbed_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAEventKOGrabbed_node_ElseAction, assetPath);
+					variableCount += SAEventKOGrabbed_node_ElseAction.SetData((SAEventKOGrabbed)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SACameraShake:
+					SACameraShakeNode SACameraShake_node_ElseAction = graph.AddNode<SACameraShakeNode>();
+					GetPort("ElseAction").Connect(SACameraShake_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SACameraShake_node_ElseAction, assetPath);
+					variableCount += SACameraShake_node_ElseAction.SetData((SACameraShake)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAResetOnHits:
+					SAResetOnHitsNode SAResetOnHits_node_ElseAction = graph.AddNode<SAResetOnHitsNode>();
+					GetPort("ElseAction").Connect(SAResetOnHits_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAResetOnHits_node_ElseAction, assetPath);
+					variableCount += SAResetOnHits_node_ElseAction.SetData((SAResetOnHits)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAOnHit:
+					SAOnHitNode SAOnHit_node_ElseAction = graph.AddNode<SAOnHitNode>();
+					GetPort("ElseAction").Connect(SAOnHit_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAOnHit_node_ElseAction, assetPath);
+					variableCount += SAOnHit_node_ElseAction.SetData((SAOnHit)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAFastForwardState:
+					SAFastForwardStateNode SAFastForwardState_node_ElseAction = graph.AddNode<SAFastForwardStateNode>();
+					GetPort("ElseAction").Connect(SAFastForwardState_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAFastForwardState_node_ElseAction, assetPath);
+					variableCount += SAFastForwardState_node_ElseAction.SetData((SAFastForwardState)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SATimingTweak:
+					SATimingTweakNode SATimingTweak_node_ElseAction = graph.AddNode<SATimingTweakNode>();
+					GetPort("ElseAction").Connect(SATimingTweak_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SATimingTweak_node_ElseAction, assetPath);
+					variableCount += SATimingTweak_node_ElseAction.SetData((SATimingTweak)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAMapAnimation:
+					SAMapAnimationNode SAMapAnimation_node_ElseAction = graph.AddNode<SAMapAnimationNode>();
+					GetPort("ElseAction").Connect(SAMapAnimation_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAMapAnimation_node_ElseAction, assetPath);
+					variableCount += SAMapAnimation_node_ElseAction.SetData((SAMapAnimation)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAAlterMoveDT:
+					SAAlterMoveDTNode SAAlterMoveDT_node_ElseAction = graph.AddNode<SAAlterMoveDTNode>();
+					GetPort("ElseAction").Connect(SAAlterMoveDT_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAAlterMoveDT_node_ElseAction, assetPath);
+					variableCount += SAAlterMoveDT_node_ElseAction.SetData((SAAlterMoveDT)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAAlterMoveVel:
+					SAAlterMoveVelNode SAAlterMoveVel_node_ElseAction = graph.AddNode<SAAlterMoveVelNode>();
+					GetPort("ElseAction").Connect(SAAlterMoveVel_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAAlterMoveVel_node_ElseAction, assetPath);
+					variableCount += SAAlterMoveVel_node_ElseAction.SetData((SAAlterMoveVel)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetStagePart:
+					SASetStagePartNode SASetStagePart_node_ElseAction = graph.AddNode<SASetStagePartNode>();
+					GetPort("ElseAction").Connect(SASetStagePart_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetStagePart_node_ElseAction, assetPath);
+					variableCount += SASetStagePart_node_ElseAction.SetData((SASetStagePart)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetStagePartsDefault:
+					SASetStagePartsDefaultNode SASetStagePartsDefault_node_ElseAction = graph.AddNode<SASetStagePartsDefaultNode>();
+					GetPort("ElseAction").Connect(SASetStagePartsDefault_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetStagePartsDefault_node_ElseAction, assetPath);
+					variableCount += SASetStagePartsDefault_node_ElseAction.SetData((SASetStagePartsDefault)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAJump:
+					SAJumpNode SAJump_node_ElseAction = graph.AddNode<SAJumpNode>();
+					GetPort("ElseAction").Connect(SAJump_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAJump_node_ElseAction, assetPath);
+					variableCount += SAJump_node_ElseAction.SetData((SAJump)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAStopJump:
+					SAStopJumpNode SAStopJump_node_ElseAction = graph.AddNode<SAStopJumpNode>();
+					GetPort("ElseAction").Connect(SAStopJump_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAStopJump_node_ElseAction, assetPath);
+					variableCount += SAStopJump_node_ElseAction.SetData((SAStopJump)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAManageAirJump:
+					SAManageAirJumpNode SAManageAirJump_node_ElseAction = graph.AddNode<SAManageAirJumpNode>();
+					GetPort("ElseAction").Connect(SAManageAirJump_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAManageAirJump_node_ElseAction, assetPath);
+					variableCount += SAManageAirJump_node_ElseAction.SetData((SAManageAirJump)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SALeaveGround:
+					SALeaveGroundNode SALeaveGround_node_ElseAction = graph.AddNode<SALeaveGroundNode>();
+					GetPort("ElseAction").Connect(SALeaveGround_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SALeaveGround_node_ElseAction, assetPath);
+					variableCount += SALeaveGround_node_ElseAction.SetData((SALeaveGround)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAUnHogEdge:
+					SAUnHogEdgeNode SAUnHogEdge_node_ElseAction = graph.AddNode<SAUnHogEdgeNode>();
+					GetPort("ElseAction").Connect(SAUnHogEdge_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAUnHogEdge_node_ElseAction, assetPath);
+					variableCount += SAUnHogEdge_node_ElseAction.SetData((SAUnHogEdge)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAPlaySFXTimeline:
+					SAPlaySFXTimelineNode SAPlaySFXTimeline_node_ElseAction = graph.AddNode<SAPlaySFXTimelineNode>();
+					GetPort("ElseAction").Connect(SAPlaySFXTimeline_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAPlaySFXTimeline_node_ElseAction, assetPath);
+					variableCount += SAPlaySFXTimeline_node_ElseAction.SetData((SAPlaySFXTimeline)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAFindLastHorizontalInput:
+					SAFindLastHorizontalInputNode SAFindLastHorizontalInput_node_ElseAction = graph.AddNode<SAFindLastHorizontalInputNode>();
+					GetPort("ElseAction").Connect(SAFindLastHorizontalInput_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAFindLastHorizontalInput_node_ElseAction, assetPath);
+					variableCount += SAFindLastHorizontalInput_node_ElseAction.SetData((SAFindLastHorizontalInput)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASetCommandGrab:
+					SASetCommandGrabNode SASetCommandGrab_node_ElseAction = graph.AddNode<SASetCommandGrabNode>();
+					GetPort("ElseAction").Connect(SASetCommandGrab_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASetCommandGrab_node_ElseAction, assetPath);
+					variableCount += SASetCommandGrab_node_ElseAction.SetData((SASetCommandGrab)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SACameraPunch:
+					SACameraPunchNode SACameraPunch_node_ElseAction = graph.AddNode<SACameraPunchNode>();
+					GetPort("ElseAction").Connect(SACameraPunch_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SACameraPunch_node_ElseAction, assetPath);
+					variableCount += SACameraPunch_node_ElseAction.SetData((SACameraPunch)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASpawnAgent2:
+					SASpawnAgent2Node SASpawnAgent2_node_ElseAction = graph.AddNode<SASpawnAgent2Node>();
+					GetPort("ElseAction").Connect(SASpawnAgent2_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASpawnAgent2_node_ElseAction, assetPath);
+					variableCount += SASpawnAgent2_node_ElseAction.SetData((SASpawnAgent2)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAManipDecorChain:
+					SAManipDecorChainNode SAManipDecorChain_node_ElseAction = graph.AddNode<SAManipDecorChainNode>();
+					GetPort("ElseAction").Connect(SAManipDecorChain_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAManipDecorChain_node_ElseAction, assetPath);
+					variableCount += SAManipDecorChain_node_ElseAction.SetData((SAManipDecorChain)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAUpdateHitboxes:
+					SAUpdateHitboxesNode SAUpdateHitboxes_node_ElseAction = graph.AddNode<SAUpdateHitboxesNode>();
+					GetPort("ElseAction").Connect(SAUpdateHitboxes_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAUpdateHitboxes_node_ElseAction, assetPath);
+					variableCount += SAUpdateHitboxes_node_ElseAction.SetData((SAUpdateHitboxes)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SASampleAnim:
+					SASampleAnimNode SASampleAnim_node_ElseAction = graph.AddNode<SASampleAnimNode>();
+					GetPort("ElseAction").Connect(SASampleAnim_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SASampleAnim_node_ElseAction, assetPath);
+					variableCount += SASampleAnim_node_ElseAction.SetData((SASampleAnim)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAForceExtraInputCheck:
+					SAForceExtraInputCheckNode SAForceExtraInputCheck_node_ElseAction = graph.AddNode<SAForceExtraInputCheckNode>();
+					GetPort("ElseAction").Connect(SAForceExtraInputCheck_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAForceExtraInputCheck_node_ElseAction, assetPath);
+					variableCount += SAForceExtraInputCheck_node_ElseAction.SetData((SAForceExtraInputCheck)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SALaunchGrabbedCustom:
+					SALaunchGrabbedCustomNode SALaunchGrabbedCustom_node_ElseAction = graph.AddNode<SALaunchGrabbedCustomNode>();
+					GetPort("ElseAction").Connect(SALaunchGrabbedCustom_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SALaunchGrabbedCustom_node_ElseAction, assetPath);
+					variableCount += SALaunchGrabbedCustom_node_ElseAction.SetData((SALaunchGrabbedCustom)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAMapAnimationSimple:
+					SAMapAnimationSimpleNode SAMapAnimationSimple_node_ElseAction = graph.AddNode<SAMapAnimationSimpleNode>();
+					GetPort("ElseAction").Connect(SAMapAnimationSimple_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAMapAnimationSimple_node_ElseAction, assetPath);
+					variableCount += SAMapAnimationSimple_node_ElseAction.SetData((SAMapAnimationSimple)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAPersistLocalFX:
+					SAPersistLocalFXNode SAPersistLocalFX_node_ElseAction = graph.AddNode<SAPersistLocalFXNode>();
+					GetPort("ElseAction").Connect(SAPersistLocalFX_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAPersistLocalFX_node_ElseAction, assetPath);
+					variableCount += SAPersistLocalFX_node_ElseAction.SetData((SAPersistLocalFX)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAOnLeaveParent:
+					SAOnLeaveParentNode SAOnLeaveParent_node_ElseAction = graph.AddNode<SAOnLeaveParentNode>();
+					GetPort("ElseAction").Connect(SAOnLeaveParent_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAOnLeaveParent_node_ElseAction, assetPath);
+					variableCount += SAOnLeaveParent_node_ElseAction.SetData((SAOnLeaveParent)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAPlayVoiceLine:
+					SAPlayVoiceLineNode SAPlayVoiceLine_node_ElseAction = graph.AddNode<SAPlayVoiceLineNode>();
+					GetPort("ElseAction").Connect(SAPlayVoiceLine_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAPlayVoiceLine_node_ElseAction, assetPath);
+					variableCount += SAPlayVoiceLine_node_ElseAction.SetData((SAPlayVoiceLine)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAPlayCategoryVoiceLine:
+					SAPlayCategoryVoiceLineNode SAPlayCategoryVoiceLine_node_ElseAction = graph.AddNode<SAPlayCategoryVoiceLineNode>();
+					GetPort("ElseAction").Connect(SAPlayCategoryVoiceLine_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAPlayCategoryVoiceLine_node_ElseAction, assetPath);
+					variableCount += SAPlayCategoryVoiceLine_node_ElseAction.SetData((SAPlayCategoryVoiceLine)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				break;
+				case StateAction.TypeId.SAStopVoiceLines:
+					SAStopVoiceLinesNode SAStopVoiceLines_node_ElseAction = graph.AddNode<SAStopVoiceLinesNode>();
+					GetPort("ElseAction").Connect(SAStopVoiceLines_node_ElseAction.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(SAStopVoiceLines_node_ElseAction, assetPath);
+					variableCount += SAStopVoiceLines_node_ElseAction.SetData((SAStopVoiceLines)ElseAction, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 				break;
 			}
 			
@@ -1063,56 +1119,55 @@ namespace NASB_Moveset_Editor.StateActions
 		public new SACheckThing GetData()
 		{
 			SACheckThing objToReturn = new SACheckThing();
-			objToReturn.TID = TypeId.CheckId;
-			objToReturn.Version = Version;
+			objToReturn.TID = TypeId.SACheckThing;
 			if (GetPort("CheckThing").ConnectionCount > 0)
 			{
 				CheckThingNode CheckThing_Node = (CheckThingNode)GetPort("CheckThing").GetConnection(0).node;
 				switch (CheckThing_Node.TID)
 				{
-					case CheckThing.TypeId.MultipleId:
-						CTMultipleNode MultipleId_CheckThing_Node = (CTMultipleNode)GetPort("CheckThing").GetConnection(0).node;
-						objToReturn.CheckThing = MultipleId_CheckThing_Node.GetData();
+					case CheckThing.TypeId.CheckThing:
+						CheckThingNode CheckThing_CheckThing_Node = (CheckThingNode)GetPort("CheckThing").GetConnection(0).node;
+						objToReturn.CheckThing = CheckThing_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.CompareId:
-						CTCompareFloatNode CompareId_CheckThing_Node = (CTCompareFloatNode)GetPort("CheckThing").GetConnection(0).node;
-						objToReturn.CheckThing = CompareId_CheckThing_Node.GetData();
+					case CheckThing.TypeId.CTMultiple:
+						CTMultipleNode CTMultiple_CheckThing_Node = (CTMultipleNode)GetPort("CheckThing").GetConnection(0).node;
+						objToReturn.CheckThing = CTMultiple_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.DoubleTapId:
-						CTDoubleTapIdNode DoubleTapId_CheckThing_Node = (CTDoubleTapIdNode)GetPort("CheckThing").GetConnection(0).node;
-						objToReturn.CheckThing = DoubleTapId_CheckThing_Node.GetData();
+					case CheckThing.TypeId.CTCompareFloat:
+						CTCompareFloatNode CTCompareFloat_CheckThing_Node = (CTCompareFloatNode)GetPort("CheckThing").GetConnection(0).node;
+						objToReturn.CheckThing = CTCompareFloat_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.InputId:
-						CTInputNode InputId_CheckThing_Node = (CTInputNode)GetPort("CheckThing").GetConnection(0).node;
-						objToReturn.CheckThing = InputId_CheckThing_Node.GetData();
+					case CheckThing.TypeId.CTDoubleTap:
+						CTDoubleTapNode CTDoubleTap_CheckThing_Node = (CTDoubleTapNode)GetPort("CheckThing").GetConnection(0).node;
+						objToReturn.CheckThing = CTDoubleTap_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.InputSeriesId:
-						CTInputSeriesNode InputSeriesId_CheckThing_Node = (CTInputSeriesNode)GetPort("CheckThing").GetConnection(0).node;
-						objToReturn.CheckThing = InputSeriesId_CheckThing_Node.GetData();
+					case CheckThing.TypeId.CTInput:
+						CTInputNode CTInput_CheckThing_Node = (CTInputNode)GetPort("CheckThing").GetConnection(0).node;
+						objToReturn.CheckThing = CTInput_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.TechId:
-						CTCheckTechNode TechId_CheckThing_Node = (CTCheckTechNode)GetPort("CheckThing").GetConnection(0).node;
-						objToReturn.CheckThing = TechId_CheckThing_Node.GetData();
+					case CheckThing.TypeId.CTInputSeries:
+						CTInputSeriesNode CTInputSeries_CheckThing_Node = (CTInputSeriesNode)GetPort("CheckThing").GetConnection(0).node;
+						objToReturn.CheckThing = CTInputSeries_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.GrabId:
-						CTGrabIdNode GrabId_CheckThing_Node = (CTGrabIdNode)GetPort("CheckThing").GetConnection(0).node;
-						objToReturn.CheckThing = GrabId_CheckThing_Node.GetData();
+					case CheckThing.TypeId.CTCheckTech:
+						CTCheckTechNode CTCheckTech_CheckThing_Node = (CTCheckTechNode)GetPort("CheckThing").GetConnection(0).node;
+						objToReturn.CheckThing = CTCheckTech_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.GrabAgentId:
-						CTGrabbedAgentNode GrabAgentId_CheckThing_Node = (CTGrabbedAgentNode)GetPort("CheckThing").GetConnection(0).node;
-						objToReturn.CheckThing = GrabAgentId_CheckThing_Node.GetData();
+					case CheckThing.TypeId.CTGrab:
+						CTGrabNode CTGrab_CheckThing_Node = (CTGrabNode)GetPort("CheckThing").GetConnection(0).node;
+						objToReturn.CheckThing = CTGrab_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.SkinId:
-						CTSkinNode SkinId_CheckThing_Node = (CTSkinNode)GetPort("CheckThing").GetConnection(0).node;
-						objToReturn.CheckThing = SkinId_CheckThing_Node.GetData();
+					case CheckThing.TypeId.CTGrabbedAgent:
+						CTGrabbedAgentNode CTGrabbedAgent_CheckThing_Node = (CTGrabbedAgentNode)GetPort("CheckThing").GetConnection(0).node;
+						objToReturn.CheckThing = CTGrabbedAgent_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.MoveId:
-						CTMoveNode MoveId_CheckThing_Node = (CTMoveNode)GetPort("CheckThing").GetConnection(0).node;
-						objToReturn.CheckThing = MoveId_CheckThing_Node.GetData();
+					case CheckThing.TypeId.CTSkin:
+						CTSkinNode CTSkin_CheckThing_Node = (CTSkinNode)GetPort("CheckThing").GetConnection(0).node;
+						objToReturn.CheckThing = CTSkin_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.BaseIdentifier:
-						CheckThingNode BaseIdentifier_CheckThing_Node = (CheckThingNode)GetPort("CheckThing").GetConnection(0).node;
-						objToReturn.CheckThing = BaseIdentifier_CheckThing_Node.GetData();
+					case CheckThing.TypeId.CTMove:
+						CTMoveNode CTMove_CheckThing_Node = (CTMoveNode)GetPort("CheckThing").GetConnection(0).node;
+						objToReturn.CheckThing = CTMove_CheckThing_Node.GetData();
 					break;
 				}
 			}
@@ -1121,317 +1176,329 @@ namespace NASB_Moveset_Editor.StateActions
 				StateActionNode StateAction_Node = (StateActionNode)GetPort("Action").GetConnection(0).node;
 				switch (StateAction_Node.TID)
 				{
-					case StateAction.TypeId.DebugId:
-						SADebugMessageNode DebugId_StateAction_Node = (SADebugMessageNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = DebugId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.PlayAnimId:
-						SAPlayAnimNode PlayAnimId_StateAction_Node = (SAPlayAnimNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = PlayAnimId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.RootAnimId:
-						SAPlayRootAnimNode RootAnimId_StateAction_Node = (SAPlayRootAnimNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = RootAnimId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SnapAnimWeightsId:
-						SASnapAnimWeightsNode SnapAnimWeightsId_StateAction_Node = (SASnapAnimWeightsNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = SnapAnimWeightsId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.StandardInputId:
-						SAStandardInputNode StandardInputId_StateAction_Node = (SAStandardInputNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = StandardInputId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.InputId:
-						SAInputActionNode InputId_StateAction_Node = (SAInputActionNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = InputId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.DeactInputId:
-						SADeactivateInputActionNode DeactInputId_StateAction_Node = (SADeactivateInputActionNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = DeactInputId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.InputEventFromFrameId:
-						SAAddInputEventFromFrameNode InputEventFromFrameId_StateAction_Node = (SAAddInputEventFromFrameNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = InputEventFromFrameId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.CancelStateId:
-						SACancelToStateNode CancelStateId_StateAction_Node = (SACancelToStateNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = CancelStateId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.CustomCallId:
-						SACustomCallNode CustomCallId_StateAction_Node = (SACustomCallNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = CustomCallId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.TimerId:
-						SATimedActionNode TimerId_StateAction_Node = (SATimedActionNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = TimerId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.OrderId:
-						SAOrderedSensitiveNode OrderId_StateAction_Node = (SAOrderedSensitiveNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = OrderId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ProxyId:
-						SAProxyMoveNode ProxyId_StateAction_Node = (SAProxyMoveNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = ProxyId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.CheckId:
-						SACheckThingNode CheckId_StateAction_Node = (SACheckThingNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = CheckId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ActiveActionId:
-						SAActiveActionNode ActiveActionId_StateAction_Node = (SAActiveActionNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = ActiveActionId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.DeactivateActionId:
-						SADeactivateActionNode DeactivateActionId_StateAction_Node = (SADeactivateActionNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = DeactivateActionId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SetFloatId:
-						SASetFloatTargetNode SetFloatId_StateAction_Node = (SASetFloatTargetNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = SetFloatId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.OnBounceId:
-						SAOnBounceNode OnBounceId_StateAction_Node = (SAOnBounceNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = OnBounceId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.OnLeaveEdgeId:
-						SAOnLeaveEdgeNode OnLeaveEdgeId_StateAction_Node = (SAOnLeaveEdgeNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = OnLeaveEdgeId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.OnStoppedAtEdgeId:
-						SAOnStoppedAtLedgeNode OnStoppedAtEdgeId_StateAction_Node = (SAOnStoppedAtLedgeNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = OnStoppedAtEdgeId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.OnLandId:
-						SAOnLandNode OnLandId_StateAction_Node = (SAOnLandNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = OnLandId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.OnCancelId:
-						SAOnCancelNode OnCancelId_StateAction_Node = (SAOnCancelNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = OnCancelId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.RefreshAtkId:
-						SARefreshAttackNode RefreshAtkId_StateAction_Node = (SARefreshAttackNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = RefreshAtkId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.EndAtkId:
-						SAEndAttackNode EndAtkId_StateAction_Node = (SAEndAttackNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = EndAtkId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SetHitboxCountId:
-						SASetHitboxCountNode SetHitboxCountId_StateAction_Node = (SASetHitboxCountNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = SetHitboxCountId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ConfigHitboxId:
-						SAConfigHitboxNode ConfigHitboxId_StateAction_Node = (SAConfigHitboxNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = ConfigHitboxId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SetAtkPropId:
-						SASetAttackPropNode SetAtkPropId_StateAction_Node = (SASetAttackPropNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = SetAtkPropId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ManipHitboxId:
-						SAManipHitboxNode ManipHitboxId_StateAction_Node = (SAManipHitboxNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = ManipHitboxId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.UpdateHurtsetId:
-						SAUpdateHurtboxesNode UpdateHurtsetId_StateAction_Node = (SAUpdateHurtboxesNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = UpdateHurtsetId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SetupHurtsetId:
-						SASetupHurtboxesNode SetupHurtsetId_StateAction_Node = (SASetupHurtboxesNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = SetupHurtsetId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ManipHurtboxId:
-						SAManipHurtboxNode ManipHurtboxId_StateAction_Node = (SAManipHurtboxNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = ManipHurtboxId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.BoneStateId:
-						SABoneStateNode BoneStateId_StateAction_Node = (SABoneStateNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = BoneStateId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.BoneScaleId:
-						SABoneScaleNode BoneScaleId_StateAction_Node = (SABoneScaleNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = BoneScaleId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SpawnAgentId:
-						SASpawnAgentNode SpawnAgentId_StateAction_Node = (SASpawnAgentNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = SpawnAgentId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.LocalFXId:
-						SALocalFXNode LocalFXId_StateAction_Node = (SALocalFXNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = LocalFXId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SpawnFXId:
-						SASpawnFXNode SpawnFXId_StateAction_Node = (SASpawnFXNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = SpawnFXId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.HitboxFXId:
-						SASetHitboxFXNode HitboxFXId_StateAction_Node = (SASetHitboxFXNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = HitboxFXId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SFXId:
-						SAPlaySFXNode SFXId_StateAction_Node = (SAPlaySFXNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = SFXId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.HitboxSFXId:
-						SASetHitboxSFXNode HitboxSFXId_StateAction_Node = (SASetHitboxSFXNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = HitboxSFXId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ColorTintId:
-						SAColorTintNode ColorTintId_StateAction_Node = (SAColorTintNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = ColorTintId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.FindFloorId:
-						SAFindFloorNode FindFloorId_StateAction_Node = (SAFindFloorNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = FindFloorId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.HurtGrabbedId:
-						SAHurtGrabbedNode HurtGrabbedId_StateAction_Node = (SAHurtGrabbedNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = HurtGrabbedId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.LaunchGrabbedId:
-						SALaunchGrabbedNode LaunchGrabbedId_StateAction_Node = (SALaunchGrabbedNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = LaunchGrabbedId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.StateCancelGrabbedId:
-						SAStateCancelGrabbedNode StateCancelGrabbedId_StateAction_Node = (SAStateCancelGrabbedNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = StateCancelGrabbedId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.EndGrabId:
-						SAEndGrabNode EndGrabId_StateAction_Node = (SAEndGrabNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = EndGrabId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.GrabNotifyEscapeId:
-						SAGrabNotifyEscapeNode GrabNotifyEscapeId_StateAction_Node = (SAGrabNotifyEscapeNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = GrabNotifyEscapeId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.IgnoreGrabbedId:
-						SAIgnoreGrabbedNode IgnoreGrabbedId_StateAction_Node = (SAIgnoreGrabbedNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = IgnoreGrabbedId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.EventKOId:
-						SAEventKONode EventKOId_StateAction_Node = (SAEventKONode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = EventKOId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.EventKOGrabbedId:
-						SAEventKOGrabbedNode EventKOGrabbedId_StateAction_Node = (SAEventKOGrabbedNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = EventKOGrabbedId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.CameraShakeId:
-						SACameraShakeNode CameraShakeId_StateAction_Node = (SACameraShakeNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = CameraShakeId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ResetOnHitId:
-						SAResetOnHitsNode ResetOnHitId_StateAction_Node = (SAResetOnHitsNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = ResetOnHitId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.OnHitId:
-						SAOnHitNode OnHitId_StateAction_Node = (SAOnHitNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = OnHitId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.FastForwardId:
-						SAFastForwardStateNode FastForwardId_StateAction_Node = (SAFastForwardStateNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = FastForwardId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.TimingTweakId:
-						SATimingTweakNode TimingTweakId_StateAction_Node = (SATimingTweakNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = TimingTweakId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.MapAnimId:
-						SAMapAnimationNode MapAnimId_StateAction_Node = (SAMapAnimationNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = MapAnimId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.AlterMoveDtId:
-						SAAlterMoveDTNode AlterMoveDtId_StateAction_Node = (SAAlterMoveDTNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = AlterMoveDtId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.AlterMoveVelId:
-						SAAlterMoveVelNode AlterMoveVelId_StateAction_Node = (SAAlterMoveVelNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = AlterMoveVelId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SetStagePartId:
-						SASetStagePartNode SetStagePartId_StateAction_Node = (SASetStagePartNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = SetStagePartId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SetStagePartsDefaultId:
-						SASetStagePartsDefaultNode SetStagePartsDefaultId_StateAction_Node = (SASetStagePartsDefaultNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = SetStagePartsDefaultId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.JumpId:
-						SAJumpNode JumpId_StateAction_Node = (SAJumpNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = JumpId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.StopJumpId:
-						SAStopJumpNode StopJumpId_StateAction_Node = (SAStopJumpNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = StopJumpId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ManageAirJumpId:
-						SAManageAirJumpNode ManageAirJumpId_StateAction_Node = (SAManageAirJumpNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = ManageAirJumpId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.LeaveGroundId:
-						SALeaveGroundNode LeaveGroundId_StateAction_Node = (SALeaveGroundNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = LeaveGroundId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.UnhogEdgeId:
-						SAUnHogEdgeNode UnhogEdgeId_StateAction_Node = (SAUnHogEdgeNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = UnhogEdgeId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SFXTimelineId:
-						SAPlaySFXTimelineNode SFXTimelineId_StateAction_Node = (SAPlaySFXTimelineNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = SFXTimelineId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.FindLastHorizontalInputId:
-						SAFindLastHorizontalInputNode FindLastHorizontalInputId_StateAction_Node = (SAFindLastHorizontalInputNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = FindLastHorizontalInputId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SetCommandGrab:
-						SASetCommandGrabNode SetCommandGrab_StateAction_Node = (SASetCommandGrabNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = SetCommandGrab_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.CameraPunchId:
-						SACameraPunchNode CameraPunchId_StateAction_Node = (SACameraPunchNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = CameraPunchId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SpawnAgent2Id:
-						SASpawnAgent2Node SpawnAgent2Id_StateAction_Node = (SASpawnAgent2Node)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = SpawnAgent2Id_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ManipDecorChainId:
-						SAManipDecorChainNode ManipDecorChainId_StateAction_Node = (SAManipDecorChainNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = ManipDecorChainId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.UpdateHitboxesId:
-						SAUpdateHitboxesNode UpdateHitboxesId_StateAction_Node = (SAUpdateHitboxesNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = UpdateHitboxesId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SampleAnimId:
-						SASampleAnimNode SampleAnimId_StateAction_Node = (SASampleAnimNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = SampleAnimId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ForceExtraInputId:
-						SAForceExtraInputCheckNode ForceExtraInputId_StateAction_Node = (SAForceExtraInputCheckNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = ForceExtraInputId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.LaunchGrabbedCustomId:
-						SALaunchGrabbedCustomNode LaunchGrabbedCustomId_StateAction_Node = (SALaunchGrabbedCustomNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = LaunchGrabbedCustomId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.MapAnimSimpleId:
-						SAMapAnimationSimpleNode MapAnimSimpleId_StateAction_Node = (SAMapAnimationSimpleNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = MapAnimSimpleId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.OnLeaveParentId:
-						SAOnLeaveParentNode OnLeaveParentId_StateAction_Node = (SAOnLeaveParentNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = OnLeaveParentId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.PersistLocalFXId:
-						SAPersistLocalFXNode PersistLocalFXId_StateAction_Node = (SAPersistLocalFXNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = PersistLocalFXId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.BaseIdentifier:
-						StateActionNode BaseIdentifier_StateAction_Node = (StateActionNode)GetPort("Action").GetConnection(0).node;
-						objToReturn.Action = BaseIdentifier_StateAction_Node.GetData();
+					case StateAction.TypeId.StateAction:
+						StateActionNode StateAction_StateAction_Node = (StateActionNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = StateAction_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SADebugMessage:
+						SADebugMessageNode SADebugMessage_StateAction_Node = (SADebugMessageNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SADebugMessage_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAPlayAnim:
+						SAPlayAnimNode SAPlayAnim_StateAction_Node = (SAPlayAnimNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAPlayAnim_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAPlayRootAnim:
+						SAPlayRootAnimNode SAPlayRootAnim_StateAction_Node = (SAPlayRootAnimNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAPlayRootAnim_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASnapAnimWeights:
+						SASnapAnimWeightsNode SASnapAnimWeights_StateAction_Node = (SASnapAnimWeightsNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SASnapAnimWeights_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAStandardInput:
+						SAStandardInputNode SAStandardInput_StateAction_Node = (SAStandardInputNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAStandardInput_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAInputAction:
+						SAInputActionNode SAInputAction_StateAction_Node = (SAInputActionNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAInputAction_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SADeactivateInputAction:
+						SADeactivateInputActionNode SADeactivateInputAction_StateAction_Node = (SADeactivateInputActionNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SADeactivateInputAction_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAAddInputEventFromFrame:
+						SAAddInputEventFromFrameNode SAAddInputEventFromFrame_StateAction_Node = (SAAddInputEventFromFrameNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAAddInputEventFromFrame_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SACancelToState:
+						SACancelToStateNode SACancelToState_StateAction_Node = (SACancelToStateNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SACancelToState_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SACustomCall:
+						SACustomCallNode SACustomCall_StateAction_Node = (SACustomCallNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SACustomCall_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SATimedAction:
+						SATimedActionNode SATimedAction_StateAction_Node = (SATimedActionNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SATimedAction_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAOrderSensitive:
+						SAOrderSensitiveNode SAOrderSensitive_StateAction_Node = (SAOrderSensitiveNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAOrderSensitive_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAProxyMove:
+						SAProxyMoveNode SAProxyMove_StateAction_Node = (SAProxyMoveNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAProxyMove_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SACheckThing:
+						SACheckThingNode SACheckThing_StateAction_Node = (SACheckThingNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SACheckThing_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAActiveAction:
+						SAActiveActionNode SAActiveAction_StateAction_Node = (SAActiveActionNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAActiveAction_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SADeactivateAction:
+						SADeactivateActionNode SADeactivateAction_StateAction_Node = (SADeactivateActionNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SADeactivateAction_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetFloatTarget:
+						SASetFloatTargetNode SASetFloatTarget_StateAction_Node = (SASetFloatTargetNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SASetFloatTarget_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAOnBounce:
+						SAOnBounceNode SAOnBounce_StateAction_Node = (SAOnBounceNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAOnBounce_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAOnLeaveEdge:
+						SAOnLeaveEdgeNode SAOnLeaveEdge_StateAction_Node = (SAOnLeaveEdgeNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAOnLeaveEdge_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAOnStoppedAtEdge:
+						SAOnStoppedAtEdgeNode SAOnStoppedAtEdge_StateAction_Node = (SAOnStoppedAtEdgeNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAOnStoppedAtEdge_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAOnLand:
+						SAOnLandNode SAOnLand_StateAction_Node = (SAOnLandNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAOnLand_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAOnCancel:
+						SAOnCancelNode SAOnCancel_StateAction_Node = (SAOnCancelNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAOnCancel_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SARefreshAttack:
+						SARefreshAttackNode SARefreshAttack_StateAction_Node = (SARefreshAttackNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SARefreshAttack_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAEndAttack:
+						SAEndAttackNode SAEndAttack_StateAction_Node = (SAEndAttackNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAEndAttack_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetHitboxCount:
+						SASetHitboxCountNode SASetHitboxCount_StateAction_Node = (SASetHitboxCountNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SASetHitboxCount_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAConfigHitbox:
+						SAConfigHitboxNode SAConfigHitbox_StateAction_Node = (SAConfigHitboxNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAConfigHitbox_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetAtkProp:
+						SASetAtkPropNode SASetAtkProp_StateAction_Node = (SASetAtkPropNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SASetAtkProp_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAManipHitBox:
+						SAManipHitBoxNode SAManipHitBox_StateAction_Node = (SAManipHitBoxNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAManipHitBox_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAUpdateHurtboxes:
+						SAUpdateHurtboxesNode SAUpdateHurtboxes_StateAction_Node = (SAUpdateHurtboxesNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAUpdateHurtboxes_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetupHurtboxes:
+						SASetupHurtboxesNode SASetupHurtboxes_StateAction_Node = (SASetupHurtboxesNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SASetupHurtboxes_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAManipHurtBox:
+						SAManipHurtBoxNode SAManipHurtBox_StateAction_Node = (SAManipHurtBoxNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAManipHurtBox_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SABoneState:
+						SABoneStateNode SABoneState_StateAction_Node = (SABoneStateNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SABoneState_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SABoneScale:
+						SABoneScaleNode SABoneScale_StateAction_Node = (SABoneScaleNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SABoneScale_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASpawnAgent:
+						SASpawnAgentNode SASpawnAgent_StateAction_Node = (SASpawnAgentNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SASpawnAgent_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SALocalFX:
+						SALocalFXNode SALocalFX_StateAction_Node = (SALocalFXNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SALocalFX_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASpawnFX:
+						SASpawnFXNode SASpawnFX_StateAction_Node = (SASpawnFXNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SASpawnFX_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetHitboxFX:
+						SASetHitboxFXNode SASetHitboxFX_StateAction_Node = (SASetHitboxFXNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SASetHitboxFX_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAPlaySFX:
+						SAPlaySFXNode SAPlaySFX_StateAction_Node = (SAPlaySFXNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAPlaySFX_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetHitboxSFX:
+						SASetHitboxSFXNode SASetHitboxSFX_StateAction_Node = (SASetHitboxSFXNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SASetHitboxSFX_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAColorTint:
+						SAColorTintNode SAColorTint_StateAction_Node = (SAColorTintNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAColorTint_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAFindFloor:
+						SAFindFloorNode SAFindFloor_StateAction_Node = (SAFindFloorNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAFindFloor_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAHurtGrabbed:
+						SAHurtGrabbedNode SAHurtGrabbed_StateAction_Node = (SAHurtGrabbedNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAHurtGrabbed_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SALaunchGrabbed:
+						SALaunchGrabbedNode SALaunchGrabbed_StateAction_Node = (SALaunchGrabbedNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SALaunchGrabbed_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAStateCancelGrabbed:
+						SAStateCancelGrabbedNode SAStateCancelGrabbed_StateAction_Node = (SAStateCancelGrabbedNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAStateCancelGrabbed_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAEndGrab:
+						SAEndGrabNode SAEndGrab_StateAction_Node = (SAEndGrabNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAEndGrab_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAGrabNotifyEscape:
+						SAGrabNotifyEscapeNode SAGrabNotifyEscape_StateAction_Node = (SAGrabNotifyEscapeNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAGrabNotifyEscape_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAIgnoreGrabbed:
+						SAIgnoreGrabbedNode SAIgnoreGrabbed_StateAction_Node = (SAIgnoreGrabbedNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAIgnoreGrabbed_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAEventKO:
+						SAEventKONode SAEventKO_StateAction_Node = (SAEventKONode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAEventKO_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAEventKOGrabbed:
+						SAEventKOGrabbedNode SAEventKOGrabbed_StateAction_Node = (SAEventKOGrabbedNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAEventKOGrabbed_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SACameraShake:
+						SACameraShakeNode SACameraShake_StateAction_Node = (SACameraShakeNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SACameraShake_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAResetOnHits:
+						SAResetOnHitsNode SAResetOnHits_StateAction_Node = (SAResetOnHitsNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAResetOnHits_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAOnHit:
+						SAOnHitNode SAOnHit_StateAction_Node = (SAOnHitNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAOnHit_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAFastForwardState:
+						SAFastForwardStateNode SAFastForwardState_StateAction_Node = (SAFastForwardStateNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAFastForwardState_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SATimingTweak:
+						SATimingTweakNode SATimingTweak_StateAction_Node = (SATimingTweakNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SATimingTweak_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAMapAnimation:
+						SAMapAnimationNode SAMapAnimation_StateAction_Node = (SAMapAnimationNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAMapAnimation_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAAlterMoveDT:
+						SAAlterMoveDTNode SAAlterMoveDT_StateAction_Node = (SAAlterMoveDTNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAAlterMoveDT_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAAlterMoveVel:
+						SAAlterMoveVelNode SAAlterMoveVel_StateAction_Node = (SAAlterMoveVelNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAAlterMoveVel_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetStagePart:
+						SASetStagePartNode SASetStagePart_StateAction_Node = (SASetStagePartNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SASetStagePart_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetStagePartsDefault:
+						SASetStagePartsDefaultNode SASetStagePartsDefault_StateAction_Node = (SASetStagePartsDefaultNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SASetStagePartsDefault_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAJump:
+						SAJumpNode SAJump_StateAction_Node = (SAJumpNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAJump_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAStopJump:
+						SAStopJumpNode SAStopJump_StateAction_Node = (SAStopJumpNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAStopJump_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAManageAirJump:
+						SAManageAirJumpNode SAManageAirJump_StateAction_Node = (SAManageAirJumpNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAManageAirJump_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SALeaveGround:
+						SALeaveGroundNode SALeaveGround_StateAction_Node = (SALeaveGroundNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SALeaveGround_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAUnHogEdge:
+						SAUnHogEdgeNode SAUnHogEdge_StateAction_Node = (SAUnHogEdgeNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAUnHogEdge_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAPlaySFXTimeline:
+						SAPlaySFXTimelineNode SAPlaySFXTimeline_StateAction_Node = (SAPlaySFXTimelineNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAPlaySFXTimeline_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAFindLastHorizontalInput:
+						SAFindLastHorizontalInputNode SAFindLastHorizontalInput_StateAction_Node = (SAFindLastHorizontalInputNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAFindLastHorizontalInput_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetCommandGrab:
+						SASetCommandGrabNode SASetCommandGrab_StateAction_Node = (SASetCommandGrabNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SASetCommandGrab_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SACameraPunch:
+						SACameraPunchNode SACameraPunch_StateAction_Node = (SACameraPunchNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SACameraPunch_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASpawnAgent2:
+						SASpawnAgent2Node SASpawnAgent2_StateAction_Node = (SASpawnAgent2Node)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SASpawnAgent2_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAManipDecorChain:
+						SAManipDecorChainNode SAManipDecorChain_StateAction_Node = (SAManipDecorChainNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAManipDecorChain_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAUpdateHitboxes:
+						SAUpdateHitboxesNode SAUpdateHitboxes_StateAction_Node = (SAUpdateHitboxesNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAUpdateHitboxes_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASampleAnim:
+						SASampleAnimNode SASampleAnim_StateAction_Node = (SASampleAnimNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SASampleAnim_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAForceExtraInputCheck:
+						SAForceExtraInputCheckNode SAForceExtraInputCheck_StateAction_Node = (SAForceExtraInputCheckNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAForceExtraInputCheck_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SALaunchGrabbedCustom:
+						SALaunchGrabbedCustomNode SALaunchGrabbedCustom_StateAction_Node = (SALaunchGrabbedCustomNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SALaunchGrabbedCustom_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAMapAnimationSimple:
+						SAMapAnimationSimpleNode SAMapAnimationSimple_StateAction_Node = (SAMapAnimationSimpleNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAMapAnimationSimple_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAPersistLocalFX:
+						SAPersistLocalFXNode SAPersistLocalFX_StateAction_Node = (SAPersistLocalFXNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAPersistLocalFX_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAOnLeaveParent:
+						SAOnLeaveParentNode SAOnLeaveParent_StateAction_Node = (SAOnLeaveParentNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAOnLeaveParent_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAPlayVoiceLine:
+						SAPlayVoiceLineNode SAPlayVoiceLine_StateAction_Node = (SAPlayVoiceLineNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAPlayVoiceLine_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAPlayCategoryVoiceLine:
+						SAPlayCategoryVoiceLineNode SAPlayCategoryVoiceLine_StateAction_Node = (SAPlayCategoryVoiceLineNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAPlayCategoryVoiceLine_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAStopVoiceLines:
+						SAStopVoiceLinesNode SAStopVoiceLines_StateAction_Node = (SAStopVoiceLinesNode)GetPort("Action").GetConnection(0).node;
+						objToReturn.Action = SAStopVoiceLines_StateAction_Node.GetData();
 					break;
 				}
 			}
@@ -1441,317 +1508,329 @@ namespace NASB_Moveset_Editor.StateActions
 				StateActionNode StateAction_Node = (StateActionNode)GetPort("ElseAction").GetConnection(0).node;
 				switch (StateAction_Node.TID)
 				{
-					case StateAction.TypeId.DebugId:
-						SADebugMessageNode DebugId_StateAction_Node = (SADebugMessageNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = DebugId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.PlayAnimId:
-						SAPlayAnimNode PlayAnimId_StateAction_Node = (SAPlayAnimNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = PlayAnimId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.RootAnimId:
-						SAPlayRootAnimNode RootAnimId_StateAction_Node = (SAPlayRootAnimNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = RootAnimId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SnapAnimWeightsId:
-						SASnapAnimWeightsNode SnapAnimWeightsId_StateAction_Node = (SASnapAnimWeightsNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = SnapAnimWeightsId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.StandardInputId:
-						SAStandardInputNode StandardInputId_StateAction_Node = (SAStandardInputNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = StandardInputId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.InputId:
-						SAInputActionNode InputId_StateAction_Node = (SAInputActionNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = InputId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.DeactInputId:
-						SADeactivateInputActionNode DeactInputId_StateAction_Node = (SADeactivateInputActionNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = DeactInputId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.InputEventFromFrameId:
-						SAAddInputEventFromFrameNode InputEventFromFrameId_StateAction_Node = (SAAddInputEventFromFrameNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = InputEventFromFrameId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.CancelStateId:
-						SACancelToStateNode CancelStateId_StateAction_Node = (SACancelToStateNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = CancelStateId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.CustomCallId:
-						SACustomCallNode CustomCallId_StateAction_Node = (SACustomCallNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = CustomCallId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.TimerId:
-						SATimedActionNode TimerId_StateAction_Node = (SATimedActionNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = TimerId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.OrderId:
-						SAOrderedSensitiveNode OrderId_StateAction_Node = (SAOrderedSensitiveNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = OrderId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ProxyId:
-						SAProxyMoveNode ProxyId_StateAction_Node = (SAProxyMoveNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = ProxyId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.CheckId:
-						SACheckThingNode CheckId_StateAction_Node = (SACheckThingNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = CheckId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ActiveActionId:
-						SAActiveActionNode ActiveActionId_StateAction_Node = (SAActiveActionNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = ActiveActionId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.DeactivateActionId:
-						SADeactivateActionNode DeactivateActionId_StateAction_Node = (SADeactivateActionNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = DeactivateActionId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SetFloatId:
-						SASetFloatTargetNode SetFloatId_StateAction_Node = (SASetFloatTargetNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = SetFloatId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.OnBounceId:
-						SAOnBounceNode OnBounceId_StateAction_Node = (SAOnBounceNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = OnBounceId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.OnLeaveEdgeId:
-						SAOnLeaveEdgeNode OnLeaveEdgeId_StateAction_Node = (SAOnLeaveEdgeNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = OnLeaveEdgeId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.OnStoppedAtEdgeId:
-						SAOnStoppedAtLedgeNode OnStoppedAtEdgeId_StateAction_Node = (SAOnStoppedAtLedgeNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = OnStoppedAtEdgeId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.OnLandId:
-						SAOnLandNode OnLandId_StateAction_Node = (SAOnLandNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = OnLandId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.OnCancelId:
-						SAOnCancelNode OnCancelId_StateAction_Node = (SAOnCancelNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = OnCancelId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.RefreshAtkId:
-						SARefreshAttackNode RefreshAtkId_StateAction_Node = (SARefreshAttackNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = RefreshAtkId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.EndAtkId:
-						SAEndAttackNode EndAtkId_StateAction_Node = (SAEndAttackNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = EndAtkId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SetHitboxCountId:
-						SASetHitboxCountNode SetHitboxCountId_StateAction_Node = (SASetHitboxCountNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = SetHitboxCountId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ConfigHitboxId:
-						SAConfigHitboxNode ConfigHitboxId_StateAction_Node = (SAConfigHitboxNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = ConfigHitboxId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SetAtkPropId:
-						SASetAttackPropNode SetAtkPropId_StateAction_Node = (SASetAttackPropNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = SetAtkPropId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ManipHitboxId:
-						SAManipHitboxNode ManipHitboxId_StateAction_Node = (SAManipHitboxNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = ManipHitboxId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.UpdateHurtsetId:
-						SAUpdateHurtboxesNode UpdateHurtsetId_StateAction_Node = (SAUpdateHurtboxesNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = UpdateHurtsetId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SetupHurtsetId:
-						SASetupHurtboxesNode SetupHurtsetId_StateAction_Node = (SASetupHurtboxesNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = SetupHurtsetId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ManipHurtboxId:
-						SAManipHurtboxNode ManipHurtboxId_StateAction_Node = (SAManipHurtboxNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = ManipHurtboxId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.BoneStateId:
-						SABoneStateNode BoneStateId_StateAction_Node = (SABoneStateNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = BoneStateId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.BoneScaleId:
-						SABoneScaleNode BoneScaleId_StateAction_Node = (SABoneScaleNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = BoneScaleId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SpawnAgentId:
-						SASpawnAgentNode SpawnAgentId_StateAction_Node = (SASpawnAgentNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = SpawnAgentId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.LocalFXId:
-						SALocalFXNode LocalFXId_StateAction_Node = (SALocalFXNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = LocalFXId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SpawnFXId:
-						SASpawnFXNode SpawnFXId_StateAction_Node = (SASpawnFXNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = SpawnFXId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.HitboxFXId:
-						SASetHitboxFXNode HitboxFXId_StateAction_Node = (SASetHitboxFXNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = HitboxFXId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SFXId:
-						SAPlaySFXNode SFXId_StateAction_Node = (SAPlaySFXNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = SFXId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.HitboxSFXId:
-						SASetHitboxSFXNode HitboxSFXId_StateAction_Node = (SASetHitboxSFXNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = HitboxSFXId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ColorTintId:
-						SAColorTintNode ColorTintId_StateAction_Node = (SAColorTintNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = ColorTintId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.FindFloorId:
-						SAFindFloorNode FindFloorId_StateAction_Node = (SAFindFloorNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = FindFloorId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.HurtGrabbedId:
-						SAHurtGrabbedNode HurtGrabbedId_StateAction_Node = (SAHurtGrabbedNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = HurtGrabbedId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.LaunchGrabbedId:
-						SALaunchGrabbedNode LaunchGrabbedId_StateAction_Node = (SALaunchGrabbedNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = LaunchGrabbedId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.StateCancelGrabbedId:
-						SAStateCancelGrabbedNode StateCancelGrabbedId_StateAction_Node = (SAStateCancelGrabbedNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = StateCancelGrabbedId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.EndGrabId:
-						SAEndGrabNode EndGrabId_StateAction_Node = (SAEndGrabNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = EndGrabId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.GrabNotifyEscapeId:
-						SAGrabNotifyEscapeNode GrabNotifyEscapeId_StateAction_Node = (SAGrabNotifyEscapeNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = GrabNotifyEscapeId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.IgnoreGrabbedId:
-						SAIgnoreGrabbedNode IgnoreGrabbedId_StateAction_Node = (SAIgnoreGrabbedNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = IgnoreGrabbedId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.EventKOId:
-						SAEventKONode EventKOId_StateAction_Node = (SAEventKONode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = EventKOId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.EventKOGrabbedId:
-						SAEventKOGrabbedNode EventKOGrabbedId_StateAction_Node = (SAEventKOGrabbedNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = EventKOGrabbedId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.CameraShakeId:
-						SACameraShakeNode CameraShakeId_StateAction_Node = (SACameraShakeNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = CameraShakeId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ResetOnHitId:
-						SAResetOnHitsNode ResetOnHitId_StateAction_Node = (SAResetOnHitsNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = ResetOnHitId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.OnHitId:
-						SAOnHitNode OnHitId_StateAction_Node = (SAOnHitNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = OnHitId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.FastForwardId:
-						SAFastForwardStateNode FastForwardId_StateAction_Node = (SAFastForwardStateNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = FastForwardId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.TimingTweakId:
-						SATimingTweakNode TimingTweakId_StateAction_Node = (SATimingTweakNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = TimingTweakId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.MapAnimId:
-						SAMapAnimationNode MapAnimId_StateAction_Node = (SAMapAnimationNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = MapAnimId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.AlterMoveDtId:
-						SAAlterMoveDTNode AlterMoveDtId_StateAction_Node = (SAAlterMoveDTNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = AlterMoveDtId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.AlterMoveVelId:
-						SAAlterMoveVelNode AlterMoveVelId_StateAction_Node = (SAAlterMoveVelNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = AlterMoveVelId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SetStagePartId:
-						SASetStagePartNode SetStagePartId_StateAction_Node = (SASetStagePartNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = SetStagePartId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SetStagePartsDefaultId:
-						SASetStagePartsDefaultNode SetStagePartsDefaultId_StateAction_Node = (SASetStagePartsDefaultNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = SetStagePartsDefaultId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.JumpId:
-						SAJumpNode JumpId_StateAction_Node = (SAJumpNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = JumpId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.StopJumpId:
-						SAStopJumpNode StopJumpId_StateAction_Node = (SAStopJumpNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = StopJumpId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ManageAirJumpId:
-						SAManageAirJumpNode ManageAirJumpId_StateAction_Node = (SAManageAirJumpNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = ManageAirJumpId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.LeaveGroundId:
-						SALeaveGroundNode LeaveGroundId_StateAction_Node = (SALeaveGroundNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = LeaveGroundId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.UnhogEdgeId:
-						SAUnHogEdgeNode UnhogEdgeId_StateAction_Node = (SAUnHogEdgeNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = UnhogEdgeId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SFXTimelineId:
-						SAPlaySFXTimelineNode SFXTimelineId_StateAction_Node = (SAPlaySFXTimelineNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = SFXTimelineId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.FindLastHorizontalInputId:
-						SAFindLastHorizontalInputNode FindLastHorizontalInputId_StateAction_Node = (SAFindLastHorizontalInputNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = FindLastHorizontalInputId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SetCommandGrab:
-						SASetCommandGrabNode SetCommandGrab_StateAction_Node = (SASetCommandGrabNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = SetCommandGrab_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.CameraPunchId:
-						SACameraPunchNode CameraPunchId_StateAction_Node = (SACameraPunchNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = CameraPunchId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SpawnAgent2Id:
-						SASpawnAgent2Node SpawnAgent2Id_StateAction_Node = (SASpawnAgent2Node)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = SpawnAgent2Id_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ManipDecorChainId:
-						SAManipDecorChainNode ManipDecorChainId_StateAction_Node = (SAManipDecorChainNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = ManipDecorChainId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.UpdateHitboxesId:
-						SAUpdateHitboxesNode UpdateHitboxesId_StateAction_Node = (SAUpdateHitboxesNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = UpdateHitboxesId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.SampleAnimId:
-						SASampleAnimNode SampleAnimId_StateAction_Node = (SASampleAnimNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = SampleAnimId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.ForceExtraInputId:
-						SAForceExtraInputCheckNode ForceExtraInputId_StateAction_Node = (SAForceExtraInputCheckNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = ForceExtraInputId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.LaunchGrabbedCustomId:
-						SALaunchGrabbedCustomNode LaunchGrabbedCustomId_StateAction_Node = (SALaunchGrabbedCustomNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = LaunchGrabbedCustomId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.MapAnimSimpleId:
-						SAMapAnimationSimpleNode MapAnimSimpleId_StateAction_Node = (SAMapAnimationSimpleNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = MapAnimSimpleId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.OnLeaveParentId:
-						SAOnLeaveParentNode OnLeaveParentId_StateAction_Node = (SAOnLeaveParentNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = OnLeaveParentId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.PersistLocalFXId:
-						SAPersistLocalFXNode PersistLocalFXId_StateAction_Node = (SAPersistLocalFXNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = PersistLocalFXId_StateAction_Node.GetData();
-					break;
-					case StateAction.TypeId.BaseIdentifier:
-						StateActionNode BaseIdentifier_StateAction_Node = (StateActionNode)GetPort("ElseAction").GetConnection(0).node;
-						objToReturn.ElseAction = BaseIdentifier_StateAction_Node.GetData();
+					case StateAction.TypeId.StateAction:
+						StateActionNode StateAction_StateAction_Node = (StateActionNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = StateAction_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SADebugMessage:
+						SADebugMessageNode SADebugMessage_StateAction_Node = (SADebugMessageNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SADebugMessage_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAPlayAnim:
+						SAPlayAnimNode SAPlayAnim_StateAction_Node = (SAPlayAnimNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAPlayAnim_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAPlayRootAnim:
+						SAPlayRootAnimNode SAPlayRootAnim_StateAction_Node = (SAPlayRootAnimNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAPlayRootAnim_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASnapAnimWeights:
+						SASnapAnimWeightsNode SASnapAnimWeights_StateAction_Node = (SASnapAnimWeightsNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SASnapAnimWeights_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAStandardInput:
+						SAStandardInputNode SAStandardInput_StateAction_Node = (SAStandardInputNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAStandardInput_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAInputAction:
+						SAInputActionNode SAInputAction_StateAction_Node = (SAInputActionNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAInputAction_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SADeactivateInputAction:
+						SADeactivateInputActionNode SADeactivateInputAction_StateAction_Node = (SADeactivateInputActionNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SADeactivateInputAction_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAAddInputEventFromFrame:
+						SAAddInputEventFromFrameNode SAAddInputEventFromFrame_StateAction_Node = (SAAddInputEventFromFrameNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAAddInputEventFromFrame_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SACancelToState:
+						SACancelToStateNode SACancelToState_StateAction_Node = (SACancelToStateNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SACancelToState_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SACustomCall:
+						SACustomCallNode SACustomCall_StateAction_Node = (SACustomCallNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SACustomCall_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SATimedAction:
+						SATimedActionNode SATimedAction_StateAction_Node = (SATimedActionNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SATimedAction_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAOrderSensitive:
+						SAOrderSensitiveNode SAOrderSensitive_StateAction_Node = (SAOrderSensitiveNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAOrderSensitive_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAProxyMove:
+						SAProxyMoveNode SAProxyMove_StateAction_Node = (SAProxyMoveNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAProxyMove_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SACheckThing:
+						SACheckThingNode SACheckThing_StateAction_Node = (SACheckThingNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SACheckThing_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAActiveAction:
+						SAActiveActionNode SAActiveAction_StateAction_Node = (SAActiveActionNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAActiveAction_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SADeactivateAction:
+						SADeactivateActionNode SADeactivateAction_StateAction_Node = (SADeactivateActionNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SADeactivateAction_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetFloatTarget:
+						SASetFloatTargetNode SASetFloatTarget_StateAction_Node = (SASetFloatTargetNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SASetFloatTarget_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAOnBounce:
+						SAOnBounceNode SAOnBounce_StateAction_Node = (SAOnBounceNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAOnBounce_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAOnLeaveEdge:
+						SAOnLeaveEdgeNode SAOnLeaveEdge_StateAction_Node = (SAOnLeaveEdgeNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAOnLeaveEdge_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAOnStoppedAtEdge:
+						SAOnStoppedAtEdgeNode SAOnStoppedAtEdge_StateAction_Node = (SAOnStoppedAtEdgeNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAOnStoppedAtEdge_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAOnLand:
+						SAOnLandNode SAOnLand_StateAction_Node = (SAOnLandNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAOnLand_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAOnCancel:
+						SAOnCancelNode SAOnCancel_StateAction_Node = (SAOnCancelNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAOnCancel_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SARefreshAttack:
+						SARefreshAttackNode SARefreshAttack_StateAction_Node = (SARefreshAttackNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SARefreshAttack_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAEndAttack:
+						SAEndAttackNode SAEndAttack_StateAction_Node = (SAEndAttackNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAEndAttack_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetHitboxCount:
+						SASetHitboxCountNode SASetHitboxCount_StateAction_Node = (SASetHitboxCountNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SASetHitboxCount_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAConfigHitbox:
+						SAConfigHitboxNode SAConfigHitbox_StateAction_Node = (SAConfigHitboxNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAConfigHitbox_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetAtkProp:
+						SASetAtkPropNode SASetAtkProp_StateAction_Node = (SASetAtkPropNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SASetAtkProp_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAManipHitBox:
+						SAManipHitBoxNode SAManipHitBox_StateAction_Node = (SAManipHitBoxNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAManipHitBox_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAUpdateHurtboxes:
+						SAUpdateHurtboxesNode SAUpdateHurtboxes_StateAction_Node = (SAUpdateHurtboxesNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAUpdateHurtboxes_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetupHurtboxes:
+						SASetupHurtboxesNode SASetupHurtboxes_StateAction_Node = (SASetupHurtboxesNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SASetupHurtboxes_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAManipHurtBox:
+						SAManipHurtBoxNode SAManipHurtBox_StateAction_Node = (SAManipHurtBoxNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAManipHurtBox_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SABoneState:
+						SABoneStateNode SABoneState_StateAction_Node = (SABoneStateNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SABoneState_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SABoneScale:
+						SABoneScaleNode SABoneScale_StateAction_Node = (SABoneScaleNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SABoneScale_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASpawnAgent:
+						SASpawnAgentNode SASpawnAgent_StateAction_Node = (SASpawnAgentNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SASpawnAgent_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SALocalFX:
+						SALocalFXNode SALocalFX_StateAction_Node = (SALocalFXNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SALocalFX_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASpawnFX:
+						SASpawnFXNode SASpawnFX_StateAction_Node = (SASpawnFXNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SASpawnFX_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetHitboxFX:
+						SASetHitboxFXNode SASetHitboxFX_StateAction_Node = (SASetHitboxFXNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SASetHitboxFX_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAPlaySFX:
+						SAPlaySFXNode SAPlaySFX_StateAction_Node = (SAPlaySFXNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAPlaySFX_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetHitboxSFX:
+						SASetHitboxSFXNode SASetHitboxSFX_StateAction_Node = (SASetHitboxSFXNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SASetHitboxSFX_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAColorTint:
+						SAColorTintNode SAColorTint_StateAction_Node = (SAColorTintNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAColorTint_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAFindFloor:
+						SAFindFloorNode SAFindFloor_StateAction_Node = (SAFindFloorNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAFindFloor_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAHurtGrabbed:
+						SAHurtGrabbedNode SAHurtGrabbed_StateAction_Node = (SAHurtGrabbedNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAHurtGrabbed_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SALaunchGrabbed:
+						SALaunchGrabbedNode SALaunchGrabbed_StateAction_Node = (SALaunchGrabbedNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SALaunchGrabbed_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAStateCancelGrabbed:
+						SAStateCancelGrabbedNode SAStateCancelGrabbed_StateAction_Node = (SAStateCancelGrabbedNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAStateCancelGrabbed_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAEndGrab:
+						SAEndGrabNode SAEndGrab_StateAction_Node = (SAEndGrabNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAEndGrab_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAGrabNotifyEscape:
+						SAGrabNotifyEscapeNode SAGrabNotifyEscape_StateAction_Node = (SAGrabNotifyEscapeNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAGrabNotifyEscape_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAIgnoreGrabbed:
+						SAIgnoreGrabbedNode SAIgnoreGrabbed_StateAction_Node = (SAIgnoreGrabbedNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAIgnoreGrabbed_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAEventKO:
+						SAEventKONode SAEventKO_StateAction_Node = (SAEventKONode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAEventKO_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAEventKOGrabbed:
+						SAEventKOGrabbedNode SAEventKOGrabbed_StateAction_Node = (SAEventKOGrabbedNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAEventKOGrabbed_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SACameraShake:
+						SACameraShakeNode SACameraShake_StateAction_Node = (SACameraShakeNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SACameraShake_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAResetOnHits:
+						SAResetOnHitsNode SAResetOnHits_StateAction_Node = (SAResetOnHitsNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAResetOnHits_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAOnHit:
+						SAOnHitNode SAOnHit_StateAction_Node = (SAOnHitNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAOnHit_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAFastForwardState:
+						SAFastForwardStateNode SAFastForwardState_StateAction_Node = (SAFastForwardStateNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAFastForwardState_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SATimingTweak:
+						SATimingTweakNode SATimingTweak_StateAction_Node = (SATimingTweakNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SATimingTweak_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAMapAnimation:
+						SAMapAnimationNode SAMapAnimation_StateAction_Node = (SAMapAnimationNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAMapAnimation_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAAlterMoveDT:
+						SAAlterMoveDTNode SAAlterMoveDT_StateAction_Node = (SAAlterMoveDTNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAAlterMoveDT_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAAlterMoveVel:
+						SAAlterMoveVelNode SAAlterMoveVel_StateAction_Node = (SAAlterMoveVelNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAAlterMoveVel_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetStagePart:
+						SASetStagePartNode SASetStagePart_StateAction_Node = (SASetStagePartNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SASetStagePart_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetStagePartsDefault:
+						SASetStagePartsDefaultNode SASetStagePartsDefault_StateAction_Node = (SASetStagePartsDefaultNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SASetStagePartsDefault_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAJump:
+						SAJumpNode SAJump_StateAction_Node = (SAJumpNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAJump_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAStopJump:
+						SAStopJumpNode SAStopJump_StateAction_Node = (SAStopJumpNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAStopJump_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAManageAirJump:
+						SAManageAirJumpNode SAManageAirJump_StateAction_Node = (SAManageAirJumpNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAManageAirJump_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SALeaveGround:
+						SALeaveGroundNode SALeaveGround_StateAction_Node = (SALeaveGroundNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SALeaveGround_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAUnHogEdge:
+						SAUnHogEdgeNode SAUnHogEdge_StateAction_Node = (SAUnHogEdgeNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAUnHogEdge_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAPlaySFXTimeline:
+						SAPlaySFXTimelineNode SAPlaySFXTimeline_StateAction_Node = (SAPlaySFXTimelineNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAPlaySFXTimeline_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAFindLastHorizontalInput:
+						SAFindLastHorizontalInputNode SAFindLastHorizontalInput_StateAction_Node = (SAFindLastHorizontalInputNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAFindLastHorizontalInput_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASetCommandGrab:
+						SASetCommandGrabNode SASetCommandGrab_StateAction_Node = (SASetCommandGrabNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SASetCommandGrab_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SACameraPunch:
+						SACameraPunchNode SACameraPunch_StateAction_Node = (SACameraPunchNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SACameraPunch_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASpawnAgent2:
+						SASpawnAgent2Node SASpawnAgent2_StateAction_Node = (SASpawnAgent2Node)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SASpawnAgent2_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAManipDecorChain:
+						SAManipDecorChainNode SAManipDecorChain_StateAction_Node = (SAManipDecorChainNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAManipDecorChain_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAUpdateHitboxes:
+						SAUpdateHitboxesNode SAUpdateHitboxes_StateAction_Node = (SAUpdateHitboxesNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAUpdateHitboxes_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SASampleAnim:
+						SASampleAnimNode SASampleAnim_StateAction_Node = (SASampleAnimNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SASampleAnim_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAForceExtraInputCheck:
+						SAForceExtraInputCheckNode SAForceExtraInputCheck_StateAction_Node = (SAForceExtraInputCheckNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAForceExtraInputCheck_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SALaunchGrabbedCustom:
+						SALaunchGrabbedCustomNode SALaunchGrabbedCustom_StateAction_Node = (SALaunchGrabbedCustomNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SALaunchGrabbedCustom_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAMapAnimationSimple:
+						SAMapAnimationSimpleNode SAMapAnimationSimple_StateAction_Node = (SAMapAnimationSimpleNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAMapAnimationSimple_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAPersistLocalFX:
+						SAPersistLocalFXNode SAPersistLocalFX_StateAction_Node = (SAPersistLocalFXNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAPersistLocalFX_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAOnLeaveParent:
+						SAOnLeaveParentNode SAOnLeaveParent_StateAction_Node = (SAOnLeaveParentNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAOnLeaveParent_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAPlayVoiceLine:
+						SAPlayVoiceLineNode SAPlayVoiceLine_StateAction_Node = (SAPlayVoiceLineNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAPlayVoiceLine_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAPlayCategoryVoiceLine:
+						SAPlayCategoryVoiceLineNode SAPlayCategoryVoiceLine_StateAction_Node = (SAPlayCategoryVoiceLineNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAPlayCategoryVoiceLine_StateAction_Node.GetData();
+					break;
+					case StateAction.TypeId.SAStopVoiceLines:
+						SAStopVoiceLinesNode SAStopVoiceLines_StateAction_Node = (SAStopVoiceLinesNode)GetPort("ElseAction").GetConnection(0).node;
+						objToReturn.ElseAction = SAStopVoiceLines_StateAction_Node.GetData();
 					break;
 				}
 			}
