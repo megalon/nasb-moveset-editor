@@ -87,6 +87,7 @@ namespace NASB_Moveset_Editor
 
                 Logger.LogInfo($"Writing file...\n{outputFilePath}!");
                 moveset.WriteSerial(writer);
+                File.WriteAllText(outputFilePath, writer.GetString());
                 Logger.LogInfo($"Finished writing file!\n{outputFilePath}!");
             }
             catch (Exception e)
