@@ -559,7 +559,8 @@ namespace NASB_Moveset_Editor.StateActions
 		{
 			SAOrderSensitive objToReturn = new SAOrderSensitive();
 			objToReturn.TID = TypeId.SAOrderSensitive;
-			objToReturn.Actions = new StateAction[GetPort("Actions").ConnectionCount];
+			objToReturn.Actions = new StateAction[DynamicOutputs.Count()];
+
 			int i = 0;
 			foreach(NodePort port in DynamicOutputs)
 			{
