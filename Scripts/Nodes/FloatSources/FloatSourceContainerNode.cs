@@ -49,6 +49,8 @@ namespace NASB_Moveset_Editor.FloatSources
 			position.x = nodeDepthXY.x * Consts.NodeXOffset;
 			position.y = nodeDepthXY.y * Consts.NodeYOffset;
 			int variableCount = 0;
+
+			if (data == null) return variableCount;
 			
 			FloatSource = data.FloatSource;
 			
