@@ -25,7 +25,6 @@ using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
 using NASB_Moveset_Editor.Unity;
 using static MovesetParser.StateActions.StateAction;
-using static MovesetParser.StateActions.SAMapAnimationSimple;
 
 namespace NASB_Moveset_Editor.StateActions
 {
@@ -34,7 +33,7 @@ namespace NASB_Moveset_Editor.StateActions
 		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public string AnimId;
 		public bool RootAnim;
-		public MapPoint[] MapPoints;
+		[Output(connectionType = ConnectionType.Multiple)] public SAMapAnimationSimple.MapPoint[] MapPoints;
 		
 		protected override void Init()
 		{
@@ -57,6 +56,15 @@ namespace NASB_Moveset_Editor.StateActions
 			AnimId = data.AnimId;
 			RootAnim = data.RootAnim;
 			MapPoints = data.MapPoints;
+			
+			foreach (SAMapAnimationSimple.MapPoint MapPoints_item in MapPoints)
+			{
+				SAMapAnimationSimple_MapPointNode node_MapPoints = graph.AddNode<SAMapAnimationSimple_MapPointNode>();
+				GetPort("MapPoints").Connect(node_MapPoints.GetPort("NodeInput"));
+				AssetDatabase.AddObjectToAsset(node_MapPoints, assetPath);
+				variableCount += node_MapPoints.SetData(MapPoints_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				++variableCount;
+			}
 			return variableCount;
 		}
 		
@@ -66,7 +74,14 @@ namespace NASB_Moveset_Editor.StateActions
 			objToReturn.TID = TypeId.SAMapAnimationSimple;
 			objToReturn.AnimId = AnimId;
 			objToReturn.RootAnim = RootAnim;
-			objToReturn.MapPoints = MapPoints;
+			objToReturn.MapPoints = new SAMapAnimationSimple.MapPoint[GetPort("MapPoints").ConnectionCount];
+			int i = 0;
+			foreach(NodePort port in GetPort("MapPoints").GetConnections())
+			{
+				SAMapAnimationSimple_MapPointNode SAMapAnimationSimple_MapPoint_Node = (SAMapAnimationSimple_MapPointNode)port.node;
+				objToReturn.MapPoints[i] = SAMapAnimationSimple_MapPoint_Node.GetData();
+				++i;
+			}
 			return objToReturn;
 		}
 	}

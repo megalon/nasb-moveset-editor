@@ -25,7 +25,6 @@ using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
 using NASB_Moveset_Editor.Unity;
 using static MovesetParser.StateActions.StateAction;
-using static MovesetParser.StateActions.SASpawnAgent2;
 
 namespace NASB_Moveset_Editor.StateActions
 {
@@ -42,7 +41,7 @@ namespace NASB_Moveset_Editor.StateActions
 		[Output(connectionType = ConnectionType.Override)] public FloatSourceContainer WorldOffsetY;
 		[Output(connectionType = ConnectionType.Override)] public FloatSourceContainer WorldOffsetZ;
 		public bool CustomSpawnMovement;
-		public SpawnMovement[] CustomSpawnMovements;
+		[Output(connectionType = ConnectionType.Multiple)] public SpawnMovement[] CustomSpawnMovements;
 		public string SpawnedAgentDataId;
 		[Output(connectionType = ConnectionType.Override)] public FloatSourceContainer SpawnedAgentDataSetValue;
 		[Output(connectionType = ConnectionType.Override)] public FloatSourceContainer ResultOrderAdded;
@@ -60,7 +59,7 @@ namespace NASB_Moveset_Editor.StateActions
 		[Output(connectionType = ConnectionType.Override)] public FloatSourceContainer RedirectX;
 		[Output(connectionType = ConnectionType.Override)] public FloatSourceContainer RedirectY;
 		public bool ExactSpawn;
-		public AddedSpawnedData[] AddedSpawnedDatas;
+		[Output(connectionType = ConnectionType.Multiple)] public SASpawnAgent2.AddedSpawnedData[] AddedSpawnedDatas;
 		
 		protected override void Init()
 		{
@@ -133,6 +132,16 @@ namespace NASB_Moveset_Editor.StateActions
 			
 			CustomSpawnMovement = data.CustomSpawnMovement;
 			CustomSpawnMovements = data.CustomSpawnMovements;
+			
+			foreach (SpawnMovement CustomSpawnMovements_item in data.CustomSpawnMovements)
+			{
+				SpawnMovementNode node_CustomSpawnMovements = graph.AddNode<SpawnMovementNode>();
+				GetPort("CustomSpawnMovements").Connect(node_CustomSpawnMovements.GetPort("NodeInput"));
+				AssetDatabase.AddObjectToAsset(node_CustomSpawnMovements, assetPath);
+				variableCount += node_CustomSpawnMovements.SetData(CustomSpawnMovements_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				++variableCount;
+			}
+			
 			SpawnedAgentDataId = data.SpawnedAgentDataId;
 			SpawnedAgentDataSetValue = data.SpawnedAgentDataSetValue;
 			
@@ -214,6 +223,15 @@ namespace NASB_Moveset_Editor.StateActions
 			
 			ExactSpawn = data.ExactSpawn;
 			AddedSpawnedDatas = data.AddedSpawnedDatas;
+			
+			foreach (SASpawnAgent2.AddedSpawnedData AddedSpawnedDatas_item in AddedSpawnedDatas)
+			{
+				SASpawnAgent2_AddedSpawnedDataNode node_AddedSpawnedDatas = graph.AddNode<SASpawnAgent2_AddedSpawnedDataNode>();
+				GetPort("AddedSpawnedDatas").Connect(node_AddedSpawnedDatas.GetPort("NodeInput"));
+				AssetDatabase.AddObjectToAsset(node_AddedSpawnedDatas, assetPath);
+				variableCount += node_AddedSpawnedDatas.SetData(AddedSpawnedDatas_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				++variableCount;
+			}
 			return variableCount;
 		}
 		
@@ -255,7 +273,14 @@ namespace NASB_Moveset_Editor.StateActions
 				objToReturn.WorldOffsetZ = FloatSourceContainer_Node.GetData();
 			}
 			objToReturn.CustomSpawnMovement = CustomSpawnMovement;
-			objToReturn.CustomSpawnMovements = CustomSpawnMovements;
+			objToReturn.CustomSpawnMovements = new SpawnMovement[GetPort("CustomSpawnMovements").ConnectionCount];
+			int i = 0;
+			foreach(NodePort port in GetPort("CustomSpawnMovements").GetConnections())
+			{
+				SpawnMovementNode SpawnMovement_Node = (SpawnMovementNode)port.node;
+				objToReturn.CustomSpawnMovements[i] = SpawnMovement_Node.GetData();
+				++i;
+			}
 			objToReturn.SpawnedAgentDataId = SpawnedAgentDataId;
 			if (GetPort("SpawnedAgentDataSetValue").ConnectionCount > 0)
 			{
@@ -309,7 +334,14 @@ namespace NASB_Moveset_Editor.StateActions
 				objToReturn.RedirectY = FloatSourceContainer_Node.GetData();
 			}
 			objToReturn.ExactSpawn = ExactSpawn;
-			objToReturn.AddedSpawnedDatas = AddedSpawnedDatas;
+			objToReturn.AddedSpawnedDatas = new SASpawnAgent2.AddedSpawnedData[GetPort("AddedSpawnedDatas").ConnectionCount];
+			i = 0;
+			foreach(NodePort port in GetPort("AddedSpawnedDatas").GetConnections())
+			{
+				SASpawnAgent2_AddedSpawnedDataNode SASpawnAgent2_AddedSpawnedData_Node = (SASpawnAgent2_AddedSpawnedDataNode)port.node;
+				objToReturn.AddedSpawnedDatas[i] = SASpawnAgent2_AddedSpawnedData_Node.GetData();
+				++i;
+			}
 			return objToReturn;
 		}
 	}

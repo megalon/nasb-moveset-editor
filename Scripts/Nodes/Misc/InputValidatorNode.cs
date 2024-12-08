@@ -38,8 +38,8 @@ namespace NASB_Moveset_Editor.Misc
 		{
 			base.Init();
 
-			// InputValidator should default to Inside, since zero is unused
-			// TODO: THis is commented out for testing!
+			// TODO: Figure this out!
+			//// InputValidator should default to Inside, since zero is unused
 			//SegCompare = CtrlSegCompare.Inside;
 		}
 		

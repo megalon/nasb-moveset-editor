@@ -25,7 +25,6 @@ using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
 using NASB_Moveset_Editor.Unity;
 using static MovesetParser.CheckThings.CheckThing;
-using static MovesetParser.CheckThings.CTInputSeries;
 
 namespace NASB_Moveset_Editor.CheckThings
 {
@@ -33,8 +32,8 @@ namespace NASB_Moveset_Editor.CheckThings
 	{
 		[Input(connectionType = ConnectionType.Override)] public CheckThing NodeInput;
 		public int CheckFrames;
-		public LookForInput[] InputSeries;
-		public LookForInput[] StopLooking;
+		[Output(connectionType = ConnectionType.Multiple)] public CTInputSeries.LookForInput[] InputSeries;
+		[Output(connectionType = ConnectionType.Multiple)] public CTInputSeries.LookForInput[] StopLooking;
 		
 		protected override void Init()
 		{
@@ -56,7 +55,25 @@ namespace NASB_Moveset_Editor.CheckThings
 			
 			CheckFrames = data.CheckFrames;
 			InputSeries = data.InputSeries;
+			
+			foreach (CTInputSeries.LookForInput InputSeries_item in InputSeries)
+			{
+				CTInputSeries_LookForInputNode node_InputSeries = graph.AddNode<CTInputSeries_LookForInputNode>();
+				GetPort("InputSeries").Connect(node_InputSeries.GetPort("NodeInput"));
+				AssetDatabase.AddObjectToAsset(node_InputSeries, assetPath);
+				variableCount += node_InputSeries.SetData(InputSeries_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				++variableCount;
+			}
 			StopLooking = data.StopLooking;
+			
+			foreach (CTInputSeries.LookForInput StopLooking_item in StopLooking)
+			{
+				CTInputSeries_LookForInputNode node_StopLooking = graph.AddNode<CTInputSeries_LookForInputNode>();
+				GetPort("StopLooking").Connect(node_StopLooking.GetPort("NodeInput"));
+				AssetDatabase.AddObjectToAsset(node_StopLooking, assetPath);
+				variableCount += node_StopLooking.SetData(StopLooking_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				++variableCount;
+			}
 			return variableCount;
 		}
 		
@@ -65,8 +82,22 @@ namespace NASB_Moveset_Editor.CheckThings
 			CTInputSeries objToReturn = new CTInputSeries();
 			objToReturn.TID = TypeId.CTInputSeries;
 			objToReturn.CheckFrames = CheckFrames;
-			objToReturn.InputSeries = InputSeries;
-			objToReturn.StopLooking = StopLooking;
+			objToReturn.InputSeries = new CTInputSeries.LookForInput[GetPort("InputSeries").ConnectionCount];
+			int i = 0;
+			foreach(NodePort port in GetPort("InputSeries").GetConnections())
+			{
+				CTInputSeries_LookForInputNode CTInputSeries_LookForInput_Node = (CTInputSeries_LookForInputNode)port.node;
+				objToReturn.InputSeries[i] = CTInputSeries_LookForInput_Node.GetData();
+				++i;
+			}
+			objToReturn.StopLooking = new CTInputSeries.LookForInput[GetPort("StopLooking").ConnectionCount];
+			i = 0;
+			foreach(NodePort port in GetPort("StopLooking").GetConnections())
+			{
+				CTInputSeries_LookForInputNode CTInputSeries_LookForInput_Node = (CTInputSeries_LookForInputNode)port.node;
+				objToReturn.StopLooking[i] = CTInputSeries_LookForInput_Node.GetData();
+				++i;
+			}
 			return objToReturn;
 		}
 	}

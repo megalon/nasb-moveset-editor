@@ -31,7 +31,7 @@ namespace NASB_Moveset_Editor
 	public class MovesetNode : BaseMovesetNode
 	{
 		[Input(connectionType = ConnectionType.Override)] public Moveset NodeInput;
-		public IdState[] States;
+		[Output(connectionType = ConnectionType.Multiple)] public IdState[] States;
 		
 		protected override void Init()
 		{
@@ -51,13 +51,30 @@ namespace NASB_Moveset_Editor
 			int variableCount = 0;
 			
 			States = data.States;
+			
+			foreach (IdState States_item in data.States)
+			{
+				IdStateNode node_States = graph.AddNode<IdStateNode>();
+				GetPort("States").Connect(node_States.GetPort("NodeInput"));
+				AssetDatabase.AddObjectToAsset(node_States, assetPath);
+				variableCount += node_States.SetData(States_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				++variableCount;
+			}
+			
 			return variableCount;
 		}
 		
 		public Moveset GetData()
 		{
 			Moveset objToReturn = new Moveset();
-			objToReturn.States = States;
+			objToReturn.States = new IdState[GetPort("States").ConnectionCount];
+			int i = 0;
+			foreach(NodePort port in GetPort("States").GetConnections())
+			{
+				IdStateNode IdState_Node = (IdStateNode)port.node;
+				objToReturn.States[i] = IdState_Node.GetData();
+				++i;
+			}
 			return objToReturn;
 		}
 	}

@@ -31,7 +31,7 @@ namespace NASB_Moveset_Editor.Misc
 	public class HurtSetSetupNode : BaseMovesetNode
 	{
 		[Input(connectionType = ConnectionType.Override)] public HurtSetSetup NodeInput;
-		public HurtBone[] HurtBones;
+		[Output(connectionType = ConnectionType.Multiple)] public HurtSetSetup.HurtBone[] HurtBones;
 		
 		protected override void Init()
 		{
@@ -51,13 +51,29 @@ namespace NASB_Moveset_Editor.Misc
 			int variableCount = 0;
 			
 			HurtBones = data.HurtBones;
+			
+			foreach (HurtSetSetup.HurtBone HurtBones_item in HurtBones)
+			{
+				HurtSetSetup_HurtBoneNode node_HurtBones = graph.AddNode<HurtSetSetup_HurtBoneNode>();
+				GetPort("HurtBones").Connect(node_HurtBones.GetPort("NodeInput"));
+				AssetDatabase.AddObjectToAsset(node_HurtBones, assetPath);
+				variableCount += node_HurtBones.SetData(HurtBones_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				++variableCount;
+			}
 			return variableCount;
 		}
 		
 		public HurtSetSetup GetData()
 		{
 			HurtSetSetup objToReturn = new HurtSetSetup();
-			objToReturn.HurtBones = HurtBones;
+			objToReturn.HurtBones = new HurtSetSetup.HurtBone[GetPort("HurtBones").ConnectionCount];
+			int i = 0;
+			foreach(NodePort port in GetPort("HurtBones").GetConnections())
+			{
+				HurtSetSetup_HurtBoneNode HurtSetSetup_HurtBone_Node = (HurtSetSetup_HurtBoneNode)port.node;
+				objToReturn.HurtBones[i] = HurtSetSetup_HurtBone_Node.GetData();
+				++i;
+			}
 			return objToReturn;
 		}
 	}

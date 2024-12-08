@@ -41,7 +41,7 @@ namespace NASB_Moveset_Editor.StateActions
 		[Output(connectionType = ConnectionType.Override)] public FloatSourceContainer WorldOffsetY;
 		[Output(connectionType = ConnectionType.Override)] public FloatSourceContainer WorldOffsetZ;
 		public bool CustomSpawnMovement;
-		public SpawnMovement[] CustomSpawnMovements;
+		[Output(connectionType = ConnectionType.Multiple)] public SpawnMovement[] CustomSpawnMovements;
 		[Output(connectionType = ConnectionType.Override)] public SAGUAMessageObject GuaMessageObject;
 		[Output(connectionType = ConnectionType.Override)] public FloatSourceContainer ResultOrderAdded;
 		
@@ -116,6 +116,16 @@ namespace NASB_Moveset_Editor.StateActions
 			
 			CustomSpawnMovement = data.CustomSpawnMovement;
 			CustomSpawnMovements = data.CustomSpawnMovements;
+			
+			foreach (SpawnMovement CustomSpawnMovements_item in data.CustomSpawnMovements)
+			{
+				SpawnMovementNode node_CustomSpawnMovements = graph.AddNode<SpawnMovementNode>();
+				GetPort("CustomSpawnMovements").Connect(node_CustomSpawnMovements.GetPort("NodeInput"));
+				AssetDatabase.AddObjectToAsset(node_CustomSpawnMovements, assetPath);
+				variableCount += node_CustomSpawnMovements.SetData(CustomSpawnMovements_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				++variableCount;
+			}
+			
 			GuaMessageObject = data.GuaMessageObject;
 			
 			SAGUAMessageObjectNode node_GuaMessageObject = graph.AddNode<SAGUAMessageObjectNode>();
@@ -172,7 +182,14 @@ namespace NASB_Moveset_Editor.StateActions
 				objToReturn.WorldOffsetZ = FloatSourceContainer_Node.GetData();
 			}
 			objToReturn.CustomSpawnMovement = CustomSpawnMovement;
-			objToReturn.CustomSpawnMovements = CustomSpawnMovements;
+			objToReturn.CustomSpawnMovements = new SpawnMovement[GetPort("CustomSpawnMovements").ConnectionCount];
+			int i = 0;
+			foreach(NodePort port in GetPort("CustomSpawnMovements").GetConnections())
+			{
+				SpawnMovementNode SpawnMovement_Node = (SpawnMovementNode)port.node;
+				objToReturn.CustomSpawnMovements[i] = SpawnMovement_Node.GetData();
+				++i;
+			}
 			if (GetPort("GuaMessageObject").ConnectionCount > 0)
 			{
 				SAGUAMessageObjectNode SAGUAMessageObject_Node = (SAGUAMessageObjectNode)GetPort("GuaMessageObject").GetConnection(0).node;

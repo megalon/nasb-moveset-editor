@@ -25,14 +25,13 @@ using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
 using NASB_Moveset_Editor.Unity;
 using static MovesetParser.StateActions.StateAction;
-using static MovesetParser.StateActions.SASetFloatTarget;
 
 namespace NASB_Moveset_Editor.StateActions
 {
 	public class SASetFloatTargetNode : StateActionNode
 	{
 		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
-		public SetFloat[] Sets;
+		[Output(connectionType = ConnectionType.Multiple)] public SASetFloatTarget.SetFloat[] Sets;
 		
 		protected override void Init()
 		{
@@ -53,6 +52,15 @@ namespace NASB_Moveset_Editor.StateActions
 			int variableCount = 0;
 			
 			Sets = data.Sets;
+			
+			foreach (SASetFloatTarget.SetFloat Sets_item in Sets)
+			{
+				SASetFloatTarget_SetFloatNode node_Sets = graph.AddNode<SASetFloatTarget_SetFloatNode>();
+				GetPort("Sets").Connect(node_Sets.GetPort("NodeInput"));
+				AssetDatabase.AddObjectToAsset(node_Sets, assetPath);
+				variableCount += node_Sets.SetData(Sets_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				++variableCount;
+			}
 			return variableCount;
 		}
 		
@@ -60,7 +68,14 @@ namespace NASB_Moveset_Editor.StateActions
 		{
 			SASetFloatTarget objToReturn = new SASetFloatTarget();
 			objToReturn.TID = TypeId.SASetFloatTarget;
-			objToReturn.Sets = Sets;
+			objToReturn.Sets = new SASetFloatTarget.SetFloat[GetPort("Sets").ConnectionCount];
+			int i = 0;
+			foreach(NodePort port in GetPort("Sets").GetConnections())
+			{
+				SASetFloatTarget_SetFloatNode SASetFloatTarget_SetFloat_Node = (SASetFloatTarget_SetFloatNode)port.node;
+				objToReturn.Sets[i] = SASetFloatTarget_SetFloat_Node.GetData();
+				++i;
+			}
 			return objToReturn;
 		}
 	}

@@ -25,14 +25,13 @@ using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
 using NASB_Moveset_Editor.Unity;
 using static MovesetParser.StateActions.StateAction;
-using static MovesetParser.StateActions.SAManipHitBox;
 
 namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAManipHitBoxNode : StateActionNode
 	{
 		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
-		public HBM[] Manips;
+		[Output(connectionType = ConnectionType.Multiple)] public SAManipHitBox.HBM[] Manips;
 		
 		protected override void Init()
 		{
@@ -53,6 +52,15 @@ namespace NASB_Moveset_Editor.StateActions
 			int variableCount = 0;
 			
 			Manips = data.Manips;
+			
+			foreach (SAManipHitBox.HBM Manips_item in Manips)
+			{
+				SAManipHitBox_HBMNode node_Manips = graph.AddNode<SAManipHitBox_HBMNode>();
+				GetPort("Manips").Connect(node_Manips.GetPort("NodeInput"));
+				AssetDatabase.AddObjectToAsset(node_Manips, assetPath);
+				variableCount += node_Manips.SetData(Manips_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+				++variableCount;
+			}
 			return variableCount;
 		}
 		
@@ -60,7 +68,14 @@ namespace NASB_Moveset_Editor.StateActions
 		{
 			SAManipHitBox objToReturn = new SAManipHitBox();
 			objToReturn.TID = TypeId.SAManipHitBox;
-			objToReturn.Manips = Manips;
+			objToReturn.Manips = new SAManipHitBox.HBM[GetPort("Manips").ConnectionCount];
+			int i = 0;
+			foreach(NodePort port in GetPort("Manips").GetConnections())
+			{
+				SAManipHitBox_HBMNode SAManipHitBox_HBM_Node = (SAManipHitBox_HBMNode)port.node;
+				objToReturn.Manips[i] = SAManipHitBox_HBM_Node.GetData();
+				++i;
+			}
 			return objToReturn;
 		}
 	}
