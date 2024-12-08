@@ -30,7 +30,6 @@ namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSFuncNode : FloatSourceNode
 	{
-		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		public MovesetParser.FloatSources.FSFunc.FuncWay Way;
 		[Output(connectionType = ConnectionType.Override)] public FloatSourceContainer A;
 		[Output(connectionType = ConnectionType.Override)] public FloatSourceContainer B;

@@ -29,7 +29,7 @@ namespace NASB_Moveset_Editor.Unity
 	public class Vector2Node : BaseMovesetNode
 	{
 		[Output(connectionType = ConnectionType.Override)] public MovesetParser.Unity.Vector2 zero;
-		[Output(connectionType = ConnectionType.Override)] public UnityEngine.Vector2 zeroVector;
+		[Output(connectionType = ConnectionType.Override)] public MovesetParser.Unity.Vector2 zeroVector;
 		public float x;
 		public float y;
 	}

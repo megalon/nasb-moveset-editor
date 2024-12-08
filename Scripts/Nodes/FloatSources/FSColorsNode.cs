@@ -30,7 +30,6 @@ namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSColorsNode : FloatSourceNode
 	{
-		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		public string ColorId;
 		public bool Permanent;
 		

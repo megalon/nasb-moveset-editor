@@ -30,7 +30,6 @@ namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSAnimNode : FloatSourceNode
 	{
-		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		public string Animation;
 		public MovesetParser.FloatSources.FSAnim.AnimationAttribute Attribute;
 		

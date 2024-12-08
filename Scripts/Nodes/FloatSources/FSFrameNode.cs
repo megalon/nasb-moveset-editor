@@ -30,7 +30,6 @@ namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSFrameNode : FloatSourceNode
 	{
-		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		
 		protected override void Init()
 		{

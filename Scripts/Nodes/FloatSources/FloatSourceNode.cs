@@ -30,6 +30,7 @@ namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FloatSourceNode : BaseMovesetNode
 	{
+		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		[HideInInspector] public MovesetParser.FloatSources.FloatSource.TypeId TID;
 		public float Value;
 		

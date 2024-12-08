@@ -30,7 +30,6 @@ namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSCollisionNode : FloatSourceNode
 	{
-		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		public MovesetParser.FloatSources.FSCollision.CollisionAttribute Attribute;
 		
 		protected override void Init()

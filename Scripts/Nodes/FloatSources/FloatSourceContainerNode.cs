@@ -28,10 +28,10 @@ using static MovesetParser.FloatSources.FloatSourceContainer;
 
 namespace NASB_Moveset_Editor.FloatSources
 {
-	public class FloatSourceContainerNode : FloatSourceNode
-	{
-		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
-		[Output(connectionType = ConnectionType.Override)] public FloatSource FloatSource;
+	public class FloatSourceContainerNode : BaseMovesetNode
+    {
+        [Input(connectionType = ConnectionType.Override)] public FloatSourceContainer NodeInput;
+        [Output(connectionType = ConnectionType.Override)] public FloatSource FloatSource;
 		
 		protected override void Init()
 		{
@@ -51,7 +51,7 @@ namespace NASB_Moveset_Editor.FloatSources
 			int variableCount = 0;
 
 			if (data == null) return variableCount;
-			
+
 			FloatSource = data.FloatSource;
 			
 			switch (FloatSource.TID)

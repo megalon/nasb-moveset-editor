@@ -30,7 +30,6 @@ namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSVector2MagNode : FloatSourceNode
 	{
-		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		[Output(connectionType = ConnectionType.Override)] public FloatSourceContainer X;
 		[Output(connectionType = ConnectionType.Override)] public FloatSourceContainer Y;
 		

@@ -30,7 +30,6 @@ namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSLastAtkNode : FloatSourceNode
 	{
-		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		public MovesetParser.FloatSources.FSLastAtk.LastAtkAttribute Attribute;
 		
 		protected override void Init()

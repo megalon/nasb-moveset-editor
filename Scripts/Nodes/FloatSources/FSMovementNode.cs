@@ -30,7 +30,6 @@ namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSMovementNode : FloatSourceNode
 	{
-		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
 		public MovesetParser.FloatSources.FSMovement.MovementAttribute Attribute;
 		
 		protected override void Init()
