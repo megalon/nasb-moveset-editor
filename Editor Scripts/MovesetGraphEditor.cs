@@ -121,7 +121,15 @@ namespace NASB_Moveset_Editor
 				// If this is a list, get the type of the item in the list, then find nodes that have inputs for that type
 				if (typeof(IEnumerable).IsAssignableFrom(compatibleType) && compatibleType != typeof(string))
 				{
-					Type subType = Type.GetType(compatibleType.GenericTypeArguments[0].AssemblyQualifiedName);
+					Type subType = null;
+
+					if (compatibleType.IsArray)
+					{
+						subType = compatibleType.GetElementType();
+					} else
+					{
+						subType = Type.GetType(compatibleType.GenericTypeArguments[0].AssemblyQualifiedName);
+					}
 					nodeTypes = NodeEditorUtilities.GetCompatibleNodesTypes(NodeEditorReflection.nodeTypes, subType, direction).OrderBy(GetNodeMenuOrder).ToArray();
 				}
 				else if (NodeEditorPreferences.GetSettings().createFilter)
