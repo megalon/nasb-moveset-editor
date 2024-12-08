@@ -25,6 +25,7 @@ using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
 using NASB_Moveset_Editor.Unity;
 using static MovesetParser.Misc.InputValidator;
+using NUnit.Framework.Constraints;
 
 namespace NASB_Moveset_Editor.Misc
 {
@@ -77,6 +78,8 @@ namespace NASB_Moveset_Editor.Misc
 			SegmentCompare = data.SegmentCompare;
 			MultiCompare = data.MultiCompare;
 			Validators = data.Validators;
+
+			if (Validators == null) return variableCount;
 			
 			foreach (InputValidator Validators_item in data.Validators)
 			{
