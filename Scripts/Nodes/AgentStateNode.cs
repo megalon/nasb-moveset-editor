@@ -53,13 +53,16 @@ namespace NASB_Moveset_Editor
 			
 			Timeline = data.Timeline;
 			
-			foreach (TimedAction Timeline_item in data.Timeline)
+			if (Timeline != null)
 			{
-				TimedActionNode node_Timeline = graph.AddNode<TimedActionNode>();
-				GetPort("Timeline").Connect(node_Timeline.GetPort("NodeInput"));
-				AssetDatabase.AddObjectToAsset(node_Timeline, assetPath);
-				variableCount += node_Timeline.SetData(Timeline_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
-				++variableCount;
+				foreach (TimedAction Timeline_item in data.Timeline)
+				{
+					TimedActionNode node_Timeline = graph.AddNode<TimedActionNode>();
+					GetPort("Timeline").Connect(node_Timeline.GetPort("NodeInput"));
+					AssetDatabase.AddObjectToAsset(node_Timeline, assetPath);
+					variableCount += node_Timeline.SetData(Timeline_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+					++variableCount;
+				}
 			}
 			
 			CustomCall = data.CustomCall;
