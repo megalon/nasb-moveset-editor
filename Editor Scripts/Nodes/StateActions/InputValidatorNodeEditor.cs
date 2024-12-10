@@ -1,8 +1,10 @@
 using NASB_Moveset_Editor.StateActions;
-using NASB_Parser.StateActions;
+using MovesetParser.StateActions;
 using System.Linq;
 using UnityEditor;
 using XNodeEditor;
+using NASB_Moveset_Editor.Misc;
+using MovesetParser.Misc;
 
 namespace NASB_Moveset_Editor
 {
@@ -14,7 +16,7 @@ namespace NASB_Moveset_Editor
     [CustomNodeEditor(typeof(InputValidatorNode))]
     public class InputValidatorNodeEditor : StateActionNodeEditor
     {
-        InputValidator.CtrlSeg ctrlSeg;
+        CtrlSeg ctrlSeg;
 
         bool initialized = false;
         /// <summary> Called whenever the xNode editor window is updated </summary>
@@ -41,11 +43,11 @@ namespace NASB_Moveset_Editor
                         // Initialize the item on first load
                         if (!initialized)
                         {
-                            ctrlSeg = (InputValidator.CtrlSeg)iterator.intValue;
+                            ctrlSeg = (CtrlSeg)iterator.intValue;
                             initialized = true;
                         }
                         EditorGUILayout.LabelField(iterator.displayName);
-                        ctrlSeg = (InputValidator.CtrlSeg)EditorGUILayout.EnumFlagsField(ctrlSeg);
+                        ctrlSeg = (CtrlSeg)EditorGUILayout.EnumFlagsField(ctrlSeg);
                         iterator.intValue = (int)ctrlSeg;
                     } else if (iterator.name.Equals("SegCompare") || iterator.name.Equals("MultiCompare"))
                     {

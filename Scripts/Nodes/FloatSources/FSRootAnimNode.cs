@@ -4,37 +4,38 @@
 // * https://github.com/megalon/NASB_Parser_to_xNode
 // * 
 // * 
-using System;
-using System.Collections.Generic;
-using System.Text;
+using MovesetParser.BulkSerialize;
 using UnityEngine;
 using UnityEditor;
 using XNode;
 using XNodeEditor;
-using NASB_Parser;
-using NASB_Parser.FloatSources;
-using NASB_Parser.Jumps;
-using NASB_Parser.CheckThings;
-using NASB_Parser.StateActions;
-using NASB_Parser.ObjectSources;
+using MovesetParser;
+using MovesetParser.CheckThings;
+using MovesetParser.FloatSources;
+using MovesetParser.Jumps;
+using MovesetParser.Misc;
+using MovesetParser.StateActions;
+using MovesetParser.ObjectSources;
+using MovesetParser.Unity;
+using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
-using NASB_Moveset_Editor.CheckThings;
+using NASB_Moveset_Editor.Misc;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
-using static NASB_Parser.FloatSources.FloatSource;
+using NASB_Moveset_Editor.Unity;
+using static MovesetParser.FloatSources.FloatSource;
 
 namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSRootAnimNode : FloatSourceNode
 	{
-		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
-		public NASB_Parser.FloatSources.FSRootAnim.Attributes Attribute;
+		public MovesetParser.FloatSources.FSRootAnim.RootAnimAttribute Attribute;
 		
 		protected override void Init()
 		{
 			base.Init();
-			TID = TypeId.RootAnimId;
+			TID = TypeId.FSRootAnim;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -42,7 +43,7 @@ namespace NASB_Moveset_Editor.FloatSources
 			return null;
 		}
 		
-		public int SetData(FSRootAnim data, MovesetGraph graph, string assetPath, Vector2 nodeDepthXY)
+		public int SetData(FSRootAnim data, MovesetGraph graph, string assetPath, UnityEngine.Vector2 nodeDepthXY)
 		{
 			name = NodeEditorUtilities.NodeDefaultName(typeof(FSRootAnim));
 			position.x = nodeDepthXY.x * Consts.NodeXOffset;
@@ -56,8 +57,7 @@ namespace NASB_Moveset_Editor.FloatSources
 		public new FSRootAnim GetData()
 		{
 			FSRootAnim objToReturn = new FSRootAnim();
-			objToReturn.TID = TypeId.RootAnimId;
-			objToReturn.Version = Version;
+			objToReturn.TID = TypeId.FSRootAnim;
 			objToReturn.Attribute = Attribute;
 			return objToReturn;
 		}

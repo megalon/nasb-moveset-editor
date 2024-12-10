@@ -4,37 +4,39 @@
 // * https://github.com/megalon/NASB_Parser_to_xNode
 // * 
 // * 
-using System;
-using System.Collections.Generic;
-using System.Text;
+using MovesetParser.BulkSerialize;
+using MovesetParser.Misc;
 using UnityEngine;
 using UnityEditor;
 using XNode;
 using XNodeEditor;
-using NASB_Parser;
-using NASB_Parser.FloatSources;
-using NASB_Parser.Jumps;
-using NASB_Parser.CheckThings;
-using NASB_Parser.StateActions;
-using NASB_Parser.ObjectSources;
+using MovesetParser;
+using MovesetParser.CheckThings;
+using MovesetParser.FloatSources;
+using MovesetParser.Jumps;
+using MovesetParser.StateActions;
+using MovesetParser.ObjectSources;
+using MovesetParser.Unity;
+using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
-using NASB_Moveset_Editor.CheckThings;
+using NASB_Moveset_Editor.Misc;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
-using static NASB_Parser.StateActions.StateAction;
+using NASB_Moveset_Editor.Unity;
+using static MovesetParser.StateActions.StateAction;
 
 namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAManageAirJumpNode : StateActionNode
 	{
 		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
-		public NASB_Parser.StateActions.SAManageAirJump.ManageType Manage;
+		public Manage Manage;
 		
 		protected override void Init()
 		{
 			base.Init();
-			TID = TypeId.ManageAirJumpId;
+			TID = TypeId.SAManageAirJump;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -42,7 +44,7 @@ namespace NASB_Moveset_Editor.StateActions
 			return null;
 		}
 		
-		public int SetData(SAManageAirJump data, MovesetGraph graph, string assetPath, Vector2 nodeDepthXY)
+		public int SetData(SAManageAirJump data, MovesetGraph graph, string assetPath, UnityEngine.Vector2 nodeDepthXY)
 		{
 			name = NodeEditorUtilities.NodeDefaultName(typeof(SAManageAirJump));
 			position.x = nodeDepthXY.x * Consts.NodeXOffset;
@@ -56,8 +58,7 @@ namespace NASB_Moveset_Editor.StateActions
 		public new SAManageAirJump GetData()
 		{
 			SAManageAirJump objToReturn = new SAManageAirJump();
-			objToReturn.TID = TypeId.ManageAirJumpId;
-			objToReturn.Version = Version;
+			objToReturn.TID = TypeId.SAManageAirJump;
 			objToReturn.Manage = Manage;
 			return objToReturn;
 		}

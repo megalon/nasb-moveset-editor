@@ -4,38 +4,40 @@
 // * https://github.com/megalon/NASB_Parser_to_xNode
 // * 
 // * 
-using System;
-using System.Collections.Generic;
-using System.Text;
+using MovesetParser.BulkSerialize;
 using UnityEngine;
 using UnityEditor;
 using XNode;
 using XNodeEditor;
-using NASB_Parser;
-using NASB_Parser.FloatSources;
-using NASB_Parser.Jumps;
-using NASB_Parser.CheckThings;
-using NASB_Parser.StateActions;
-using NASB_Parser.ObjectSources;
+using MovesetParser;
+using MovesetParser.CheckThings;
+using MovesetParser.FloatSources;
+using MovesetParser.Jumps;
+using MovesetParser.Misc;
+using MovesetParser.StateActions;
+using MovesetParser.ObjectSources;
+using MovesetParser.Unity;
+using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
-using NASB_Moveset_Editor.CheckThings;
+using NASB_Moveset_Editor.Misc;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
-using static NASB_Parser.CheckThings.CheckThing;
+using NASB_Moveset_Editor.Unity;
+using static MovesetParser.CheckThings.CheckThing;
 
 namespace NASB_Moveset_Editor.CheckThings
 {
 	public class CTMultipleNode : CheckThingNode
 	{
 		[Input(connectionType = ConnectionType.Override)] public CheckThing NodeInput;
-		public NASB_Parser.CheckThings.CTMultiple.CheckMatch Match;
-		[Output(connectionType = ConnectionType.Multiple)] public List<CheckThing> Checklist;
+		public MovesetParser.CheckThings.CTMultiple.CheckMatch Match;
+		[Output(connectionType = ConnectionType.Multiple)] public CheckThing[] Checklist;
 		
 		protected override void Init()
 		{
 			base.Init();
-			TID = TypeId.MultipleId;
+			TID = TypeId.CTMultiple;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -43,7 +45,7 @@ namespace NASB_Moveset_Editor.CheckThings
 			return null;
 		}
 		
-		public int SetData(CTMultiple data, MovesetGraph graph, string assetPath, Vector2 nodeDepthXY)
+		public int SetData(CTMultiple data, MovesetGraph graph, string assetPath, UnityEngine.Vector2 nodeDepthXY)
 		{
 			name = NodeEditorUtilities.NodeDefaultName(typeof(CTMultiple));
 			position.x = nodeDepthXY.x * Consts.NodeXOffset;
@@ -57,65 +59,71 @@ namespace NASB_Moveset_Editor.CheckThings
 			{
 				switch (Checklist_item.TID)
 				{
-					case CheckThing.TypeId.MultipleId:
-						CTMultipleNode MultipleId_node_Checklist = graph.AddNode<CTMultipleNode>();
-						GetPort("Checklist").Connect(MultipleId_node_Checklist.GetPort("NodeInput"));
-						AssetDatabase.AddObjectToAsset(MultipleId_node_Checklist, assetPath);
-						variableCount += MultipleId_node_Checklist.SetData((CTMultiple)Checklist_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					case CheckThing.TypeId.CheckThing:
+						CheckThingNode CheckThing_node_Checklist = graph.AddNode<CheckThingNode>();
+						GetPort("Checklist").Connect(CheckThing_node_Checklist.GetPort("NodeInput"));
+						AssetDatabase.AddObjectToAsset(CheckThing_node_Checklist, assetPath);
+						variableCount += CheckThing_node_Checklist.SetData((CheckThing)Checklist_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 					break;
-					case CheckThing.TypeId.CompareId:
-						CTCompareFloatNode CompareId_node_Checklist = graph.AddNode<CTCompareFloatNode>();
-						GetPort("Checklist").Connect(CompareId_node_Checklist.GetPort("NodeInput"));
-						AssetDatabase.AddObjectToAsset(CompareId_node_Checklist, assetPath);
-						variableCount += CompareId_node_Checklist.SetData((CTCompareFloat)Checklist_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					case CheckThing.TypeId.CTMultiple:
+						CTMultipleNode CTMultiple_node_Checklist = graph.AddNode<CTMultipleNode>();
+						GetPort("Checklist").Connect(CTMultiple_node_Checklist.GetPort("NodeInput"));
+						AssetDatabase.AddObjectToAsset(CTMultiple_node_Checklist, assetPath);
+						variableCount += CTMultiple_node_Checklist.SetData((CTMultiple)Checklist_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 					break;
-					case CheckThing.TypeId.DoubleTapId:
-						CTDoubleTapIdNode DoubleTapId_node_Checklist = graph.AddNode<CTDoubleTapIdNode>();
-						GetPort("Checklist").Connect(DoubleTapId_node_Checklist.GetPort("NodeInput"));
-						AssetDatabase.AddObjectToAsset(DoubleTapId_node_Checklist, assetPath);
-						variableCount += DoubleTapId_node_Checklist.SetData((CTDoubleTapId)Checklist_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					case CheckThing.TypeId.CTCompareFloat:
+						CTCompareFloatNode CTCompareFloat_node_Checklist = graph.AddNode<CTCompareFloatNode>();
+						GetPort("Checklist").Connect(CTCompareFloat_node_Checklist.GetPort("NodeInput"));
+						AssetDatabase.AddObjectToAsset(CTCompareFloat_node_Checklist, assetPath);
+						variableCount += CTCompareFloat_node_Checklist.SetData((CTCompareFloat)Checklist_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 					break;
-					case CheckThing.TypeId.InputId:
-						CTInputNode InputId_node_Checklist = graph.AddNode<CTInputNode>();
-						GetPort("Checklist").Connect(InputId_node_Checklist.GetPort("NodeInput"));
-						AssetDatabase.AddObjectToAsset(InputId_node_Checklist, assetPath);
-						variableCount += InputId_node_Checklist.SetData((CTInput)Checklist_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					case CheckThing.TypeId.CTDoubleTap:
+						CTDoubleTapNode CTDoubleTap_node_Checklist = graph.AddNode<CTDoubleTapNode>();
+						GetPort("Checklist").Connect(CTDoubleTap_node_Checklist.GetPort("NodeInput"));
+						AssetDatabase.AddObjectToAsset(CTDoubleTap_node_Checklist, assetPath);
+						variableCount += CTDoubleTap_node_Checklist.SetData((CTDoubleTap)Checklist_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 					break;
-					case CheckThing.TypeId.InputSeriesId:
-						CTInputSeriesNode InputSeriesId_node_Checklist = graph.AddNode<CTInputSeriesNode>();
-						GetPort("Checklist").Connect(InputSeriesId_node_Checklist.GetPort("NodeInput"));
-						AssetDatabase.AddObjectToAsset(InputSeriesId_node_Checklist, assetPath);
-						variableCount += InputSeriesId_node_Checklist.SetData((CTInputSeries)Checklist_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					case CheckThing.TypeId.CTInput:
+						CTInputNode CTInput_node_Checklist = graph.AddNode<CTInputNode>();
+						GetPort("Checklist").Connect(CTInput_node_Checklist.GetPort("NodeInput"));
+						AssetDatabase.AddObjectToAsset(CTInput_node_Checklist, assetPath);
+						variableCount += CTInput_node_Checklist.SetData((CTInput)Checklist_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 					break;
-					case CheckThing.TypeId.TechId:
-						CTCheckTechNode TechId_node_Checklist = graph.AddNode<CTCheckTechNode>();
-						GetPort("Checklist").Connect(TechId_node_Checklist.GetPort("NodeInput"));
-						AssetDatabase.AddObjectToAsset(TechId_node_Checklist, assetPath);
-						variableCount += TechId_node_Checklist.SetData((CTCheckTech)Checklist_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					case CheckThing.TypeId.CTInputSeries:
+						CTInputSeriesNode CTInputSeries_node_Checklist = graph.AddNode<CTInputSeriesNode>();
+						GetPort("Checklist").Connect(CTInputSeries_node_Checklist.GetPort("NodeInput"));
+						AssetDatabase.AddObjectToAsset(CTInputSeries_node_Checklist, assetPath);
+						variableCount += CTInputSeries_node_Checklist.SetData((CTInputSeries)Checklist_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 					break;
-					case CheckThing.TypeId.GrabId:
-						CTGrabIdNode GrabId_node_Checklist = graph.AddNode<CTGrabIdNode>();
-						GetPort("Checklist").Connect(GrabId_node_Checklist.GetPort("NodeInput"));
-						AssetDatabase.AddObjectToAsset(GrabId_node_Checklist, assetPath);
-						variableCount += GrabId_node_Checklist.SetData((CTGrabId)Checklist_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					case CheckThing.TypeId.CTCheckTech:
+						CTCheckTechNode CTCheckTech_node_Checklist = graph.AddNode<CTCheckTechNode>();
+						GetPort("Checklist").Connect(CTCheckTech_node_Checklist.GetPort("NodeInput"));
+						AssetDatabase.AddObjectToAsset(CTCheckTech_node_Checklist, assetPath);
+						variableCount += CTCheckTech_node_Checklist.SetData((CTCheckTech)Checklist_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 					break;
-					case CheckThing.TypeId.GrabAgentId:
-						CTGrabbedAgentNode GrabAgentId_node_Checklist = graph.AddNode<CTGrabbedAgentNode>();
-						GetPort("Checklist").Connect(GrabAgentId_node_Checklist.GetPort("NodeInput"));
-						AssetDatabase.AddObjectToAsset(GrabAgentId_node_Checklist, assetPath);
-						variableCount += GrabAgentId_node_Checklist.SetData((CTGrabbedAgent)Checklist_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					case CheckThing.TypeId.CTGrab:
+						CTGrabNode CTGrab_node_Checklist = graph.AddNode<CTGrabNode>();
+						GetPort("Checklist").Connect(CTGrab_node_Checklist.GetPort("NodeInput"));
+						AssetDatabase.AddObjectToAsset(CTGrab_node_Checklist, assetPath);
+						variableCount += CTGrab_node_Checklist.SetData((CTGrab)Checklist_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 					break;
-					case CheckThing.TypeId.SkinId:
-						CTSkinNode SkinId_node_Checklist = graph.AddNode<CTSkinNode>();
-						GetPort("Checklist").Connect(SkinId_node_Checklist.GetPort("NodeInput"));
-						AssetDatabase.AddObjectToAsset(SkinId_node_Checklist, assetPath);
-						variableCount += SkinId_node_Checklist.SetData((CTSkin)Checklist_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					case CheckThing.TypeId.CTGrabbedAgent:
+						CTGrabbedAgentNode CTGrabbedAgent_node_Checklist = graph.AddNode<CTGrabbedAgentNode>();
+						GetPort("Checklist").Connect(CTGrabbedAgent_node_Checklist.GetPort("NodeInput"));
+						AssetDatabase.AddObjectToAsset(CTGrabbedAgent_node_Checklist, assetPath);
+						variableCount += CTGrabbedAgent_node_Checklist.SetData((CTGrabbedAgent)Checklist_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 					break;
-					case CheckThing.TypeId.MoveId:
-						CTMoveNode MoveId_node_Checklist = graph.AddNode<CTMoveNode>();
-						GetPort("Checklist").Connect(MoveId_node_Checklist.GetPort("NodeInput"));
-						AssetDatabase.AddObjectToAsset(MoveId_node_Checklist, assetPath);
-						variableCount += MoveId_node_Checklist.SetData((CTMove)Checklist_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+					case CheckThing.TypeId.CTSkin:
+						CTSkinNode CTSkin_node_Checklist = graph.AddNode<CTSkinNode>();
+						GetPort("Checklist").Connect(CTSkin_node_Checklist.GetPort("NodeInput"));
+						AssetDatabase.AddObjectToAsset(CTSkin_node_Checklist, assetPath);
+						variableCount += CTSkin_node_Checklist.SetData((CTSkin)Checklist_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
+					break;
+					case CheckThing.TypeId.CTMove:
+						CTMoveNode CTMove_node_Checklist = graph.AddNode<CTMoveNode>();
+						GetPort("Checklist").Connect(CTMove_node_Checklist.GetPort("NodeInput"));
+						AssetDatabase.AddObjectToAsset(CTMove_node_Checklist, assetPath);
+						variableCount += CTMove_node_Checklist.SetData((CTMove)Checklist_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 					break;
 				}
 				++variableCount;
@@ -127,59 +135,61 @@ namespace NASB_Moveset_Editor.CheckThings
 		public new CTMultiple GetData()
 		{
 			CTMultiple objToReturn = new CTMultiple();
-			objToReturn.TID = TypeId.MultipleId;
-			objToReturn.Version = Version;
+			objToReturn.TID = TypeId.CTMultiple;
 			objToReturn.Match = Match;
+			objToReturn.Checklist = new CheckThing[GetPort("Checklist").ConnectionCount];
+			int i = 0;
 			foreach(NodePort port in GetPort("Checklist").GetConnections())
 			{
 				CheckThingNode CheckThing_Node = (CheckThingNode)port.node;
 				switch (CheckThing_Node.TID)
 				{
-					case CheckThing.TypeId.MultipleId:
-						CTMultipleNode MultipleId_CheckThing_Node = (CTMultipleNode)port.node;
-						objToReturn.Checklist.Add(MultipleId_CheckThing_Node.GetData());
+					case CheckThing.TypeId.CheckThing:
+						CheckThingNode CheckThing_CheckThing_Node = (CheckThingNode)port.node;
+						objToReturn.Checklist[i] = CheckThing_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.CompareId:
-						CTCompareFloatNode CompareId_CheckThing_Node = (CTCompareFloatNode)port.node;
-						objToReturn.Checklist.Add(CompareId_CheckThing_Node.GetData());
+					case CheckThing.TypeId.CTMultiple:
+						CTMultipleNode CTMultiple_CheckThing_Node = (CTMultipleNode)port.node;
+						objToReturn.Checklist[i] = CTMultiple_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.DoubleTapId:
-						CTDoubleTapIdNode DoubleTapId_CheckThing_Node = (CTDoubleTapIdNode)port.node;
-						objToReturn.Checklist.Add(DoubleTapId_CheckThing_Node.GetData());
+					case CheckThing.TypeId.CTCompareFloat:
+						CTCompareFloatNode CTCompareFloat_CheckThing_Node = (CTCompareFloatNode)port.node;
+						objToReturn.Checklist[i] = CTCompareFloat_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.InputId:
-						CTInputNode InputId_CheckThing_Node = (CTInputNode)port.node;
-						objToReturn.Checklist.Add(InputId_CheckThing_Node.GetData());
+					case CheckThing.TypeId.CTDoubleTap:
+						CTDoubleTapNode CTDoubleTap_CheckThing_Node = (CTDoubleTapNode)port.node;
+						objToReturn.Checklist[i] = CTDoubleTap_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.InputSeriesId:
-						CTInputSeriesNode InputSeriesId_CheckThing_Node = (CTInputSeriesNode)port.node;
-						objToReturn.Checklist.Add(InputSeriesId_CheckThing_Node.GetData());
+					case CheckThing.TypeId.CTInput:
+						CTInputNode CTInput_CheckThing_Node = (CTInputNode)port.node;
+						objToReturn.Checklist[i] = CTInput_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.TechId:
-						CTCheckTechNode TechId_CheckThing_Node = (CTCheckTechNode)port.node;
-						objToReturn.Checklist.Add(TechId_CheckThing_Node.GetData());
+					case CheckThing.TypeId.CTInputSeries:
+						CTInputSeriesNode CTInputSeries_CheckThing_Node = (CTInputSeriesNode)port.node;
+						objToReturn.Checklist[i] = CTInputSeries_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.GrabId:
-						CTGrabIdNode GrabId_CheckThing_Node = (CTGrabIdNode)port.node;
-						objToReturn.Checklist.Add(GrabId_CheckThing_Node.GetData());
+					case CheckThing.TypeId.CTCheckTech:
+						CTCheckTechNode CTCheckTech_CheckThing_Node = (CTCheckTechNode)port.node;
+						objToReturn.Checklist[i] = CTCheckTech_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.GrabAgentId:
-						CTGrabbedAgentNode GrabAgentId_CheckThing_Node = (CTGrabbedAgentNode)port.node;
-						objToReturn.Checklist.Add(GrabAgentId_CheckThing_Node.GetData());
+					case CheckThing.TypeId.CTGrab:
+						CTGrabNode CTGrab_CheckThing_Node = (CTGrabNode)port.node;
+						objToReturn.Checklist[i] = CTGrab_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.SkinId:
-						CTSkinNode SkinId_CheckThing_Node = (CTSkinNode)port.node;
-						objToReturn.Checklist.Add(SkinId_CheckThing_Node.GetData());
+					case CheckThing.TypeId.CTGrabbedAgent:
+						CTGrabbedAgentNode CTGrabbedAgent_CheckThing_Node = (CTGrabbedAgentNode)port.node;
+						objToReturn.Checklist[i] = CTGrabbedAgent_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.MoveId:
-						CTMoveNode MoveId_CheckThing_Node = (CTMoveNode)port.node;
-						objToReturn.Checklist.Add(MoveId_CheckThing_Node.GetData());
+					case CheckThing.TypeId.CTSkin:
+						CTSkinNode CTSkin_CheckThing_Node = (CTSkinNode)port.node;
+						objToReturn.Checklist[i] = CTSkin_CheckThing_Node.GetData();
 					break;
-					case CheckThing.TypeId.BaseIdentifier:
-						CheckThingNode BaseIdentifier_CheckThing_Node = (CheckThingNode)port.node;
-						objToReturn.Checklist.Add(BaseIdentifier_CheckThing_Node.GetData());
+					case CheckThing.TypeId.CTMove:
+						CTMoveNode CTMove_CheckThing_Node = (CTMoveNode)port.node;
+						objToReturn.Checklist[i] = CTMove_CheckThing_Node.GetData();
 					break;
 				}
+				++i;
 			}
 			return objToReturn;
 		}

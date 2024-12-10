@@ -1,4 +1,5 @@
 using NASB_Moveset_Editor;
+using NASB_Moveset_Editor.Misc;
 using NASB_Moveset_Editor.StateActions;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,8 +10,8 @@ using XNodeEditor;
 
 namespace NASB_Moveset_Editor
 {
-    [CustomNodeEditor(typeof(HurtBoneNode))]
-    public class HurtBoneNodeEditor : StateActionNodeEditor
+    [CustomNodeEditor(typeof(HurtSetSetup_HurtBoneNode))]
+    public class HurtBoneNodeEditor : BaseMovesetNodeEditor
     {
         public override void OnBodyGUI()
         {

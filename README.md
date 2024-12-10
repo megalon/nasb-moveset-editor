@@ -63,7 +63,7 @@ You can extract these files from within the game using a tool like [Asset Studio
 
 *These may change with each update, so make sure you have the latest files!*
 
-The movesets for characters are typically named by their ID. For example, `char_rival.txt` for Helga. You can tell if you have a correct file if you open it in a text editor, and it starts with `BulkSerialize` followed by a bunch of numbers on each line.
+The movesets for characters are typically named by their ID. For example, `Moveset_char_rival.txt` for Helga. You can tell if you have a correct file if you open it in a text editor, and it starts with `BulkSerialize` followed by a bunch of numbers on each line.
 
 ![Example BulkSerialized file](https://user-images.githubusercontent.com/27714637/143726738-68d888c8-3fc7-4d78-b1df-c389549f3cef.png)
 
@@ -87,11 +87,11 @@ Import that file if you want to see all of the base moves that each character ca
 
 characterBase isn't the only file that characters inherit moveset information from. Here is the full heiarchy.
 ```
-blastzoneKOBase
-grabbableBase
-launchableBase
-characterBase
-char_x
+Moveset_blastzoneKOBase
+Moveset_grabbableBase
+Moveset_launchableBase
+Moveset_characterBase
+Moveset_char_x
 ```
 ## Create New Moveset Graph
 
@@ -118,6 +118,8 @@ This will convert the collection of graphs in the selected folder back into a Bu
 Bobbie has made a [moveset swapper mod](https://discord.com/channels/842098987875434541/894748073471930388/899027100395257936) in the [NASB Discord.](https://discord.com/invite/nasb)
 
 It looks for a moveset file in `BepInEx/Movesets` that matches the name of the text asset in the game.
+
+It was made using an old version of the game, and currently looks for moveset with the old name format.
 
 For example, Spongebob's moveset would be `char_apple.txt`. You can also use `char_apple_new.txt`
 

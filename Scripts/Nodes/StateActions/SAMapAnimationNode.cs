@@ -4,37 +4,39 @@
 // * https://github.com/megalon/NASB_Parser_to_xNode
 // * 
 // * 
-using NASB_Parser.FloatSources;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using MovesetParser.BulkSerialize;
+using MovesetParser.FloatSources;
 using UnityEngine;
 using UnityEditor;
 using XNode;
 using XNodeEditor;
-using NASB_Parser;
-using NASB_Parser.Jumps;
-using NASB_Parser.CheckThings;
-using NASB_Parser.StateActions;
-using NASB_Parser.ObjectSources;
+using MovesetParser;
+using MovesetParser.CheckThings;
+using MovesetParser.Jumps;
+using MovesetParser.Misc;
+using MovesetParser.StateActions;
+using MovesetParser.ObjectSources;
+using MovesetParser.Unity;
+using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
-using NASB_Moveset_Editor.CheckThings;
+using NASB_Moveset_Editor.Misc;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
-using static NASB_Parser.StateActions.StateAction;
+using NASB_Moveset_Editor.Unity;
+using static MovesetParser.StateActions.StateAction;
 
 namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAMapAnimationNode : StateActionNode
 	{
 		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
-		[Output(connectionType = ConnectionType.Multiple)] public List<SAMapAnimation.MapPoint> Map;
+		[Output(connectionType = ConnectionType.Multiple)] public SAMapAnimation.MapPoint[] MapPoints;
 		
 		protected override void Init()
 		{
 			base.Init();
-			TID = TypeId.MapAnimId;
+			TID = TypeId.SAMapAnimation;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -42,21 +44,21 @@ namespace NASB_Moveset_Editor.StateActions
 			return null;
 		}
 		
-		public int SetData(SAMapAnimation data, MovesetGraph graph, string assetPath, Vector2 nodeDepthXY)
+		public int SetData(SAMapAnimation data, MovesetGraph graph, string assetPath, UnityEngine.Vector2 nodeDepthXY)
 		{
 			name = NodeEditorUtilities.NodeDefaultName(typeof(SAMapAnimation));
 			position.x = nodeDepthXY.x * Consts.NodeXOffset;
 			position.y = nodeDepthXY.y * Consts.NodeYOffset;
 			int variableCount = 0;
 			
-			Map = data.Map;
+			MapPoints = data.MapPoints;
 			
-			foreach (SAMapAnimation.MapPoint Map_item in Map)
+			foreach (SAMapAnimation.MapPoint MapPoints_item in MapPoints)
 			{
-				SAMapAnimation_MapPointNode node_Map = graph.AddNode<SAMapAnimation_MapPointNode>();
-				GetPort("Map").Connect(node_Map.GetPort("NodeInput"));
-				AssetDatabase.AddObjectToAsset(node_Map, assetPath);
-				variableCount += node_Map.SetData(Map_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				SAMapAnimation_MapPointNode node_MapPoints = graph.AddNode<SAMapAnimation_MapPointNode>();
+				GetPort("MapPoints").Connect(node_MapPoints.GetPort("NodeInput"));
+				AssetDatabase.AddObjectToAsset(node_MapPoints, assetPath);
+				variableCount += node_MapPoints.SetData(MapPoints_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 				++variableCount;
 			}
 			return variableCount;
@@ -65,12 +67,14 @@ namespace NASB_Moveset_Editor.StateActions
 		public new SAMapAnimation GetData()
 		{
 			SAMapAnimation objToReturn = new SAMapAnimation();
-			objToReturn.TID = TypeId.MapAnimId;
-			objToReturn.Version = Version;
-			foreach(NodePort port in GetPort("Map").GetConnections())
+			objToReturn.TID = TypeId.SAMapAnimation;
+			objToReturn.MapPoints = new SAMapAnimation.MapPoint[GetPort("MapPoints").ConnectionCount];
+			int i = 0;
+			foreach(NodePort port in GetPort("MapPoints").GetConnections())
 			{
 				SAMapAnimation_MapPointNode SAMapAnimation_MapPoint_Node = (SAMapAnimation_MapPointNode)port.node;
-				objToReturn.Map.Add(SAMapAnimation_MapPoint_Node.GetData());
+				objToReturn.MapPoints[i] = SAMapAnimation_MapPoint_Node.GetData();
+				++i;
 			}
 			return objToReturn;
 		}

@@ -10,41 +10,41 @@ namespace NASB_Moveset_Editor
 {
     public class Utils : MonoBehaviour
     {
-        public static Dictionary<NASB_Parser.FloatSources.FSFunc.FuncWay, FSFuncText> funcTextDict;
+        public static Dictionary<MovesetParser.FloatSources.FSFunc.FuncWay, FSFuncText> funcTextDict;
 
         public static void SetupUtils()
         {
             if (funcTextDict != null) return;
-            funcTextDict = new Dictionary<NASB_Parser.FloatSources.FSFunc.FuncWay, FSFuncText>();
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Abs, new FSFuncText("Input"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Add, new FSFuncText("A", "B"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Sub, new FSFuncText("A", "B"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Div, new FSFuncText("A", "B"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Mult, new FSFuncText("A", "B"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Sin, new FSFuncText("Input Deg"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Cos, new FSFuncText("Input Deg"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Mod, new FSFuncText("A", "B"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Clamp, new FSFuncText("Input", "Min", "Max"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Floor, new FSFuncText("Input"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Ceil, new FSFuncText("Input"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.MoveTo, new FSFuncText("Current", "Target", "Max Delta", "Mathf.MoveTowards(Current, Target, Max_Delta * Frames)"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.MoveToAng, new FSFuncText("Current", "Target", "Max Delta", "Mathf.MoveTowardsAngle(Current, Target, Max_Delta * Frames)"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.MoveToF, new FSFuncText("Current", "Target", "Max Delta", "Mathf.MoveTowards(Current, Target, Max_Delta * (Frames * Time_Per_Frame))"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.MoveToAngF, new FSFuncText("Current", "Target", "Max Delta", "Mathf.MoveTowardsAngle(Current, Target, Max_Delta * (Frames * Time_Per_Frame))"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Sign, new FSFuncText("Input"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Lerp, new FSFuncText("A", "B", "T"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.InvLerp, new FSFuncText("A", "B", "T"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Repeat, new FSFuncText("Input", "Length"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Pow, new FSFuncText("Input", "Power"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Sqrt, new FSFuncText("Input"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Log, new FSFuncText("Input"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Log10, new FSFuncText("Input"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Atan, new FSFuncText("Input"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Atan2, new FSFuncText("Y", "X"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.RoundToInt, new FSFuncText("Input"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Max, new FSFuncText("A", "B"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Min, new FSFuncText("A", "B"));
-            funcTextDict.Add(NASB_Parser.FloatSources.FSFunc.FuncWay.Pi, new FSFuncText());
+            funcTextDict = new Dictionary<MovesetParser.FloatSources.FSFunc.FuncWay, FSFuncText>();
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Abs, new FSFuncText("Input"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Add, new FSFuncText("A", "B"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Sub, new FSFuncText("A", "B"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Div, new FSFuncText("A", "B"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Mult, new FSFuncText("A", "B"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Sin, new FSFuncText("Input Deg"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Cos, new FSFuncText("Input Deg"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Mod, new FSFuncText("A", "B"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Clamp, new FSFuncText("Input", "Min", "Max"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Floor, new FSFuncText("Input"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Ceil, new FSFuncText("Input"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.MoveTo, new FSFuncText("Current", "Target", "Max Delta", "Mathf.MoveTowards(Current, Target, Max_Delta * Frames)"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.MoveToAng, new FSFuncText("Current", "Target", "Max Delta", "Mathf.MoveTowardsAngle(Current, Target, Max_Delta * Frames)"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.MoveToF, new FSFuncText("Current", "Target", "Max Delta", "Mathf.MoveTowards(Current, Target, Max_Delta * (Frames * Time_Per_Frame))"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.MoveToAngF, new FSFuncText("Current", "Target", "Max Delta", "Mathf.MoveTowardsAngle(Current, Target, Max_Delta * (Frames * Time_Per_Frame))"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Sign, new FSFuncText("Input"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Lerp, new FSFuncText("A", "B", "T"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.InvLerp, new FSFuncText("A", "B", "T"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Repeat, new FSFuncText("Input", "Length"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Pow, new FSFuncText("Input", "Power"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Sqrt, new FSFuncText("Input"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Log, new FSFuncText("Input"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Log10, new FSFuncText("Input"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Atan, new FSFuncText("Input"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Atan2, new FSFuncText("Y", "X"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.RoundToInt, new FSFuncText("Input"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Max, new FSFuncText("A", "B"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Min, new FSFuncText("A", "B"));
+            funcTextDict.Add(MovesetParser.FloatSources.FSFunc.FuncWay.Pi, new FSFuncText());
         }
 
         public static string GetGraphsDirPath()
@@ -112,9 +112,19 @@ namespace NASB_Moveset_Editor
         public const float NodeClusterYSpacing = 50f;
         public const float NodeVarHeight = 20f;
         public const int MaxDisplayNameLength = 12;
-        public static List<string> NodesToIgnore = new List<string> { "BaseMovesetNode", "SerialMovesetNode", "CheckThingNode", "FloatSourceNode", "JumpNode", "ObjectSourceNode", "StateActionNode" };
+        public static List<string> NodesToIgnore = new List<string> { 
+            "BaseMovesetNode",
+            "MovesetNode",
+            "CheckThingNode",
+            "FloatSourceNode",
+            "JumpNode",
+            "ObjectSourceNode",
+            "StateActionNode",
+            "Vector2Node",
+            "Vector3Node"
+        };
 
-        public const string VERSION = "0.3.0";
+        public const string VERSION = "0.4.0";
         public const string PROJECT_NAME = "NASB Moveset Editor";
         public const string GRAPH_FOLDER_NAME = "Moveset Graphs";
 

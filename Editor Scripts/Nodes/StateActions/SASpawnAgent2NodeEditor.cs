@@ -22,15 +22,19 @@ namespace NASB_Moveset_Editor
             DisplayStringProp(iterator.serializedObject.FindProperty("Id"));
             DisplayStringProp(iterator.serializedObject.FindProperty("Bone"));
 
-            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("LocalOffset"), true);
-            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("WorldOffset"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("LocalOffsetX"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("LocalOffsetY"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("LocalOffsetZ"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("WorldOffsetX"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("WorldOffsetY"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("WorldOffsetZ"), true);
 
             SerializedProperty spawnMovementBool = iterator.serializedObject.FindProperty("CustomSpawnMovement");
             spawnMovementBool.boolValue = EditorGUILayout.ToggleLeft(spawnMovementBool.displayName, spawnMovementBool.boolValue);
 
             if (spawnMovementBool.boolValue)
             {
-                NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("Movements"), true);
+                NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("CustomSpawnMovements"), true);
             }
 
             DisplayStringProp(iterator.serializedObject.FindProperty("SpawnedAgentDataId"));
@@ -38,7 +42,6 @@ namespace NASB_Moveset_Editor
             NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("SpawnedAgentDataSetValue"), true);
             NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("ResultOrderAdded"), true);
 
-            
             // Contextual set options
             SerializedProperty setPlayerIndex = iterator.serializedObject.FindProperty("SetPlayerIndex");
             SerializedProperty setAttackTeam = iterator.serializedObject.FindProperty("SetAttackTeam");
@@ -65,11 +68,10 @@ namespace NASB_Moveset_Editor
                 NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("RedirectY"), true);
             }
 
-
             SerializedProperty exactSpawn = iterator.serializedObject.FindProperty("ExactSpawn");
             exactSpawn.boolValue = EditorGUILayout.ToggleLeft(exactSpawn.displayName, exactSpawn.boolValue);
 
-            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("AddedSpawns"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("AddedSpawnedDatas"), true);
 
             serializedObject.ApplyModifiedProperties();
         }

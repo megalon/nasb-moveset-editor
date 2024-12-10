@@ -1,13 +1,13 @@
 using NASB_Moveset_Editor.CheckThings;
-using NASB_Parser.StateActions;
+using MovesetParser.StateActions;
 using System.Linq;
 using UnityEditor;
 using XNodeEditor;
 
 namespace NASB_Moveset_Editor
 {
-    [CustomNodeEditor(typeof(CTGrabIdNode))]
-    public class CTGrabIdNodeEditor : CheckThingNodeEditor
+    [CustomNodeEditor(typeof(CTGrabNode))]
+    public class CTGrabNodeEditor : CheckThingNodeEditor
     {
         public override void OnBodyGUI()
         {

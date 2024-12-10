@@ -1,4 +1,4 @@
-using NASB_Parser;
+using MovesetParser;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -68,12 +68,12 @@ namespace NASB_Moveset_Editor
 
         private void CreateGraph()
         {
-            SerialMoveset data = new SerialMoveset();
+            Moveset data = new Moveset();
 
             IdState idState = new IdState();
             idState.Id = stateId;
 
-            data.States.Add(idState);
+            data.States = new IdState[] { idState };
 
             List<MovesetGraph> graphs = new List<MovesetGraph>();
 

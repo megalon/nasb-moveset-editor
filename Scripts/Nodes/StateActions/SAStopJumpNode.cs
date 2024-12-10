@@ -4,25 +4,27 @@
 // * https://github.com/megalon/NASB_Parser_to_xNode
 // * 
 // * 
-using System;
-using System.Collections.Generic;
-using System.Text;
+using MovesetParser.BulkSerialize;
 using UnityEngine;
 using UnityEditor;
 using XNode;
 using XNodeEditor;
-using NASB_Parser;
-using NASB_Parser.FloatSources;
-using NASB_Parser.Jumps;
-using NASB_Parser.CheckThings;
-using NASB_Parser.StateActions;
-using NASB_Parser.ObjectSources;
+using MovesetParser;
+using MovesetParser.CheckThings;
+using MovesetParser.FloatSources;
+using MovesetParser.Jumps;
+using MovesetParser.Misc;
+using MovesetParser.StateActions;
+using MovesetParser.ObjectSources;
+using MovesetParser.Unity;
+using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
-using NASB_Moveset_Editor.CheckThings;
+using NASB_Moveset_Editor.Misc;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
-using static NASB_Parser.StateActions.StateAction;
+using NASB_Moveset_Editor.Unity;
+using static MovesetParser.StateActions.StateAction;
 
 namespace NASB_Moveset_Editor.StateActions
 {
@@ -31,11 +33,12 @@ namespace NASB_Moveset_Editor.StateActions
 		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
 		public bool StopAll;
 		public string JumpId;
+		public string[] JumpIds;
 		
 		protected override void Init()
 		{
 			base.Init();
-			TID = TypeId.StopJumpId;
+			TID = TypeId.SAStopJump;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -43,7 +46,7 @@ namespace NASB_Moveset_Editor.StateActions
 			return null;
 		}
 		
-		public int SetData(SAStopJump data, MovesetGraph graph, string assetPath, Vector2 nodeDepthXY)
+		public int SetData(SAStopJump data, MovesetGraph graph, string assetPath, UnityEngine.Vector2 nodeDepthXY)
 		{
 			name = NodeEditorUtilities.NodeDefaultName(typeof(SAStopJump));
 			position.x = nodeDepthXY.x * Consts.NodeXOffset;
@@ -52,16 +55,17 @@ namespace NASB_Moveset_Editor.StateActions
 			
 			StopAll = data.StopAll;
 			JumpId = data.JumpId;
+			JumpIds = data.JumpIds;
 			return variableCount;
 		}
 		
 		public new SAStopJump GetData()
 		{
 			SAStopJump objToReturn = new SAStopJump();
-			objToReturn.TID = TypeId.StopJumpId;
-			objToReturn.Version = Version;
+			objToReturn.TID = TypeId.SAStopJump;
 			objToReturn.StopAll = StopAll;
 			objToReturn.JumpId = JumpId;
+			objToReturn.JumpIds = JumpIds;
 			return objToReturn;
 		}
 	}

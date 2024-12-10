@@ -4,25 +4,27 @@
 // * https://github.com/megalon/NASB_Parser_to_xNode
 // * 
 // * 
-using System;
-using System.Collections.Generic;
-using System.Text;
+using MovesetParser.BulkSerialize;
 using UnityEngine;
 using UnityEditor;
 using XNode;
 using XNodeEditor;
-using NASB_Parser;
-using NASB_Parser.FloatSources;
-using NASB_Parser.Jumps;
-using NASB_Parser.CheckThings;
-using NASB_Parser.StateActions;
-using NASB_Parser.ObjectSources;
+using MovesetParser;
+using MovesetParser.CheckThings;
+using MovesetParser.FloatSources;
+using MovesetParser.Jumps;
+using MovesetParser.Misc;
+using MovesetParser.StateActions;
+using MovesetParser.ObjectSources;
+using MovesetParser.Unity;
+using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
-using NASB_Moveset_Editor.CheckThings;
+using NASB_Moveset_Editor.Misc;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
-using static NASB_Parser.CheckThings.CheckThing;
+using NASB_Moveset_Editor.Unity;
+using static MovesetParser.CheckThings.CheckThing;
 
 namespace NASB_Moveset_Editor.CheckThings
 {
@@ -30,13 +32,14 @@ namespace NASB_Moveset_Editor.CheckThings
 	{
 		[Input(connectionType = ConnectionType.Override)] public CheckThing NodeInput;
 		public string MovesetId;
+		public string[] Extras;
 		public bool Previous;
-		public List<string> Extras;
+		public bool Not;
 		
 		protected override void Init()
 		{
 			base.Init();
-			TID = TypeId.MoveId;
+			TID = TypeId.CTMove;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -44,7 +47,7 @@ namespace NASB_Moveset_Editor.CheckThings
 			return null;
 		}
 		
-		public int SetData(CTMove data, MovesetGraph graph, string assetPath, Vector2 nodeDepthXY)
+		public int SetData(CTMove data, MovesetGraph graph, string assetPath, UnityEngine.Vector2 nodeDepthXY)
 		{
 			name = NodeEditorUtilities.NodeDefaultName(typeof(CTMove));
 			position.x = nodeDepthXY.x * Consts.NodeXOffset;
@@ -52,19 +55,20 @@ namespace NASB_Moveset_Editor.CheckThings
 			int variableCount = 0;
 			
 			MovesetId = data.MovesetId;
-			Previous = data.Previous;
 			Extras = data.Extras;
+			Previous = data.Previous;
+			Not = data.Not;
 			return variableCount;
 		}
 		
 		public new CTMove GetData()
 		{
 			CTMove objToReturn = new CTMove();
-			objToReturn.TID = TypeId.MoveId;
-			objToReturn.Version = Version;
+			objToReturn.TID = TypeId.CTMove;
 			objToReturn.MovesetId = MovesetId;
-			objToReturn.Previous = Previous;
 			objToReturn.Extras = Extras;
+			objToReturn.Previous = Previous;
+			objToReturn.Not = Not;
 			return objToReturn;
 		}
 	}

@@ -20,30 +20,36 @@ namespace NASB_Moveset_Editor
             NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("NodeInput"), true);
             NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("Hitbox"), true);
 
-            //   ForceZ0 is ignored as of game update v21.5.0
-            //   and NASB Parser for Unity v1.2.0
-            // 
-            // SerializedProperty forceZ0Bool = iterator.serializedObject.FindProperty("ForceZ0");
-            // forceZ0Bool.boolValue = EditorGUILayout.ToggleLeft(forceZ0Bool.displayName, forceZ0Bool.boolValue);
-
-            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("Radius"), true);
-            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("LocalOffset"), true);
-            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("WorldOffset"), true);
-
             DisplayStringProp(iterator.serializedObject.FindProperty("Prop"));
             DisplayStringProp(iterator.serializedObject.FindProperty("Bone"));
+
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("Radius"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("LocalOffsetX"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("LocalOffsetY"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("LocalOffsetZ"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("WorldOffsetX"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("WorldOffsetY"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("WorldOffsetZ"), true);
+
             DisplayStringProp(iterator.serializedObject.FindProperty("FxId"));
             DisplayStringProp(iterator.serializedObject.FindProperty("SfxId"));
+
+            SerializedProperty inactiveBool = iterator.serializedObject.FindProperty("Inactive");
+            inactiveBool.boolValue = EditorGUILayout.ToggleLeft(inactiveBool.displayName, inactiveBool.boolValue);
 
             SerializedProperty secondTrackBool = iterator.serializedObject.FindProperty("SecondTrack");
             secondTrackBool.boolValue = EditorGUILayout.ToggleLeft(secondTrackBool.displayName, secondTrackBool.boolValue);
 
             if (secondTrackBool.boolValue)
             {
-                DisplayStringProp(iterator.serializedObject.FindProperty("Bone2"));
+                DisplayStringProp(iterator.serializedObject.FindProperty("Bone2nd"));
 
-                NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("LocalOffset2"), true);
-                NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("WorldOffset2"), true);
+                NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("LocalOffset2ndX"), true);
+                NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("LocalOffset2ndY"), true);
+                NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("LocalOffset2ndZ"), true);
+                NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("WorldOffset2ndX"), true);
+                NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("WorldOffset2ndY"), true);
+                NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("WorldOffset2ndZ"), true);
             }
 
             // Iterate through dynamic ports and draw them in the order in which they are serialized

@@ -4,25 +4,27 @@
 // * https://github.com/megalon/NASB_Parser_to_xNode
 // * 
 // * 
-using NASB_Parser.StateActions;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using MovesetParser.BulkSerialize;
+using MovesetParser.Misc;
 using UnityEngine;
 using UnityEditor;
 using XNode;
 using XNodeEditor;
-using NASB_Parser;
-using NASB_Parser.FloatSources;
-using NASB_Parser.Jumps;
-using NASB_Parser.CheckThings;
-using NASB_Parser.ObjectSources;
+using MovesetParser;
+using MovesetParser.CheckThings;
+using MovesetParser.FloatSources;
+using MovesetParser.Jumps;
+using MovesetParser.StateActions;
+using MovesetParser.ObjectSources;
+using MovesetParser.Unity;
+using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
-using NASB_Moveset_Editor.CheckThings;
+using NASB_Moveset_Editor.Misc;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
-using static NASB_Parser.CheckThings.CheckThing;
+using NASB_Moveset_Editor.Unity;
+using static MovesetParser.CheckThings.CheckThing;
 
 namespace NASB_Moveset_Editor.CheckThings
 {
@@ -36,7 +38,7 @@ namespace NASB_Moveset_Editor.CheckThings
 		protected override void Init()
 		{
 			base.Init();
-			TID = TypeId.InputId;
+			TID = TypeId.CTInput;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -44,7 +46,7 @@ namespace NASB_Moveset_Editor.CheckThings
 			return null;
 		}
 		
-		public int SetData(CTInput data, MovesetGraph graph, string assetPath, Vector2 nodeDepthXY)
+		public int SetData(CTInput data, MovesetGraph graph, string assetPath, UnityEngine.Vector2 nodeDepthXY)
 		{
 			name = NodeEditorUtilities.NodeDefaultName(typeof(CTInput));
 			position.x = nodeDepthXY.x * Consts.NodeXOffset;
@@ -56,7 +58,7 @@ namespace NASB_Moveset_Editor.CheckThings
 			InputValidatorNode node_InputValidator = graph.AddNode<InputValidatorNode>();
 			GetPort("InputValidator").Connect(node_InputValidator.GetPort("NodeInput"));
 			AssetDatabase.AddObjectToAsset(node_InputValidator, assetPath);
-			variableCount += node_InputValidator.SetData(InputValidator, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+			variableCount += node_InputValidator.SetData(InputValidator, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 			++variableCount;
 			
 			Frames = data.Frames;
@@ -67,8 +69,7 @@ namespace NASB_Moveset_Editor.CheckThings
 		public new CTInput GetData()
 		{
 			CTInput objToReturn = new CTInput();
-			objToReturn.TID = TypeId.InputId;
-			objToReturn.Version = Version;
+			objToReturn.TID = TypeId.CTInput;
 			if (GetPort("InputValidator").ConnectionCount > 0)
 			{
 				InputValidatorNode InputValidator_Node = (InputValidatorNode)GetPort("InputValidator").GetConnection(0).node;

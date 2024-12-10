@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEditor;
-using NASB_Parser;
+using MovesetParser;
 using System.IO;
 using System;
 using System.Collections.Generic;
 using XNode;
 using XNodeEditor;
 using NASB_Moveset_Editor.StateActions;
+using System.Linq;
 
 namespace NASB_Moveset_Editor
 {
@@ -20,10 +21,7 @@ namespace NASB_Moveset_Editor
 
             EditorPrefs.SetString(Consts.KEY_IMPORT_PATH, Path.GetDirectoryName(filePath));
 
-            BulkSerializeReader ser;
-            using (var fsread = File.OpenRead(filePath))
-                ser = new BulkSerializeReader(fsread);
-            var data = new SerialMoveset(ser);
+            Moveset data = Moveset.CreateFromFile(filePath);
 
             var textAssetName = Path.GetFileNameWithoutExtension(filePath);
 
@@ -44,8 +42,7 @@ namespace NASB_Moveset_Editor
 
             EditorPrefs.SetString(Consts.KEY_EXPORT_PATH, Path.GetDirectoryName(outputFilePath));
 
-            SerialMoveset serialMoveset = new SerialMoveset();
-
+            List<IdState> idStates = new List<IdState>();
 
             string[] graphPaths = Directory.GetFiles(graphDir);
             foreach (string graphPath in graphPaths)
@@ -63,9 +60,9 @@ namespace NASB_Moveset_Editor
                     IdState tempIdState = idStateNode.GetData();
 
                     // Sort timeline by start frame
-                    tempIdState.State.Timeline.Sort((x, y) => x.AtFrame.CompareTo(y.AtFrame));
+                    Array.Sort(tempIdState.State.Timeline, (x, y) => x.AtFrame.CompareTo(y.AtFrame));
 
-                    serialMoveset.States.Add(tempIdState);
+                    idStates.Add(tempIdState);
                 }
                 catch (Exception e)
                 {
@@ -79,17 +76,18 @@ namespace NASB_Moveset_Editor
                 }
             }
 
-            Logger.LogInfo($"Built SerialMoveset for {graphName}!");
+            Moveset moveset = new Moveset();
+            moveset.States = idStates.ToArray();
+
+            Logger.LogInfo($"Built Moveset for {graphName}!");
 
             try
             {
-                var writer = new BulkSerializeWriter();
-                serialMoveset.Write(writer);
-                using var fs = File.OpenWrite(outputFilePath);
-                using var sr = new StreamWriter(fs);
+                var writer = new MovesetParser.BulkSerialize.Writer();
 
                 Logger.LogInfo($"Writing file...\n{outputFilePath}!");
-                writer.Serialize(sr);
+                moveset.WriteSerial(writer);
+                File.WriteAllText(outputFilePath, writer.GetString());
                 Logger.LogInfo($"Finished writing file!\n{outputFilePath}!");
             }
             catch (Exception e)
@@ -104,7 +102,7 @@ namespace NASB_Moveset_Editor
             EditorUtility.DisplayDialog(Consts.PROJECT_NAME, $"Export complete!\n\nSaved to \"{outputFilePath}\"", "OK");
         }
 
-        public static List<MovesetGraph> GenerateGraphs(SerialMoveset data, string itemName)
+        public static List<MovesetGraph> GenerateGraphs(Moveset data, string itemName)
         {
             string graphsFolderPath = Utils.GetGraphsDirPath();
             if (!Directory.Exists(graphsFolderPath))
@@ -130,7 +128,7 @@ namespace NASB_Moveset_Editor
             return CreateGraphsForAllStates(data, updatedItemName, folderPath);
         }
 
-        public static List<MovesetGraph> CreateGraphsForAllStates(SerialMoveset data, string updatedItemName, string assetFolderPath)
+        public static List<MovesetGraph> CreateGraphsForAllStates(Moveset data, string updatedItemName, string assetFolderPath)
         {
             List<MovesetGraph> movesetGraphs = new List<MovesetGraph>();
             // Split the moveset apart by state
@@ -147,7 +145,7 @@ namespace NASB_Moveset_Editor
             return movesetGraphs;
         }
 
-        private static MovesetGraph CreateOneStateGraph(IdState state, string textassetName, string assetFolderPath, SerialMoveset data, int i)
+        private static MovesetGraph CreateOneStateGraph(IdState state, string textassetName, string assetFolderPath, Moveset data, int i)
         {
             // Check if graph already exists
             string filePath = Path.Combine(Utils.GetGraphsDirPath(), textassetName, $"{state.Id}.asset");
@@ -160,7 +158,7 @@ namespace NASB_Moveset_Editor
             }
 
             if (data != null)
-                EditorUtility.DisplayProgressBar($"Importing {textassetName}...", $"Loading {state.Id}", i / data.States.Count);
+                EditorUtility.DisplayProgressBar($"Importing {textassetName}...", $"Loading {state.Id}", i / data.States.Length);
             else
                 EditorUtility.DisplayProgressBar($"Importing {textassetName}...", $"Loading {state.Id}", 0);
 

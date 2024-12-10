@@ -23,18 +23,22 @@ namespace NASB_Moveset_Editor
             DisplayStringProp(iterator.serializedObject.FindProperty("Id"));
             DisplayStringProp(iterator.serializedObject.FindProperty("Bone"));
 
-            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("LocalOffset"), true);
-            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("WorldOffset"), true);
-            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("MessageObject"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("LocalOffsetX"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("LocalOffsetY"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("LocalOffsetZ"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("WorldOffsetX"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("WorldOffsetY"), true);
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("WorldOffsetZ"), true);
 
             SerializedProperty spawnMovementBool = iterator.serializedObject.FindProperty("CustomSpawnMovement");
             spawnMovementBool.boolValue = EditorGUILayout.ToggleLeft(spawnMovementBool.displayName, spawnMovementBool.boolValue);
 
             if (spawnMovementBool.boolValue)
             {
-                NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("Movements"), true);
+                NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("CustomSpawnMovements"), true);
             }
 
+            NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("GuaMessageObject"), true);
             NodeEditorGUILayout.PropertyField(iterator.serializedObject.FindProperty("ResultOrderAdded"), true);
 
 

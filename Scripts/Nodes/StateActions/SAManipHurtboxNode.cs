@@ -4,38 +4,39 @@
 // * https://github.com/megalon/NASB_Parser_to_xNode
 // * 
 // * 
-using NASB_Parser.FloatSources;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using MovesetParser.BulkSerialize;
+using MovesetParser.FloatSources;
+using MovesetParser.Misc;
 using UnityEngine;
 using UnityEditor;
 using XNode;
 using XNodeEditor;
-using NASB_Parser;
-using static NASB_Parser.StateActions.SAManipHurtbox;
-using NASB_Parser.Jumps;
-using NASB_Parser.CheckThings;
-using NASB_Parser.StateActions;
-using NASB_Parser.ObjectSources;
+using MovesetParser;
+using MovesetParser.CheckThings;
+using MovesetParser.Jumps;
+using MovesetParser.StateActions;
+using MovesetParser.ObjectSources;
+using MovesetParser.Unity;
+using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
-using NASB_Moveset_Editor.CheckThings;
+using NASB_Moveset_Editor.Misc;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
-using static NASB_Parser.StateActions.StateAction;
+using NASB_Moveset_Editor.Unity;
+using static MovesetParser.StateActions.StateAction;
 
 namespace NASB_Moveset_Editor.StateActions
 {
-	public class SAManipHurtboxNode : StateActionNode
+	public class SAManipHurtBoxNode : StateActionNode
 	{
 		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
-		[Output(connectionType = ConnectionType.Multiple)] public List<SAManipHurtbox.HBM> Manips;
+		[Output(connectionType = ConnectionType.Multiple)] public SAManipHurtBox.HBM[] Manips;
 		
 		protected override void Init()
 		{
 			base.Init();
-			TID = TypeId.ManipHurtboxId;
+			TID = TypeId.SAManipHurtBox;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -43,35 +44,37 @@ namespace NASB_Moveset_Editor.StateActions
 			return null;
 		}
 		
-		public int SetData(SAManipHurtbox data, MovesetGraph graph, string assetPath, Vector2 nodeDepthXY)
+		public int SetData(SAManipHurtBox data, MovesetGraph graph, string assetPath, UnityEngine.Vector2 nodeDepthXY)
 		{
-			name = NodeEditorUtilities.NodeDefaultName(typeof(SAManipHurtbox));
+			name = NodeEditorUtilities.NodeDefaultName(typeof(SAManipHurtBox));
 			position.x = nodeDepthXY.x * Consts.NodeXOffset;
 			position.y = nodeDepthXY.y * Consts.NodeYOffset;
 			int variableCount = 0;
 			
 			Manips = data.Manips;
 			
-			foreach (SAManipHurtbox.HBM Manips_item in Manips)
+			foreach (SAManipHurtBox.HBM Manips_item in Manips)
 			{
-				SAManipHurtbox_HBMNode node_Manips = graph.AddNode<SAManipHurtbox_HBMNode>();
+				SAManipHurtBox_HBMNode node_Manips = graph.AddNode<SAManipHurtBox_HBMNode>();
 				GetPort("Manips").Connect(node_Manips.GetPort("NodeInput"));
 				AssetDatabase.AddObjectToAsset(node_Manips, assetPath);
-				variableCount += node_Manips.SetData(Manips_item, graph, assetPath, nodeDepthXY + new Vector2(1, variableCount));
+				variableCount += node_Manips.SetData(Manips_item, graph, assetPath, nodeDepthXY + new UnityEngine.Vector2(1, variableCount));
 				++variableCount;
 			}
 			return variableCount;
 		}
 		
-		public new SAManipHurtbox GetData()
+		public new SAManipHurtBox GetData()
 		{
-			SAManipHurtbox objToReturn = new SAManipHurtbox();
-			objToReturn.TID = TypeId.ManipHurtboxId;
-			objToReturn.Version = Version;
+			SAManipHurtBox objToReturn = new SAManipHurtBox();
+			objToReturn.TID = TypeId.SAManipHurtBox;
+			objToReturn.Manips = new SAManipHurtBox.HBM[GetPort("Manips").ConnectionCount];
+			int i = 0;
 			foreach(NodePort port in GetPort("Manips").GetConnections())
 			{
-				SAManipHurtbox_HBMNode SAManipHurtbox_HBM_Node = (SAManipHurtbox_HBMNode)port.node;
-				objToReturn.Manips.Add(SAManipHurtbox_HBM_Node.GetData());
+				SAManipHurtBox_HBMNode SAManipHurtBox_HBM_Node = (SAManipHurtBox_HBMNode)port.node;
+				objToReturn.Manips[i] = SAManipHurtBox_HBM_Node.GetData();
+				++i;
 			}
 			return objToReturn;
 		}

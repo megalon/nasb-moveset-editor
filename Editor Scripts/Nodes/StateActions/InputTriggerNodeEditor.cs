@@ -1,10 +1,12 @@
 using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.StateActions;
-using NASB_Parser.StateActions;
+using MovesetParser.StateActions;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using XNodeEditor;
+using NASB_Moveset_Editor.Misc;
+using MovesetParser.Misc;
 
 namespace NASB_Moveset_Editor
 {

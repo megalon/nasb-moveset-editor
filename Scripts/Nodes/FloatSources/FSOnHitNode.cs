@@ -4,37 +4,38 @@
 // * https://github.com/megalon/NASB_Parser_to_xNode
 // * 
 // * 
-using System;
-using System.Collections.Generic;
-using System.Text;
+using MovesetParser.BulkSerialize;
 using UnityEngine;
 using UnityEditor;
 using XNode;
 using XNodeEditor;
-using NASB_Parser;
-using NASB_Parser.FloatSources;
-using NASB_Parser.Jumps;
-using NASB_Parser.CheckThings;
-using NASB_Parser.StateActions;
-using NASB_Parser.ObjectSources;
+using MovesetParser;
+using MovesetParser.CheckThings;
+using MovesetParser.FloatSources;
+using MovesetParser.Jumps;
+using MovesetParser.Misc;
+using MovesetParser.StateActions;
+using MovesetParser.ObjectSources;
+using MovesetParser.Unity;
+using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
-using NASB_Moveset_Editor.CheckThings;
+using NASB_Moveset_Editor.Misc;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
-using static NASB_Parser.FloatSources.FloatSource;
+using NASB_Moveset_Editor.Unity;
+using static MovesetParser.FloatSources.FloatSource;
 
 namespace NASB_Moveset_Editor.FloatSources
 {
 	public class FSOnHitNode : FloatSourceNode
 	{
-		[Input(connectionType = ConnectionType.Override)] public FloatSource NodeInput;
-		public NASB_Parser.FloatSources.FSOnHit.OnHitParam Param;
+		public MovesetParser.FloatSources.FSOnHit.OnHitAttribute Attribute;
 		
 		protected override void Init()
 		{
 			base.Init();
-			TID = TypeId.OnHitId;
+			TID = TypeId.FSOnHit;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -42,23 +43,22 @@ namespace NASB_Moveset_Editor.FloatSources
 			return null;
 		}
 		
-		public int SetData(FSOnHit data, MovesetGraph graph, string assetPath, Vector2 nodeDepthXY)
+		public int SetData(FSOnHit data, MovesetGraph graph, string assetPath, UnityEngine.Vector2 nodeDepthXY)
 		{
 			name = NodeEditorUtilities.NodeDefaultName(typeof(FSOnHit));
 			position.x = nodeDepthXY.x * Consts.NodeXOffset;
 			position.y = nodeDepthXY.y * Consts.NodeYOffset;
 			int variableCount = 0;
 			
-			Param = data.Param;
+			Attribute = data.Attribute;
 			return variableCount;
 		}
 		
 		public new FSOnHit GetData()
 		{
 			FSOnHit objToReturn = new FSOnHit();
-			objToReturn.TID = TypeId.OnHitId;
-			objToReturn.Version = Version;
-			objToReturn.Param = Param;
+			objToReturn.TID = TypeId.FSOnHit;
+			objToReturn.Attribute = Attribute;
 			return objToReturn;
 		}
 	}

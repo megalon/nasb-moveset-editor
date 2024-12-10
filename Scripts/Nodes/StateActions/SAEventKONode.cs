@@ -4,37 +4,39 @@
 // * https://github.com/megalon/NASB_Parser_to_xNode
 // * 
 // * 
-using System;
-using System.Collections.Generic;
-using System.Text;
+using MovesetParser.BulkSerialize;
 using UnityEngine;
 using UnityEditor;
 using XNode;
 using XNodeEditor;
-using NASB_Parser;
-using NASB_Parser.FloatSources;
-using NASB_Parser.Jumps;
-using NASB_Parser.CheckThings;
-using NASB_Parser.StateActions;
-using NASB_Parser.ObjectSources;
+using MovesetParser;
+using MovesetParser.CheckThings;
+using MovesetParser.FloatSources;
+using MovesetParser.Jumps;
+using MovesetParser.Misc;
+using MovesetParser.StateActions;
+using MovesetParser.ObjectSources;
+using MovesetParser.Unity;
+using NASB_Moveset_Editor.CheckThings;
 using NASB_Moveset_Editor.FloatSources;
 using NASB_Moveset_Editor.Jumps;
-using NASB_Moveset_Editor.CheckThings;
+using NASB_Moveset_Editor.Misc;
 using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
-using static NASB_Parser.StateActions.StateAction;
+using NASB_Moveset_Editor.Unity;
+using static MovesetParser.StateActions.StateAction;
 
 namespace NASB_Moveset_Editor.StateActions
 {
 	public class SAEventKONode : StateActionNode
 	{
 		[Input(connectionType = ConnectionType.Override)] public StateAction NodeInput;
-		public NASB_Parser.StateActions.SAEventKO.KOType KO;
+		public MovesetParser.StateActions.SAEventKO.KO KoType;
 		
 		protected override void Init()
 		{
 			base.Init();
-			TID = TypeId.EventKOId;
+			TID = TypeId.SAEventKO;
 		}
 		
 		public override object GetValue(NodePort port)
@@ -42,23 +44,22 @@ namespace NASB_Moveset_Editor.StateActions
 			return null;
 		}
 		
-		public int SetData(SAEventKO data, MovesetGraph graph, string assetPath, Vector2 nodeDepthXY)
+		public int SetData(SAEventKO data, MovesetGraph graph, string assetPath, UnityEngine.Vector2 nodeDepthXY)
 		{
 			name = NodeEditorUtilities.NodeDefaultName(typeof(SAEventKO));
 			position.x = nodeDepthXY.x * Consts.NodeXOffset;
 			position.y = nodeDepthXY.y * Consts.NodeYOffset;
 			int variableCount = 0;
 			
-			KO = data.KO;
+			KoType = data.KoType;
 			return variableCount;
 		}
 		
 		public new SAEventKO GetData()
 		{
 			SAEventKO objToReturn = new SAEventKO();
-			objToReturn.TID = TypeId.EventKOId;
-			objToReturn.Version = Version;
-			objToReturn.KO = KO;
+			objToReturn.TID = TypeId.SAEventKO;
+			objToReturn.KoType = KoType;
 			return objToReturn;
 		}
 	}
