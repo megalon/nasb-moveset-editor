@@ -123,7 +123,7 @@ namespace NASB_Moveset_Editor
             "Vector3Node"
         };
 
-        public const string VERSION = "0.4.0";
+        public const string VERSION = "0.4.1";
         public const string PROJECT_NAME = "NASB Moveset Editor";
         public const string GRAPH_FOLDER_NAME = "Moveset Graphs";
 
