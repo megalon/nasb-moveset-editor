@@ -33,7 +33,7 @@ namespace NASB_Moveset_Editor.Misc
 		[Input(connectionType = ConnectionType.Override)] public AnimConfig NodeInput;
 		public float Rate;
 		public float Weight;
-		public WrapMode WrapMode;
+		public MovesetParser.Misc.WrapMode WrapMode;
 		public bool ClingToFrames;
 		
 		protected override void Init()
