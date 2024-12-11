@@ -25,6 +25,7 @@ using NASB_Moveset_Editor.StateActions;
 using NASB_Moveset_Editor.ObjectSources;
 using NASB_Moveset_Editor.Unity;
 using static MovesetParser.FloatSources.FloatSource;
+using static MovesetParser.FloatSources.FSMovement;
 
 namespace NASB_Moveset_Editor.FloatSources
 {
