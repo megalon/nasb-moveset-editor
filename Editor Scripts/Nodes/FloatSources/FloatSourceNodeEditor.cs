@@ -24,6 +24,15 @@ namespace NASB_Moveset_Editor
                 enterChildren = false;
                 if (excludes.Contains(iterator.name)) continue;
 
+                if (serializedObject.targetObject.name.ToLowerInvariant().Equals("float source"))
+                {
+                    NodeEditorGUILayout.PropertyField(iterator, true);
+                    continue;
+                } else if (iterator.name.Equals("Value"))
+                {
+                    continue;
+                }
+
                 if (iterator.type.Equals("string"))
                 {
                     EditorGUILayout.LabelField(iterator.displayName);

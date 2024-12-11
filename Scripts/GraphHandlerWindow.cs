@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -108,11 +108,11 @@ namespace NASB_Moveset_Editor
                     EditorGUILayout.Space(4);
                     EditorGUILayout.BeginHorizontal();
                     {
-                        EditorGUILayout.LabelField("Created by megalon2d", GUILayout.MinWidth(0));
+                        EditorGUILayout.LabelField("Created by megalon", GUILayout.MinWidth(0));
                         EditorGUILayout.LabelField($"Version {Consts.VERSION}", rightAlignedGUIStyle, GUILayout.MinWidth(0));
                     }
                     EditorGUILayout.EndHorizontal();
-                    EditorGUILayout.LabelField("MovesetParser created by sc2ad");
+                    EditorGUILayout.LabelField("NASB Moveset Parser created by Steven");
                     EditorGUILayout.LabelField("xNode created by Siccity");
                     EditorGUILayout.Space(10);
                 }
