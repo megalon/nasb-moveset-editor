@@ -4,7 +4,7 @@
 
 This is a custom moveset editor for Nickelodeon All-Star Brawl's BulkSerialized file format!
 
-It runs in the Unity Editor using [xNode](https://github.com/Siccity/xNode) and a fork of [NASB_Parser](https://github.com/sc2ad/NASB_Parser).
+It runs in the Unity Editor using a fork of [xNode](https://github.com/Siccity/xNode) and a fork of [NASB Moveset Parser](https://github.com/DeadlyKitten/NASB-Moveset-Parser).
 
 # 🚀 Installation
 
@@ -15,7 +15,7 @@ The simplest way to do this is through [Unity Hub.](https://unity3d.com/get-unit
 
 Once installed, create a new 3D Unity project using `Unity 2020.3.15f2`
 
-## 2. Import xNode
+## 2. Import my fork of xNode
 
 You have two options to install xNode. Using Unity's Package Manager, or manual install.
 
@@ -139,7 +139,9 @@ For example, Spongebob's moveset would be `char_apple.txt`. You can also use `ch
 
 # Credits
 
-[NASB_Parser by sc2ad](https://github.com/sc2ad/NASB_Parser)
+[Original NASB_Parser by sc2ad](https://github.com/sc2ad/NASB_Parser)
+
+[Current NASB Moveset Parser by Steven](https://github.com/DeadlyKitten/NASB-Moveset-Parser)
 
 [xNode by Siccity](https://github.com/Siccity/xNode)
 
