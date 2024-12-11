@@ -116,7 +116,6 @@ namespace NASB_Moveset_Editor
             "BaseMovesetNode",
             "MovesetNode",
             "CheckThingNode",
-            "FloatSourceNode",
             "JumpNode",
             "ObjectSourceNode",
             "StateActionNode",
